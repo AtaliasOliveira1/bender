@@ -8224,8 +8224,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
           ;
           const pingImageUrl = await banner.Ping("", ppimg, nomebot, speedConverted.toFixed(3), uptimeBot, totalGrupos, totalUsers);
           await nazu.sendMessage(from, {
-            image: pingImageUrl,
-            caption: mensagem
+            text: mensagem
           }, {
             quoted: info
           });
@@ -8386,7 +8385,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
     var isVideo2 = !!boij;
     if (isVideo2 && boij.seconds > 9.9) return reply(`O vídeo precisa ter no máximo 9.9 segundos para ser convertido em figurinha.`);
     var buffer = await getFileBuffer(isVideo2 ? boij : boij2, isVideo2 ? 'video' : 'image')
-    await sendSticker(nazu, from, { sticker: buffer, author: `✦ ${nomedono} ✦\n● https://info.loami.shop - ${day} ●`, packname: `👤 Usuario(a): ➔ ${pushname}\n🤖 Bot ➔ ${nomebot}\n👑 Dono: ➔`, type: isVideo2 ? 'video' : 'image'}, { quoted: info });
+    //await sendSticker(nazu, from, { sticker: buffer, author: `✦ ${nomedono} ✦\n● https://info.loami.shop - ${day} ●`, packname: `👤 Usuario(a): ➔ ${pushname}\n🤖 Bot ➔ ${nomebot}\n👑 Dono: ➔`, type: isVideo2 ? 'video' : 'image'}, { quoted: info });
     await sendSticker(nazu, from, { sticker: buffer, author: `✦ ${nomedono} ✦\n● https://info.loami.shop - ${day} ●`, packname: `👤 Usuario(a): ➔ ${pushname}\n🤖 Bot ➔ ${nomebot}\n👑 Dono: ➔`, type: isVideo2 ? 'video' : 'image', forceSquare: true}, { quoted: info });
   } catch(e) {
   console.error(e);

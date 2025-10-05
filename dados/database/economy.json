@@ -1,5 +1,41 @@
 {
-  "users": {},
+  "users": {
+    "82235738820857@lid": {
+      "wallet": 0,
+      "bank": 0,
+      "cooldowns": {},
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": {
+        "expiresAt": 1759719599999,
+        "tasks": [
+          {
+            "type": "work",
+            "target": 4,
+            "progress": 0
+          },
+          {
+            "type": "mine",
+            "target": 7,
+            "progress": 0
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 6,
+            "progress": 0
+          }
+        ],
+        "reward": 302,
+        "claimed": false
+      },
+      "weeklyChallenge": null,
+      "monthlyChallenge": null,
+      "skills": {},
+      "properties": {}
+    }
+  },
   "shop": {
     "pickaxe_bronze": {
       "name": "Picareta de Bronze",
@@ -140,6 +176,35 @@
       "name": "Gerente",
       "min": 260,
       "max": 420
+    }
+  },
+  "market": [],
+  "marketCounter": 1,
+  "propertiesCatalog": {
+    "casa": {
+      "name": "Casa",
+      "price": 5000,
+      "upkeepPerDay": 50,
+      "incomeGoldPerDay": 80
+    },
+    "fazenda": {
+      "name": "Fazenda",
+      "price": 15000,
+      "upkeepPerDay": 150,
+      "incomeMaterialsPerDay": {
+        "pedra": 6,
+        "ferro": 1
+      }
+    },
+    "mina_privada": {
+      "name": "Mina Privada",
+      "price": 30000,
+      "upkeepPerDay": 400,
+      "incomeMaterialsPerDay": {
+        "pedra": 12,
+        "ferro": 3,
+        "ouro": 1
+      }
     }
   }
 }

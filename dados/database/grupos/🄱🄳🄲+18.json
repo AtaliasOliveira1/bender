@@ -1,0 +1,31 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-05T19:10:53.273Z",
+  "groupName": "🄱🄳🄲+18",
+  "modogold": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": false,
+  "contador": [
+    {
+      "id": "87673284907138@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Maria",
+      "firstSeen": "2025-10-05T19:10:53.275Z",
+      "lastActivity": "2025-10-05T19:10:53.275Z"
+    },
+    {
+      "id": "2435414282420@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Mega Cartuchos",
+      "firstSeen": "2025-10-05T19:16:18.068Z",
+      "lastActivity": "2025-10-05T19:16:18.996Z"
+    }
+  ]
+}

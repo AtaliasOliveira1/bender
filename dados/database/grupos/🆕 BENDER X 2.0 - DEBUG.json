@@ -2,7 +2,7 @@
   "mark": {},
   "createdAt": "2025-10-05T18:54:39.816Z",
   "groupName": "🆕 BENDER X 2.0 - DEBUG",
-  "modogold": false,
+  "modogold": true,
   "minMessage": null,
   "moderators": [],
   "allowedModCommands": [],
@@ -11,12 +11,30 @@
   "contador": [
     {
       "id": "82235738820857@lid",
-      "msg": 0,
-      "cmd": 1,
+      "msg": 8,
+      "cmd": 16,
       "figu": 0,
       "pushname": "๛αταℓiαs ℓσ-αмiㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
       "firstSeen": "2025-10-05T18:54:39.818Z",
-      "lastActivity": "2025-10-05T18:54:39.818Z"
+      "lastActivity": "2025-10-05T19:20:30.441Z"
+    },
+    {
+      "id": "163351011319890@lid",
+      "msg": 14,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "VaLéria",
+      "firstSeen": "2025-10-05T19:04:11.525Z",
+      "lastActivity": "2025-10-05T19:13:01.442Z"
+    },
+    {
+      "id": "212944998678773@lid",
+      "msg": 6,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Bender",
+      "firstSeen": "2025-10-05T19:05:12.508Z",
+      "lastActivity": "2025-10-05T19:20:31.329Z"
     }
   ]
 }
