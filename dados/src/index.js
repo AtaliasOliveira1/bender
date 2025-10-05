@@ -13,6 +13,8 @@ import WaLib from '@cognima/walib';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+import moment from 'moment-timezone';
+
 const packageJson = JSON.parse(fs.readFileSync(pathz.join(__dirname, '..', '..', 'package.json'), 'utf-8'));
 const botVersion = packageJson.version;
 const DATABASE_DIR = __dirname + '/../database';
@@ -812,6 +814,26 @@ function getPatent(level, patents) {
   return "Iniciante";
 }
 
+//=======Atalias Horario de Brasilia=============\\
+
+/* ------- [ Horário Oficial de Brasília Loami ] ------- */
+/* Data & Hora */
+const time = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
+const hora = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
+const date = moment.tz('America/Sao_Paulo').format('DD/MM/YYYY');
+
+
+const time2 = moment().tz('America/Sao_Paulo').format('HH:mm:ss');
+if(time2 > "00:00:00" && time2 < "05:00:00") {
+    var tempo = 'Boa noite';
+} if(time2 > "05:00:00" && time2 < "12:00:00") {
+    var tempo = 'Bom dia';
+} if(time2 > "12:00:00" && time2 < "18:00:00") {
+    var tempo = 'Boa tarde'
+} if(time2 > "18:00:00") {
+    var tempo = 'Boa noite';
+};
+
 // ====== Economia (Gold) Helpers ======
 function loadEconomy() {
   return loadJsonFile(ECONOMY_FILE, { users: {}, shop: {}, jobCatalog: {} });
@@ -1547,10 +1569,10 @@ async function NazuninhaBotExec(nazu, info, store, groupCache, messagesCache) {
     const menc_jid2 = info.message?.extendedTextMessage?.contextInfo?.mentionedJid;
     const menc_os2 = (menc_jid2 && menc_jid2.length > 0) ? menc_jid2[0] : menc_prt;
     const sender_ou_n = (menc_jid2 && menc_jid2.length > 0) ? menc_jid2[0] : menc_prt || sender;
-    const groupFile = pathz.join(__dirname, '..', 'database', 'grupos', `${from}.json`);
-    let groupData = {};
     const groupMetadata = !isGroup ? {} : await nazu.groupMetadata(from).catch(() => ({}));
     const groupName = groupMetadata?.subject || '';
+    const groupFile = pathz.join(__dirname, '..', 'database', 'grupos', `${groupName}.json`);
+    let groupData = {};
     if (isGroup) {
       if (!fs.existsSync(groupFile)) {
         fs.writeFileSync(groupFile, JSON.stringify({
@@ -6304,7 +6326,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
             const buttonMenuData = await menuButtons(prefix, nomebot, pushname, customDesign);
             
             const menuVideoPath = __dirname + '/../midias/menu.mp4';
-            const menuImagePath = __dirname + '/../midias/menu.jpg';
+            const menuImagePath = __dirname + '/../midias/menu.png';
             const useVideo = fs.existsSync(menuVideoPath);
             const mediaPath = useVideo ? menuVideoPath : menuImagePath;
             
@@ -6329,7 +6351,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
             }
           } else {
             const menuVideoPath = __dirname + '/../midias/menu.mp4';
-            const menuImagePath = __dirname + '/../midias/menu.jpg';
+            const menuImagePath = __dirname + '/../midias/menu.png';
             const useVideo = fs.existsSync(menuVideoPath);
             const mediaPath = useVideo ? menuVideoPath : menuImagePath;
             const mediaBuffer = fs.readFileSync(mediaPath);
@@ -6460,7 +6482,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
         break;
         async function sendMenuWithMedia(menuType, menuFunction) {
           const menuVideoPath = __dirname + '/../midias/menu.mp4';
-          const menuImagePath = __dirname + '/../midias/menu.jpg';
+          const menuImagePath = __dirname + '/../midias/menu.png';
           const useVideo = fs.existsSync(menuVideoPath);
           const mediaPath = useVideo ? menuVideoPath : menuImagePath;
           const mediaBuffer = fs.readFileSync(mediaPath);
@@ -6905,7 +6927,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
       case 'midiamenu':
         try {
           if (!isOwner) return reply("Este comando é apenas para o meu dono");
-          if (fs.existsSync(__dirname + '/../midias/menu.jpg')) fs.unlinkSync(__dirname + '/../midias/menu.jpg');
+          if (fs.existsSync(__dirname + '/../midias/menu.png')) fs.unlinkSync(__dirname + '/../midias/menu.png');
           if (fs.existsSync(__dirname + '/../midias/menu.mp4')) fs.unlinkSync(__dirname + '/../midias/menu.mp4');
           var RSM = info.message?.extendedTextMessage?.contextInfo?.quotedMessage;
           var boij2 = RSM?.imageMessage || info.message?.imageMessage || RSM?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessage?.message?.imageMessage || RSM?.viewOnceMessage?.message?.imageMessage;
@@ -7932,7 +7954,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
         try {
           const topCommands = await commandStats.getMostUsedCommands(10);
           const menuVideoPath = __dirname + '/../midias/menu.mp4';
-          const menuImagePath = __dirname + '/../midias/menu.jpg';
+          const menuImagePath = __dirname + '/../midias/menu.png';
           const useVideo = fs.existsSync(menuVideoPath);
           const mediaPath = useVideo ? menuVideoPath : menuImagePath;
           const mediaBuffer = fs.readFileSync(mediaPath);
@@ -8352,30 +8374,26 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
       case 'st':
       case 'stk':
       case 'sticker':
-      case 's':
-        try {
-          var RSM = info.message?.extendedTextMessage?.contextInfo?.quotedMessage;
-          var boij2 = RSM?.imageMessage || info.message?.imageMessage || RSM?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessage?.message?.imageMessage || RSM?.viewOnceMessage?.message?.imageMessage;
-          var boij = RSM?.videoMessage || info.message?.videoMessage || RSM?.viewOnceMessageV2?.message?.videoMessage || info.message?.viewOnceMessageV2?.message?.videoMessage || info.message?.viewOnceMessage?.message?.videoMessage || RSM?.viewOnceMessage?.message?.videoMessage;
-          if (!boij && !boij2) return reply(`Marque uma imagem ou um vídeo de até 9.9 segundos para fazer figurinha, com o comando: ${prefix + command} (mencionando a mídia)`);
-          var isVideo2 = !!boij;
-          if (isVideo2 && boij.seconds > 9.9) return reply(`O vídeo precisa ter no máximo 9.9 segundos para ser convertido em figurinha.`);
-          var buffer = await getFileBuffer(isVideo2 ? boij : boij2, isVideo2 ? 'video' : 'image');
-          await sendSticker(nazu, from, {
-            sticker: buffer,
-            author: `『${pushname}』\n『${nomebot}』\n『${nomedono}』\n『cognima.com.br』`,
-            packname: '👤 Usuario(a)ᮀ۟❁’￫\n🤖 Botᮀ۟❁’￫\n👑 Donoᮀ۟❁’￫\n🌐 Siteᮀ۟❁’￫',
-            type: isVideo2 ? 'video' : 'image',
-            forceSquare: true
-          }, {
-            quoted: info
-          });
-        } catch (e) {
-          console.error(e);
-          await reply("🐝 Oh não! Aconteceu um errinho inesperado aqui. Tente de novo daqui a pouquinho, por favor! 🥺");
-        }
-        ;
-        break;
+      
+      case 'st':case 'stk':case 'sticker':case 's': try {
+    const hora16 = moment.tz('America/Sao_Paulo').format('HH:MM:SS')
+    const date16 = moment.tz('America/Sao_Paulo').format('DD/MM/YYYY')
+    let day = `${date16} ${hora16}`
+    var RSM = info.message?.extendedTextMessage?.contextInfo?.quotedMessage;
+    var boij2 = RSM?.imageMessage || info.message?.imageMessage || RSM?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessage?.message?.imageMessage || RSM?.viewOnceMessage?.message?.imageMessage;
+   var boij = RSM?.videoMessage || info.message?.videoMessage || RSM?.viewOnceMessageV2?.message?.videoMessage || info.message?.viewOnceMessageV2?.message?.videoMessage || info.message?.viewOnceMessage?.message?.videoMessage || RSM?.viewOnceMessage?.message?.videoMessage;
+    if (!boij && !boij2) return reply(`Marque uma imagem ou um vídeo de até 9.9 segundos para fazer figurinha, com o comando: ${prefix + command} (mencionando a mídia)`);
+    var isVideo2 = !!boij;
+    if (isVideo2 && boij.seconds > 9.9) return reply(`O vídeo precisa ter no máximo 9.9 segundos para ser convertido em figurinha.`);
+    var buffer = await getFileBuffer(isVideo2 ? boij : boij2, isVideo2 ? 'video' : 'image')
+    await sendSticker(nazu, from, { sticker: buffer, author: `✦ ${nomedono} ✦\n● https://info.loami.shop - ${day} ●`, packname: `👤 Usuario(a): ➔ ${pushname}\n🤖 Bot ➔ ${nomebot}\n👑 Dono: ➔`, type: isVideo2 ? 'video' : 'image'}, { quoted: info });
+    await sendSticker(nazu, from, { sticker: buffer, author: `✦ ${nomedono} ✦\n● https://info.loami.shop - ${day} ●`, packname: `👤 Usuario(a): ➔ ${pushname}\n🤖 Bot ➔ ${nomebot}\n👑 Dono: ➔`, type: isVideo2 ? 'video' : 'image', forceSquare: true}, { quoted: info });
+  } catch(e) {
+  console.error(e);
+  await reply("⚠️ Oh não! Aconteceu um errinho inesperado aqui. Tente de novo daqui a pouquinho, por favor! ⚠️");
+  };
+  break
+
       case 'st2':
       case 'stk2':
       case 'sticker2':
