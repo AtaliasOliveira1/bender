@@ -163,7 +163,7 @@ async function resolveInputToBuffer(input) {
 /**
  * Envia sticker
  */
-const sendSticker = async (nazu, jid, {
+const sendSticker = async (bender, jid, {
   sticker: input,
   type = "image",
   packname = "",
@@ -186,7 +186,7 @@ const sendSticker = async (nazu, jid, {
     webpBuffer = await writeExif(webpBuffer, { packname, author });
   }
 
-  await nazu.sendMessage(jid, { sticker: webpBuffer }, { quoted });
+  await bender.sendMessage(jid, { sticker: webpBuffer }, { quoted });
   console.log("[sticker] Enviado com sucesso");
   return webpBuffer;
 };

@@ -79,7 +79,7 @@ function getApiKeyStatus() {
   return { ...apiKeyStatus };
 }
 
-async function notifyOwnerAboutApiKey(nazu, ownerLid, error) {
+async function notifyOwnerAboutApiKey(bender, ownerLid, error) {
   if (apiKeyStatus.notificationSent) return;
   
   try {
@@ -103,7 +103,7 @@ async function notifyOwnerAboutApiKey(nazu, ownerLid, error) {
 Para reativar, corrija a key e use o comando *!ia status*`;
 
     const ownerId = ownerLid || (ownerNumber?.replace(/[^\d]/g, '') + '@s.whatsapp.net');
-    await nazu.sendText(ownerId, message);
+    await bender.sendText(ownerId, message);
     
     apiKeyStatus.notificationSent = true;
     console.log('📧 Notificação sobre API key enviada ao dono');
@@ -509,7 +509,7 @@ function updateHistorico(grupoUserId, role, content, nome = null) {
   }
 }
 
-async function processUserMessages(data, indexPath, key, nazu = null, ownerNumber = null) {
+async function processUserMessages(data, indexPath, key, bender = null, ownerNumber = null) {
   try {
     const { mensagens } = data;
     if (!mensagens || !Array.isArray(mensagens)) {
@@ -628,8 +628,8 @@ async function processUserMessages(data, indexPath, key, nazu = null, ownerNumbe
         console.error('Erro na API Cognima:', apiError.message);
         
         // Se é erro de API key, notifica o dono
-        if (isApiKeyError(apiError) && nazu && ownerNumber) {
-          await notifyOwnerAboutApiKey(nazu, ownerNumber, apiError.message);
+        if (isApiKeyError(apiError) && bender && ownerNumber) {
+          await notifyOwnerAboutApiKey(bender, ownerNumber, apiError.message);
           
           return { 
             resp: [], 

@@ -35,7 +35,7 @@ function isApiKeyError(error) {
 }
 
 // Notificação de API Key
-async function notifyOwnerAboutApiKey(nazu, ownerNumber, error, command) {
+async function notifyOwnerAboutApiKey(bender, ownerNumber, error, command) {
   try {
     const message = `🚨 *ALERTA - API KEY INVÁLIDA* 🚨
 
@@ -51,7 +51,7 @@ async function notifyOwnerAboutApiKey(nazu, ownerNumber, error, command) {
 • Verificar se a key está correta no config.json`;
 
     const ownerId = ownerNumber?.replace(/[^\d]/g, '') + '@s.whatsapp.net';
-    await nazu.sendText(ownerId, message);
+    await bender.sendText(ownerId, message);
   } catch (notifyError) {
     console.error('❌ Erro ao notificar dono sobre API key:', notifyError.message);
   }
