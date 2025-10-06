@@ -8455,12 +8455,12 @@ case 'roubar':
 
         // 3. Checagem de Saldo e Cobrança
         if (me.wallet < COST) {
-            return reply(`❌ Saldo insuficiente! Este comando custa R$${fmt(COST)} Gold. Você tem apenas R$${fmt(me.wallet)} na carteira.`);
+            return reply(`❌ Saldo insuficiente! Este comando custa ${fmt(COST)} BCOINS. Você tem apenas ${fmt(me.wallet)} BCOINS na carteira.`);
         }
         
         me.wallet -= COST;
         saveEconomy(econ);
-        reply(`💸 Cobrado R$${fmt(COST)} Gold da sua carteira para renomear a figurinha.\n💸Saldo restante: R$${fmt(me.wallet)}.`);
+        reply(`💸 Cobrado ${fmt(COST)} BCOINS da sua carteira para renomear a figurinha.\n\n💸Saldo restante: ${fmt(me.wallet)} BCOINS.`);
 
         // 4. Continuação do comando de renomear
         var encmediats;
