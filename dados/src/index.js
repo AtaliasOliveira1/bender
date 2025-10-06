@@ -8460,7 +8460,7 @@ case 'roubar':
         
         me.wallet -= COST;
         saveEconomy(econ);
-        reply(`💸 Cobrado ${fmt(COST)} BCOINS da sua carteira para renomear a figurinha.\n\n💸Saldo restante: ${fmt(me.wallet)} BCOINS.`);
+        reply(`💸 Cobrado ${fmt(COST)} BCOINS da sua carteira para renomear a figurinha.\n\n💸Saldo restante: *${fmt(me.wallet)} BCOINS.*`);
 
         // 4. Continuação do comando de renomear
         var encmediats;
