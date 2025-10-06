@@ -5754,7 +5754,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
       case 'encurtalink':
       case 'tinyurl':
         try {
-          if (!q) return reply(`❌️ *Forma incorreta, use está como exemplo:* ${prefix + command} https://instagram.com/hiudyyy_`);
+          if (!q) return reply(`❌️ *Forma incorreta, use está como exemplo:* ${prefix + command} https://instagram.com/ataliasloami`);
           var anu;
           anu = await axios.get(`https://tinyurl.com/api-create.php?url=${q}`);
           reply(`${anu.data}`);
@@ -6882,7 +6882,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
       case 'nome-dono':
         try {
           if (!isOwner) return reply("Este comando é exclusivo para o meu dono!");
-          if (!q) return reply(`Por favor, digite o novo nome do dono.\nExemplo: ${prefix}${command} Hiudy`);
+          if (!q) return reply(`Por favor, digite o novo nome do dono.\nExemplo: ${prefix}${command} @ataliasloami`);
           let config = JSON.parse(fs.readFileSync(__dirname + '/config.json'));
           config.nomedono = q;
           fs.writeFileSync(__dirname + '/config.json', JSON.stringify(config, null, 2));
@@ -8160,7 +8160,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
 
       case 'criador':
         try {
-          const TextinCriadorInfo = `╭⊰ 🌸 『 *INFORMAÇÕES DO CRIADOR* 』\n┊\n┊👨‍💻 *Criador*: Hiudy\n┊📱 *Número*: wa.me/553399285117\n┊🌐 *GitHub*: github.com/hiudyy\n┊📸 *Instagram*: instagram.com/hiudyyy_\n┊\n╰─┈┈┈┈┈◜❁◞┈┈┈┈┈─╯`;
+          const TextinCriadorInfo = `╭⊰ 🌸 『 *INFORMAÇÕES DO CRIADOR* 』\n┊\n┊👨‍💻 *Criador*: @ataliasloami\n┊📱 *Número*: wa.me/559984691168\n┊🌐 *GitHub*: github.com/AtaliasOliveira1\n┊📸 *Instagram*: instagram.com/ataliasloami\n┊\n╰─┈┈┈┈┈◜❁◞┈┈┈┈┈─╯`;
           await reply(TextinCriadorInfo);
         } catch (e) {
           console.error(e);
@@ -8435,35 +8435,56 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
         }
         ;
         break;
-      case 'rename':
-      case 'roubar':
-        try {
-          if (!isQuotedSticker) return reply('Você usou de forma errada... Marque uma figurinha.');
-          var author;
-          author = q.split(`/`)[0];
-          var packname;
-          packname = q.split(`/`)[1];
-          if (!q || !author || !packname) return reply(`Formato errado, utilize:\n${prefix}${command} Autor/Pack\nEx: ${prefix}${command} By:/Hiudy`);
-          var encmediats;
-          encmediats = await getFileBuffer(info.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage, 'sticker');
-          await sendSticker(bender, from, {
+        
+      
+ case 'rename':
+case 'roubar':
+    const COST = 50;
+    const econ = loadEconomy();
+    const me = getEcoUser(econ, sender);
+
+    try {
+        if (!isQuotedSticker) return reply('Você usou de forma errada... Marque uma figurinha.');
+
+        // 1. Sua lógica de leitura original, que funciona:
+        var author = q.split(`/`)[0]?.trim(); 
+        var packname = q.split(`/`)[1]?.trim(); 
+
+        // 2. Sua lógica de validação original (reforçada com trim):
+        if (!author || !packname) return reply(`Formato errado, utilize:\n${prefix}${command} Autor/Pack\nEx: ${prefix}${command} By:/@ataliasloami`);
+
+        // 3. Checagem de Saldo e Cobrança
+        if (me.wallet < COST) {
+            return reply(`❌ Saldo insuficiente! Este comando custa R$${fmt(COST)} Gold. Você tem apenas R$${fmt(me.wallet)} na carteira.`);
+        }
+        
+        me.wallet -= COST;
+        saveEconomy(econ);
+        reply(`💸 Cobrado R$${fmt(COST)} Gold da sua carteira para renomear a figurinha.\n💸Saldo restante: R$${fmt(me.wallet)}.`);
+
+        // 4. Continuação do comando de renomear
+        var encmediats;
+        encmediats = await getFileBuffer(info.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage, 'sticker');
+        
+        await sendSticker(bender, from, {
             sticker: `data:image/jpeg;base64,${encmediats.toString('base64')}`,
-            author: packname,
+            author: packname, // Note que author e packname estão invertidos, mas é assim que o seu bot funciona!
             packname: author,
             rename: true
-          }, {
+        }, {
             quoted: info
-          });
-        } catch (e) {
-          console.error(e);
-          await reply("🐝 Oh não! Aconteceu um errinho inesperado aqui. Tente de novo daqui a pouquinho, por favor! 🥺");
-        }
-        ;
-        break;
+        });
+
+    } catch (e) {
+        console.error(e);
+        await reply("🐝 Oh não! Aconteceu um errinho inesperado aqui. O Gold foi cobrado, mas não consegui enviar a figurinha. Tente de novo, por favor! 🥺");
+    }
+    break;
+
       case 'rgtake':
         try {
           const [author, pack] = q.split('/');
-          if (!q || !author || !pack) return reply(`Formato errado, utilize:\n${prefix}${command} Autor/Pack\nEx: ${prefix}${command} By:/Hiudy`);
+          if (!q || !author || !pack) return reply(`Formato errado, utilize:\n${prefix}${command} Autor/Pack\nEx: ${prefix}${command} By:/@ataliasloami`);
           const filePath = __dirname + '/../database/users/take.json';
           const dataTake = fs.existsSync(filePath) ? JSON.parse(fs.readFileSync(filePath, 'utf-8')) : {};
           dataTake[sender] = {
@@ -11770,7 +11791,7 @@ ${groupData.rules.length}. ${q}`);
     await reply(
       `🎉 Aqui está o link do produto no evento como GRATUITO:\n\n` +
       `⚠️ Atenção: Nem todos os anúncios funcionam com esse método. Se não funcionar com este link, tente outro.\n\n` +
-      `💡 Esse sistema foi criado por mim (Hiudy) e, até hoje, não vi ninguém oferecendo algo assim. Aproveite!\n\n` +
+      `` +
       `${KKMeMamaTemu}`
     );
   } catch (e) {

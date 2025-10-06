@@ -1,9 +1,11 @@
 {
   "users": {
     "82235738820857@lid": {
-      "wallet": 0,
-      "bank": 0,
-      "cooldowns": {},
+      "wallet": 24850,
+      "bank": 25000,
+      "cooldowns": {
+        "fish": 1759694047974
+      },
       "inventory": {},
       "job": null,
       "tools": {},
@@ -30,10 +32,97 @@
         "reward": 302,
         "claimed": false
       },
-      "weeklyChallenge": null,
-      "monthlyChallenge": null,
-      "skills": {},
-      "properties": {}
+      "weeklyChallenge": {
+        "expiresAt": 1759719599999,
+        "tasks": [
+          {
+            "type": "explore",
+            "target": 22,
+            "progress": 0
+          },
+          {
+            "type": "hunt",
+            "target": 26,
+            "progress": 0
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 20,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 18,
+            "progress": 0
+          }
+        ],
+        "reward": 3203,
+        "claimed": false
+      },
+      "monthlyChallenge": {
+        "expiresAt": 1761965999999,
+        "tasks": [
+          {
+            "type": "crimeSuccess",
+            "target": 89,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 85,
+            "progress": 0
+          },
+          {
+            "type": "fish",
+            "target": 66,
+            "progress": 1
+          },
+          {
+            "type": "mine",
+            "target": 98,
+            "progress": 0
+          },
+          {
+            "type": "explore",
+            "target": 87,
+            "progress": 0
+          }
+        ],
+        "reward": 16387,
+        "claimed": false
+      },
+      "skills": {
+        "mining": {
+          "level": 1,
+          "xp": 0
+        },
+        "working": {
+          "level": 1,
+          "xp": 0
+        },
+        "fishing": {
+          "level": 1,
+          "xp": 1
+        },
+        "exploring": {
+          "level": 1,
+          "xp": 0
+        },
+        "hunting": {
+          "level": 1,
+          "xp": 0
+        },
+        "forging": {
+          "level": 1,
+          "xp": 0
+        },
+        "crime": {
+          "level": 1,
+          "xp": 0
+        }
+      },
+      "properties": {},
+      "gold": null
     }
   },
   "shop": {
