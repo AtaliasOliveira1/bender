@@ -123,6 +123,129 @@
       },
       "properties": {},
       "gold": null
+    },
+    "212944998678773@lid": {
+      "wallet": 144,
+      "bank": 0,
+      "cooldowns": {
+        "work": 1759889462011
+      },
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": {
+        "expiresAt": 1759892399999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 5,
+            "progress": 0
+          },
+          {
+            "type": "explore",
+            "target": 7,
+            "progress": 0
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 3,
+            "progress": 0
+          }
+        ],
+        "reward": 688,
+        "claimed": false
+      },
+      "weeklyChallenge": {
+        "expiresAt": 1760324399999,
+        "tasks": [
+          {
+            "type": "fish",
+            "target": 28,
+            "progress": 0
+          },
+          {
+            "type": "hunt",
+            "target": 29,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 16,
+            "progress": 1
+          },
+          {
+            "type": "mine",
+            "target": 28,
+            "progress": 0
+          }
+        ],
+        "reward": 4207,
+        "claimed": false
+      },
+      "monthlyChallenge": {
+        "expiresAt": 1761965999999,
+        "tasks": [
+          {
+            "type": "crimeSuccess",
+            "target": 85,
+            "progress": 0
+          },
+          {
+            "type": "hunt",
+            "target": 90,
+            "progress": 0
+          },
+          {
+            "type": "explore",
+            "target": 67,
+            "progress": 0
+          },
+          {
+            "type": "fish",
+            "target": 84,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 64,
+            "progress": 1
+          }
+        ],
+        "reward": 17572,
+        "claimed": false
+      },
+      "skills": {
+        "mining": {
+          "level": 1,
+          "xp": 0
+        },
+        "working": {
+          "level": 1,
+          "xp": 1
+        },
+        "fishing": {
+          "level": 1,
+          "xp": 0
+        },
+        "exploring": {
+          "level": 1,
+          "xp": 0
+        },
+        "hunting": {
+          "level": 1,
+          "xp": 0
+        },
+        "forging": {
+          "level": 1,
+          "xp": 0
+        },
+        "crime": {
+          "level": 1,
+          "xp": 0
+        }
+      },
+      "properties": {}
     }
   },
   "shop": {

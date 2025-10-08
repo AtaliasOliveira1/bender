@@ -6424,7 +6424,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
 ╰══𝐅𝐈𝐆𝐔𝐑𝐈𝐍𝐇𝐀𝐒══⪨
 ⋟📸 ${prefix}s (ᴍᴀʀᴄᴀʀ ғᴏᴛᴏ)
 ⋟✏️ ${prefix}ʀᴇɴᴀᴍᴇ (ɴᴏᴍᴇ/ɴᴏᴍᴇ) 🪙
-⋟🖼️ ${prefix}ғɪɢᴜʀɪɴʜᴀs (5)
+⋟🖼️ ${prefix}ғɪɢᴜʀɪɴʜᴀs (5) 🪙
 ⋟📝 ${prefix}ᴍᴇɴᴜғɪɢ
 ╰┈┈┈◜❁◞┈┈┈
 ⋟📂 ${prefix}ᴍᴇɴᴜᴀᴅᴍ
@@ -6523,11 +6523,11 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
             
             let menuText = `${cabecalhomenu}
 ╰══𝐀𝐃𝐌𝐈𝐍𝐈𝐒𝐓𝐑𝐀𝐂𝐀𝐎══⪨
-⋟🚫 ${prefix}ban
+⋟🚫 ${prefix}ban 🪙
 ⋟⬆️ ${prefix}promover
 ⋟⬇️ ${prefix}rebaixar
-⋟🔇 ${prefix}mute
-⋟🔊 ${prefix}desmute
+⋟🔇 ${prefix}mute 🪙
+⋟🔊 ${prefix}desmute 🪙
 ⋟⚠️ ${prefix}adv
 ⋟✅ ${prefix}rmadv
 ⋟📜 ${prefix}listadv
@@ -6540,10 +6540,10 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
 ⋟🧹 ${prefix}limparrank
 ⋟🔄 ${prefix}resetrank
 ╰══𝐆𝐄𝐑𝐄𝐍𝐂𝐈𝐀𝐌𝐄𝐍𝐓𝐎══⪨
-⋟🗑️ ${prefix}del
+⋟🗑️ ${prefix}del 🪙
 ⋟🧼 ${prefix}limpar
 ⋟👻 ${prefix}banghost
-⋟👁️‍🗨️ ${prefix}hidetag
+⋟👁️‍🗨️ ${prefix}hidetag 🪙
 ⋟📌 ${prefix}marcar
 ⋟🎁 ${prefix}sorteio
 ⋟🔗 ${prefix}linkgp
@@ -8948,7 +8948,11 @@ if (!chargeUser(50, sender)) {
       case 'kick':
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
-          if (!isGroupAdmin) return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔");
+          if (!isGroupAdmin) {
+            if (!chargeUser(15000, sender)) {
+        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 15.000 BCOINS");
+       }
+          }
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
           if (!menc_os2) return reply("Marque alguém 🙄");
           if (menc_os2 === nmrdn) return reply("❌ Não posso banir o dono do bot.");
