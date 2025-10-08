@@ -35,6 +35,7 @@ const CUSTOM_REACTS_FILE = pathz.join(DATABASE_DIR, 'customReacts.json');
 const REMINDERS_FILE = pathz.join(DATABASE_DIR, 'reminders.json');
 
 //CONST ATALIAS
+const API_KEY_BRONXYS = "benderbot"
 const assBender = '𝑩𝒆𝒏𝒅𝒆𝒓𝑿 𝒗3.0'
 const dattofc = moment.tz('America/Sao_Paulo').format('DD/MM/YYYY');
 const hourofc = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
@@ -3129,6 +3130,13 @@ const figpackname2 = `${isGroup ? "⚙️ Grupo:" : "🪪 Usuário:"} ${isGroup 
 const figautor2 = `\n🕑 Tempo: ${dattofc} ${hourofc}\n${pushname} | ${isPremium ? userpremiumsticker : ""}`;
 
 
+async function fetchJson(url, options) { 
+   const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36', 'DNT': 1, 'Upgrade-Insecure-Request': 1 }, ...options });
+	if (!res.ok) return Promise.reject("Error")
+		const json = await res.json();
+		return Promise.resolve(json);
+}
+
 /**
  * Realiza a cobrança de um valor no saldo do usuário.
  *
@@ -3162,10 +3170,51 @@ function chargeUser(cost, sender) {
 }
 
     switch (command) {
+
+case 'sendstickers':
+case 'figurinhas':
+case 'figurinha':
+case 'sendsticker':
+if (!chargeUser(10, sender)) {
+        return; 
+    }
+  try {
+    const args = body.trim().split(/\s+/);
+    let quantidade = parseInt(args[1]);
+    if (isNaN(quantidade)) quantidade = 3;
+    quantidade = Math.min(Math.max(1, quantidade), 10);
+
+    // Função delay
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    const totalFigurinhas = 5532;
+
+    for (let i = 0; i < quantidade; i++) {
+      const num = Math.floor(Math.random() * totalFigurinhas);
+      const repoIndex = Math.floor(num / 1000) + 1;
+      const url = `https://raw.githubusercontent.com/AtaliasOliveira1/stickers-${repoIndex}/main/fig%20(${num}).webp`;
+
+      try {
+        await bender.sendMessage(from, { sticker: { url: url } });
+        await delay(1000); // delay de 1s entre envios
+      } catch (err) {
+        console.error(`Erro ao enviar figurinha ${num}:`, err.message);
+        await reply(`❌ Não consegui enviar uma das figurinhas. Tenta de novo!`);
+        break;
+      }
+    }
+
+  } catch (e) {
+    console.error(e);
+    await reply("⚠️ Deu ruim aqui... tenta de novo em instantes! 😖");
+  }
+break
+
       case 'menugold':
       case 'menumoedas':
       case 'moedas':
       case 'gold':
+        case 'bcoins':
         try {
           await bender.react('🆗', {key: info.key});
 
@@ -3225,6 +3274,17 @@ function chargeUser(cost, sender) {
 ╰══𝐃𝐄𝐒𝐀𝐅𝐈𝐎 𝐃𝐈𝐀𝐑𝐈𝐎 ══⪨
 ⋟❓ ${prefix}desafio
 ⋟✅ ${prefix}desafio coletar
+╰══𝐂𝐎𝐌𝐀𝐍𝐃𝐎𝐒══⪨
+⋟🪙 Ban = 15.000
+⋟🪙 Mute = 10.000
+⋟🪙 Desmute = 1.000
+⋟🪙 Figurinhas = 10
+⋟🪙 Rename = 50
+⋟🪙 Del = 5.000
+⋟🪙 Hidetag = 10.000
+⋟🪙 Rvisu = 2.000
+⋟🪙 Play = 15
+⋟🪙 Playvid = 15
 ╰─┈┈┈◜❁◞┈┈┈─╯`;
             
             await bender.sendMessage(from, {
@@ -6096,130 +6156,62 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
         }
         ;
         break;
-      case 'play':
-      case 'ytmp3':
-        try {
-          if (!q) {
-            return reply(`📝 Digite o nome da música ou um link do YouTube.\n\n📌 *Exemplo:* ${prefix + command} Back to Black`);
-          }
+      
+case 'play': {
+ return reply("Indisponível no momento!");
+if (!chargeUser(15, sender)) {
+        return; 
+    }
+   try {
+      if(!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`);
+      
+      await bender.react('⬇️', {key: info.key});
+      let data = await fetchJson(`https://api.bronxyshost.com.br/api-bronxys/pesquisa_ytb?nome=${q}&apikey=${API_KEY_BRONXYS}`);
+      
+      if(data[0]?.tempo?.length >= 7) 
+         return reply("Desculpe, este vídeo ou áudio é muito grande, peça outra música abaixo de uma hora.");
 
-          // Verificar se tem API key
-          if (!KeyCog) {
-            await bender.sendMessage(nmrdn, {
-              text: `Olá! 🐝 Passei aqui para avisar que alguém tentou usar o comando "${prefix}${command}", mas parece que a sua API key ainda não foi configurada. 😊 Você pode entrar em contato para solicitar uma key gratuita com limite de 50 requests por dia ou comprar a ilimitada por R$15/mês! 🚀\nwa.me/553399285117`
+      var N_E = " Não encontrado.";
+      var bla = `📥 *Baixar vídeo:* \`${prefix}playvid ${q.trim()}\`
+🎧 *Tocando agora no ${assBender}!*`;
+
+      bender.sendMessage(from, {text: bla}, {quoted: info});
+
+      bender.sendMessage(from, {
+         audio: {url: `https://api.bronxyshost.com.br/api-bronxys/play?nome_url=${q}&apikey=${API_KEY_BRONXYS}`},
+         mimetype: "audio/mpeg", 
+         fileName: data[0]?.titulo || "play.mp3"
+      }, {quoted: info}).catch(async (e) => {
+         console.log(e);
+         await reply("Erro...\nTentando outra fonte, aguarde...");
+
+         try {
+            let ABC = await fetchJson(zerosite+`/api/ytsrc?q=${q}&apikey=`+API_KEY_ZEROTWO);
+            let data2 = ABC.resultado[0];
+
+            //sendImage(from, data2.thumbnail, bla2, info);
+            sendAudio(from, zerosite+`/api/dl/ytaudio?url=${data2.url}&apikey=`+API_KEY_ZEROTWO, "audio/mpeg", info).catch(e => {
+               return reply("Tentei, mas não foi possível, tente novamente!");
             });
-            return reply('Este comando precisa de API key para funcionar. Meu dono já foi notificado! 😺');
-          }
+         } catch (e2) {
+            console.log(e2);
+            return reply("❌ Nenhuma das fontes conseguiu baixar o áudio.");
+         }
+      });
+   } catch (e) {
+      console.log(e);
+      return reply("Seja mais específico, não deu pra encontrar com apenas isso... / Erro");
+   }
+}
+break;
 
-          let videoUrl;
-          let videoInfo;
-          
-          if (q.includes('youtube.com') || q.includes('youtu.be')) {
-            videoUrl = q;
-            await reply('Aguarde um momentinho... ☀️');
-            
-            const dlRes = await youtube.mp3(videoUrl, 128, KeyCog);
-            if (!dlRes.ok) {
-              return reply(`❌ Erro ao baixar o áudio: ${dlRes.msg}`);
-            }
 
-            try {
-              await bender.sendMessage(from, {
-                audio: dlRes.buffer,
-                mimetype: 'audio/mpeg'
-              }, {
-                quoted: info
-              });
-            } catch (audioError) {
-              if (String(audioError).includes("ENOSPC") || String(audioError).includes("size")) {
-                await reply('📦 Arquivo muito grande para enviar como áudio, enviando como documento...');
-                await bender.sendMessage(from, {
-                  document: dlRes.buffer,
-                  fileName: `${dlRes.filename}`,
-                  mimetype: 'audio/mpeg'
-                }, {
-                  quoted: info
-                });
-              } else {
-                throw audioError;
-              }
-            }
-            return;
-          } else {
-            videoInfo = await youtube.search(q, KeyCog);
-            if (!videoInfo.ok) {
-              return reply(`❌ Erro na pesquisa: ${videoInfo.msg}`);
-            }
-            videoUrl = videoInfo.data.url;
-          }
-
-          if (!videoInfo.ok) {
-            return reply(`❌ Não foi possível encontrar informações sobre o vídeo: ${videoInfo.msg}`);
-          }
-
-          if (videoInfo.data.seconds > 1800) {
-            return reply(`⚠️ Este vídeo é muito longo (${videoInfo.data.timestamp}).\nPor favor, escolha um vídeo com menos de 30 minutos.`);
-          }
-
-          const views = typeof videoInfo.data.views === 'number' ? videoInfo.data.views.toLocaleString('pt-BR') : videoInfo.data.views;
-          const description = videoInfo.data.description ? videoInfo.data.description.slice(0, 100) + (videoInfo.data.description.length > 100 ? '...' : '') : 'Sem descrição disponível';
-          const caption = `🎵 *Música Encontrada* 🎵\n\n📌 *Título:* ${videoInfo.data.title}\n👤 *Artista/Canal:* ${videoInfo.data.author.name}\n⏱ *Duração:* ${videoInfo.data.timestamp} (${videoInfo.data.seconds} segundos)\n👀 *Visualizações:* ${views}\n📅 *Publicado:* ${videoInfo.data.ago}\n📜 *Descrição:* ${description}\n🔗 *Link:* ${videoInfo.data.url}\n\n🎧 *Baixando e processando sua música, aguarde...*`;
-          
-          await bender.sendMessage(from, {
-            image: {
-              url: videoInfo.data.thumbnail
-            },
-            caption: caption,
-            footer: `${nomebot} • Versão ${botVersion}`
-          }, {
-            quoted: info
-          });
-
-          const dlRes = await youtube.mp3(videoUrl, 128, KeyCog);
-          if (!dlRes.ok) {
-            return reply(`❌ Erro ao baixar o áudio: ${dlRes.msg}`);
-          }
-
-          try {
-            await bender.sendMessage(from, {
-              audio: dlRes.buffer,
-              mimetype: 'audio/mpeg'
-            }, {
-              quoted: info
-            });
-          } catch (audioError) {
-            if (String(audioError).includes("ENOSPC") || String(audioError).includes("size")) {
-              await reply('📦 Arquivo muito grande para enviar como áudio, enviando como documento...');
-              await bender.sendMessage(from, {
-                document: dlRes.buffer,
-                fileName: `${dlRes.filename}`,
-                mimetype: 'audio/mpeg'
-              }, {
-                quoted: info
-              });
-            } else {
-              throw audioError;
-            }
-          }
-        } catch (error) {
-          console.error('Erro no comando play/ytmp3:', error);
-          
-          // Verificar se é erro de API key e notificar o dono
-          if (error.message && error.message.includes('API key inválida')) {
-            await youtube.notifyOwnerAboutApiKey(bender, numerodono, error.message, command);
-            return reply('🤖 *Sistema de YouTube temporariamente indisponível*\n\n😅 Estou com problemas técnicos no momento. O administrador já foi notificado!\n\n⏰ Tente novamente em alguns minutos.');
-          }
-          
-          if (String(error).includes("age")) {
-            return reply(`🔞 Este conteúdo possui restrição de idade e não pode ser baixado.`);
-          }
-          
-          reply("❌ Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.");
-        }
-        break;
         break;
       case 'playvid':
       case 'ytmp4':
+        if (!chargeUser(15, sender)) {
+        return; 
+    }
         try {
           if (!q) return reply(`Digite o nome do vídeo ou um link do YouTube.\n> Ex: ${prefix + command} Back to Black`);
           
@@ -6521,7 +6513,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
 ⋟🖼️ ${prefix}ғɪɢᴜʀɪɴʜᴀs (5) 🪙
 ⋟📝 ${prefix}ᴍᴇɴᴜғɪɢ
 ╰┈┈┈◜❁◞┈┈┈
-⋟🪙 ${prefix}ᴍᴇɴᴜɢᴏʟᴅ
+⋟🪙 ${prefix}ʙᴄᴏɪɴs
 ⋟📂 ${prefix}ᴍᴇɴᴜᴀᴅᴍ
 ⋟👥 ${prefix}ᴍᴇɴᴜᴍᴇᴍʙʀᴏ
 ⋟🎲 ${prefix}ʙʀɪɴᴄᴀᴅᴇɪʀᴀs
@@ -6572,13 +6564,281 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
       case 'menubrincadeiras':
       case 'gamemenu':
         try {
-          let menuContent = await menubn(prefix, nomebot, pushname, isModoLite);
-          await sendMenuWithMedia('brincadeiras', async () => menuContent);
+          await bender.react('🆗', {key: info.key});
+
+          const menuVideoPath = __dirname + '/../midias/menu.mp4';
+            const menuImagePath = __dirname + '/../midias/menu.png';
+            const useVideo = fs.existsSync(menuVideoPath);
+            const mediaPath = useVideo ? menuVideoPath : menuImagePath;
+            const mediaBuffer = fs.readFileSync(mediaPath);
+            
+            let menuText = `${cabecalhomenu}
+╰══𝐉𝐎𝐆𝐎𝐒 𝐄 𝐃𝐈𝐕𝐄𝐑𝐒𝐎𝐄𝐒══⪨
+⋟❌ ${prefix}jogodavelha
+⋟🤥 ${prefix}eununca
+⋟❓ ${prefix}vab
+⋟🎲 ${prefix}chance
+⋟🔮 ${prefix}quando
+⋟🍀 ${prefix}sorte
+⋟❤️ ${prefix}casal
+⋟💘 ${prefix}shipo
+⋟⚖️ ${prefix}sn
+⋟✂️ ${prefix}ppt
+⋟💀 ${prefix}suicidio
+╰══𝐈𝐍𝐓𝐄𝐑𝐀𝐂𝐎𝐄𝐒 𝐒𝐎𝐂𝐈𝐀𝐒══⪨
+⋟🦶 ${prefix}chute
+⋟⚽ ${prefix}chutar
+⋟✋ ${prefix}tapa
+⋟👊 ${prefix}soco
+⋟🥊 ${prefix}socar
+⋟💥 ${prefix}explodir
+⋟🤗 ${prefix}abraco
+⋟🫂 ${prefix}abracar
+⋟🦷 ${prefix}morder
+⋟👄 ${prefix}mordida
+⋟👅 ${prefix}lamber
+⋟👅 ${prefix}lambida
+⋟💋 ${prefix}beijo
+⋟😘 ${prefix}beijar
+⋟🔪 ${prefix}mata
+⋟☠️ ${prefix}matar
+⋟💆 ${prefix}cafune
+╰══𝐈𝐍𝐓𝐄𝐑𝐀𝐂𝐎𝐄𝐒 𝐏𝐈𝐂𝐀𝐍𝐓𝐄𝐒══⪨
+⋟🥵 ${prefix}surubao
+⋟🔞 ${prefix}sexo
+⋟👄 ${prefix}beijob
+⋟ Tongue ${prefix}beijarb
+⋟🍑 ${prefix}tapar
+⋟💦 ${prefix}goza
+⋟💦 ${prefix}gozar
+⋟🤱 ${prefix}mamar
+⋟🥛 ${prefix}mamada
+╰══𝐌𝐀𝐒𝐂𝐔𝐋𝐈𝐍𝐀𝐒══⪨
+⋟🏳️‍🌈 ${prefix}gay
+⋟🧠 ${prefix}burro
+⋟💡 ${prefix}inteligente
+⋟🎌 ${prefix}otaku
+⋟💍 ${prefix}fiel
+⋟💔 ${prefix}infiel
+⋟🐐 ${prefix}corno
+⋟🐂 ${prefix}gado
+⋟😏 ${prefix}gostoso
+⋟🤢 ${prefix}feio
+⋟💰 ${prefix}rico
+⋟🏚️ ${prefix}pobre
+⋟🍆 ${prefix}pirocudo
+⋟❌ ${prefix}nazista
+⋟🦹 ${prefix}ladrao
+⋟😈 ${prefix}safado
+⋟😵‍💫 ${prefix}vesgo
+⋟🍻 ${prefix}bebado
+⋟🙅 ${prefix}machista
+⋟🚫 ${prefix}homofobico
+⋟🤬 ${prefix}racista
+⋟😠 ${prefix}chato
+⋟🌟 ${prefix}sortudo
+⋟🌧️ ${prefix}azarado
+⋟💪 ${prefix}forte
+⋟🤏 ${prefix}fraco
+⋟🎯 ${prefix}pegador
+⋟🤡 ${prefix}otario
+⋟🧔 ${prefix}macho
+⋟🤪 ${prefix}bobo
+⋟🤓 ${prefix}nerd
+⋟😴 ${prefix}preguicoso
+⋟💼 ${prefix}trabalhador
+⋟😤 ${prefix}brabo
+⋟🤩 ${prefix}lindo
+⋟🦊 ${prefix}malandro
+⋟😊 ${prefix}simpatico
+⋟😂 ${prefix}engracado
+⋟😎 ${prefix}charmoso
+⋟🤫 ${prefix}misterioso
+⋟🥰 ${prefix}carinhoso
+⋟🖕 ${prefix}desumilde
+⋟🙏 ${prefix}humilde
+⋟😡 ${prefix}ciumento
+⋟🦁 ${prefix}corajoso
+⋟🐭 ${prefix}covarde
+⋟😌 ${prefix}esperto
+⋟🐍 ${prefix}talarico
+⋟😭 ${prefix}chorao
+⋟😜 ${prefix}brincalhao
+⋟🇧🇷 ${prefix}bolsonarista
+⋟🚩 ${prefix}petista
+⋟☭ ${prefix}comunista
+⋟🧑‍🦱 ${prefix}lulista
+⋟⚔️ ${prefix}traidor
+⋟😈 ${prefix}bandido
+⋟🐶 ${prefix}cachorro
+⋟🗑️ ${prefix}vagabundo
+⋟🤥 ${prefix}pilantra
+⋟👑 ${prefix}mito
+⋟✅ ${prefix}padrao
+⋟🎭 ${prefix}comedia
+⋟🃏 ${prefix}psicopata
+⋟🏋️ ${prefix}fortao
+⋟🥖 ${prefix}magrelo
+⋟😏 ${prefix}bombado
+⋟🧑‍💼 ${prefix}chefe
+⋟🏛️ ${prefix}presidente
+⋟🤴 ${prefix}rei
+⋟🤵 ${prefix}patrao
+⋟🍾 ${prefix}playboy
+⋟🤪 ${prefix}zueiro
+⋟🎮 ${prefix}gamer
+⋟💻 ${prefix}programador
+⋟🔭 ${prefix}visionario
+⋟💸 ${prefix}billionario
+⋟⚡ ${prefix}poderoso
+⋟🥇 ${prefix}vencedor
+⋟🎩 ${prefix}senhor
+⋟🥛 ${prefix}mamada
+╰══𝐅𝐄𝐌𝐈𝐍𝐈𝐍𝐀𝐒══⪨
+⋟🏳️‍🌈 ${prefix}lésbica
+⋟🧠 ${prefix}burra
+⋟💡 ${prefix}inteligente
+⋟🎌 ${prefix}otaku
+⋟💍 ${prefix}fiel
+⋟💔 ${prefix}infiel
+⋟🐐 ${prefix}corna
+⋟🐂 ${prefix}gada
+⋟😏 ${prefix}gostosa
+⋟🤢 ${prefix}feia
+⋟💰 ${prefix}rica
+⋟🏚️ ${prefix}pobre
+⋟🍑 ${prefix}bucetuda
+⋟❌ ${prefix}nazista
+⋟🦹 ${prefix}ladra
+⋟😈 ${prefix}safada
+⋟😵‍💫 ${prefix}vesga
+⋟🍻 ${prefix}bêbada
+⋟🙅 ${prefix}machista
+⋟🚫 ${prefix}homofóbica
+⋟🤬 ${prefix}racista
+⋟😠 ${prefix}chata
+⋟🌟 ${prefix}sortuda
+⋟🌧️ ${prefix}azarada
+⋟💪 ${prefix}forte
+⋟🤏 ${prefix}fraca
+⋟🎯 ${prefix}pegadora
+⋟🤡 ${prefix}otária
+⋟💁 ${prefix}boba
+⋟🤓 ${prefix}nerd
+⋟😴 ${prefix}preguiçosa
+⋟💼 ${prefix}trabalhadora
+⋟😤 ${prefix}braba
+⋟🤩 ${prefix}linda
+⋟🦊 ${prefix}malandra
+⋟😊 ${prefix}simpática
+⋟😂 ${prefix}engraçada
+⋟😎 ${prefix}charmosa
+⋟🤫 ${prefix}misteriosa
+⋟🥰 ${prefix}carinhosa
+⋟🖕 ${prefix}desumilde
+⋟🙏 ${prefix}humilde
+⋟😡 ${prefix}ciumenta
+⋟🦁 ${prefix}corajosa
+⋟🐭 ${prefix}covarde
+⋟😌 ${prefix}esperta
+⋟🐍 ${prefix}talarica
+⋟😭 ${prefix}chorona
+⋟😜 ${prefix}brincalhona
+⋟🇧🇷 ${prefix}bolsonarista
+⋟🚩 ${prefix}petista
+⋟☭ ${prefix}comunista
+⋟🧑‍🦱 ${prefix}lulista
+⋟⚔️ ${prefix}traidora
+⋟😈 ${prefix}bandida
+⋟🐶 ${prefix}cachorra
+⋟🗑️ ${prefix}vagabunda
+⋟🤥 ${prefix}pilantra
+⋟👑 ${prefix}mito
+⋟✅ ${prefix}padrão
+⋟🎭 ${prefix}comédia
+⋟🃏 ${prefix}psicopata
+⋟🏋️ ${prefix}fortona
+⋟🥖 ${prefix}magrela
+⋟😏 ${prefix}bombada
+⋟🧑‍💼 ${prefix}chefe
+⋟🏛️ ${prefix}presidenta
+⋟👸 ${prefix}rainha
+⋟🤵 ${prefix}patroa
+⋟🍾 ${prefix}playgirl
+⋟🤪 ${prefix}zueira
+⋟🎮 ${prefix}gamer
+⋟💻 ${prefix}programadora
+⋟🔭 ${prefix}visionária
+⋟💸 ${prefix}bilionária
+⋟⚡ ${prefix}poderosa
+⋟🥇 ${prefix}vencedora
+⋟🎩 ${prefix}senhora
+╰══𝐑𝐀𝐍𝐊𝐒 𝐌𝐀𝐒𝐂𝐔𝐋𝐈𝐍𝐎𝐒══⪨
+⋟🏳️‍🌈 ${prefix}rankgay
+⋟🧠 ${prefix}rankburro
+⋟💡 ${prefix}rankinteligente
+⋟🎌 ${prefix}rankotaku
+⋟💍 ${prefix}rankfiel
+⋟💔 ${prefix}rankinfiel
+⋟🐐 ${prefix}rankcorno
+⋟🐂 ${prefix}rankgado
+⋟😏 ${prefix}rankgostoso
+⋟💰 ${prefix}rankrico
+⋟🏚️ ${prefix}rankpobre
+⋟💪 ${prefix}rankforte
+⋟🎯 ${prefix}rankpegador
+⋟🧔 ${prefix}rankmacho
+⋟🤓 ${prefix}ranknerd
+⋟💼 ${prefix}ranktrabalhador
+⋟😤 ${prefix}rankbrabo
+⋟🤩 ${prefix}ranklindo
+⋟🦊 ${prefix}rankmalandro
+⋟😂 ${prefix}rankengracado
+⋟😎 ${prefix}rankcharmoso
+⋟🔭 ${prefix}rankvisionario
+⋟⚡ ${prefix}rankpoderoso
+⋟🥇 ${prefix}rankvencedor
+╰══𝐑𝐀𝐍𝐊𝐒 𝐅𝐄𝐌𝐈𝐍𝐈𝐍𝐀𝐒══⪨
+⋟🏳️‍🌈 ${prefix}ranklesbica
+⋟🧠 ${prefix}rankburra
+⋟💡 ${prefix}rankinteligente
+⋟🎌 ${prefix}rankotaku
+⋟💍 ${prefix}rankfiel
+⋟💔 ${prefix}rankinfiel
+⋟🐐 ${prefix}rankcorna
+⋟🐂 ${prefix}rankgada
+⋟😏 ${prefix}rankgostosa
+⋟💰 ${prefix}rankrica
+⋟🏚️ ${prefix}rankpobre
+⋟💪 ${prefix}rankforte
+⋟🎯 ${prefix}rankpegadora
+⋟💁 ${prefix}ranknerd
+⋟💼 ${prefix}ranktrabalhadora
+⋟😤 ${prefix}rankbraba
+⋟🤩 ${prefix}ranklinda
+⋟🦊 ${prefix}rankmalandra
+⋟😂 ${prefix}rankengracada
+⋟😎 ${prefix}rankcharmosa
+⋟🔭 ${prefix}rankvisionaria
+⋟⚡ ${prefix}rankpoderosa
+⋟🥇 ${prefix}rankvencedora
+╰─┈┈┈◜❁◞┈┈┈─╯`;
+            
+            await bender.sendMessage(from, {
+              [useVideo ? 'video' : 'image']: mediaBuffer,
+              caption: menuText,
+              gifPlayback: useVideo,
+              mimetype: useVideo ? 'video/mp4' : 'image/jpeg'
+            }, {
+              quoted: info
+            });
+          //await sendMenuWithMedia('admin', menuadm);
         } catch (error) {
-          console.error('Erro ao enviar menu de brincadeiras:', error);
-          await reply("❌ Ocorreu um erro ao carregar o menu de brincadeiras");
+          console.error('Erro ao enviar menu de administração:', error);
+          await reply("❌ Ocorreu um erro ao carregar o menu de administração");
         }
         break;
+
       case 'menudown':
       case 'menudownload':
       case 'menudownloads':
@@ -7667,6 +7927,9 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
       case 'rvisu':
       case 'open':
       case 'revelar':
+      if (!chargeUser(2000, sender)) {
+        return; 
+    }
         try {
           var RSMM = info.message?.extendedTextMessage?.contextInfo?.quotedMessage;
           var boij22 = RSMM?.imageMessage || info.message?.imageMessage || RSMM?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessage?.message?.imageMessage || RSMM?.viewOnceMessage?.message?.imageMessage;
@@ -8949,7 +9212,9 @@ if (!chargeUser(50, sender)) {
       case 'delete':
       case 'del':
       case 'd':
-        if (!isGroupAdmin) return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔");
+        if (!isGroupAdmin) {
+            if (!chargeUser(5000, sender)) {
+        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 5.000 BCOINS");}}
         if (!menc_prt) return reply("Marque uma mensagem.");
         let stanzaId, participant;
         if (info.message.extendedTextMessage) {
@@ -9378,7 +9643,9 @@ if (!chargeUser(50, sender)) {
       case 'hidetag':
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
-          if (!isGroupAdmin) return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔");
+          if (!isGroupAdmin) {
+            if (!chargeUser(10000, sender)) {
+        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 10.000 BCOINS");}}
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
           var DFC4 = "";
           var rsm4 = info.message?.extendedTextMessage?.contextInfo?.quotedMessage;
@@ -10669,7 +10936,9 @@ Exemplos:
       case 'unmute':
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
-          if (!isGroupAdmin) return reply("você precisa ser adm 💔");
+          if (!isGroupAdmin) {
+            if (!chargeUser(1000, sender)) {
+        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 1.000 BCOINS");}}
           if (!menc_os2) return reply("Marque alguém 🙄");
           const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {

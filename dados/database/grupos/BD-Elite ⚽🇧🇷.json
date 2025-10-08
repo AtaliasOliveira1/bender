@@ -7,7 +7,7 @@
   "moderators": [],
   "allowedModCommands": [],
   "mutedUsers": {},
-  "levelingEnabled": false,
+  "levelingEnabled": true,
   "contador": [
     {
       "id": "108607039352965@lid",
@@ -65,12 +65,12 @@
     },
     {
       "id": "212944998678773@lid",
-      "msg": 6,
+      "msg": 7,
       "cmd": 0,
       "figu": 1,
       "pushname": "Bender",
       "firstSeen": "2025-10-05T21:51:42.358Z",
-      "lastActivity": "2025-10-06T01:40:06.196Z"
+      "lastActivity": "2025-10-08T03:41:55.607Z"
     },
     {
       "id": "246596000337939@lid",
