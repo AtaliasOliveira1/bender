@@ -2790,6 +2790,7 @@ async function NazuninhaBotExec(bender, info, store, groupCache, messagesCache) 
         const timestamp = new Date().toLocaleTimeString('pt-BR', {
           hour12: false
         });
+        //mensagens do console atalias
         const messageType = isCmd ? 'COMANDO' : 'MENSAGEM';
         const context = isGroup ? 'GRUPO' : 'PRIVADO';
         const messagePreview = isCmd ? `${prefix}${command}${q ? ` ${q.substring(0, 25)}${q.length > 25 ? '...' : ''}` : ''}` : budy2.substring(0, 35) + (budy2.length > 35 ? '...' : '');
@@ -6343,6 +6344,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
       case 'comandos':
       case 'commands':
         try {
+          await bender.react('🆗', {key: info.key});
           const BUTTONS_FILE = pathz.join(DATABASE_DIR, 'bottons.json');
           ensureJsonFileExists(BUTTONS_FILE, { enabled: false });
           const buttonsData = loadJsonFile(BUTTONS_FILE, { enabled: false });
@@ -6479,7 +6481,121 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
       case 'menuadmins':
       case 'admmenu':
         try {
-          await sendMenuWithMedia('admin', menuadm);
+          await bender.react('🆗', {key: info.key});
+
+          const menuVideoPath = __dirname + '/../midias/menu.mp4';
+            const menuImagePath = __dirname + '/../midias/menu.png';
+            const useVideo = fs.existsSync(menuVideoPath);
+            const mediaPath = useVideo ? menuVideoPath : menuImagePath;
+            const mediaBuffer = fs.readFileSync(mediaPath);
+            
+            let menuText = `${cabecalhomenu}
+╰══𝐀𝐃𝐌𝐈𝐍𝐈𝐒𝐓𝐑𝐀𝐂𝐀𝐎══⪨
+⋟🚫 ${prefix}ban
+⋟⬆️ ${prefix}promover
+⋟⬇️ ${prefix}rebaixar
+⋟🔇 ${prefix}mute
+⋟🔊 ${prefix}desmute
+⋟⚠️ ${prefix}adv
+⋟✅ ${prefix}rmadv
+⋟📜 ${prefix}listadv
+⋟🧱 ${prefix}blockuser
+⋟🔓 ${prefix}unblockuser
+⋟📋 ${prefix}listblocksgp
+⋟➕ ${prefix}addblacklist
+⋟➖ ${prefix}delblacklist
+⋟❌ ${prefix}listblacklist
+⋟🧹 ${prefix}limparrank
+⋟🔄 ${prefix}resetrank
+╰══𝐆𝐄𝐑𝐄𝐍𝐂𝐈𝐀𝐌𝐄𝐍𝐓𝐎══⪨
+⋟🗑️ ${prefix}del
+⋟🧼 ${prefix}limpar
+⋟👻 ${prefix}banghost
+⋟👁️‍🗨️ ${prefix}hidetag
+⋟📌 ${prefix}marcar
+⋟🎁 ${prefix}sorteio
+⋟🔗 ${prefix}linkgp
+⋟🚪 ${prefix}grupo A/F
+⋟🕒 ${prefix}opengp HH:MM|off
+⋟🕧 ${prefix}closegp HH:MM|off
+⋟🖊️ ${prefix}setname
+⋟📝 ${prefix}setdesc
+⋟➕ ${prefix}addregra
+⋟➖ ${prefix}delregra
+⋟💬 ${prefix}limitmessage
+⋟❌ ${prefix}dellimitmessage
+╰══𝐁𝐋𝐎𝐂𝐊══⪨
+⋟🔒 ${prefix}blockcmd
+⋟🔑 ${prefix}unblockcmd
+╰══𝐌𝐎𝐃𝐄𝐑𝐀𝐃𝐎𝐑𝐄𝐒══⪨
+⋟➕ ${prefix}addmod
+⋟➖ ${prefix}delmod
+⋟👥 ${prefix}listmods
+⋟📜 ${prefix}grantmodcmd
+⋟🚫 ${prefix}revokemodcmd
+⋟📜 ${prefix}listmodcmds
+╰══𝐏𝐀𝐑𝐂𝐄𝐑𝐈𝐀𝐒══⪨
+⋟🤝 ${prefix}parcerias
+⋟➕ ${prefix}addparceria
+⋟➖ ${prefix}delparceria
+╰══𝐀𝐍𝐓𝐈 𝐍𝐔𝐊𝐄══⪨
+⋟🛡️ ${prefix}antinuke
+⋟👑 ${prefix}donogp
+⋟🗑️ ${prefix}rmdonogp
+⋟👥 ${prefix}donosgp
+╰══𝐀𝐔𝐓𝐎 𝐑𝐄𝐏𝐎𝐒𝐓𝐀══⪨
+⋟🤖 ${prefix}addautoadm
+⋟🖼️ ${prefix}addautoadmidia
+⋟📋 ${prefix}listautoadm
+⋟❌ ${prefix}delautoadm
+⋟💬 ${prefix}autorespostas
+⋟🔁 ${prefix}autorepo
+╰══𝐀𝐓𝐈𝐕𝐀𝐂𝐎𝐄𝐒 ══⪨
+⋟⬇️ ${prefix}autodl
+⋟🤏 ${prefix}minmessage
+⋟💡 ${prefix}assistente
+⋟🌚 ${prefix}modobn
+⋟🔞 ${prefix}modonsfw
+⋟🤝 ${prefix}modoparceria
+⋟🌟 ${prefix}modogold
+⋟👋 ${prefix}bemvindo
+⋟🏃 ${prefix}saida
+⋟🏷️ ${prefix}autosticker
+⋟🛡️ ${prefix}soadm
+⋟🕵️ ${prefix}x9
+⋟💡 ${prefix}assistente
+⋟⚡ ${prefix}modolite
+⋟⏱️ ${prefix}cmdlimit
+⋟🔗 ${prefix}antilinkgp
+⋟⚔️ ${prefix}antilinkhard
+⋟🛑 ${prefix}antiporn
+⋟🌊 ${prefix}antiflood
+⋟🎭 ${prefix}antifake
+⋟🇵🇹 ${prefix}antipt
+⋟📄 ${prefix}antidoc
+⋟📍 ${prefix}antiloc
+⋟🖼️ ${prefix}antifig
+⋟🖱️ ${prefix}antibtn
+⋟🔇 ${prefix}antistatus
+╰══𝐂𝐎𝐍𝐅𝐈𝐆𝐔𝐑𝐀𝐂𝐎𝐄𝐒 ══⪨
+⋟✍️ ${prefix}legendasaiu
+⋟📝 ${prefix}legendabv
+⋟📸 ${prefix}fotobv
+⋟🗑️ ${prefix}rmfotobv
+⋟📷 ${prefix}fotosaiu
+⋟❌ ${prefix}rmfotosaiu
+⋟⚙️ ${prefix}setprefix
+╰─┈┈┈◜❁◞┈┈┈─╯`;
+            
+            await bender.sendMessage(from, {
+              [useVideo ? 'video' : 'image']: mediaBuffer,
+              caption: menuText,
+              gifPlayback: useVideo,
+              mimetype: useVideo ? 'video/mp4' : 'image/jpeg'
+            }, {
+              quoted: info
+            });
+          //await sendMenuWithMedia('admin', menuadm);
         } catch (error) {
           console.error('Erro ao enviar menu de administração:', error);
           await reply("❌ Ocorreu um erro ao carregar o menu de administração");

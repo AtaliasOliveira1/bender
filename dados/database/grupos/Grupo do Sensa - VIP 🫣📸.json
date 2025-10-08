@@ -20,12 +20,12 @@
     },
     {
       "id": "159923711250461@lid",
-      "msg": 28,
+      "msg": 33,
       "cmd": 0,
-      "figu": 3,
+      "figu": 4,
       "pushname": "🇧🇷",
       "firstSeen": "2025-10-05T20:40:15.289Z",
-      "lastActivity": "2025-10-08T00:24:29.471Z"
+      "lastActivity": "2025-10-08T01:17:27.588Z"
     },
     {
       "id": "115264104456199@lid",
@@ -110,12 +110,12 @@
     },
     {
       "id": "235445896093827@lid",
-      "msg": 97,
+      "msg": 99,
       "cmd": 0,
       "figu": 18,
       "pushname": "Rayra Luana",
       "firstSeen": "2025-10-05T21:43:30.439Z",
-      "lastActivity": "2025-10-08T00:49:43.496Z"
+      "lastActivity": "2025-10-08T01:21:41.333Z"
     },
     {
       "id": "53477191467258@lid",
@@ -263,12 +263,12 @@
     },
     {
       "id": "23124171075776@lid",
-      "msg": 13,
+      "msg": 17,
       "cmd": 0,
       "figu": 3,
       "pushname": ".",
       "firstSeen": "2025-10-05T22:11:55.263Z",
-      "lastActivity": "2025-10-08T01:01:20.629Z"
+      "lastActivity": "2025-10-08T01:05:18.411Z"
     },
     {
       "id": "22110609080474@lid",
@@ -353,12 +353,12 @@
     },
     {
       "id": "242987925807344@lid",
-      "msg": 5,
+      "msg": 10,
       "cmd": 0,
       "figu": 0,
       "pushname": "Leandro",
       "firstSeen": "2025-10-05T23:34:43.120Z",
-      "lastActivity": "2025-10-07T23:59:44.686Z"
+      "lastActivity": "2025-10-08T01:22:09.125Z"
     },
     {
       "id": "152114974162955@lid",
@@ -515,12 +515,12 @@
     },
     {
       "id": "21028176707772@lid",
-      "msg": 5,
+      "msg": 6,
       "cmd": 0,
       "figu": 0,
       "pushname": ".",
       "firstSeen": "2025-10-07T23:57:27.082Z",
-      "lastActivity": "2025-10-08T00:07:10.498Z"
+      "lastActivity": "2025-10-08T01:31:19.008Z"
     },
     {
       "id": "177300746330260@lid",
@@ -623,12 +623,12 @@
     },
     {
       "id": "212549760987175@lid",
-      "msg": 5,
+      "msg": 7,
       "cmd": 0,
       "figu": 0,
       "pushname": "🥰",
       "firstSeen": "2025-10-08T00:29:06.964Z",
-      "lastActivity": "2025-10-08T00:54:49.434Z"
+      "lastActivity": "2025-10-08T01:21:47.290Z"
     },
     {
       "id": "270656021233914@lid",
@@ -695,12 +695,66 @@
     },
     {
       "id": "165330940911846@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 2,
+      "pushname": "Anjinha❤️🫶🏼",
+      "firstSeen": "2025-10-08T01:01:51.796Z",
+      "lastActivity": "2025-10-08T01:19:56.347Z"
+    },
+    {
+      "id": "131632308731978@lid",
+      "msg": 5,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Jean.Alencar8782",
+      "firstSeen": "2025-10-08T01:04:09.433Z",
+      "lastActivity": "2025-10-08T01:04:39.065Z"
+    },
+    {
+      "id": "145646686359756@lid",
       "msg": 1,
       "cmd": 0,
       "figu": 0,
-      "pushname": "Anjinha❤️🫶🏼",
-      "firstSeen": "2025-10-08T01:01:51.796Z",
-      "lastActivity": "2025-10-08T01:01:51.796Z"
+      "pushname": "P.R",
+      "firstSeen": "2025-10-08T01:04:28.576Z",
+      "lastActivity": "2025-10-08T01:04:28.576Z"
+    },
+    {
+      "id": "242326400192614@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Jdcell",
+      "firstSeen": "2025-10-08T01:12:46.094Z",
+      "lastActivity": "2025-10-08T01:12:46.094Z"
+    },
+    {
+      "id": "113430119895180@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "John Walyson",
+      "firstSeen": "2025-10-08T01:13:48.367Z",
+      "lastActivity": "2025-10-08T01:13:48.367Z"
+    },
+    {
+      "id": "86986190799017@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Wandesson😄",
+      "firstSeen": "2025-10-08T01:18:22.225Z",
+      "lastActivity": "2025-10-08T01:27:53.168Z"
+    },
+    {
+      "id": "148958424871006@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "❤️🙃🙃🙃",
+      "firstSeen": "2025-10-08T01:24:48.397Z",
+      "lastActivity": "2025-10-08T01:24:54.850Z"
     }
   ]
 }
