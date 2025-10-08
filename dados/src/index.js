@@ -8692,10 +8692,9 @@ case 'atalias2':
       
  case 'rename':
 case 'roubar':
-    const COST = 50;
-    const econ = loadEconomy();
-    const me = getEcoUser(econ, sender);
-
+if (!chargeUser(50, sender)) {
+        return; 
+    }
     try {
         if (!isQuotedSticker) return reply('Você usou de forma errada... Marque uma figurinha.');
 
@@ -8705,15 +8704,6 @@ case 'roubar':
 
         // 2. Sua lógica de validação original (reforçada com trim):
         if (!author || !packname) return reply(`Formato errado, utilize:\n${prefix}${command} Autor/Pack\nEx: ${prefix}${command} By:/@ataliasloami`);
-
-        // 3. Checagem de Saldo e Cobrança
-        if (me.wallet < COST) {
-            return reply(`❌ Saldo insuficiente! Este comando custa ${fmt(COST)} BCOINS. Você tem apenas ${fmt(me.wallet)} BCOINS na carteira.`);
-        }
-        
-        me.wallet -= COST;
-        saveEconomy(econ);
-        reply(`💸 Cobrado ${fmt(COST)} BCOINS da sua carteira para renomear a figurinha.\n\n💸Saldo restante: *${fmt(me.wallet)} BCOINS.*`);
 
         // 4. Continuação do comando de renomear
         var encmediats;
