@@ -7,7 +7,7 @@
   "moderators": [],
   "allowedModCommands": [],
   "mutedUsers": {},
-  "levelingEnabled": false,
+  "levelingEnabled": true,
   "contador": [
     {
       "id": "196250393665712@lid",
@@ -65,12 +65,12 @@
     },
     {
       "id": "110935230390418@lid",
-      "msg": 9,
+      "msg": 10,
       "cmd": 0,
       "figu": 0,
       "pushname": ".",
       "firstSeen": "2025-10-05T21:21:58.532Z",
-      "lastActivity": "2025-10-08T01:38:54.153Z"
+      "lastActivity": "2025-10-08T02:58:49.682Z"
     },
     {
       "id": "48129688772836@lid",
@@ -110,12 +110,12 @@
     },
     {
       "id": "235445896093827@lid",
-      "msg": 99,
+      "msg": 100,
       "cmd": 0,
       "figu": 18,
       "pushname": "Rayra Luana",
       "firstSeen": "2025-10-05T21:43:30.439Z",
-      "lastActivity": "2025-10-08T01:21:41.333Z"
+      "lastActivity": "2025-10-08T02:48:40.206Z"
     },
     {
       "id": "53477191467258@lid",
@@ -782,6 +782,15 @@
       "pushname": "Bia Santos",
       "firstSeen": "2025-10-08T02:28:53.461Z",
       "lastActivity": "2025-10-08T02:28:53.461Z"
+    },
+    {
+      "id": "164823732060406@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Pizzaria do Chelsea",
+      "firstSeen": "2025-10-08T02:54:45.953Z",
+      "lastActivity": "2025-10-08T02:54:47.802Z"
     }
   ]
 }

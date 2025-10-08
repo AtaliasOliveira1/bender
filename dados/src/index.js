@@ -1038,17 +1038,37 @@ function updatePeriodChallenge(user, type, inc=1, successFlag=true){
 function isPeriodCompleted(ch){
   if (!ch) return false; return ch.tasks.every(t=> (t.progress||0) >= t.target);
 }
+
 function checkLevelUp(userId, userData, levelingData, bender, from) {
   const nextLevelXp = calculateNextLevelXp(userData.level);
   if (userData.xp >= nextLevelXp) {
     userData.level++;
     userData.xp -= nextLevelXp;
     userData.patent = getPatent(userData.level, levelingData.patents);
+
+    // --- RECOMPENSA EM BCOINS (NOVA LÓGICA) ---
+        const REWARD_BCOINS = 5;
+        
+        // Carrega a economia
+        const econ = loadEconomy(); 
+        // Pega o usuário na economia (use userId)
+        const ecoUser = getEcoUser(econ, userId); 
+        
+        // Adiciona a recompensa à carteira
+        ecoUser.wallet += REWARD_BCOINS;
+        
+        // Salva os dados da economia
+        saveEconomy(econ); 
+        // ------------------------------------------
+
     fs.writeFileSync(LEVELING_FILE, JSON.stringify(levelingData, null, 2));
     bender.sendMessage(from, {
-      text: `🎉 @${getUserName(userId)} subiu para o nível ${userData.level}!\n🔹 XP atual: ${userData.xp}\n🎖️ Nova patente: ${userData.patent}`,
-      mentions: [userId]
-    });
+            text: `🎉 @${getUserName(userId)} subiu para o nível ${userData.level}!\n` + 
+                  `🔹 XP atual: ${userData.xp}\n` + 
+                  `🎖️ Nova patente: ${userData.patent}\n\n` +
+                  `💰 RECOMPENSA: Você ganhou *${fmt(REWARD_BCOINS)} BCOINS*! Saldo atual: *${fmt(ecoUser.wallet)} BCOINS.*`, // Exibe a recompensa e o novo saldo
+            mentions: [userId]
+        });
   }
 }
 function checkLevelDown(userId, userData, levelingData) {

@@ -1,10 +1,38 @@
 {
   "users": {
     "82235738820857@lid": {
+      "level": 2,
+      "xp": 9,
+      "patent": "Aprendiz",
+      "messages": 79,
+      "commands": 9
+    },
+    "235445896093827@lid": {
       "level": 1,
-      "xp": 20,
+      "xp": 5,
       "patent": "Iniciante",
-      "messages": 4,
+      "messages": 1,
+      "commands": 0
+    },
+    "212944998678773@lid": {
+      "level": 1,
+      "xp": 10,
+      "patent": "Iniciante",
+      "messages": 2,
+      "commands": 0
+    },
+    "164823732060406@lid": {
+      "level": 1,
+      "xp": 15,
+      "patent": "Iniciante",
+      "messages": 3,
+      "commands": 0
+    },
+    "110935230390418@lid": {
+      "level": 1,
+      "xp": 5,
+      "patent": "Iniciante",
+      "messages": 1,
       "commands": 0
     }
   },

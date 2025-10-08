@@ -11,12 +11,21 @@
   "contador": [
     {
       "id": "82235738820857@lid",
-      "msg": 1,
-      "cmd": 0,
-      "figu": 0,
+      "msg": 39,
+      "cmd": 9,
+      "figu": 30,
       "pushname": "๛αταℓiαs ℓσ-αмiㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
       "firstSeen": "2025-10-08T02:45:23.565Z",
-      "lastActivity": "2025-10-08T02:45:23.565Z"
+      "lastActivity": "2025-10-08T03:02:12.366Z"
+    },
+    {
+      "id": "212944998678773@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Bender",
+      "firstSeen": "2025-10-08T02:51:57.064Z",
+      "lastActivity": "2025-10-08T02:52:12.706Z"
     }
   ]
 }
