@@ -236,12 +236,12 @@
     },
     {
       "id": "182141694546093@lid",
-      "msg": 9,
+      "msg": 10,
       "cmd": 0,
       "figu": 1,
       "pushname": "Ery",
       "firstSeen": "2025-10-05T22:09:33.960Z",
-      "lastActivity": "2025-10-05T22:30:01.617Z"
+      "lastActivity": "2025-10-08T02:08:53.596Z"
     },
     {
       "id": "72327400271873@lid",
@@ -425,12 +425,12 @@
     },
     {
       "id": "106640078569689@lid",
-      "msg": 21,
+      "msg": 22,
       "cmd": 0,
       "figu": 3,
       "pushname": "Arlem Janse CPF FORTE",
       "firstSeen": "2025-10-06T00:19:49.465Z",
-      "lastActivity": "2025-10-08T00:38:33.909Z"
+      "lastActivity": "2025-10-08T02:40:25.591Z"
     },
     {
       "id": "214074071728215@lid",
@@ -524,12 +524,12 @@
     },
     {
       "id": "177300746330260@lid",
-      "msg": 2,
+      "msg": 3,
       "cmd": 0,
       "figu": 0,
       "pushname": "Matheus",
       "firstSeen": "2025-10-08T00:00:13.890Z",
-      "lastActivity": "2025-10-08T00:36:36.655Z"
+      "lastActivity": "2025-10-08T02:09:50.341Z"
     },
     {
       "id": "120706062934104@lid",
@@ -773,6 +773,15 @@
       "pushname": "Rodrigues_dr77 🫶🏻✨",
       "firstSeen": "2025-10-08T01:49:19.246Z",
       "lastActivity": "2025-10-08T01:49:19.246Z"
+    },
+    {
+      "id": "85367474671853@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Bia Santos",
+      "firstSeen": "2025-10-08T02:28:53.461Z",
+      "lastActivity": "2025-10-08T02:28:53.461Z"
     }
   ]
 }

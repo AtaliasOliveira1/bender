@@ -1596,13 +1596,13 @@ async function NazuninhaBotExec(bender, info, store, groupCache, messagesCache) 
           mark: {}
         };
       };
-  // default flags
-  groupData.modogold = typeof groupData.modogold === 'boolean' ? groupData.modogold : false;
+  // default flags - grupos
+  groupData.modogold = typeof groupData.modogold === 'boolean' ? groupData.modogold : true;
       groupData.minMessage = groupData.minMessage || null;
       groupData.moderators = groupData.moderators || [];
       groupData.allowedModCommands = groupData.allowedModCommands || [];
       groupData.mutedUsers = groupData.mutedUsers || {};
-      groupData.levelingEnabled = groupData.levelingEnabled || false;
+      groupData.levelingEnabled = groupData.levelingEnabled || true;
       if (groupName && groupData.groupName !== groupName) {
         groupData.groupName = groupName;
         fs.writeFileSync(groupFile, JSON.stringify(groupData, null, 2));
@@ -3142,10 +3142,84 @@ function chargeUser(cost, sender) {
 }
 
     switch (command) {
-      case 'menugold': {
-        await sendMenuWithMedia('menugold', menuGold);
+      case 'menugold':
+      case 'menumoedas':
+      case 'moedas':
+      case 'gold':
+        try {
+          await bender.react('🆗', {key: info.key});
+
+          const menuVideoPath = __dirname + '/../midias/menu.mp4';
+            const menuImagePath = __dirname + '/../midias/menu.png';
+            const useVideo = fs.existsSync(menuVideoPath);
+            const mediaPath = useVideo ? menuVideoPath : menuImagePath;
+            const mediaBuffer = fs.readFileSync(mediaPath);
+            
+            let menuText = `${cabecalhomenu}
+╰══𝐒𝐓𝐀𝐓𝐔𝐒 𝐄 𝐏𝐄𝐑𝐅𝐈𝐋══⪨
+⋟👤 ${prefix}perfilrpg
+⋟💵 ${prefix}carteira
+⋟🏦 ${prefix}banco
+⋟🏆 ${prefix}topgold
+╰══𝐑𝐄𝐍𝐃𝐀𝐒 ══⪨
+⋟☀️ ${prefix}diario
+⋟👷 ${prefix}trabalhar
+⋟⛏️ ${prefix}minerar
+⋟🎣 ${prefix}pescar
+⋟🗺️ ${prefix}explorar
+⋟🏹 ${prefix}caçar
+⋟🔥 ${prefix}forjar
+⋟🔪 ${prefix}crime
+⋟🚨 ${prefix}assaltar @user
+╰══𝐄𝐌𝐏𝐑𝐄𝐆𝐎𝐒══⪨
+⋟📝 ${prefix}vagas
+⋟📥 ${prefix}emprego <vaga>
+⋟🚪 ${prefix}demitir
+╰══𝐁𝐀𝐍𝐂𝐎══⪨
+⋟⬆️ ${prefix}depositar <valor|all>
+⋟⬇️ ${prefix}sacar <valor|all>
+⋟➡️ ${prefix}transferir <@user> <valor>
+⋟💠 ${prefix}pix <@user> <valor>
+╰══𝐈𝐓𝐄𝐍𝐒 𝐄 𝐋𝐎𝐉𝐀══⪨
+⋟🏪 ${prefix}loja
+⋟🛒 ${prefix}comprar <item>
+⋟🎒 ${prefix}inventario
+⋟🔩 ${prefix}materiais
+⋟🏷️ ${prefix}precos
+⋟💰 ${prefix}vender <material> <qtd|all>
+⋟🔧 ${prefix}reparar
+╰══𝐌𝐄𝐑𝐂𝐀𝐃𝐎══⪨
+⋟🌐 ${prefix}mercado
+⋟📢 ${prefix}listar item|mat <id|material> <qtd> <preço>
+⋟💳 ${prefix}comprarmercado <id>
+⋟📜 ${prefix}meusanuncios
+⋟❌ ${prefix}cancelar <id>
+╰══𝐏𝐑𝐎𝐏𝐑𝐈𝐄𝐃𝐀𝐃𝐄𝐒══⪨
+⋟🏘️ ${prefix}propriedades
+⋟🏠 ${prefix}comprarpropriedade <tipo>
+⋟📥 ${prefix}coletarpropriedades
+╰══𝐏𝐑𝐎𝐆𝐑𝐄𝐒𝐒𝐀𝐎 ══⪨
+⋟📈 ${prefix}habilidades
+⋟📅 ${prefix}desafiosemanal
+⋟🗓️ ${prefix}desafiomensal
+╰══𝐃𝐄𝐒𝐀𝐅𝐈𝐎 𝐃𝐈𝐀𝐑𝐈𝐎 ══⪨
+⋟❓ ${prefix}desafio
+⋟✅ ${prefix}desafio coletar
+╰─┈┈┈◜❁◞┈┈┈─╯`;
+            
+            await bender.sendMessage(from, {
+              [useVideo ? 'video' : 'image']: mediaBuffer,
+              caption: menuText,
+              gifPlayback: useVideo,
+              mimetype: useVideo ? 'video/mp4' : 'image/jpeg'
+            }, {
+              quoted: info
+            });
+        } catch (error) {
+          console.error('Erro ao enviar menu de administração:', error);
+          await reply("❌ Ocorreu um erro ao carregar o menu de administração");
+        }
         break;
-      }
 
       case 'lembrete':
       case 'lembrar': {
@@ -6427,6 +6501,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
 ⋟🖼️ ${prefix}ғɪɢᴜʀɪɴʜᴀs (5) 🪙
 ⋟📝 ${prefix}ᴍᴇɴᴜғɪɢ
 ╰┈┈┈◜❁◞┈┈┈
+⋟🪙 ${prefix}ᴍᴇɴᴜɢᴏʟᴅ
 ⋟📂 ${prefix}ᴍᴇɴᴜᴀᴅᴍ
 ⋟👥 ${prefix}ᴍᴇɴᴜᴍᴇᴍʙʀᴏ
 ⋟🎲 ${prefix}ʙʀɪɴᴄᴀᴅᴇɪʀᴀs
@@ -8950,9 +9025,7 @@ if (!chargeUser(50, sender)) {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) {
             if (!chargeUser(15000, sender)) {
-        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 15.000 BCOINS");
-       }
-          }
+        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 15.000 BCOINS");}}
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
           if (!menc_os2) return reply("Marque alguém 🙄");
           if (menc_os2 === nmrdn) return reply("❌ Não posso banir o dono do bot.");
@@ -10546,7 +10619,9 @@ Exemplos:
       case 'mutar':
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
-          if (!isGroupAdmin) return reply("você precisa ser adm 💔");
+          if (!isGroupAdmin) {
+            if (!chargeUser(10000, sender)) {
+        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 10.000 BCOINS");}}
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
           if (!menc_os2) return reply("Marque alguém 🙄");
           const groupFilePath = __dirname + `/../database/grupos/${from}.json`;

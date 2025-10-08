@@ -1,5 +1,13 @@
 {
-  "users": {},
+  "users": {
+    "82235738820857@lid": {
+      "level": 1,
+      "xp": 20,
+      "patent": "Iniciante",
+      "messages": 4,
+      "commands": 0
+    }
+  },
   "patents": [
     {
       "name": "Iniciante",
