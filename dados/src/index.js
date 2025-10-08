@@ -3109,6 +3109,38 @@ const figpackname2 = `${isGroup ? "⚙️ Grupo:" : "🪪 Usuário:"} ${isGroup 
 const figautor2 = `\n🕑 Tempo: ${dattofc} ${hourofc}\n${pushname} | ${isPremium ? userpremiumsticker : ""}`;
 
 
+/**
+ * Realiza a cobrança de um valor no saldo do usuário.
+ *
+ * @param {number} cost - O valor a ser cobrado.
+ * @param {string} sender - O ID do usuário (quem está sendo cobrado).
+ * @returns {boolean} - Retorna true se a cobrança for bem-sucedida, false caso contrário.
+ */
+function chargeUser(cost, sender) {
+    // 1. Carrega a economia e o usuário
+    const econ = loadEconomy();
+    const me = getEcoUser(econ, sender);
+    const COST = cost; // Apenas por clareza
+
+    // 2. Checagem de Saldo
+    if (me.wallet < COST) {
+        // Envia a mensagem de erro
+        reply(`❌ Saldo insuficiente! Este comando custa ${fmt(COST)} BCOINS. Você tem apenas ${fmt(me.wallet)} BCOINS na carteira.`);
+        // Retorna FALSE para indicar que a cobrança FALHOU
+        return false;
+    }
+
+    // 3. Realiza a Cobrança e Salva
+    me.wallet -= COST;
+    saveEconomy(econ);
+
+    // Envia a mensagem de sucesso
+    reply(`💸 Cobrado ${fmt(COST)} BCOINS da sua carteira.\n\n💸 Saldo restante: *${fmt(me.wallet)} BCOINS.*`);
+    
+    // Retorna TRUE para indicar que a cobrança FOI BEM-SUCEDIDA
+    return true;
+}
+
     switch (command) {
       case 'menugold': {
         await sendMenuWithMedia('menugold', menuGold);
@@ -6391,7 +6423,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
 ┗ 📂 4 ɢʙ ]
 ╰══𝐅𝐈𝐆𝐔𝐑𝐈𝐍𝐇𝐀𝐒══⪨
 ⋟📸 ${prefix}s (ᴍᴀʀᴄᴀʀ ғᴏᴛᴏ)
-⋟✏️ ${prefix}ʀᴇɴᴀᴍᴇ (ɴᴏᴍᴇ/ɴᴏᴍᴇ)
+⋟✏️ ${prefix}ʀᴇɴᴀᴍᴇ (ɴᴏᴍᴇ/ɴᴏᴍᴇ) 🪙
 ⋟🖼️ ${prefix}ғɪɢᴜʀɪɴʜᴀs (5)
 ⋟📝 ${prefix}ᴍᴇɴᴜғɪɢ
 ╰┈┈┈◜❁◞┈┈┈
@@ -8639,6 +8671,24 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
         ;
         break;
         
+      
+case 'atalias':
+    // Se a cobrança FALHAR (retornar false), o 'if' será TRUE e a execução para.
+    if (!chargeUser(50, sender)) {
+        return; 
+    }
+    // Este código só roda se a cobrança for BEM-SUCEDIDA
+    await bender.sendMessage(from, {text: "cobrou e pagou 50"});
+    break;
+
+case 'atalias2':
+    // Se a cobrança FALHAR (retornar false), o 'if' será TRUE e a execução para.
+    if (!chargeUser(100000, sender)) {
+        return;
+    }
+    // Este código só roda se a cobrança for BEM-SUCEDIDA
+    await bender.sendMessage(from, {text: "cobrou e pagou 100000"});
+    break;
       
  case 'rename':
 case 'roubar':
