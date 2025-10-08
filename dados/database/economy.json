@@ -1,94 +1,538 @@
 {
   "users": {
-    "82235738820857@lid": {
-      "wallet": 24170,
-      "bank": 25000,
+    "271051728674996@lid": {
+      "wallet": 377,
+      "bank": 4240,
       "cooldowns": {
-        "fish": 1759694047974
+        "work": 1759867859509,
+        "fish": 1759867682318,
+        "crime": 1759852122963,
+        "explore": 1759867746999,
+        "daily": 1759890101924,
+        "mine": 1759863249896,
+        "rob": 1759700499588,
+        "hunt": 1759867810387,
+        "forge": 1759792517938
       },
-      "inventory": {},
-      "job": null,
-      "tools": {},
-      "materials": {},
+      "inventory": {
+        "rod": 1,
+        "lucky": 1,
+        "bow": 1
+      },
+      "job": "gerente",
+      "tools": {
+        "pickaxe": {
+          "tier": "diamante",
+          "dur": 116,
+          "max": 150,
+          "key": "pickaxe_diamante"
+        }
+      },
+      "materials": {
+        "pedra": 12,
+        "ferro": 11,
+        "ouro": 1,
+        "diamante": 2
+      },
       "challenge": {
-        "expiresAt": 1759719599999,
+        "expiresAt": 1759881599999,
         "tasks": [
-          {
-            "type": "work",
-            "target": 4,
-            "progress": 0
-          },
-          {
-            "type": "mine",
-            "target": 7,
-            "progress": 0
-          },
           {
             "type": "crimeSuccess",
-            "target": 6,
-            "progress": 0
-          }
-        ],
-        "reward": 302,
-        "claimed": false
-      },
-      "weeklyChallenge": {
-        "expiresAt": 1759719599999,
-        "tasks": [
-          {
-            "type": "explore",
-            "target": 22,
+            "target": 3,
             "progress": 0
           },
           {
             "type": "hunt",
-            "target": 26,
+            "target": 5,
+            "progress": 3
+          },
+          {
+            "type": "explore",
+            "target": 3,
+            "progress": 3
+          }
+        ],
+        "reward": 303,
+        "claimed": false
+      },
+      "weeklyChallenge": {
+        "expiresAt": 1760313599999,
+        "tasks": [
+          {
+            "type": "crimeSuccess",
+            "target": 30,
+            "progress": 1
+          },
+          {
+            "type": "hunt",
+            "target": 29,
+            "progress": 9
+          },
+          {
+            "type": "explore",
+            "target": 29,
+            "progress": 11
+          },
+          {
+            "type": "fish",
+            "target": 16,
+            "progress": 10
+          }
+        ],
+        "reward": 3903,
+        "claimed": false
+      },
+      "monthlyChallenge": {
+        "expiresAt": 1761955199999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 70,
+            "progress": 65
+          },
+          {
+            "type": "hunt",
+            "target": 68,
+            "progress": 39
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 68,
+            "progress": 8
+          },
+          {
+            "type": "fish",
+            "target": 64,
+            "progress": 64
+          },
+          {
+            "type": "explore",
+            "target": 88,
+            "progress": 60
+          }
+        ],
+        "reward": 16861,
+        "claimed": false
+      },
+      "skills": {
+        "mining": {
+          "level": 2,
+          "xp": 15
+        },
+        "working": {
+          "level": 2,
+          "xp": 7
+        },
+        "fishing": {
+          "level": 2,
+          "xp": 15
+        },
+        "exploring": {
+          "level": 2,
+          "xp": 10
+        },
+        "hunting": {
+          "level": 1,
+          "xp": 39
+        },
+        "forging": {
+          "level": 1,
+          "xp": 0
+        },
+        "crime": {
+          "level": 1,
+          "xp": 8
+        }
+      },
+      "properties": {}
+    },
+    "191727876972700@lid": {
+      "wallet": 0,
+      "bank": 216,
+      "cooldowns": {
+        "rob": 1759867703926,
+        "work": 1759769097312,
+        "fish": 1759767827347,
+        "explore": 1759767890088,
+        "hunt": 1759767955343,
+        "daily": 1759872944959,
+        "mine": 1759768802705,
+        "crime": 1759865341769,
+        "forge": 1759768020236
+      },
+      "inventory": {
+        "rod": 1,
+        "lucky": 2,
+        "lamp": 1,
+        "bow": 1,
+        "vault": 43,
+        "forge": 1
+      },
+      "job": "gerente",
+      "tools": {
+        "pickaxe": {
+          "tier": "diamante",
+          "dur": 76,
+          "max": 150,
+          "key": "pickaxe_diamante"
+        }
+      },
+      "materials": {
+        "pedra": 31,
+        "ferro": 29,
+        "ouro": 8,
+        "diamante": 3
+      },
+      "challenge": {
+        "expiresAt": 1759881599999,
+        "tasks": [
+          {
+            "type": "explore",
+            "target": 3,
             "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 3,
+            "progress": 0
+          },
+          {
+            "type": "mine",
+            "target": 3,
+            "progress": 0
+          }
+        ],
+        "reward": 304,
+        "claimed": false
+      },
+      "weeklyChallenge": {
+        "expiresAt": 1760313599999,
+        "tasks": [
+          {
+            "type": "hunt",
+            "target": 17,
+            "progress": 13
+          },
+          {
+            "type": "explore",
+            "target": 21,
+            "progress": 13
+          },
+          {
+            "type": "mine",
+            "target": 16,
+            "progress": 15
           },
           {
             "type": "crimeSuccess",
             "target": 20,
-            "progress": 0
-          },
-          {
-            "type": "work",
-            "target": 18,
-            "progress": 0
+            "progress": 4
           }
         ],
-        "reward": 3203,
+        "reward": 3734,
         "claimed": false
       },
       "monthlyChallenge": {
-        "expiresAt": 1761965999999,
+        "expiresAt": 1761955199999,
+        "tasks": [
+          {
+            "type": "work",
+            "target": 76,
+            "progress": 76
+          },
+          {
+            "type": "fish",
+            "target": 80,
+            "progress": 80
+          },
+          {
+            "type": "explore",
+            "target": 92,
+            "progress": 91
+          },
+          {
+            "type": "hunt",
+            "target": 63,
+            "progress": 63
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 96,
+            "progress": 21
+          }
+        ],
+        "reward": 15420,
+        "claimed": false
+      },
+      "skills": {
+        "mining": {
+          "level": 2,
+          "xp": 64
+        },
+        "working": {
+          "level": 2,
+          "xp": 40
+        },
+        "fishing": {
+          "level": 2,
+          "xp": 52
+        },
+        "exploring": {
+          "level": 2,
+          "xp": 41
+        },
+        "hunting": {
+          "level": 2,
+          "xp": 20
+        },
+        "forging": {
+          "level": 1,
+          "xp": 0
+        },
+        "crime": {
+          "level": 1,
+          "xp": 21
+        }
+      },
+      "properties": {}
+    },
+    "144594469703905@lid": {
+      "wallet": 0,
+      "bank": 2339,
+      "cooldowns": {
+        "rob": 1759698030314,
+        "fish": 1759867295829,
+        "work": 1759871733102,
+        "explore": 1759867318547,
+        "crime": 1759705007763,
+        "hunt": 1759867318674,
+        "mine": 1759695249272,
+        "daily": 1759754197153
+      },
+      "inventory": {
+        "repairkit": 1
+      },
+      "job": "gerente",
+      "tools": {
+        "pickaxe": {
+          "tier": "bronze",
+          "dur": 0,
+          "max": 20,
+          "key": "pickaxe_bronze"
+        }
+      },
+      "materials": {
+        "pedra": 0
+      },
+      "challenge": {
+        "expiresAt": 1759881599999,
         "tasks": [
           {
             "type": "crimeSuccess",
-            "target": 89,
-            "progress": 0
-          },
-          {
-            "type": "work",
-            "target": 85,
+            "target": 7,
             "progress": 0
           },
           {
             "type": "fish",
-            "target": 66,
+            "target": 4,
             "progress": 1
           },
           {
             "type": "mine",
-            "target": 98,
-            "progress": 0
-          },
-          {
-            "type": "explore",
-            "target": 87,
+            "target": 5,
             "progress": 0
           }
         ],
-        "reward": 16387,
+        "reward": 624,
+        "claimed": false
+      },
+      "weeklyChallenge": {
+        "expiresAt": 1760313599999,
+        "tasks": [
+          {
+            "type": "work",
+            "target": 24,
+            "progress": 5
+          },
+          {
+            "type": "hunt",
+            "target": 17,
+            "progress": 2
+          },
+          {
+            "type": "explore",
+            "target": 22,
+            "progress": 1
+          },
+          {
+            "type": "fish",
+            "target": 23,
+            "progress": 1
+          }
+        ],
+        "reward": 4883,
+        "claimed": false
+      },
+      "monthlyChallenge": {
+        "expiresAt": 1761955199999,
+        "tasks": [
+          {
+            "type": "explore",
+            "target": 69,
+            "progress": 25
+          },
+          {
+            "type": "fish",
+            "target": 77,
+            "progress": 21
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 95,
+            "progress": 11
+          },
+          {
+            "type": "mine",
+            "target": 61,
+            "progress": 20
+          },
+          {
+            "type": "work",
+            "target": 66,
+            "progress": 31
+          }
+        ],
+        "reward": 16173,
+        "claimed": false
+      },
+      "skills": {
+        "mining": {
+          "level": 1,
+          "xp": 20
+        },
+        "working": {
+          "level": 1,
+          "xp": 31
+        },
+        "fishing": {
+          "level": 1,
+          "xp": 21
+        },
+        "exploring": {
+          "level": 1,
+          "xp": 25
+        },
+        "hunting": {
+          "level": 1,
+          "xp": 25
+        },
+        "forging": {
+          "level": 1,
+          "xp": 0
+        },
+        "crime": {
+          "level": 1,
+          "xp": 11
+        }
+      },
+      "properties": {}
+    },
+    "10381271544005@lid": {
+      "wallet": 0,
+      "bank": 0,
+      "cooldowns": {
+        "rob": 1759850632350,
+        "work": 1759864787302,
+        "crime": 1759869085388,
+        "daily": 1759935616833,
+        "fish": 1759867950215,
+        "hunt": 1759868880832,
+        "explore": 1759702678882
+      },
+      "inventory": {},
+      "job": "gerente",
+      "tools": {},
+      "materials": {},
+      "challenge": {
+        "expiresAt": 1759881599999,
+        "tasks": [
+          {
+            "type": "fish",
+            "target": 6,
+            "progress": 2
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 5,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 6,
+            "progress": 3
+          }
+        ],
+        "reward": 575,
+        "claimed": false
+      },
+      "weeklyChallenge": {
+        "expiresAt": 1760313599999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 30,
+            "progress": 0
+          },
+          {
+            "type": "fish",
+            "target": 30,
+            "progress": 3
+          },
+          {
+            "type": "hunt",
+            "target": 16,
+            "progress": 3
+          },
+          {
+            "type": "explore",
+            "target": 25,
+            "progress": 0
+          }
+        ],
+        "reward": 3471,
+        "claimed": false
+      },
+      "monthlyChallenge": {
+        "expiresAt": 1761955199999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 66,
+            "progress": 0
+          },
+          {
+            "type": "hunt",
+            "target": 68,
+            "progress": 5
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 77,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 95,
+            "progress": 11
+          },
+          {
+            "type": "fish",
+            "target": 97,
+            "progress": 7
+          }
+        ],
+        "reward": 15680,
         "claimed": false
       },
       "skills": {
@@ -98,19 +542,19 @@
         },
         "working": {
           "level": 1,
-          "xp": 0
+          "xp": 11
         },
         "fishing": {
           "level": 1,
-          "xp": 1
+          "xp": 7
         },
         "exploring": {
           "level": 1,
-          "xp": 0
+          "xp": 1
         },
         "hunting": {
           "level": 1,
-          "xp": 0
+          "xp": 5
         },
         "forging": {
           "level": 1,
@@ -121,31 +565,591 @@
           "xp": 0
         }
       },
-      "properties": {},
-      "gold": null
+      "properties": {}
+    },
+    "66585297461499@lid": {
+      "wallet": 0,
+      "bank": 3606,
+      "cooldowns": {
+        "work": 1759868793901,
+        "rob": 1759764757868,
+        "fish": 1759868619181,
+        "mine": 1759868507334,
+        "explore": 1759868682763,
+        "crime": 1759869009944,
+        "hunt": 1759865059237,
+        "forge": 1759868756241,
+        "daily": 1759872923348
+      },
+      "inventory": {
+        "lucky": 1,
+        "rod": 1,
+        "bow": 1
+      },
+      "job": "gerente",
+      "tools": {
+        "pickaxe": {
+          "tier": "bronze",
+          "dur": 7,
+          "max": 20,
+          "key": "pickaxe_bronze"
+        }
+      },
+      "materials": {
+        "pedra": 19
+      },
+      "challenge": {
+        "expiresAt": 1759881599999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 7,
+            "progress": 6
+          },
+          {
+            "type": "work",
+            "target": 4,
+            "progress": 4
+          },
+          {
+            "type": "fish",
+            "target": 6,
+            "progress": 6
+          }
+        ],
+        "reward": 378,
+        "claimed": false
+      },
+      "weeklyChallenge": {
+        "expiresAt": 1760313599999,
+        "tasks": [
+          {
+            "type": "hunt",
+            "target": 26,
+            "progress": 15
+          },
+          {
+            "type": "fish",
+            "target": 21,
+            "progress": 17
+          },
+          {
+            "type": "work",
+            "target": 29,
+            "progress": 18
+          },
+          {
+            "type": "mine",
+            "target": 21,
+            "progress": 13
+          }
+        ],
+        "reward": 3316,
+        "claimed": false
+      },
+      "monthlyChallenge": {
+        "expiresAt": 1761955199999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 88,
+            "progress": 33
+          },
+          {
+            "type": "work",
+            "target": 72,
+            "progress": 47
+          },
+          {
+            "type": "fish",
+            "target": 94,
+            "progress": 50
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 61,
+            "progress": 14
+          },
+          {
+            "type": "explore",
+            "target": 71,
+            "progress": 50
+          }
+        ],
+        "reward": 16984,
+        "claimed": false
+      },
+      "skills": {
+        "mining": {
+          "level": 1,
+          "xp": 33
+        },
+        "working": {
+          "level": 1,
+          "xp": 47
+        },
+        "fishing": {
+          "level": 2,
+          "xp": 0
+        },
+        "exploring": {
+          "level": 2,
+          "xp": 0
+        },
+        "hunting": {
+          "level": 1,
+          "xp": 38
+        },
+        "forging": {
+          "level": 1,
+          "xp": 0
+        },
+        "crime": {
+          "level": 1,
+          "xp": 14
+        }
+      },
+      "properties": {}
     },
     "212944998678773@lid": {
-      "wallet": 144,
+      "wallet": 0,
       "bank": 0,
-      "cooldowns": {
-        "work": 1759889462011
-      },
+      "cooldowns": {},
       "inventory": {},
       "job": null,
       "tools": {},
       "materials": {},
+      "challenge": null,
+      "weeklyChallenge": null,
+      "monthlyChallenge": null,
+      "skills": {},
+      "properties": {}
+    },
+    "193793672400970@lid": {
+      "wallet": 0,
+      "bank": 5573,
+      "cooldowns": {
+        "rob": 1759865073145,
+        "fish": 1759868586996,
+        "work": 1759868756068,
+        "explore": 1759868655221,
+        "crime": 1759868961712,
+        "hunt": 1759868712140,
+        "daily": 1759936389202,
+        "forge": 1759695777628,
+        "mine": 1759868469142
+      },
+      "inventory": {
+        "rod": 1,
+        "bow": 1,
+        "lucky": 1
+      },
+      "job": "programador",
+      "tools": {
+        "pickaxe": {
+          "tier": "ferro",
+          "dur": 19,
+          "max": 60,
+          "key": "pickaxe_ferro"
+        }
+      },
+      "materials": {
+        "pedra": 16,
+        "ferro": 4
+      },
       "challenge": {
-        "expiresAt": 1759892399999,
+        "expiresAt": 1759881599999,
         "tasks": [
-          {
-            "type": "mine",
-            "target": 5,
-            "progress": 0
-          },
           {
             "type": "explore",
             "target": 7,
+            "progress": 4
+          },
+          {
+            "type": "fish",
+            "target": 3,
+            "progress": 3
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 4,
+            "progress": 2
+          }
+        ],
+        "reward": 650,
+        "claimed": false
+      },
+      "weeklyChallenge": {
+        "expiresAt": 1760313599999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 29,
+            "progress": 17
+          },
+          {
+            "type": "work",
+            "target": 30,
+            "progress": 16
+          },
+          {
+            "type": "fish",
+            "target": 30,
+            "progress": 17
+          },
+          {
+            "type": "explore",
+            "target": 30,
+            "progress": 17
+          }
+        ],
+        "reward": 4897,
+        "claimed": false
+      },
+      "monthlyChallenge": {
+        "expiresAt": 1761955199999,
+        "tasks": [
+          {
+            "type": "hunt",
+            "target": 98,
+            "progress": 52
+          },
+          {
+            "type": "explore",
+            "target": 81,
+            "progress": 66
+          },
+          {
+            "type": "fish",
+            "target": 63,
+            "progress": 63
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 73,
+            "progress": 12
+          },
+          {
+            "type": "work",
+            "target": 97,
+            "progress": 57
+          }
+        ],
+        "reward": 16200,
+        "claimed": false
+      },
+      "skills": {
+        "mining": {
+          "level": 2,
+          "xp": 11
+        },
+        "working": {
+          "level": 2,
+          "xp": 7
+        },
+        "fishing": {
+          "level": 2,
+          "xp": 20
+        },
+        "exploring": {
+          "level": 2,
+          "xp": 16
+        },
+        "hunting": {
+          "level": 2,
+          "xp": 2
+        },
+        "forging": {
+          "level": 1,
+          "xp": 0
+        },
+        "crime": {
+          "level": 1,
+          "xp": 12
+        }
+      },
+      "properties": {}
+    },
+    "gta": {
+      "wallet": 0,
+      "bank": 0,
+      "cooldowns": {},
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": null,
+      "weeklyChallenge": null,
+      "monthlyChallenge": null,
+      "skills": {},
+      "properties": {}
+    },
+    "cr": {
+      "wallet": 0,
+      "bank": 0,
+      "cooldowns": {},
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": null,
+      "weeklyChallenge": null,
+      "monthlyChallenge": null,
+      "skills": {},
+      "properties": {}
+    },
+    "messi": {
+      "wallet": 0,
+      "bank": 0,
+      "cooldowns": {},
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": null,
+      "weeklyChallenge": null,
+      "monthlyChallenge": null,
+      "skills": {},
+      "properties": {}
+    },
+    "jose": {
+      "wallet": -30,
+      "bank": 0,
+      "cooldowns": {},
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": null,
+      "weeklyChallenge": null,
+      "monthlyChallenge": null,
+      "skills": {},
+      "properties": {}
+    },
+    "82235738820857@lid": {
+      "wallet": 0,
+      "bank": 347,
+      "cooldowns": {
+        "fish": 1759706696654,
+        "work": 1759706866006,
+        "forge": 1759705059088,
+        "hunt": 1759705078866,
+        "daily": 1759791124463,
+        "rob": 1759707007357,
+        "explore": 1759706761251
+      },
+      "inventory": {},
+      "job": "gerente",
+      "tools": {},
+      "materials": {},
+      "challenge": {
+        "expiresAt": 1759708799999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 7,
             "progress": 0
+          },
+          {
+            "type": "hunt",
+            "target": 4,
+            "progress": 1
+          },
+          {
+            "type": "explore",
+            "target": 6,
+            "progress": 1
+          }
+        ],
+        "reward": 444,
+        "claimed": false
+      },
+      "weeklyChallenge": {
+        "expiresAt": 1759708799999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 15,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 27,
+            "progress": 3
+          },
+          {
+            "type": "explore",
+            "target": 22,
+            "progress": 1
+          },
+          {
+            "type": "fish",
+            "target": 25,
+            "progress": 3
+          }
+        ],
+        "reward": 4723,
+        "claimed": false
+      },
+      "monthlyChallenge": {
+        "expiresAt": 1761955199999,
+        "tasks": [
+          {
+            "type": "explore",
+            "target": 64,
+            "progress": 1
+          },
+          {
+            "type": "fish",
+            "target": 63,
+            "progress": 3
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 97,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 69,
+            "progress": 3
+          },
+          {
+            "type": "mine",
+            "target": 91,
+            "progress": 0
+          }
+        ],
+        "reward": 15177,
+        "claimed": false
+      },
+      "skills": {
+        "mining": {
+          "level": 1,
+          "xp": 0
+        },
+        "working": {
+          "level": 1,
+          "xp": 3
+        },
+        "fishing": {
+          "level": 1,
+          "xp": 3
+        },
+        "exploring": {
+          "level": 1,
+          "xp": 1
+        },
+        "hunting": {
+          "level": 1,
+          "xp": 1
+        },
+        "forging": {
+          "level": 1,
+          "xp": 0
+        },
+        "crime": {
+          "level": 1,
+          "xp": 0
+        }
+      },
+      "properties": {}
+    },
+    "558896259945@s.whatsapp.net": {
+      "wallet": 0,
+      "bank": 0,
+      "cooldowns": {},
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": null,
+      "weeklyChallenge": null,
+      "monthlyChallenge": null,
+      "skills": {},
+      "properties": {}
+    },
+    "558893709672@s.whatsapp.net": {
+      "wallet": 9000,
+      "bank": 0,
+      "cooldowns": {},
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": null,
+      "weeklyChallenge": null,
+      "monthlyChallenge": null,
+      "skills": {},
+      "properties": {}
+    },
+    "José": {
+      "wallet": 0,
+      "bank": 0,
+      "cooldowns": {},
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": null,
+      "weeklyChallenge": null,
+      "monthlyChallenge": null,
+      "skills": {},
+      "properties": {}
+    },
+    "davi": {
+      "wallet": 0,
+      "bank": 0,
+      "cooldowns": {},
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": null,
+      "weeklyChallenge": null,
+      "monthlyChallenge": null,
+      "skills": {},
+      "properties": {}
+    },
+    "18928055152672@lid": {
+      "wallet": 0,
+      "bank": 3462,
+      "cooldowns": {
+        "crime": 1759706182961,
+        "work": 1759774608302,
+        "fish": 1759774436485,
+        "rob": 1759723711185,
+        "mine": 1759774319592,
+        "daily": 1759788238373,
+        "hunt": 1759774553257,
+        "explore": 1759774502451,
+        "forge": 1759774565936
+      },
+      "inventory": {},
+      "job": "gerente",
+      "tools": {
+        "pickaxe": {
+          "tier": "bronze",
+          "dur": 6,
+          "max": 20,
+          "key": "pickaxe_bronze"
+        }
+      },
+      "materials": {
+        "pedra": 25
+      },
+      "challenge": {
+        "expiresAt": 1759795199999,
+        "tasks": [
+          {
+            "type": "fish",
+            "target": 6,
+            "progress": 6
+          },
+          {
+            "type": "hunt",
+            "target": 3,
+            "progress": 3
           },
           {
             "type": "crimeSuccess",
@@ -153,66 +1157,189 @@
             "progress": 0
           }
         ],
-        "reward": 688,
+        "reward": 639,
         "claimed": false
       },
       "weeklyChallenge": {
-        "expiresAt": 1760324399999,
-        "tasks": [
-          {
-            "type": "fish",
-            "target": 28,
-            "progress": 0
-          },
-          {
-            "type": "hunt",
-            "target": 29,
-            "progress": 0
-          },
-          {
-            "type": "work",
-            "target": 16,
-            "progress": 1
-          },
-          {
-            "type": "mine",
-            "target": 28,
-            "progress": 0
-          }
-        ],
-        "reward": 4207,
-        "claimed": false
-      },
-      "monthlyChallenge": {
-        "expiresAt": 1761965999999,
+        "expiresAt": 1760313599999,
         "tasks": [
           {
             "type": "crimeSuccess",
-            "target": 85,
+            "target": 30,
             "progress": 0
           },
           {
             "type": "hunt",
-            "target": 90,
-            "progress": 0
+            "target": 15,
+            "progress": 7
           },
           {
             "type": "explore",
-            "target": 67,
+            "target": 21,
+            "progress": 7
+          },
+          {
+            "type": "fish",
+            "target": 25,
+            "progress": 7
+          }
+        ],
+        "reward": 4250,
+        "claimed": false
+      },
+      "monthlyChallenge": {
+        "expiresAt": 1761955199999,
+        "tasks": [
+          {
+            "type": "explore",
+            "target": 83,
+            "progress": 9
+          },
+          {
+            "type": "work",
+            "target": 89,
+            "progress": 16
+          },
+          {
+            "type": "mine",
+            "target": 72,
+            "progress": 14
+          },
+          {
+            "type": "fish",
+            "target": 61,
+            "progress": 14
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 70,
+            "progress": 2
+          }
+        ],
+        "reward": 19837,
+        "claimed": false
+      },
+      "skills": {
+        "mining": {
+          "level": 1,
+          "xp": 14
+        },
+        "working": {
+          "level": 1,
+          "xp": 16
+        },
+        "fishing": {
+          "level": 1,
+          "xp": 14
+        },
+        "exploring": {
+          "level": 1,
+          "xp": 9
+        },
+        "hunting": {
+          "level": 1,
+          "xp": 12
+        },
+        "forging": {
+          "level": 1,
+          "xp": 0
+        },
+        "crime": {
+          "level": 1,
+          "xp": 2
+        }
+      },
+      "properties": {}
+    },
+    "133242803998821@lid": {
+      "wallet": 153,
+      "bank": 0,
+      "cooldowns": {
+        "work": 1759764177823
+      },
+      "inventory": {},
+      "job": null,
+      "tools": {},
+      "materials": {},
+      "challenge": {
+        "expiresAt": 1759795199999,
+        "tasks": [
+          {
+            "type": "explore",
+            "target": 7,
             "progress": 0
           },
           {
             "type": "fish",
-            "target": 84,
+            "target": 4,
             "progress": 0
           },
           {
             "type": "work",
-            "target": 64,
+            "target": 7,
             "progress": 1
           }
         ],
-        "reward": 17572,
+        "reward": 605,
+        "claimed": false
+      },
+      "weeklyChallenge": {
+        "expiresAt": 1760313599999,
+        "tasks": [
+          {
+            "type": "explore",
+            "target": 25,
+            "progress": 0
+          },
+          {
+            "type": "fish",
+            "target": 15,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 19,
+            "progress": 1
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 22,
+            "progress": 0
+          }
+        ],
+        "reward": 3261,
+        "claimed": false
+      },
+      "monthlyChallenge": {
+        "expiresAt": 1761955199999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 75,
+            "progress": 0
+          },
+          {
+            "type": "fish",
+            "target": 75,
+            "progress": 0
+          },
+          {
+            "type": "hunt",
+            "target": 69,
+            "progress": 0
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 68,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 97,
+            "progress": 1
+          }
+        ],
+        "reward": 18006,
         "claimed": false
       },
       "skills": {
@@ -390,8 +1517,17 @@
       "max": 420
     }
   },
-  "market": [],
-  "marketCounter": 1,
+  "market": [
+    {
+      "id": 1,
+      "type": "mat",
+      "mat": "ferro",
+      "qty": 5,
+      "price": 1500,
+      "seller": "191727876972700@lid"
+    }
+  ],
+  "marketCounter": 3,
   "propertiesCatalog": {
     "casa": {
       "name": "Casa",

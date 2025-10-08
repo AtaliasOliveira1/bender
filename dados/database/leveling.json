@@ -1,46 +1,53 @@
 {
   "users": {
+    "99592037220603@lid": {
+      "level": 5,
+      "xp": 96,
+      "patent": "Explorador",
+      "messages": 111,
+      "commands": 1
+    },
     "82235738820857@lid": {
-      "level": 3,
-      "xp": 59,
+      "level": 14,
+      "xp": 2,
+      "patent": "Aventureiro",
+      "messages": 476,
+      "commands": 14
+    },
+    "116273505640686@lid": {
+      "level": 4,
+      "xp": 24,
       "patent": "Aprendiz",
-      "messages": 95,
-      "commands": 25
+      "messages": 68,
+      "commands": 3
     },
-    "235445896093827@lid": {
-      "level": 1,
-      "xp": 5,
-      "patent": "Iniciante",
-      "messages": 1,
+    "163351011319890@lid": {
+      "level": 4,
+      "xp": 29,
+      "patent": "Aprendiz",
+      "messages": 70,
+      "commands": 2
+    },
+    "103109313458368@lid": {
+      "level": 3,
+      "xp": 95,
+      "patent": "Aprendiz",
+      "messages": 61,
       "commands": 0
     },
-    "212944998678773@lid": {
-      "level": 1,
-      "xp": 25,
-      "patent": "Iniciante",
-      "messages": 5,
+    "237778482786517@lid": {
+      "level": 8,
+      "xp": 27,
+      "patent": "Explorador",
+      "messages": 195,
       "commands": 0
     },
-    "164823732060406@lid": {
-      "level": 1,
-      "xp": 15,
-      "patent": "Iniciante",
-      "messages": 3,
-      "commands": 0
-    },
-    "110935230390418@lid": {
-      "level": 1,
-      "xp": 5,
-      "patent": "Iniciante",
-      "messages": 1,
-      "commands": 0
-    },
-    "106640078569689@lid": {
-      "level": 1,
-      "xp": 5,
-      "patent": "Iniciante",
-      "messages": 1,
-      "commands": 0
+    "108607039352965@lid": {
+      "level": 8,
+      "xp": 47,
+      "patent": "Explorador",
+      "messages": 197,
+      "commands": 2
     },
     "undefined": {
       "level": 1,
@@ -49,25 +56,46 @@
       "messages": 1,
       "commands": 0
     },
-    "252630295162939@lid": {
+    "105810931757278@lid": {
       "level": 1,
-      "xp": 5,
+      "xp": 60,
       "patent": "Iniciante",
-      "messages": 1,
+      "messages": 12,
       "commands": 0
     },
-    "64167130206305@lid": {
-      "level": 1,
-      "xp": 5,
-      "patent": "Iniciante",
-      "messages": 1,
+    "246596000337939@lid": {
+      "level": 3,
+      "xp": 105,
+      "patent": "Aprendiz",
+      "messages": 63,
       "commands": 0
     },
-    "189773549453327@lid": {
+    "216144531173430@lid": {
+      "level": 3,
+      "xp": 10,
+      "patent": "Aprendiz",
+      "messages": 44,
+      "commands": 0
+    },
+    "279782860279881@lid": {
       "level": 1,
-      "xp": 5,
+      "xp": 75,
       "patent": "Iniciante",
-      "messages": 1,
+      "messages": 15,
+      "commands": 0
+    },
+    "226242318065852@lid": {
+      "level": 1,
+      "xp": 80,
+      "patent": "Iniciante",
+      "messages": 16,
+      "commands": 0
+    },
+    "212944998678773@lid": {
+      "level": 1,
+      "xp": 30,
+      "patent": "Iniciante",
+      "messages": 6,
       "commands": 0
     }
   },
