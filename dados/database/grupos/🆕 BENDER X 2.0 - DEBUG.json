@@ -11,30 +11,30 @@
   "contador": [
     {
       "id": "82235738820857@lid",
-      "msg": 10,
-      "cmd": 56,
-      "figu": 1,
+      "msg": 17,
+      "cmd": 86,
+      "figu": 2,
       "pushname": "๛αταℓiαs ℓσ-αмiㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
       "firstSeen": "2025-10-05T18:54:39.818Z",
-      "lastActivity": "2025-10-06T01:58:53.527Z"
+      "lastActivity": "2025-10-08T01:01:28.125Z"
     },
     {
       "id": "163351011319890@lid",
-      "msg": 14,
+      "msg": 27,
       "cmd": 0,
       "figu": 0,
       "pushname": "VaLéria",
       "firstSeen": "2025-10-05T19:04:11.525Z",
-      "lastActivity": "2025-10-05T19:13:01.442Z"
+      "lastActivity": "2025-10-08T00:21:42.290Z"
     },
     {
       "id": "212944998678773@lid",
-      "msg": 10,
+      "msg": 12,
       "cmd": 0,
       "figu": 0,
       "pushname": "Bender",
       "firstSeen": "2025-10-05T19:05:12.508Z",
-      "lastActivity": "2025-10-06T01:54:46.980Z"
+      "lastActivity": "2025-10-08T00:41:13.909Z"
     }
   ]
 }

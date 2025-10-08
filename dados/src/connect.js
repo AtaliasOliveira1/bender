@@ -349,7 +349,8 @@ async function scanForJids(directory) {
     await scanDir(directory);
 
     try {
-        await scanFileContent(configPath.pathname);
+        //await scanFileContent(configPath.pathname);
+        await scanFileContent(fileURLToPath(configPath));
         const configBasename = path.basename(configPath.pathname, '.json');
         const filenameMatch = configBasename.match(/(\d+@s\.whatsapp\.net)/);
         if (filenameMatch) {

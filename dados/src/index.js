@@ -34,6 +34,11 @@ const MSGPREFIX_FILE = pathz.join(DONO_DIR, 'msgprefix.json');
 const CUSTOM_REACTS_FILE = pathz.join(DATABASE_DIR, 'customReacts.json');
 const REMINDERS_FILE = pathz.join(DATABASE_DIR, 'reminders.json');
 
+//CONST ATALIAS
+const assBender = '𝑩𝒆𝒏𝒅𝒆𝒓𝑿 𝒗3.0'
+const dattofc = moment.tz('America/Sao_Paulo').format('DD/MM/YYYY');
+const hourofc = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
+
 function formatUptime(seconds, longFormat = false, showZero = false) {
   const d = Math.floor(seconds / (24 * 3600));
   const h = Math.floor(seconds % (24 * 3600) / 3600);
@@ -1507,6 +1512,7 @@ async function NazuninhaBotExec(bender, info, store, groupCache, messagesCache) 
       sender = info.key.remoteJid;
     };
     const pushname = info.pushName || '';
+    const nome = pushname.split(" ")[0];
     const isStatus = from?.endsWith('@broadcast') || false;
     const nmrdn = buildUserId(numerodono, config);
     const subDonoList = loadSubdonos();
@@ -3082,6 +3088,26 @@ async function NazuninhaBotExec(bender, info, store, groupCache, messagesCache) 
       ;
     }
     ;
+
+//Funções Atalias
+
+    //menu
+    const cabecalhomenu = `🤖 ʙᴏᴛ: *${nomebot}*
+👤 ᴜsᴜᴀʀɪᴏ: *${nome}* 
+✴️ ᴅᴏɴᴏ: *${nomedono}*`
+
+//créditos figurinhas
+const hora16 = moment.tz('America/Sao_Paulo').format('HH:MM:SS')
+const date16 = moment.tz('America/Sao_Paulo').format('DD/MM/YYYY')
+const vipStatus2 = isPremium ? "Premium 👑" : "Comum";
+const userpremiumsticker = "Usuário Premium 👑"
+let day = `${date16} ${hora16}`
+const figpackname = `👤 Usuario(a): ➔ ${pushname}\n🤖 Bot ➔ ${nomebot}\n👑 Dono: ➔`;
+const figautor = `✦ ${nomedono} ✦\n● https://info.loami.shop - ${day} ●`;
+const figpackname2 = `${isGroup ? "⚙️ Grupo:" : "🪪 Usuário:"} ${isGroup ? groupName : pushname}\n👑 ⃟ᴄʀɪᴀᴅᴀ ᴘᴏʀ: ${assBender}`;
+const figautor2 = `\n🕑 Tempo: ${dattofc} ${hourofc}\n${pushname} | ${isPremium ? userpremiumsticker : ""}`;
+
+
     switch (command) {
       case 'menugold': {
         await sendMenuWithMedia('menugold', menuGold);
@@ -6357,7 +6383,20 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
             const mediaBuffer = fs.readFileSync(mediaPath);
             
             const customDesign = getMenuDesignWithDefaults(nomebot, pushname);
-            const menuText = await menu(prefix, nomebot, pushname, customDesign);
+            //const menuText = await menu(prefix, nomebot, pushname, customDesign);
+            let menuText = `${cabecalhomenu}
+┏ _ғɪɢᴜʀɪɴʜᴀs ᴀʀᴍᴀᴢᴇɴᴀᴅᴀs:_ *6.000*
+┗ 📂 4 ɢʙ ]
+╰══𝐅𝐈𝐆𝐔𝐑𝐈𝐍𝐇𝐀𝐒══⪨
+⋟📸 ${prefix}s (ᴍᴀʀᴄᴀʀ ғᴏᴛᴏ)
+⋟✏️ ${prefix}ʀᴇɴᴀᴍᴇ (ɴᴏᴍᴇ/ɴᴏᴍᴇ)
+⋟🖼️ ${prefix}ғɪɢᴜʀɪɴʜᴀs (5)
+⋟📝 ${prefix}ᴍᴇɴᴜғɪɢ
+╰┈┈┈◜❁◞┈┈┈
+⋟📂 ${prefix}ᴍᴇɴᴜᴀᴅᴍ
+⋟👥 ${prefix}ᴍᴇɴᴜᴍᴇᴍʙʀᴏ
+⋟🎲 ${prefix}ʙʀɪɴᴄᴀᴅᴇɪʀᴀs
+╰─┈┈┈◜❁◞┈┈┈─╯`;
             
             await bender.sendMessage(from, {
               [useVideo ? 'video' : 'image']: mediaBuffer,
@@ -6375,6 +6414,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
           await reply(`${menuText}\n\n⚠️ *Nota*: Ocorreu um erro ao carregar a mídia do menu.`);
         }
         break;
+
       case 'alteradores':
       case 'menualterador':
       case 'menualteradores':
@@ -6398,6 +6438,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
         }
         break;
       case 'menubn':
+      case 'brincadeiras':
       case 'menubrincadeira':
       case 'menubrincadeiras':
       case 'gamemenu':
@@ -6444,13 +6485,62 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
           await reply("❌ Ocorreu um erro ao carregar o menu de administração");
         }
         break;
-      case 'menumembros':
+
+      case 'menumembro':
       case 'menumemb':
       case 'menugeral':
       case 'membmenu':
       case 'membermenu':
         try {
-          await sendMenuWithMedia('membros', menuMembros);
+          let menuText = `${cabecalhomenu}
+╰═𝐌𝐄𝐍𝐔 𝐌𝐄𝐌𝐁𝐑𝐎𝐒═ ⪨
+⋟✏️ ${prefix}gerarnick
+⋟🌐 ${prefix}ssweb
+⋟⬆️ ${prefix}upload
+⋟🔗 ${prefix}encurtalink
+⋟🔳 ${prefix}qrcode
+⋟🗣️ ${prefix}tradutor
+⋟📚 ${prefix}dicionario
+⋟🔔 ${prefix}lembrete
+⋟📝 ${prefix}meuslembretes
+⋟🗑️ ${prefix}apagalembrete
+⋟👤 ${prefix}perfil
+⋟👑 ${prefix}dono
+⋟📢 ${prefix}mention
+⋟😈 ${prefix}rvisu 🪙
+⋟😴 ${prefix}afk
+╰═𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂𝐎𝐄𝐒═ ⪨
+⋟🔢 ${prefix}totalcmd
+⋟🏆 ${prefix}topcmd
+⋟ℹ️ ${prefix}cmdinfo
+⋟👥 ${prefix}statusgp
+⋟🤖 ${prefix}statusbot
+⋟📊 ${prefix}meustatus
+⋟📜 ${prefix}regras
+⋟📡 ${prefix}ping
+╰═𝐑𝐀𝐍𝐊═ ⪨
+⋟🟢 ${prefix}rankativo
+⋟🔴 ${prefix}rankinativo
+⋟🥇 ${prefix}rankativog
+╰═𝐅𝐅═ ⪨
+⋟🎮 ${prefix}likeff
+╰─┈┈┈◜❁◞┈┈┈─╯`;
+            
+            const menuVideoPath = __dirname + '/../midias/menu.mp4';
+            const menuImagePath = __dirname + '/../midias/menu.png';
+            const useVideo = fs.existsSync(menuVideoPath);
+            const mediaPath = useVideo ? menuVideoPath : menuImagePath;
+            const mediaBuffer = fs.readFileSync(mediaPath);
+
+            await bender.sendMessage(from, {
+              [useVideo ? 'video' : 'image']: mediaBuffer,
+              caption: menuText,
+              gifPlayback: useVideo,
+              mimetype: useVideo ? 'video/mp4' : 'image/jpeg'
+            }, {
+              quoted: info
+            });
+          //await sendMenuWithMedia('membros', menuMembros);
         } catch (error) {
           console.error('Erro ao enviar menu de membros:', error);
           await reply("❌ Ocorreu um erro ao carregar o menu de membros");
@@ -8375,9 +8465,6 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
       case 'sticker':
       
       case 'st':case 'stk':case 'sticker':case 's': try {
-    const hora16 = moment.tz('America/Sao_Paulo').format('HH:MM:SS')
-    const date16 = moment.tz('America/Sao_Paulo').format('DD/MM/YYYY')
-    let day = `${date16} ${hora16}`
     var RSM = info.message?.extendedTextMessage?.contextInfo?.quotedMessage;
     var boij2 = RSM?.imageMessage || info.message?.imageMessage || RSM?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessage?.message?.imageMessage || RSM?.viewOnceMessage?.message?.imageMessage;
    var boij = RSM?.videoMessage || info.message?.videoMessage || RSM?.viewOnceMessageV2?.message?.videoMessage || info.message?.viewOnceMessageV2?.message?.videoMessage || info.message?.viewOnceMessage?.message?.videoMessage || RSM?.viewOnceMessage?.message?.videoMessage;
@@ -8386,7 +8473,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
     if (isVideo2 && boij.seconds > 9.9) return reply(`O vídeo precisa ter no máximo 9.9 segundos para ser convertido em figurinha.`);
     var buffer = await getFileBuffer(isVideo2 ? boij : boij2, isVideo2 ? 'video' : 'image')
     //await sendSticker(bender, from, { sticker: buffer, author: `✦ ${nomedono} ✦\n● https://info.loami.shop - ${day} ●`, packname: `👤 Usuario(a): ➔ ${pushname}\n🤖 Bot ➔ ${nomebot}\n👑 Dono: ➔`, type: isVideo2 ? 'video' : 'image'}, { quoted: info });
-    await sendSticker(bender, from, { sticker: buffer, author: `✦ ${nomedono} ✦\n● https://info.loami.shop - ${day} ●`, packname: `👤 Usuario(a): ➔ ${pushname}\n🤖 Bot ➔ ${nomebot}\n👑 Dono: ➔`, type: isVideo2 ? 'video' : 'image', forceSquare: true}, { quoted: info });
+    await sendSticker(bender, from, { sticker: buffer, author: `${figautor2}`, packname: `${figpackname2}`, type: isVideo2 ? 'video' : 'image', forceSquare: true}, { quoted: info });
   } catch(e) {
   console.error(e);
   await reply("⚠️ Oh não! Aconteceu um errinho inesperado aqui. Tente de novo daqui a pouquinho, por favor! ⚠️");
