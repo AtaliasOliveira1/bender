@@ -1,0 +1,40 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-08T04:36:11.703Z",
+  "groupName": "Rainha Audiovisual",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "196494804127785@lid",
+      "msg": 4,
+      "cmd": 7,
+      "figu": 1,
+      "pushname": "Samyr Novelli",
+      "firstSeen": "2025-10-08T04:36:11.705Z",
+      "lastActivity": "2025-10-08T20:54:06.553Z"
+    },
+    {
+      "id": "133706828275861@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Lucca - Original Studio",
+      "firstSeen": "2025-10-08T20:52:25.601Z",
+      "lastActivity": "2025-10-08T20:52:34.661Z"
+    },
+    {
+      "id": "243533386666024@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Daniel",
+      "firstSeen": "2025-10-08T21:33:11.513Z",
+      "lastActivity": "2025-10-08T21:33:11.513Z"
+    }
+  ]
+}

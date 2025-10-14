@@ -232,7 +232,8 @@ ensureJsonFileExists(ECONOMY_FILE, {
     "estagiario": { name: "Estagiário", min: 80, max: 140 },
     "designer": { name: "Designer", min: 150, max: 250 },
     "programador": { name: "Programador", min: 200, max: 350 },
-    "gerente": { name: "Gerente", min: 260, max: 420 }
+    "gerente": { name: "Gerente", min: 260, max: 420 },
+    "ladrao": { name: "Ladrão", min: 99, max: 620 },
   }
 });
 ensureJsonFileExists(LEVELING_FILE, {
@@ -3112,6 +3113,89 @@ async function NazuninhaBotExec(bender, info, store, groupCache, messagesCache) 
     ;
 
 //Funções Atalias
+// Função auxiliar para criar um delay (pausa) usando async/await
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+//tempo de block
+const BLOCK_DURATION_MS = 30 * 60 * 1000; // 30 minutos
+
+// Função que será chamada após 30 minutos para desbloquear o usuário
+async function handleRoletaUnblock(userJid, chatId) {
+    // ⚠️ ATENÇÃO: Use o caminho REAL do seu arquivo de dados de grupo.
+    const groupFile = './dados/grupos.json'; // Exemplo, use o seu caminho real!
+    
+    let groupData; 
+    try {
+        groupData = JSON.parse(fs.readFileSync(groupFile, 'utf-8'));
+    } catch (e) {
+        // Se a leitura falhar, não podemos desbloquear, apenas logamos o erro.
+        console.error("Erro ao ler groupData para desbloqueio da roleta:", e);
+        return;
+    }
+    
+    // Assegura que a propriedade existe
+    groupData.blockedUsers = groupData.blockedUsers || {};
+    
+    if (groupData.blockedUsers[userJid]) {
+        
+        // 1. REMOVE DA LISTA DE BLOQUEIO MANUAL
+        delete groupData.blockedUsers[userJid];
+        
+        // 2. SALVA O ARQUIVO
+        try {
+            fs.writeFileSync(groupFile, JSON.stringify(groupData, null, 2));
+            
+            // 3. (OPCIONAL) NOTIFICA O GRUPO/USUÁRIO
+            await bender.sendMessage(chatId, { 
+                text: `✅ Usuário @${userJid.split('@')[0]} foi desbloqueado automaticamente após a penalidade da roleta.`, 
+                mentions: [userJid]
+            });
+        } catch (e) {
+            console.error("Erro ao salvar groupData após desbloqueio automático:", e);
+        }
+    }
+}
+
+//=================INICIO ROLETA===================//
+const ROLLER_COST = 100; // Custo para girar a roleta
+//const COOLDOWN_MS = 12 * 60 * 60 * 1000;  // Cooldown de 12h minuto, se desejar
+const COOLDOWN_MS = 5 * 60 * 60 * 1000; 
+//const COOLDOWN_MS = 1 * 1000;
+const PRIZES = [
+    // Chance de Ganhar (Peso) / Recompensa / Path do Vídeo
+    { weight: 150, type: 'coins', amount: 50, video: './dados/midias/50.mp4', msg: 'Parabéns! Você ganhou 50 Bcoins.' },
+    { weight: 130, type: 'coins', amount: 100, video: './dados/midias/100.mp4', msg: 'Uau! Você ganhou 100 Bcoins!' },
+    { weight: 110, type: 'coins', amount: 200, video: './dados/midias/200.mp4', msg: 'Bom prêmio! Você ganhou 200 Bcoins.' },
+    { weight: 50, type: 'coins', amount: 300, video: './dados/midias/300.mp4', msg: 'Mandou bem! Você ganhou 300 Bcoins.' },
+    { weight: 20, type: 'coins', amount: 400, video: './dados/midias/400.mp4', msg: 'Ótimo! Você levou 400 Bcoins.' },
+    { weight: 10, type: 'coins', amount: 500, video: './dados/midias/500.mp4', msg: 'Prêmio robusto! Você ganhou 500 Bcoins.' },
+    { weight: 4, type: 'coins', amount: 1000, video: './dados/midias/1000.mp4', msg: 'JACKPOT! Você levou 1.000 Bcoins!' },
+    { weight: 3, type: 'coins', amount: 2000, video: './dados/midias/2000.mp4', msg: 'SUPER JACKPOT! Você levou 2.000 Bcoins!' },
+    
+    // Prêmios Raros/Especiais
+    //{ weight: 5, type: 'coins', amount: 3000, video: './midias/3000.mp4', msg: 'PREMIAÇÂO MAXIMA! Você ganhou 3.000 Bcoins!' }, // Usaremos o vídeo da roleta ou um fallback, já que você não tem um vídeo só para ele.
+    
+    // Penalidades e Neutro
+    { weight: 200, type: 'neutral', msg: 'Quase! A roleta parou no NADA.' , video: './dados/midias/nada.mp4' },
+    { weight: 55, type: 'block', msg: 'Azar! A roleta parou no BLOCK. Você ficará bloqueado por 30 minuto.' , video: './dados/midias/block.mp4' },
+    { weight: 10, type: 'ban', msg: 'Desastre! A roleta parou no BAN. Contate um administrador.', video: './dados/midias/ban.mp4' },
+];
+
+// O peso total da roleta neste exemplo é: 150+130+110+90+70+50+20+10+5+200+55+10 = 910. 
+// Você deve ajustar os pesos para que somem o total desejado.
+const TOTAL_WEIGHT = PRIZES.reduce((sum, prize) => sum + prize.weight, 0);
+
+function selectPrize() {
+    let random = Math.random() * TOTAL_WEIGHT;
+    for (const prize of PRIZES) {
+        if (random < prize.weight) {
+            return prize;
+        }
+        random -= prize.weight;
+    }
+}
+
+//==============FIM DA ROLETA===============================//
 
     //menu
     const cabecalhomenu = `🤖 ʙᴏᴛ: *${nomebot}*
@@ -3170,6 +3254,198 @@ function chargeUser(cost, sender) {
 }
 
     switch (command) {
+/*
+case 'roleta': case 'spin':
+    const econ = loadEconomy();
+    const me = getEcoUser(econ, sender);
+        
+    // --- 1. VERIFICAÇÕES INICIAIS ---
+    const cd = me.cooldowns?.roller || 0;
+    if (Date.now() < cd) return reply(`⏳ A roleta está quente! Aguarde ${timeLeft(cd)} para girar novamente.`);
+    
+    if (me.wallet < ROLLER_COST) return reply(`Você precisa de ${fmt(ROLLER_COST)} para girar a roleta.`);
+
+    // --- 2. EXECUÇÃO ---
+    me.wallet -= ROLLER_COST;
+    const selectedPrize = selectPrize();
+    me.cooldowns.roller = Date.now() + COOLDOWN_MS; 
+
+    // --- 3. APLICAÇÃO DO PRÊMIO E CAPTION ---
+    let caption = selectedPrize.msg;
+    
+    if (selectedPrize.type === 'coins') {
+        me.wallet += selectedPrize.amount;
+        caption += ` Você tem agora ${fmt(me.wallet)} Bcoins.`;
+    } 
+    else if (selectedPrize.type === 'block') {
+        caption += ` Suas ações foram bloqueadas temporariamente.`;
+    }
+    else if (selectedPrize.type === 'ban') {
+        caption += ` O comando pode ser bloqueado permanentemente!`;
+    }
+
+    // --- 4. SALVA E ENVIA O VÍDEO ---
+    saveEconomy(econ);
+    
+    const videoPath = selectedPrize.video;
+    
+    // LEITURA DO ARQUIVO DE VÍDEO e ENVIO
+    try {
+        const videoBuffer = fs.readFileSync(videoPath);
+        const videoFilename = videoPath.split('/').pop();
+
+        // ALTERAÇÃO AQUI: Adicionar gifPlayback: true
+        await bender.sendMessage(from, {
+            video: videoBuffer, // Passa o buffer do vídeo lido
+            fileName: videoFilename,
+            caption: caption,
+            mimetype: 'video/mp4',
+            gifPlayback: true // ISSO FAZ O VÍDEO REPRODUZIR COMO GIF EM LOOP!
+        }, {
+            quoted: info
+        });
+        
+        return; 
+
+    } catch (error) {
+        console.error('Erro ao enviar vídeo da roleta:', error);
+        return reply(`⚠️ Erro ao enviar o vídeo. O prêmio foi aplicado: ${caption}`);
+    }
+    
+break; // Fim do case 'roleta'
+*/
+
+// ... (Seu código anterior do case 'roleta' é mantido até aqui)
+case 'roleta': case 'spin':
+    await bender.react('☢️', {key: info.key});
+    const econ = loadEconomy();
+    const me = getEcoUser(econ, sender);
+    
+    // É NECESSÁRIO CARREGAR O groupData aqui, como você faz no 'blockuser'
+    // Exemplo: 
+    // const groupFile = './dados/grupos.json'; // Use sua variável groupFile
+    // let groupData = JSON.parse(fs.readFileSync(groupFile, 'utf-8')); // Use sua função de leitura de groupData
+
+    // --- 1. VERIFICAÇÕES INICIAIS ---
+    const cd = me.cooldowns?.roller || 0;
+    if (Date.now() < cd) return reply(`⏳ A roleta está quente! Aguarde ${timeLeft(cd)} para girar novamente.`);
+    
+    if (me.wallet < ROLLER_COST) return reply(`Você precisa de ${fmt(ROLLER_COST)} para girar a roleta.`);
+
+    // --- 2. EXECUÇÃO ---
+    me.wallet -= ROLLER_COST;
+    const selectedPrize = selectPrize();
+    me.cooldowns.roller = Date.now() + COOLDOWN_MS; 
+
+    // --- 3. APLICAÇÃO DO PRÊMIO E CAPTION ---
+    let finalCaption = selectedPrize.msg;
+    
+    if (selectedPrize.type === 'coins') {
+        me.wallet += selectedPrize.amount;
+        finalCaption += ` Você tem agora ${fmt(me.wallet)} Bcoins.`;
+    } 
+    else if (selectedPrize.type === 'block') {
+        finalCaption += ` Azar! Você foi BLOQUEADO por 30 minutos e não pode usar comandos. 🤕`;
+        
+        // APLICAÇÃO DO BLOQUEIO MANUAL
+        groupData.blockedUsers = groupData.blockedUsers || {};
+        groupData.blockedUsers[sender] = {
+            reason: "Roleta - Penalidade de 30 minutos",
+            timestamp: Date.now()
+        };
+        // AGENDA O DESBLOQUEIO
+        setTimeout(() => {
+            handleRoletaUnblock(sender, from);
+        }, BLOCK_DURATION_MS); 
+    }
+    else if (selectedPrize.type === 'ban') {
+        finalCaption += ` Desastre! A roleta mandou BAN!`;
+        
+        let isBanSuccessful = false;
+
+        // TENTA 1: BANIR O USUÁRIO
+        if (isGroup && isBotAdmin) { 
+            try {
+                await bender.groupParticipantsUpdate(from, [sender], 'remove');
+                isBanSuccessful = true;
+                finalCaption += ` ✅ Removido(a) do grupo!`;
+            } catch (e) {
+                // Se o BAN falhar (Plano B: BLOCK DE 30 MINUTOS)
+                finalCaption += ` ❌ O banimento falhou (usuário/bot admin), então você foi BLOQUEADO por 30 minutos. 😡`;
+                
+                // APLICAÇÃO DO BLOQUEIO MANUAL
+                groupData.blockedUsers = groupData.blockedUsers || {};
+                groupData.blockedUsers[sender] = {
+                    reason: "Roleta - Contingência de BAN (30 minutos)",
+                    timestamp: Date.now()
+                };
+                // AGENDA O DESBLOQUEIO
+                setTimeout(() => {
+                    handleRoletaUnblock(sender, from);
+                }, BLOCK_DURATION_MS); 
+            }
+        } else {
+            // Se o bot não é admin/não é grupo (Plano B: BLOCK DE 30 MINUTOS)
+            finalCaption += ` ❌ O bot não tem permissão para remover, então você foi BLOQUEADO por 30 minutos. 😈`;
+
+            // APLICAÇÃO DO BLOQUEIO MANUAL
+            groupData.blockedUsers = groupData.blockedUsers || {};
+            groupData.blockedUsers[sender] = {
+                reason: "Roleta - Bot sem Admin (30 minutos)",
+                timestamp: Date.now()
+            };
+            // AGENDA O DESBLOQUEIO
+            setTimeout(() => {
+                handleRoletaUnblock(sender, from);
+            }, BLOCK_DURATION_MS); 
+        }
+    }
+
+    // --- 4. SALVA DADOS MODIFICADOS E ENVIA O VÍDEO ---
+    saveEconomy(econ);
+    
+    // SALVA OS DADOS DO GRUPO (PODE SER OMITIDO SE VOCÊ JÁ TEM SALVAMENTO GLOBAL)
+    // fs.writeFileSync(groupFile, JSON.stringify(groupData, null, 2)); 
+
+    // ... (Restante do código de envio de GIF e delay)
+
+    // --- 4. SALVA E ENVIA O VÍDEO (IMEDIATAMENTE) ---
+
+    
+    const videoPath = selectedPrize.video;
+    
+    try {
+        const videoBuffer = fs.readFileSync(videoPath);
+        const videoFilename = videoPath.split('/').pop();
+
+        // 4.1 ENVIA O GIF (SEM TEXTO) IMEDIATAMENTE
+        const gifSent = await bender.sendMessage(from, {
+            video: videoBuffer, 
+            fileName: videoFilename,
+            caption: 'A roleta está girando...', // Texto simples para a primeira mensagem
+            mimetype: 'video/mp4',
+            gifPlayback: true 
+        }, {
+            quoted: info
+        });
+        
+        // 4.2 ESPERA 10 SEGUNDOS (10000 milissegundos)
+        await delay(10 * 1000); 
+
+        // 4.3 ENVIA O TEXTO FINAL (CAPTION) COMO RESPOSTA AO GIF
+        await bender.sendMessage(from, { text: `🎯 O resultado final é:\n${finalCaption}` }, {
+            quoted: gifSent // Responde à mensagem do GIF (Opcional: info)
+        });
+        
+        return; 
+
+    } catch (error) {
+        console.error('Erro no processo da roleta:', error);
+        // Se o GIF falhar, envia a mensagem de texto com o resultado
+        return reply(`⚠️ Um erro ocorreu no vídeo. O prêmio foi aplicado: ${finalCaption}`);
+    }
+    
+break; // Fim do case 'roleta'
 
 case 'sendstickers':
 case 'figurinhas':
@@ -3233,6 +3509,7 @@ break
 ╰══𝐑𝐄𝐍𝐃𝐀𝐒 ══⪨
 ⋟☀️ ${prefix}diario
 ⋟👷 ${prefix}trabalhar
+⋟☢️ ${prefix}roleta
 ⋟⛏️ ${prefix}minerar
 ⋟🎣 ${prefix}pescar
 ⋟🗺️ ${prefix}explorar
@@ -3972,7 +4249,7 @@ Capacidade: ${cap === '∞' ? 'ilimitada' : fmt(cap)}
           }
           return reply(text);
         }
-
+/*
         if (sub === 'assaltar' || sub === 'roubar') {
           if (!mentioned) return reply('Marque alguém para assaltar.');
           if (mentioned === sender) return reply('Você não pode assaltar a si mesmo.');
@@ -3997,6 +4274,57 @@ Capacidade: ${cap === '∞' ? 'ilimitada' : fmt(cap)}
             const pay = Math.min(me.wallet, multa);
             me.wallet -= pay; target.wallet += pay;
             me.cooldowns.rob = Date.now() + 10*60*1000;
+            saveEconomy(econ);
+            return reply(`🚨 Você foi pego! Pagou ${fmt(pay)} de multa para @${getUserName(mentioned)}.`, { mentions:[mentioned] });
+          }
+        }*/
+
+        if (sub === 'assaltar' || sub === 'roubar') {
+          if (!mentioned) return reply('Marque alguém para assaltar.');
+          if (mentioned === sender) return reply('Você não pode assaltar a si mesmo.');
+          
+          // REINTRODUÇÃO DO COOLDOWN DE 1 MINUTO
+          const cd = me.cooldowns?.rob || 0;
+          if (Date.now() < cd) return reply(`⏳ Aguarde ${timeLeft(cd)} para tentar novamente.`);
+          
+          const target = getEcoUser(econ, mentioned);
+          const chance = Math.random();
+          const maxSteal = Math.min(target.wallet, 300);
+          
+          // Constante para o cooldown de 1 minuto (1 * 60 * 1000 milissegundos)
+          const COOLDOWN_MS = 1 * 60 * 1000; 
+
+          if (maxSteal <= 0) {
+            // Aplica cooldown de 1 minuto
+            me.cooldowns.rob = Date.now() + COOLDOWN_MS; 
+            saveEconomy(econ);
+            return reply('A vítima está sem dinheiro na carteira. Roubo falhou.');
+          }
+
+          // 50% de chance de sucesso
+          if (chance < 0.5) { 
+            // Valor roubado = 50% do máximo possível (GARANTIDO)
+            const amt = Math.floor(maxSteal * 0.5); 
+            
+            if (amt <= 0) {
+              // Aplica cooldown de 1 minuto
+              me.cooldowns.rob = Date.now() + COOLDOWN_MS; 
+              saveEconomy(econ);
+              return reply('A vítima tem muito pouco na carteira. O roubo falhou.');
+            }
+
+            target.wallet -= amt; me.wallet += amt;
+            // Aplica cooldown de 1 minuto
+            me.cooldowns.rob = Date.now() + COOLDOWN_MS; 
+            saveEconomy(econ);
+            return reply(`🦹 Sucesso! Você roubou ${fmt(amt)} de @${getUserName(mentioned)}.`, { mentions:[mentioned] });
+          } else {
+            // Chance de ser pego/multa padrão
+            const multa = 80 + Math.floor(Math.random()*121); 
+            const pay = Math.min(me.wallet, multa);
+            me.wallet -= pay; target.wallet += pay;
+            // Aplica cooldown de 1 minuto
+            me.cooldowns.rob = Date.now() + COOLDOWN_MS; 
             saveEconomy(econ);
             return reply(`🚨 Você foi pego! Pagou ${fmt(pay)} de multa para @${getUserName(mentioned)}.`, { mentions:[mentioned] });
           }
@@ -9049,7 +9377,6 @@ case 'atalias2':
     break;
       
  case 'rename':
-case 'roubar':
 if (!chargeUser(50, sender)) {
         return; 
     }
@@ -10152,7 +10479,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("você precisa ser adm 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
           if (!groupData.modobrincadeira || groupData.modobrincadeira === undefined) {
             
             groupData.modobrincadeira = true;

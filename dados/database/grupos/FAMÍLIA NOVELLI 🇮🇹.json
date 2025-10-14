@@ -1,0 +1,103 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-08T04:11:04.591Z",
+  "groupName": "FAMÍLIA NOVELLI 🇮🇹",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "212944998678773@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Bender",
+      "firstSeen": "2025-10-08T04:11:04.594Z",
+      "lastActivity": "2025-10-08T04:11:04.594Z"
+    },
+    {
+      "id": "159696078012477@lid",
+      "msg": 19,
+      "cmd": 35,
+      "figu": 7,
+      "pushname": "Novelli Hoje",
+      "firstSeen": "2025-10-08T04:13:34.967Z",
+      "lastActivity": "2025-10-08T17:49:41.831Z"
+    },
+    {
+      "id": "196494804127785@lid",
+      "msg": 71,
+      "cmd": 126,
+      "figu": 19,
+      "pushname": "Samyr Novelli",
+      "firstSeen": "2025-10-08T04:35:47.067Z",
+      "lastActivity": "2025-10-09T16:16:04.026Z"
+    },
+    {
+      "id": "233414410141760@lid",
+      "msg": 43,
+      "cmd": 112,
+      "figu": 14,
+      "pushname": "Fernanda Catao",
+      "firstSeen": "2025-10-08T05:31:50.175Z",
+      "lastActivity": "2025-10-09T05:22:56.682Z"
+    },
+    {
+      "id": "179353572880469@lid",
+      "msg": 23,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Claudia Novelli",
+      "firstSeen": "2025-10-08T12:36:13.541Z",
+      "lastActivity": "2025-10-09T16:03:02.301Z"
+    },
+    {
+      "msg": 3,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Usuário Desconhecido",
+      "firstSeen": "2025-10-08T15:37:45.702Z",
+      "lastActivity": "2025-10-09T05:21:45.972Z"
+    },
+    {
+      "id": "205707592921214@lid",
+      "msg": 18,
+      "cmd": 0,
+      "figu": 3,
+      "pushname": "Romulo Novelli",
+      "firstSeen": "2025-10-08T19:50:27.516Z",
+      "lastActivity": "2025-10-09T16:15:50.031Z"
+    },
+    {
+      "id": "209426950688784@lid",
+      "msg": 1,
+      "cmd": 1,
+      "figu": 0,
+      "pushname": "Diogo",
+      "firstSeen": "2025-10-09T11:13:42.814Z",
+      "lastActivity": "2025-10-09T11:14:21.986Z"
+    },
+    {
+      "id": "70502525714606@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 2,
+      "pushname": "Neli",
+      "firstSeen": "2025-10-09T13:26:53.617Z",
+      "lastActivity": "2025-10-09T14:49:39.735Z"
+    },
+    {
+      "id": "42335593312393@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 3,
+      "pushname": "Shana",
+      "firstSeen": "2025-10-09T13:43:26.998Z",
+      "lastActivity": "2025-10-09T14:41:40.702Z"
+    }
+  ],
+  "modobrincadeira": true
+}

@@ -1,0 +1,84 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-10T00:28:54.748Z",
+  "groupName": "Resenha dos abestados",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "92874590941436@lid",
+      "msg": 57,
+      "cmd": 200,
+      "figu": 2,
+      "pushname": "Luiz",
+      "firstSeen": "2025-10-10T00:28:54.791Z",
+      "lastActivity": "2025-10-10T19:07:44.975Z"
+    },
+    {
+      "id": "193793672400970@lid",
+      "msg": 606,
+      "cmd": 351,
+      "figu": 4,
+      "pushname": "José",
+      "firstSeen": "2025-10-10T00:32:55.301Z",
+      "lastActivity": "2025-10-14T09:36:35.639Z"
+    },
+    {
+      "id": "191727876972700@lid",
+      "msg": 567,
+      "cmd": 36,
+      "figu": 14,
+      "pushname": "Lz",
+      "firstSeen": "2025-10-10T00:33:29.558Z",
+      "lastActivity": "2025-10-14T09:36:18.395Z"
+    },
+    {
+      "id": "144594469703905@lid",
+      "msg": 398,
+      "cmd": 154,
+      "figu": 3,
+      "pushname": "Pedro Costa",
+      "firstSeen": "2025-10-10T00:33:39.863Z",
+      "lastActivity": "2025-10-14T09:45:29.743Z"
+    },
+    {
+      "msg": 30,
+      "cmd": 19,
+      "figu": 0,
+      "pushname": "Usuário Desconhecido",
+      "firstSeen": "2025-10-10T00:39:27.112Z",
+      "lastActivity": "2025-10-11T12:32:17.826Z"
+    },
+    {
+      "id": "271051728674996@lid",
+      "msg": 277,
+      "cmd": 77,
+      "figu": 24,
+      "pushname": "gabriel",
+      "firstSeen": "2025-10-10T18:44:31.596Z",
+      "lastActivity": "2025-10-14T09:47:18.932Z"
+    },
+    {
+      "id": "10381271544005@lid",
+      "msg": 98,
+      "cmd": 23,
+      "figu": 4,
+      "pushname": "Davi",
+      "firstSeen": "2025-10-10T18:55:50.343Z",
+      "lastActivity": "2025-10-14T00:21:39.230Z"
+    },
+    {
+      "id": "66585297461499@lid",
+      "msg": 396,
+      "cmd": 9,
+      "figu": 91,
+      "pushname": "P.Lucas🥷🏽",
+      "firstSeen": "2025-10-10T20:16:22.546Z",
+      "lastActivity": "2025-10-13T23:53:10.174Z"
+    }
+  ]
+}

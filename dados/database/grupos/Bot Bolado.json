@@ -1,0 +1,93 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-08T20:01:04.552Z",
+  "groupName": "Bot Bolado",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "32096609378490@lid",
+      "msg": 132,
+      "cmd": 1090,
+      "figu": 22,
+      "pushname": "Kaua Roeher",
+      "firstSeen": "2025-10-08T20:01:04.553Z",
+      "lastActivity": "2025-10-10T23:33:41.516Z"
+    },
+    {
+      "msg": 166,
+      "cmd": 7,
+      "figu": 0,
+      "pushname": "Usuário Desconhecido",
+      "firstSeen": "2025-10-08T20:17:31.716Z",
+      "lastActivity": "2025-10-12T18:31:04.984Z"
+    },
+    {
+      "id": "237833881178172@lid",
+      "msg": 216,
+      "cmd": 1359,
+      "figu": 22,
+      "pushname": "Junior Santos",
+      "firstSeen": "2025-10-08T22:15:21.004Z",
+      "lastActivity": "2025-10-13T14:23:19.016Z"
+    },
+    {
+      "id": "54872586117311@lid",
+      "msg": 117,
+      "cmd": 660,
+      "figu": 39,
+      "pushname": "Sérgio Sudário",
+      "firstSeen": "2025-10-09T16:19:06.207Z",
+      "lastActivity": "2025-10-13T15:26:45.108Z"
+    },
+    {
+      "id": "58587749585006@lid",
+      "msg": 45,
+      "cmd": 198,
+      "figu": 2,
+      "pushname": "D.",
+      "firstSeen": "2025-10-09T16:52:50.364Z",
+      "lastActivity": "2025-10-13T15:25:43.571Z"
+    },
+    {
+      "id": "79860655489122@lid",
+      "msg": 182,
+      "cmd": 573,
+      "figu": 3,
+      "pushname": "Victor",
+      "firstSeen": "2025-10-09T16:56:26.126Z",
+      "lastActivity": "2025-10-12T20:48:17.305Z"
+    },
+    {
+      "id": "263835747361007@lid",
+      "msg": 136,
+      "cmd": 987,
+      "figu": 19,
+      "pushname": "Zoboo",
+      "firstSeen": "2025-10-09T18:37:08.375Z",
+      "lastActivity": "2025-10-13T15:23:51.890Z"
+    },
+    {
+      "id": "104583074472005@lid",
+      "msg": 124,
+      "cmd": 713,
+      "figu": 8,
+      "pushname": "Místico",
+      "firstSeen": "2025-10-09T20:37:24.109Z",
+      "lastActivity": "2025-10-11T13:50:32.636Z"
+    },
+    {
+      "id": "54778197483748@lid",
+      "msg": 24,
+      "cmd": 58,
+      "figu": 6,
+      "pushname": "Aluízio da Honda",
+      "firstSeen": "2025-10-09T20:38:30.686Z",
+      "lastActivity": "2025-10-13T15:22:11.644Z"
+    }
+  ]
+}

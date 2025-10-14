@@ -1,0 +1,58 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-11T18:16:27.988Z",
+  "groupName": "Bumbum Guloso 🍑",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "82235738820857@lid",
+      "msg": 13,
+      "cmd": 1,
+      "figu": 3,
+      "pushname": "๛αταℓiαs ℓσ-αмiㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
+      "firstSeen": "2025-10-11T18:16:27.990Z",
+      "lastActivity": "2025-10-12T02:37:58.697Z"
+    },
+    {
+      "id": "13713880940589@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Teo",
+      "firstSeen": "2025-10-11T18:16:54.416Z",
+      "lastActivity": "2025-10-12T01:10:49.477Z"
+    },
+    {
+      "id": "105810931757278@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Jardel",
+      "firstSeen": "2025-10-11T20:03:34.284Z",
+      "lastActivity": "2025-10-12T02:38:09.063Z"
+    },
+    {
+      "id": "208426206527706@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Caio",
+      "firstSeen": "2025-10-12T01:03:45.407Z",
+      "lastActivity": "2025-10-12T01:09:23.345Z"
+    },
+    {
+      "id": "131697135865909@lid",
+      "msg": 5,
+      "cmd": 0,
+      "figu": 2,
+      "pushname": "Carlos Lobo",
+      "firstSeen": "2025-10-12T01:04:53.491Z",
+      "lastActivity": "2025-10-12T02:56:33.492Z"
+    }
+  ]
+}

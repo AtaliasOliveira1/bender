@@ -1,0 +1,48 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-09T20:45:27.429Z",
+  "groupName": "Órfãos do Bender",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "233414410141760@lid",
+      "msg": 25,
+      "cmd": 311,
+      "figu": 6,
+      "pushname": "Fernanda Catao",
+      "firstSeen": "2025-10-09T20:45:27.430Z",
+      "lastActivity": "2025-10-14T06:12:50.366Z"
+    },
+    {
+      "id": "159696078012477@lid",
+      "msg": 31,
+      "cmd": 248,
+      "figu": 0,
+      "pushname": "Novelli Hoje",
+      "firstSeen": "2025-10-09T20:46:17.379Z",
+      "lastActivity": "2025-10-14T01:57:50.586Z"
+    },
+    {
+      "id": "196494804127785@lid",
+      "msg": 64,
+      "cmd": 455,
+      "figu": 18,
+      "pushname": "Samyr Novelli",
+      "firstSeen": "2025-10-09T20:47:36.541Z",
+      "lastActivity": "2025-10-14T06:26:38.387Z"
+    },
+    {
+      "msg": 9,
+      "cmd": 1,
+      "figu": 0,
+      "pushname": "Usuário Desconhecido",
+      "firstSeen": "2025-10-09T21:45:20.585Z",
+      "lastActivity": "2025-10-14T06:26:05.576Z"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-10T00:10:21.553Z",
+  "groupName": "Abre logo prr tu e José e pau no cu",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "271051728674996@lid",
+      "msg": 3,
+      "cmd": 106,
+      "figu": 0,
+      "pushname": "gabriel",
+      "firstSeen": "2025-10-10T00:10:21.555Z",
+      "lastActivity": "2025-10-10T00:20:31.369Z"
+    },
+    {
+      "id": "191727876972700@lid",
+      "msg": 3,
+      "cmd": 3,
+      "figu": 0,
+      "pushname": "Lz",
+      "firstSeen": "2025-10-10T00:10:29.963Z",
+      "lastActivity": "2025-10-10T00:27:55.131Z"
+    },
+    {
+      "id": "144594469703905@lid",
+      "msg": 2,
+      "cmd": 11,
+      "figu": 0,
+      "pushname": "Pedro Costa",
+      "firstSeen": "2025-10-10T00:11:00.780Z",
+      "lastActivity": "2025-10-10T00:15:07.040Z"
+    },
+    {
+      "id": "92874590941436@lid",
+      "msg": 8,
+      "cmd": 109,
+      "figu": 0,
+      "pushname": "Luiz",
+      "firstSeen": "2025-10-10T00:11:57.903Z",
+      "lastActivity": "2025-10-10T00:27:00.206Z"
+    },
+    {
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Usuário Desconhecido",
+      "firstSeen": "2025-10-10T00:11:58.170Z",
+      "lastActivity": "2025-10-10T00:20:21.146Z"
+    },
+    {
+      "id": "10381271544005@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Davi",
+      "firstSeen": "2025-10-10T00:28:01.124Z",
+      "lastActivity": "2025-10-10T00:28:01.124Z"
+    }
+  ]
+}

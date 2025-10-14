@@ -1,0 +1,94 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-08T04:11:20.584Z",
+  "groupName": "República Tcheca ",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "212944998678773@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Bender",
+      "firstSeen": "2025-10-08T04:11:20.586Z",
+      "lastActivity": "2025-10-08T04:11:20.586Z"
+    },
+    {
+      "id": "248184819417341@lid",
+      "msg": 13,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Hericles Yuri Lord ",
+      "firstSeen": "2025-10-08T10:16:46.444Z",
+      "lastActivity": "2025-10-12T18:31:06.238Z"
+    },
+    {
+      "id": "116608412463123@lid",
+      "msg": 10,
+      "cmd": 0,
+      "figu": 2,
+      "pushname": "Jean Pimenta",
+      "firstSeen": "2025-10-08T10:17:18.476Z",
+      "lastActivity": "2025-10-13T13:57:21.643Z"
+    },
+    {
+      "id": "58587749585006@lid",
+      "msg": 24,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "D.",
+      "firstSeen": "2025-10-08T10:21:54.984Z",
+      "lastActivity": "2025-10-14T10:58:34.938Z"
+    },
+    {
+      "id": "54872586117311@lid",
+      "msg": 13,
+      "cmd": 0,
+      "figu": 4,
+      "pushname": "Sérgio Sudário",
+      "firstSeen": "2025-10-08T23:33:20.972Z",
+      "lastActivity": "2025-10-13T23:13:32.109Z"
+    },
+    {
+      "id": "42000602648773@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 2,
+      "pushname": "𝕱𝖊𝖗𝖓𝖆𝖓𝖉𝖔 𝕭𝖔𝖗𝖌𝖊𝖘",
+      "firstSeen": "2025-10-10T09:56:29.917Z",
+      "lastActivity": "2025-10-13T23:01:20.687Z"
+    },
+    {
+      "id": "104583074472005@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Místico",
+      "firstSeen": "2025-10-10T20:18:29.548Z",
+      "lastActivity": "2025-10-12T16:18:05.358Z"
+    },
+    {
+      "id": "214044225048638@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Pietro Lopes",
+      "firstSeen": "2025-10-12T16:21:16.367Z",
+      "lastActivity": "2025-10-12T16:21:16.367Z"
+    },
+    {
+      "id": "74728203133172@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Vinícius Máximo",
+      "firstSeen": "2025-10-13T13:37:34.405Z",
+      "lastActivity": "2025-10-13T14:08:11.954Z"
+    }
+  ]
+}

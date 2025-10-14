@@ -11,29 +11,48 @@
   "contador": [
     {
       "id": "82235738820857@lid",
-      "msg": 39,
-      "cmd": 25,
+      "msg": 51,
+      "cmd": 75,
       "figu": 30,
       "pushname": "๛αταℓiαs ℓσ-αмiㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
       "firstSeen": "2025-10-08T02:45:23.565Z",
-      "lastActivity": "2025-10-08T04:01:49.676Z"
+      "lastActivity": "2025-10-11T02:22:31.036Z"
     },
     {
       "id": "212944998678773@lid",
       "msg": 4,
-      "cmd": 0,
+      "cmd": 2,
       "figu": 0,
       "pushname": "Bender",
       "firstSeen": "2025-10-08T02:51:57.064Z",
-      "lastActivity": "2025-10-08T03:29:13.058Z"
+      "lastActivity": "2025-10-10T23:21:42.238Z"
     },
     {
-      "msg": 1,
+      "msg": 2,
       "cmd": 0,
       "figu": 1,
       "pushname": "Usuário Desconhecido",
       "firstSeen": "2025-10-08T03:06:22.011Z",
-      "lastActivity": "2025-10-08T03:06:22.011Z"
+      "lastActivity": "2025-10-10T01:29:02.152Z"
+    },
+    {
+      "id": "163351011319890@lid",
+      "msg": 23,
+      "cmd": 1,
+      "figu": 1,
+      "pushname": "VaLéria",
+      "firstSeen": "2025-10-08T07:59:19.422Z",
+      "lastActivity": "2025-10-10T23:31:34.668Z"
+    },
+    {
+      "id": "237778482786517@lid",
+      "msg": 0,
+      "cmd": 22,
+      "figu": 0,
+      "pushname": "Mr. Robot",
+      "firstSeen": "2025-10-11T01:57:27.260Z",
+      "lastActivity": "2025-10-11T02:23:03.969Z"
     }
-  ]
+  ],
+  "modobrincadeira": true
 }

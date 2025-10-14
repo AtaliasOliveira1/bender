@@ -2,7 +2,7 @@
   "mark": {},
   "createdAt": "2025-10-05T20:04:21.303Z",
   "groupName": "BD-Elite ⚽🇧🇷",
-  "modogold": false,
+  "modogold": true,
   "minMessage": null,
   "moderators": [],
   "allowedModCommands": [],
@@ -11,75 +11,110 @@
   "contador": [
     {
       "id": "108607039352965@lid",
-      "msg": 41,
-      "cmd": 0,
-      "figu": 4,
+      "msg": 511,
+      "cmd": 18,
+      "figu": 24,
       "pushname": "𝓖𝓾𝓲 𝓓𝓮 𝓙𝓮𝓼𝓾𝓼 𓅓🖤",
       "firstSeen": "2025-10-05T20:04:21.304Z",
-      "lastActivity": "2025-10-08T02:16:42.972Z"
+      "lastActivity": "2025-10-14T02:34:25.923Z"
     },
     {
       "id": "82235738820857@lid",
-      "msg": 32,
-      "cmd": 0,
-      "figu": 2,
+      "msg": 344,
+      "cmd": 74,
+      "figu": 12,
       "pushname": "๛αταℓiαs ℓσ-αмiㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
       "firstSeen": "2025-10-05T20:17:02.384Z",
-      "lastActivity": "2025-10-08T02:18:06.270Z"
+      "lastActivity": "2025-10-14T01:30:27.246Z"
     },
     {
       "id": "103109313458368@lid",
-      "msg": 15,
-      "cmd": 0,
+      "msg": 117,
+      "cmd": 39,
       "figu": 0,
       "pushname": "Kleiton",
       "firstSeen": "2025-10-05T20:17:53.508Z",
-      "lastActivity": "2025-10-08T02:16:50.463Z"
+      "lastActivity": "2025-10-14T12:34:24.459Z"
     },
     {
       "id": "105810931757278@lid",
-      "msg": 1,
+      "msg": 7,
       "cmd": 0,
-      "figu": 0,
+      "figu": 1,
       "pushname": "Jardel",
       "firstSeen": "2025-10-05T20:33:22.185Z",
-      "lastActivity": "2025-10-05T20:33:22.185Z"
+      "lastActivity": "2025-10-12T23:02:04.368Z"
     },
     {
       "id": "99592037220603@lid",
-      "msg": 3,
-      "cmd": 0,
-      "figu": 0,
+      "msg": 333,
+      "cmd": 69,
+      "figu": 5,
       "pushname": "AJ 🎶",
       "firstSeen": "2025-10-05T20:39:55.868Z",
-      "lastActivity": "2025-10-05T20:47:09.655Z"
+      "lastActivity": "2025-10-14T09:52:49.031Z"
     },
     {
       "id": "116273505640686@lid",
-      "msg": 8,
-      "cmd": 0,
-      "figu": 0,
+      "msg": 202,
+      "cmd": 44,
+      "figu": 3,
       "pushname": "Rodolfo Souza",
       "firstSeen": "2025-10-05T21:29:15.979Z",
-      "lastActivity": "2025-10-08T02:22:41.375Z"
+      "lastActivity": "2025-10-14T09:44:16.952Z"
     },
     {
       "id": "212944998678773@lid",
-      "msg": 7,
+      "msg": 8,
       "cmd": 0,
       "figu": 1,
       "pushname": "Bender",
       "firstSeen": "2025-10-05T21:51:42.358Z",
-      "lastActivity": "2025-10-08T03:41:55.607Z"
+      "lastActivity": "2025-10-10T01:24:04.045Z"
     },
     {
       "id": "246596000337939@lid",
-      "msg": 3,
-      "cmd": 0,
-      "figu": 0,
+      "msg": 161,
+      "cmd": 1,
+      "figu": 7,
       "pushname": "Carlos Sousa",
       "firstSeen": "2025-10-05T22:09:54.519Z",
-      "lastActivity": "2025-10-07T23:48:39.918Z"
+      "lastActivity": "2025-10-14T10:49:00.019Z"
+    },
+    {
+      "id": "279782860279881@lid",
+      "msg": 42,
+      "cmd": 14,
+      "figu": 1,
+      "pushname": "Nicolas Calú",
+      "firstSeen": "2025-10-08T13:12:12.068Z",
+      "lastActivity": "2025-10-14T01:30:25.738Z"
+    },
+    {
+      "id": "226242318065852@lid",
+      "msg": 120,
+      "cmd": 0,
+      "figu": 2,
+      "pushname": "Guilherme",
+      "firstSeen": "2025-10-08T18:58:41.073Z",
+      "lastActivity": "2025-10-14T00:00:40.499Z"
+    },
+    {
+      "id": "216144531173430@lid",
+      "msg": 13,
+      "cmd": 17,
+      "figu": 4,
+      "pushname": "felipe",
+      "firstSeen": "2025-10-09T22:18:17.753Z",
+      "lastActivity": "2025-10-14T09:29:46.621Z"
+    },
+    {
+      "msg": 7,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Usuário Desconhecido",
+      "firstSeen": "2025-10-09T22:20:45.650Z",
+      "lastActivity": "2025-10-11T22:03:05.089Z"
     }
   ]
 }

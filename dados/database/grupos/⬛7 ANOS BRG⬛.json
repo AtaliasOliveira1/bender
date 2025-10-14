@@ -1,0 +1,58 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-08T04:11:25.607Z",
+  "groupName": "⬛7 ANOS BRG⬛",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "212944998678773@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Bender",
+      "firstSeen": "2025-10-08T04:11:25.609Z",
+      "lastActivity": "2025-10-08T04:11:25.609Z"
+    },
+    {
+      "id": "18124879470837@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Guilherme Andrade",
+      "firstSeen": "2025-10-08T12:04:00.397Z",
+      "lastActivity": "2025-10-08T12:05:25.010Z"
+    },
+    {
+      "id": "133526255050878@lid",
+      "msg": 9,
+      "cmd": 0,
+      "figu": 3,
+      "pushname": "Xande",
+      "firstSeen": "2025-10-08T12:05:15.788Z",
+      "lastActivity": "2025-10-08T12:23:39.562Z"
+    },
+    {
+      "id": "254970767122566@lid",
+      "msg": 5,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "M",
+      "firstSeen": "2025-10-08T12:22:16.894Z",
+      "lastActivity": "2025-10-08T12:23:14.524Z"
+    },
+    {
+      "id": "108607039352965@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "𝓖𝓾𝓲 𝓓𝓮 𝓙𝓮𝓼𝓾𝓼 𓅓🖤",
+      "firstSeen": "2025-10-08T12:25:47.126Z",
+      "lastActivity": "2025-10-08T12:25:47.126Z"
+    }
+  ]
+}

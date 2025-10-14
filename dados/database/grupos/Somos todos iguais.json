@@ -1,0 +1,102 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-08T18:03:18.104Z",
+  "groupName": "Somos todos iguais",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "11962054361179@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "🖤Alone🖤",
+      "firstSeen": "2025-10-08T18:03:18.107Z",
+      "lastActivity": "2025-10-08T18:03:18.107Z"
+    },
+    {
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Usuário Desconhecido",
+      "firstSeen": "2025-10-08T18:10:03.295Z",
+      "lastActivity": "2025-10-08T18:10:03.295Z"
+    },
+    {
+      "id": "15045891256522@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "~Martinh# paixão 💀☠",
+      "firstSeen": "2025-10-08T18:10:10.987Z",
+      "lastActivity": "2025-10-08T18:10:10.987Z"
+    },
+    {
+      "id": "16922825494566@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Jordan Officiel",
+      "firstSeen": "2025-10-08T22:56:54.151Z",
+      "lastActivity": "2025-10-10T07:54:14.476Z"
+    },
+    {
+      "id": "109938848342150@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "beneditopolo7",
+      "firstSeen": "2025-10-08T23:42:35.130Z",
+      "lastActivity": "2025-10-08T23:42:35.130Z"
+    },
+    {
+      "id": "169484358824125@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "favelado junior",
+      "firstSeen": "2025-10-09T13:14:23.468Z",
+      "lastActivity": "2025-10-09T13:14:23.468Z"
+    },
+    {
+      "id": "8178171420742@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Estêvão Beu",
+      "firstSeen": "2025-10-09T14:57:22.521Z",
+      "lastActivity": "2025-10-09T21:02:18.691Z"
+    },
+    {
+      "id": "107271690428489@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 2,
+      "pushname": "Chocolate 23🍫",
+      "firstSeen": "2025-10-09T19:43:53.787Z",
+      "lastActivity": "2025-10-09T19:43:54.785Z"
+    },
+    {
+      "id": "279409734979786@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "𝕭𝖊𝖚𝖈𝖑𝖊𝖚𝖓𝖎𝖔",
+      "firstSeen": "2025-10-09T21:02:56.943Z",
+      "lastActivity": "2025-10-09T21:02:56.943Z"
+    },
+    {
+      "id": "114766408380449@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Wesley Unknown❓",
+      "firstSeen": "2025-10-09T21:52:52.163Z",
+      "lastActivity": "2025-10-09T21:52:52.163Z"
+    }
+  ]
+}
