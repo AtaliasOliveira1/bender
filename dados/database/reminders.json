@@ -8,7 +8,8 @@
       "createdAt": "2025-10-20T20:35:49.940Z",
       "at": 1760993149940,
       "message": "beber água",
-      "status": "pending"
+      "status": "sent",
+      "sentAt": "2025-10-20T23:32:22.225Z"
     }
   ]
 }

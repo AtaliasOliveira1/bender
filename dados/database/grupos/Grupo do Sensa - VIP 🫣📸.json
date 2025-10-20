@@ -20,12 +20,12 @@
     },
     {
       "id": "159923711250461@lid",
-      "msg": 33,
+      "msg": 34,
       "cmd": 0,
-      "figu": 4,
+      "figu": 5,
       "pushname": "🇧🇷",
       "firstSeen": "2025-10-05T20:40:15.289Z",
-      "lastActivity": "2025-10-08T01:17:27.588Z"
+      "lastActivity": "2025-10-20T23:35:31.470Z"
     },
     {
       "id": "115264104456199@lid",
@@ -218,12 +218,12 @@
     },
     {
       "id": "178842522099733@lid",
-      "msg": 8,
+      "msg": 9,
       "cmd": 0,
       "figu": 0,
       "pushname": "👩🏻‍⚕️🩺",
       "firstSeen": "2025-10-05T22:00:57.662Z",
-      "lastActivity": "2025-10-08T00:36:15.864Z"
+      "lastActivity": "2025-10-20T23:32:42.603Z"
     },
     {
       "id": "133371753672755@lid",
@@ -800,6 +800,15 @@
       "pushname": "Karinny Silva",
       "firstSeen": "2025-10-08T03:34:15.006Z",
       "lastActivity": "2025-10-08T03:34:15.006Z"
+    },
+    {
+      "id": "237778482786517@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Mr. Robot",
+      "firstSeen": "2025-10-20T23:33:44.406Z",
+      "lastActivity": "2025-10-20T23:33:44.406Z"
     }
   ]
 }

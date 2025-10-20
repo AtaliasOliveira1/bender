@@ -37,9 +37,9 @@
     },
     "237778482786517@lid": {
       "level": 9,
-      "xp": 93,
+      "xp": 98,
       "patent": "Explorador",
-      "messages": 222,
+      "messages": 223,
       "commands": 25
     },
     "108607039352965@lid": {
@@ -4275,6 +4275,27 @@
       "xp": 10,
       "patent": "Iniciante",
       "messages": 2,
+      "commands": 0
+    },
+    "178842522099733@lid": {
+      "level": 1,
+      "xp": 5,
+      "patent": "Iniciante",
+      "messages": 1,
+      "commands": 0
+    },
+    "159923711250461@lid": {
+      "level": 1,
+      "xp": 10,
+      "patent": "Iniciante",
+      "messages": 2,
+      "commands": 0
+    },
+    "280113707003958@lid": {
+      "level": 1,
+      "xp": 5,
+      "patent": "Iniciante",
+      "messages": 1,
       "commands": 0
     }
   },
