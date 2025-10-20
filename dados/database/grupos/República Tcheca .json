@@ -1,0 +1,130 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-08T04:11:20.584Z",
+  "groupName": "República Tcheca ",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "212944998678773@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Bender",
+      "firstSeen": "2025-10-08T04:11:20.586Z",
+      "lastActivity": "2025-10-08T04:11:20.586Z"
+    },
+    {
+      "id": "248184819417341@lid",
+      "msg": 97,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Hericles Yuri Lord ",
+      "firstSeen": "2025-10-08T10:16:46.444Z",
+      "lastActivity": "2025-10-20T21:49:43.555Z"
+    },
+    {
+      "id": "116608412463123@lid",
+      "msg": 35,
+      "cmd": 0,
+      "figu": 10,
+      "pushname": "Jean Pimenta",
+      "firstSeen": "2025-10-08T10:17:18.476Z",
+      "lastActivity": "2025-10-18T01:21:01.296Z"
+    },
+    {
+      "id": "58587749585006@lid",
+      "msg": 192,
+      "cmd": 4,
+      "figu": 4,
+      "pushname": "D.",
+      "firstSeen": "2025-10-08T10:21:54.984Z",
+      "lastActivity": "2025-10-20T22:41:37.905Z"
+    },
+    {
+      "id": "54872586117311@lid",
+      "msg": 195,
+      "cmd": 0,
+      "figu": 13,
+      "pushname": "Sérgio Sudário",
+      "firstSeen": "2025-10-08T23:33:20.972Z",
+      "lastActivity": "2025-10-20T22:59:27.155Z"
+    },
+    {
+      "id": "42000602648773@lid",
+      "msg": 105,
+      "cmd": 0,
+      "figu": 4,
+      "pushname": "𝕱𝖊𝖗𝖓𝖆𝖓𝖉𝖔 𝕭𝖔𝖗𝖌𝖊𝖘",
+      "firstSeen": "2025-10-10T09:56:29.917Z",
+      "lastActivity": "2025-10-20T23:01:29.288Z"
+    },
+    {
+      "id": "104583074472005@lid",
+      "msg": 92,
+      "cmd": 0,
+      "figu": 4,
+      "pushname": "Místico",
+      "firstSeen": "2025-10-10T20:18:29.548Z",
+      "lastActivity": "2025-10-20T18:00:49.212Z"
+    },
+    {
+      "id": "214044225048638@lid",
+      "msg": 5,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Pietro Lopes",
+      "firstSeen": "2025-10-12T16:21:16.367Z",
+      "lastActivity": "2025-10-16T20:51:51.452Z"
+    },
+    {
+      "id": "74728203133172@lid",
+      "msg": 20,
+      "cmd": 0,
+      "figu": 4,
+      "pushname": "Vinícius Máximo",
+      "firstSeen": "2025-10-13T13:37:34.405Z",
+      "lastActivity": "2025-10-17T17:18:06.663Z"
+    },
+    {
+      "id": "171386492436485@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Bruna Amaral",
+      "firstSeen": "2025-10-14T21:04:52.849Z",
+      "lastActivity": "2025-10-14T21:08:53.321Z"
+    },
+    {
+      "id": "82235738820857@lid",
+      "msg": 1,
+      "cmd": 1,
+      "figu": 0,
+      "pushname": "๛αταℓiαs ℓσ-αмiㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
+      "firstSeen": "2025-10-15T11:17:28.310Z",
+      "lastActivity": "2025-10-17T23:17:28.004Z"
+    },
+    {
+      "id": "190533423095835@lid",
+      "msg": 8,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Allan Silva🫥",
+      "firstSeen": "2025-10-15T22:32:59.921Z",
+      "lastActivity": "2025-10-16T01:39:03.660Z"
+    },
+    {
+      "id": "39509907505174@lid",
+      "msg": 44,
+      "cmd": 0,
+      "figu": 3,
+      "pushname": "Catatau",
+      "firstSeen": "2025-10-17T22:02:41.989Z",
+      "lastActivity": "2025-10-20T21:49:30.374Z"
+    }
+  ]
+}

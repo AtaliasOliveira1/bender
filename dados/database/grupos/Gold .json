@@ -1,0 +1,48 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-08T18:52:03.206Z",
+  "groupName": "Gold ",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "191727876972700@lid",
+      "msg": 36,
+      "cmd": 236,
+      "figu": 1,
+      "pushname": "Lz",
+      "firstSeen": "2025-10-08T18:52:03.211Z",
+      "lastActivity": "2025-10-11T12:04:14.191Z"
+    },
+    {
+      "msg": 8,
+      "cmd": 47,
+      "figu": 1,
+      "pushname": "Usuário Desconhecido",
+      "firstSeen": "2025-10-10T00:28:55.305Z",
+      "lastActivity": "2025-10-11T11:56:26.925Z"
+    },
+    {
+      "id": "193793672400970@lid",
+      "msg": 42,
+      "cmd": 714,
+      "figu": 0,
+      "pushname": "José",
+      "firstSeen": "2025-10-10T00:35:05.232Z",
+      "lastActivity": "2025-10-11T09:12:51.782Z"
+    },
+    {
+      "id": "144594469703905@lid",
+      "msg": 23,
+      "cmd": 351,
+      "figu": 0,
+      "pushname": "Pedro Costa",
+      "firstSeen": "2025-10-10T23:02:33.502Z",
+      "lastActivity": "2025-10-11T12:08:19.958Z"
+    }
+  ]
+}

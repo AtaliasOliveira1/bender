@@ -1,0 +1,39 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-11T17:11:43.864Z",
+  "groupName": "Jogos",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "18928055152672@lid",
+      "msg": 1,
+      "cmd": 5,
+      "figu": 0,
+      "pushname": "Adriel",
+      "firstSeen": "2025-10-11T17:11:43.865Z",
+      "lastActivity": "2025-10-11T17:19:08.940Z"
+    },
+    {
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Usuário Desconhecido",
+      "firstSeen": "2025-10-11T17:13:07.374Z",
+      "lastActivity": "2025-10-11T17:13:07.375Z"
+    },
+    {
+      "id": "82235738820857@lid",
+      "msg": 0,
+      "cmd": 1,
+      "figu": 0,
+      "pushname": "๛αταℓiαs ℓσ-αмiㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
+      "firstSeen": "2025-10-12T15:18:35.665Z",
+      "lastActivity": "2025-10-12T15:18:35.665Z"
+    }
+  ]
+}
