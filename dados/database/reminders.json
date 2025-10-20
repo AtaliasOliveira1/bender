@@ -1,3 +1,14 @@
 {
-  "reminders": []
+  "reminders": [
+    {
+      "id": "0267dab7fa82",
+      "userId": "271051728674996@lid",
+      "chatId": "271051728674996@lid",
+      "createdByName": "gabriel",
+      "createdAt": "2025-10-20T20:35:49.940Z",
+      "at": 1760993149940,
+      "message": "beber água",
+      "status": "pending"
+    }
+  ]
 }
