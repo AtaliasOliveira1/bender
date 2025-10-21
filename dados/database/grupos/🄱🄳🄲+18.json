@@ -74,12 +74,21 @@
     },
     {
       "id": "107803763056832@lid",
+<<<<<<< Updated upstream
       "msg": 26,
       "cmd": 0,
       "figu": 6,
       "pushname": "Thayse♌🐦‍🔥🖤",
       "firstSeen": "2025-10-05T19:58:17.959Z",
       "lastActivity": "2025-10-08T00:51:34.542Z"
+=======
+      "msg": 60,
+      "cmd": 0,
+      "figu": 11,
+      "pushname": "Thayse♌🐦‍🔥🖤",
+      "firstSeen": "2025-10-05T19:58:17.959Z",
+      "lastActivity": "2025-10-21T01:08:51.114Z"
+>>>>>>> Stashed changes
     },
     {
       "id": "121749857423454@lid",
@@ -173,12 +182,20 @@
     },
     {
       "id": "169745814941865@lid",
+<<<<<<< Updated upstream
       "msg": 10,
+=======
+      "msg": 21,
+>>>>>>> Stashed changes
       "cmd": 0,
       "figu": 0,
       "pushname": "🧠🫁🫀",
       "firstSeen": "2025-10-05T22:41:23.403Z",
+<<<<<<< Updated upstream
       "lastActivity": "2025-10-06T01:05:56.719Z"
+=======
+      "lastActivity": "2025-10-21T01:09:13.762Z"
+>>>>>>> Stashed changes
     },
     {
       "id": "127663893147902@lid",
@@ -350,6 +367,72 @@
       "pushname": "𝕲𝖎𝖑 𝕾𝖔𝖚𝖟𝖆",
       "firstSeen": "2025-10-08T03:49:48.422Z",
       "lastActivity": "2025-10-08T03:49:48.422Z"
+<<<<<<< Updated upstream
+=======
+    },
+    {
+      "id": "248103147950240@lid",
+      "msg": 11,
+      "cmd": 0,
+      "figu": 17,
+      "pushname": "Felipe de jesus",
+      "firstSeen": "2025-10-20T23:45:19.873Z",
+      "lastActivity": "2025-10-21T01:05:58.154Z"
+    },
+    {
+      "id": "238237809377498@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "deus e fiel",
+      "firstSeen": "2025-10-20T23:55:26.407Z",
+      "lastActivity": "2025-10-20T23:55:26.407Z"
+    },
+    {
+      "id": "76399448748137@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "🍃Mykah santhos💥",
+      "firstSeen": "2025-10-21T00:06:39.781Z",
+      "lastActivity": "2025-10-21T00:53:16.939Z"
+    },
+    {
+      "id": "135605186990195@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Marques",
+      "firstSeen": "2025-10-21T00:26:23.749Z",
+      "lastActivity": "2025-10-21T01:03:04.055Z"
+    },
+    {
+      "id": "271678659666025@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Rayglã Barros",
+      "firstSeen": "2025-10-21T00:42:40.720Z",
+      "lastActivity": "2025-10-21T00:42:40.720Z"
+    },
+    {
+      "id": "75110639739035@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "~~💚",
+      "firstSeen": "2025-10-21T01:00:54.767Z",
+      "lastActivity": "2025-10-21T01:06:18.818Z"
+    },
+    {
+      "id": "249095654494438@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": ".",
+      "firstSeen": "2025-10-21T01:07:11.285Z",
+      "lastActivity": "2025-10-21T01:07:11.285Z"
+>>>>>>> Stashed changes
     }
   ]
 }
