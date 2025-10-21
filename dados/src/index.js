@@ -3358,6 +3358,36 @@ async function NazuninhaBotExec(bender, info, store, messagesCache, rentalExpira
 
 //Funções Atalias
 
+// Detectar a palavra "figurinhas" em qualquer mensagem de texto
+if (isGroup && body.includes('figurinha')) {
+  (async () => {
+    try {
+      const totalFigurinhas = 5532;
+      const num = Math.floor(Math.random() * totalFigurinhas);
+      const repoIndex = Math.floor(num / 1000) + 1;
+      const url = `https://raw.githubusercontent.com/AtaliasOliveira1/stickers-${repoIndex}/main/fig%20(${num}).webp`;
+
+      await bender.sendMessage(from, { sticker: { url } });
+    } catch (error) {
+      console.log(error);
+      //reply('Erro ao enviar figurinha.');
+    }
+  })();
+}
+
+const reinicia = ["reinicia", "reiniciar", "reseta", "resetar"]
+if(isOwner && reinicia.includes(body.toLowerCase())) {
+//const bla3 = fs.readFileSync("./arquivos/database/figurinhas/reiniciar.webp");
+//await bender.sendMessage(from, {sticker: bla3}, {quoted: info});
+//await delay(1000)
+setTimeout(() => {
+            reply('🔄 Reiniciando agora...');
+            setTimeout(() => {
+              process.exit();
+            }, 1200);
+          }, 2000);
+}
+
 const sendAudio = (id, link, tipo, hehe) => {
     return bender.sendMessage(id, {audio: {url: link}, mimetype: tipo}, {quoted: hehe})
 }
@@ -6763,12 +6793,57 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
         }
         ;
         break;
+
+case 'ataliasbtn':
+await reply({
+        text: '🔘 *Selecione uma categoria abaixo:*',
+        title: `🌸 ${nomebot}`,
+        subtitle: `Olá, ${nome}!`,
+        footer: 'Escolha uma opção para ver os comandos',
+        interactiveButtons: [
+            {
+                name: 'single_select',
+                buttonParamsJson: JSON.stringify({
+                    title: '📋 Selecionar Menu',
+                    sections: [
+                        {
+                            title: '🤖 Inteligência Artificial',
+                            highlight_label: 'IA',
+                            rows: [
+                                {
+                                    header: '🤖 Menu IA',
+                                    title: 'Comandos de IA',
+                                    description: 'ChatGPT, Gemini e outras IAs',
+                                    id: `${prefix}menuia`
+                                }
+                            ]
+                        },
+                        {
+                            title: '📥 Downloads',
+                            highlight_label: 'Downloads',
+                            rows: [
+                                {
+                                    header: '📥 Menu Downloads',
+                                    title: 'Baixar Conteúdo',
+                                    description: 'YouTube, TikTok, Instagram e mais',
+                                    id: `${prefix}menudown`
+                                }
+                            ]
+                        }
+      
+                    ]
+                })
+            }
+        ]
+    })
+  break;
       
 case 'play': {
 if (!chargeUser(5, sender)) {
         return; 
     }
    try {
+
       if(!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`);
       
       await bender.react('⬇️', {key: info.key});
@@ -6781,7 +6856,27 @@ if (!chargeUser(5, sender)) {
       var bla = `📥 *Baixar vídeo:* \`${prefix}playvid ${q.trim()}\`
 🎧 *Tocando agora no ${assBender}!*`;
 
-      await bender.sendMessage(from, {text: bla}, {quoted: info});
+      //await bender.sendMessage(from, {text: bla}, {quoted: info});
+
+      let imageUrl = data[0]?.thumb || logoslink?.logo;
+    let imageBuffer; // Variável para guardar a imagem baixada
+
+    if (imageUrl) {
+        const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+        imageBuffer = Buffer.from(response.data); // Converte os dados brutos em um Buffer
+    } else {
+        // Se não houver imagem, use um Buffer vazio ou trate a falha
+        throw new Error("URL de imagem não encontrada.");
+    }
+
+      if (imageBuffer) {
+    await bender.sendMessage(from, {
+        image: imageBuffer, // <--- Agora é o BUFFER da imagem, não a URL (string)
+        caption: bla
+    }, {
+        quoted: info
+    });
+}
 
       await bender.sendMessage(from, {
          audio: {url: `https://api.bronxyshost.com.br/api-bronxys/play?nome_url=${q}&apikey=${API_KEY_BRONXYS}`},

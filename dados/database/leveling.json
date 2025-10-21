@@ -9,16 +9,16 @@
     },
     "82235738820857@lid": {
       "level": 25,
-      "xp": 220,
+      "xp": 380,
       "patent": "Lenda",
-      "messages": 1467,
-      "commands": 345
+      "messages": 1486,
+      "commands": 358
     },
     "116273505640686@lid": {
       "level": 12,
-      "xp": 50,
+      "xp": 55,
       "patent": "Aventureiro",
-      "messages": 332,
+      "messages": 333,
       "commands": 48
     },
     "163351011319890@lid": {
@@ -72,9 +72,9 @@
     },
     "216144531173430@lid": {
       "level": 6,
-      "xp": 85,
+      "xp": 90,
       "patent": "Explorador",
-      "messages": 121,
+      "messages": 122,
       "commands": 18
     },
     "279782860279881@lid": {
@@ -93,9 +93,9 @@
     },
     "212944998678773@lid": {
       "level": 2,
-      "xp": 55,
+      "xp": 75,
       "patent": "Aprendiz",
-      "messages": 29,
+      "messages": 33,
       "commands": 2
     },
     "159696078012477@lid": {
@@ -4286,9 +4286,9 @@
     },
     "159923711250461@lid": {
       "level": 1,
-      "xp": 10,
+      "xp": 50,
       "patent": "Iniciante",
-      "messages": 2,
+      "messages": 10,
       "commands": 0
     },
     "280113707003958@lid": {
@@ -4335,9 +4335,9 @@
     },
     "93488687374460@lid": {
       "level": 1,
-      "xp": 20,
+      "xp": 45,
       "patent": "Iniciante",
-      "messages": 4,
+      "messages": 9,
       "commands": 0
     },
     "154533057531996@lid": {
@@ -4524,9 +4524,9 @@
     },
     "254653459599520@lid": {
       "level": 1,
-      "xp": 5,
+      "xp": 10,
       "patent": "Iniciante",
-      "messages": 1,
+      "messages": 2,
       "commands": 0
     },
     "73788091850945@lid": {
@@ -4534,6 +4534,34 @@
       "xp": 5,
       "patent": "Iniciante",
       "messages": 1,
+      "commands": 0
+    },
+    "246346825113643@lid": {
+      "level": 1,
+      "xp": 5,
+      "patent": "Iniciante",
+      "messages": 1,
+      "commands": 0
+    },
+    "66443429331189@lid": {
+      "level": 1,
+      "xp": 10,
+      "patent": "Iniciante",
+      "messages": 2,
+      "commands": 0
+    },
+    "23124171075776@lid": {
+      "level": 1,
+      "xp": 10,
+      "patent": "Iniciante",
+      "messages": 2,
+      "commands": 0
+    },
+    "189773549453327@lid": {
+      "level": 1,
+      "xp": 10,
+      "patent": "Iniciante",
+      "messages": 2,
       "commands": 0
     }
   },
