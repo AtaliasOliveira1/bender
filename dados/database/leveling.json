@@ -2,17 +2,17 @@
   "users": {
     "99592037220603@lid": {
       "level": 16,
-      "xp": 78,
+      "xp": 83,
       "patent": "Veterano",
-      "messages": 577,
+      "messages": 578,
       "commands": 73
     },
     "82235738820857@lid": {
-      "level": 24,
-      "xp": 870,
-      "patent": "Mestre",
-      "messages": 1437,
-      "commands": 326
+      "level": 25,
+      "xp": 90,
+      "patent": "Lenda",
+      "messages": 1454,
+      "commands": 332
     },
     "116273505640686@lid": {
       "level": 12,
@@ -37,16 +37,16 @@
     },
     "237778482786517@lid": {
       "level": 9,
-      "xp": 98,
+      "xp": 103,
       "patent": "Explorador",
-      "messages": 223,
+      "messages": 224,
       "commands": 25
     },
     "108607039352965@lid": {
       "level": 22,
-      "xp": 139,
+      "xp": 199,
       "patent": "Mestre",
-      "messages": 1286,
+      "messages": 1298,
       "commands": 20
     },
     "undefined": {
@@ -65,16 +65,16 @@
     },
     "246596000337939@lid": {
       "level": 11,
-      "xp": 4,
+      "xp": 9,
       "patent": "Aventureiro",
-      "messages": 318,
+      "messages": 319,
       "commands": 1
     },
     "216144531173430@lid": {
       "level": 6,
-      "xp": 70,
+      "xp": 85,
       "patent": "Explorador",
-      "messages": 118,
+      "messages": 121,
       "commands": 18
     },
     "279782860279881@lid": {
@@ -93,9 +93,9 @@
     },
     "212944998678773@lid": {
       "level": 2,
-      "xp": 35,
+      "xp": 40,
       "patent": "Aprendiz",
-      "messages": 25,
+      "messages": 26,
       "commands": 2
     },
     "159696078012477@lid": {
@@ -4292,8 +4292,6 @@
       "commands": 0
     },
     "280113707003958@lid": {
-<<<<<<< Updated upstream
-=======
       "level": 2,
       "xp": 25,
       "patent": "Aprendiz",
@@ -4407,16 +4405,16 @@
     },
     "107803763056832@lid": {
       "level": 2,
-      "xp": 100,
+      "xp": 90,
       "patent": "Aprendiz",
-      "messages": 40,
+      "messages": 38,
       "commands": 0
     },
     "169745814941865@lid": {
       "level": 1,
-      "xp": 60,
+      "xp": 50,
       "patent": "Iniciante",
-      "messages": 12,
+      "messages": 10,
       "commands": 0
     },
     "135605186990195@lid": {
@@ -4504,18 +4502,10 @@
       "commands": 0
     },
     "75110639739035@lid": {
->>>>>>> Stashed changes
       "level": 1,
       "xp": 10,
       "patent": "Iniciante",
       "messages": 2,
-      "commands": 0
-    },
-    "249095654494438@lid": {
-      "level": 1,
-      "xp": 5,
-      "patent": "Iniciante",
-      "messages": 1,
       "commands": 0
     }
   },
