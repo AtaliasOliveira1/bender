@@ -1,0 +1,93 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-12T13:48:44.656Z",
+  "groupName": "Bender Sticker 🤖",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "194910347084030@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Biel ",
+      "firstSeen": "2025-10-12T13:48:44.657Z",
+      "lastActivity": "2025-10-12T13:58:09.311Z"
+    },
+    {
+      "id": "109023936397441@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Cleito",
+      "firstSeen": "2025-10-12T13:49:30.952Z",
+      "lastActivity": "2025-10-12T13:49:30.952Z"
+    },
+    {
+      "id": "163351011319890@lid",
+      "msg": 9,
+      "cmd": 1,
+      "figu": 2,
+      "pushname": "VaLéria",
+      "firstSeen": "2025-10-12T13:50:22.845Z",
+      "lastActivity": "2025-10-12T15:19:10.245Z"
+    },
+    {
+      "id": "82235738820857@lid",
+      "msg": 4,
+      "cmd": 3,
+      "figu": 0,
+      "pushname": "๛αταℓiαs ℓσ-αмiㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
+      "firstSeen": "2025-10-12T13:51:07.967Z",
+      "lastActivity": "2025-10-12T15:19:19.279Z"
+    },
+    {
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Usuário Desconhecido",
+      "firstSeen": "2025-10-12T13:51:28.082Z",
+      "lastActivity": "2025-10-12T13:51:28.082Z"
+    },
+    {
+      "id": "103495910854787@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Lívia Guimarães - Nutri 🍒",
+      "firstSeen": "2025-10-12T13:52:43.007Z",
+      "lastActivity": "2025-10-12T13:52:43.007Z"
+    },
+    {
+      "id": "4093791735995@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 4,
+      "pushname": "Luan Bussolotti",
+      "firstSeen": "2025-10-12T14:26:23.658Z",
+      "lastActivity": "2025-10-12T15:19:05.669Z"
+    },
+    {
+      "id": "26234348163101@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 5,
+      "pushname": "Carlos cpzi",
+      "firstSeen": "2025-10-12T14:42:04.179Z",
+      "lastActivity": "2025-10-12T14:44:42.186Z"
+    },
+    {
+      "id": "67654459088926@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Carlos Gustavo",
+      "firstSeen": "2025-10-12T14:48:08.388Z",
+      "lastActivity": "2025-10-12T14:48:08.388Z"
+    }
+  ]
+}
