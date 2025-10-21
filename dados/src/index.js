@@ -6839,75 +6839,148 @@ await reply({
   break;
       
 case 'play': {
-if (!chargeUser(5, sender)) {
+    if (!chargeUser(5, sender)) {
         return; 
     }
-   try {
 
-      if(!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`);
-      
-      await bender.react('⬇️', {key: info.key});
-      let data = await fetchJson(`https://api.bronxyshost.com.br/api-bronxys/pesquisa_ytb?nome=${q}&apikey=${API_KEY_BRONXYS}`);
-      
-      if(data[0]?.tempo?.length >= 7) 
-         return reply("Desculpe, este vídeo ou áudio é muito grande, peça outra música abaixo de uma hora.");
+    // ----------------------------------------------------
+    // INÍCIO: TENTATIVA DE PESQUISA COM API 1 (Bronxys)
+    // ----------------------------------------------------
+    try {
+        await bender.react('🆗', {key: info.key});
 
-      var N_E = " Não encontrado.";
-      var bla = `📥 *Baixar vídeo:* \`${prefix}playvid ${q.trim()}\`
+        if (!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`);
+        
+        let data = await fetchJson(`https://api.bronxyshost.com.br/api-bronxys/pesquisa_ytb?nome=${q}&apikey=${API_KEY_BRONXYS}`);
+        
+        // Verifica se a pesquisa retornou resultados válidos e se o vídeo não é muito longo
+        if (!data || data.length === 0 || data[0]?.tempo?.length >= 7) {
+            // Se falhar na primeira API (pesquisa ruim ou vídeo longo), vamos para o catch externo
+            throw new Error("Pesquisa ruim ou vídeo muito longo na API 1.");
+        }
+        
+        // Dados válidos da API 1 encontrados: Processamos normalmente
+
+        var N_E = " Não encontrado.";
+        var bla = `📥 *Baixar vídeo:* \`${prefix}playvid ${q.trim()}\`
 🎧 *Tocando agora no ${assBender}!*`;
 
-      //await bender.sendMessage(from, {text: bla}, {quoted: info});
+        // ----------------------------------------------------
+        // BLOCO ISOLADO PARA TENTAR ENVIAR A IMAGEM DE CAPA
+        // ----------------------------------------------------
+        try {
+            let imageUrl = data[0]?.thumb || logoslink?.logo;
+            let imageBuffer;
 
-      let imageUrl = data[0]?.thumb || logoslink?.logo;
-    let imageBuffer; // Variável para guardar a imagem baixada
+            if (imageUrl) {
+                // Tenta o download da imagem
+                const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+                imageBuffer = Buffer.from(response.data); 
+            } else {
+                throw new Error("URL de imagem não encontrada/disponível.");
+            }
 
-    if (imageUrl) {
-        const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-        imageBuffer = Buffer.from(response.data); // Converte os dados brutos em um Buffer
-    } else {
-        // Se não houver imagem, use um Buffer vazio ou trate a falha
-        throw new Error("URL de imagem não encontrada.");
-    }
+            if (imageBuffer) {
+                await bender.sendMessage(from, {
+                    image: imageBuffer,
+                    caption: bla
+                }, {
+                    quoted: info
+                });
+            }
+        } catch (eImage) {
+            // Se o download/envio da imagem falhar, apenas loga e CONTINUA
+            console.log("Aviso: Falha ao enviar a imagem de capa. Prosseguindo com o áudio.", eImage.message);
+        }
+        // ----------------------------------------------------
+        
+        // ----------------------------------------------------
+        // ENVIO DO ÁUDIO (URL da API 1)
+        // ----------------------------------------------------
+        await bender.sendMessage(from, {
+            audio: {url: `https://api.bronxyshost.com.br/api-bronxys/play?nome_url=${q}&apikey=${API_KEY_BRONXYS}`},
+            mimetype: "audio/mpeg", 
+            fileName: data[0]?.titulo || "play.mp3"
+        }, {quoted: info}).catch(async (e) => {
+            // Se o envio do áudio da API 1 falhar, tentamos a API 2 para o áudio
+            console.log("Erro no download da API 1 (Áudio), tentando API 2...", e);
+            await reply("Erro no download principal. Tentando o último recurso...");
 
-      if (imageBuffer) {
-    await bender.sendMessage(from, {
-        image: imageBuffer, // <--- Agora é o BUFFER da imagem, não a URL (string)
-        caption: bla
-    }, {
-        quoted: info
-    });
-}
+            try {
+                // Não precisa pesquisar de novo, pois já estamos no catch da API 1.
+                // Aqui seria necessário apenas a URL da API 2 para download.
+                // Mas, como você não pesquisou a API 2 ainda, teremos que fazê-lo:
 
-      await bender.sendMessage(from, {
-         audio: {url: `https://api.bronxyshost.com.br/api-bronxys/play?nome_url=${q}&apikey=${API_KEY_BRONXYS}`},
-         mimetype: "audio/mpeg", 
-         fileName: data[0]?.titulo || "play.mp3"
-      }, {quoted: info}).catch(async (e) => {
-         console.log(e);
-         await reply("Erro...\nTentando outra fonte, aguarde...");
+                let ABC = await fetchJson(zerosite+`/api/ytsrc?q=${q}&apikey=`+API_KEY_ZEROTWO);
+                let data2 = ABC.resultado[0];
 
-         try {
+                // Envio da imagem de capa (mesmo que a primeira tenha falhado)
+                await bender.sendMessage(from, {
+                    image: {url: data2.thumbnail}, // Envia a URL como objeto, esperando que o bender trate
+                    caption: bla
+                }, {quoted: info});
+                
+                // Envio do áudio (API 2)
+                await bender.sendMessage(from, {
+                    audio: {url: zerosite+`/api/dl/ytaudio?url=${data2.url}&apikey=`+API_KEY_ZEROTWO}, 
+                    mimetype: "audio/mpeg",
+                    fileName: data2.title || "play.mp3"
+                }, {quoted: info})
+                .catch(e => {
+                    return reply("Tentei, mas não foi possível, tente novamente!");
+                });
+            } catch (e2) {
+                console.log(e2);
+                return reply("❌ Nenhuma das fontes conseguiu baixar o áudio.");
+            }
+        });
+        
+    // ----------------------------------------------------
+    // CATCH EXTERNO: Trata falhas na pesquisa da API 1 (e erros inesperados)
+    // ----------------------------------------------------
+    } catch (e) {
+        console.log("Erro na API 1 (Pesquisa/Geral). Tentando Fallback de Pesquisa (API 2)...", e.message);
+
+        // Se o erro não for a falha da pesquisa (por exemplo, um erro de rede inicial)
+        if (e.message.includes("Pesquisa ruim")) {
+            await reply("A pesquisa na API principal falhou. Tentando API de backup...");
+        } else {
+            return reply("Seja mais específico, não deu pra encontrar com apenas isso... / Erro de Rede.");
+        }
+
+        // Tenta a API 2 (ZeroTwo) para pesquisa e download
+        try {
             let ABC = await fetchJson(zerosite+`/api/ytsrc?q=${q}&apikey=`+API_KEY_ZEROTWO);
             let data2 = ABC.resultado[0];
 
-            sendImage(from, data2.thumbnail, bla2, info);
-            sendAudio(from, zerosite+`/api/dl/ytaudio?url=${data2.url}&apikey=`+API_KEY_ZEROTWO, "audio/mpeg", info).catch(e => {
-               return reply("Tentei, mas não foi possível, tente novamente!");
+            // Define a legenda para os novos dados
+            var bla_fallback = `📥 *Baixar vídeo:* \`${prefix}playvid ${data2.title || q.trim()}\`
+🎧 *Tocando agora no ${assBender} (API Backup)!*`;
+
+            // Envio da imagem de capa (API 2)
+            //await bender.sendMessage(from, {
+                //image: {url: data2.thumbnail}, // Envia a URL como objeto
+               // caption: bla_fallback
+            //}, {quoted: info});
+
+            // Envio do áudio (API 2)
+            await bender.sendMessage(from, {
+                audio: {url: zerosite+`/api/dl/ytaudio?url=${data2.url}&apikey=`+API_KEY_ZEROTWO}, 
+                mimetype: "audio/mpeg",
+                fileName: data2.title || "play.mp3"
+            }, {quoted: info})
+            .catch(e => {
+                return reply("Tentei, mas não foi possível, tente novamente!");
             });
-         } catch (e2) {
-            console.log(e2);
-            return reply("❌ Nenhuma das fontes conseguiu baixar o áudio.");
-         }
-      });
-   } catch (e) {
-      console.log(e);
-      return reply("Seja mais específico, não deu pra encontrar com apenas isso... / Erro");
-   }
+            
+        } catch (e2) {
+            console.log("Falha total na pesquisa (API 1 e API 2):", e2);
+            return reply("❌ Nenhuma das fontes conseguiu encontrar a música.");
+        }
+    }
 }
 break;
 
-
-        break;
       case 'playvid':
       case 'ytmp4':
         if (!chargeUser(15, sender)) {

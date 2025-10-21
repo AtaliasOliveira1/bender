@@ -917,6 +917,15 @@
       "pushname": "Fred",
       "firstSeen": "2025-10-21T02:05:40.570Z",
       "lastActivity": "2025-10-21T02:05:40.570Z"
+    },
+    {
+      "id": "121749857423454@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "brutus",
+      "firstSeen": "2025-10-21T03:08:41.236Z",
+      "lastActivity": "2025-10-21T03:08:41.859Z"
     }
   ]
 }
