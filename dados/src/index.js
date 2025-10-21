@@ -38,6 +38,8 @@ const CMD_NOT_FOUND_FILE = pathz.join(DONO_DIR, 'cmdNotFound.json');
 
 //CONST ATALIAS
 const API_KEY_BRONXYS = "benderbot"
+const API_KEY_ZEROTWO = "benderbot"
+var zerosite = "https://zero-two-apis.com.br"
 const assBender = '𝑩𝒆𝒏𝒅𝒆𝒓𝑿 𝒗3.0'
 const dattofc = moment.tz('America/Sao_Paulo').format('DD/MM/YYYY');
 const hourofc = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
@@ -3055,20 +3057,9 @@ async function NazuninhaBotExec(bender, info, store, messagesCache, rentalExpira
         const messageType = isCmd ? 'COMANDO' : 'MENSAGEM';
         const context = isGroup ? 'GRUPO' : 'PRIVADO';
         const messagePreview = isCmd ? `${prefix}${command}${q ? ` ${q.substring(0, 25)}${q.length > 25 ? '...' : ''}` : ''}` : budy2.substring(0, 35) + (budy2.length > 35 ? '...' : '');
-        console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓');
-        console.log(`┃ ${messageType} [${context}]${' '.repeat(36 - messageType.length - context.length)}`);
-        console.log('┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫');
-        console.log(`┃ 📜 Conteúdo: ${messagePreview.padEnd(28)}`);
-        if (isGroup) {
-          console.log(`┃ 👥 Grupo: ${(groupName || 'Desconhecido').padEnd(28)}`);
-          console.log(`┃ 👤 Usuário: ${(pushname || 'Sem Nome').padEnd(28)}`);
-        } else {
-          console.log(`┃ 👤 Usuário: ${(pushname || 'Sem Nome').padEnd(28)}`);
-          console.log(`┃ 📱 Número: ${getUserName(sender).padEnd(28)}`);
-        }
-        console.log('┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫');
-        console.log(`┃ 🕒 Data/Hora: ${timestamp.padEnd(27)}`);
-        console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n');
+        console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log(`┃ ${messageType} [${context}] ┃ 📜 Conteúdo: ${messagePreview} ┃ 👥 Grupo: ${(groupName || 'Desconhecido')}\n┃ 👤 Usuário: ${(pushname || 'Sem Nome')} ┃ 🕒 Data/Hora: ${timestamp}`);
+        console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       }
       ;
     } catch (error) {
@@ -3366,6 +3357,15 @@ async function NazuninhaBotExec(bender, info, store, messagesCache, rentalExpira
     ;
 
 //Funções Atalias
+
+const sendAudio = (id, link, tipo, hehe) => {
+    return bender.sendMessage(id, {audio: {url: link}, mimetype: tipo}, {quoted: hehe})
+}
+  
+const sendImage = (id, ytb, cap) => {
+    bender.sendMessage(from, {image: {url: ytb}, caption: cap}, {quoted:info})
+}
+
 // Função auxiliar para criar um delay (pausa) usando async/await
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -6765,8 +6765,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
         break;
       
 case 'play': {
- return reply("Indisponível no momento!");
-if (!chargeUser(15, sender)) {
+if (!chargeUser(5, sender)) {
         return; 
     }
    try {
@@ -6782,9 +6781,9 @@ if (!chargeUser(15, sender)) {
       var bla = `📥 *Baixar vídeo:* \`${prefix}playvid ${q.trim()}\`
 🎧 *Tocando agora no ${assBender}!*`;
 
-      bender.sendMessage(from, {text: bla}, {quoted: info});
+      await bender.sendMessage(from, {text: bla}, {quoted: info});
 
-      bender.sendMessage(from, {
+      await bender.sendMessage(from, {
          audio: {url: `https://api.bronxyshost.com.br/api-bronxys/play?nome_url=${q}&apikey=${API_KEY_BRONXYS}`},
          mimetype: "audio/mpeg", 
          fileName: data[0]?.titulo || "play.mp3"
@@ -6796,7 +6795,7 @@ if (!chargeUser(15, sender)) {
             let ABC = await fetchJson(zerosite+`/api/ytsrc?q=${q}&apikey=`+API_KEY_ZEROTWO);
             let data2 = ABC.resultado[0];
 
-            //sendImage(from, data2.thumbnail, bla2, info);
+            sendImage(from, data2.thumbnail, bla2, info);
             sendAudio(from, zerosite+`/api/dl/ytaudio?url=${data2.url}&apikey=`+API_KEY_ZEROTWO, "audio/mpeg", info).catch(e => {
                return reply("Tentei, mas não foi possível, tente novamente!");
             });

@@ -961,11 +961,11 @@
       "properties": {}
     },
     "82235738820857@lid": {
-      "wallet": 5,
+      "wallet": 93,
       "bank": 2541,
       "cooldowns": {
         "fish": 1760049474866,
-        "work": 1760275361392,
+        "work": 1761011076651,
         "forge": 1760049851218,
         "hunt": 1759959869913,
         "daily": 1760372655964,
@@ -994,52 +994,52 @@
         "ferro": 5
       },
       "challenge": {
-        "expiresAt": 1760313599999,
+        "expiresAt": 1761015599999,
         "tasks": [
           {
             "type": "work",
-            "target": 3,
-            "progress": 1
-          },
-          {
-            "type": "fish",
-            "target": 6,
-            "progress": 0
-          },
-          {
-            "type": "mine",
             "target": 5,
-            "progress": 0
-          }
-        ],
-        "reward": 552,
-        "claimed": false
-      },
-      "weeklyChallenge": {
-        "expiresAt": 1760313599999,
-        "tasks": [
-          {
-            "type": "mine",
-            "target": 25,
-            "progress": 10
-          },
-          {
-            "type": "work",
-            "target": 15,
-            "progress": 10
-          },
-          {
-            "type": "crimeSuccess",
-            "target": 28,
             "progress": 1
+          },
+          {
+            "type": "explore",
+            "target": 3,
+            "progress": 0
           },
           {
             "type": "hunt",
-            "target": 16,
-            "progress": 4
+            "target": 6,
+            "progress": 0
           }
         ],
-        "reward": 4589,
+        "reward": 333,
+        "claimed": false
+      },
+      "weeklyChallenge": {
+        "expiresAt": 1761533999999,
+        "tasks": [
+          {
+            "type": "mine",
+            "target": 17,
+            "progress": 0
+          },
+          {
+            "type": "explore",
+            "target": 29,
+            "progress": 0
+          },
+          {
+            "type": "work",
+            "target": 22,
+            "progress": 1
+          },
+          {
+            "type": "crimeSuccess",
+            "target": 17,
+            "progress": 0
+          }
+        ],
+        "reward": 3194,
         "claimed": false
       },
       "monthlyChallenge": {
@@ -1063,7 +1063,7 @@
           {
             "type": "work",
             "target": 69,
-            "progress": 13
+            "progress": 14
           },
           {
             "type": "mine",
@@ -1081,7 +1081,7 @@
         },
         "working": {
           "level": 1,
-          "xp": 13
+          "xp": 14
         },
         "fishing": {
           "level": 1,
