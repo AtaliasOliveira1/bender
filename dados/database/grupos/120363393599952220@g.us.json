@@ -1,0 +1,94 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-26T00:26:57.448Z",
+  "groupName": "Me Bate de volta",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "13713880940589@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Teo",
+      "firstSeen": "2025-10-26T00:26:57.450Z",
+      "lastActivity": "2025-11-04T22:51:54.112Z"
+    },
+    {
+      "id": "105810931757278@lid",
+      "msg": 7,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Jardel",
+      "firstSeen": "2025-10-26T00:27:41.466Z",
+      "lastActivity": "2025-11-05T21:15:44.464Z"
+    },
+    {
+      "id": "131697135865909@lid",
+      "msg": 20,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Carlos Lobo",
+      "firstSeen": "2025-10-26T00:28:38.273Z",
+      "lastActivity": "2025-11-05T00:31:18.367Z"
+    },
+    {
+      "id": "22351026647043@lid",
+      "msg": 105,
+      "cmd": 0,
+      "figu": 16,
+      "pushname": "Thais 🎀",
+      "firstSeen": "2025-10-26T01:00:01.626Z",
+      "lastActivity": "2025-11-05T21:22:13.429Z"
+    },
+    {
+      "id": "208426206527706@lid",
+      "msg": 17,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Caio",
+      "firstSeen": "2025-10-31T14:58:08.259Z",
+      "lastActivity": "2025-11-05T01:09:11.711Z"
+    },
+    {
+      "id": "26246947860611@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Rebeca Evane 💜",
+      "firstSeen": "2025-11-02T15:10:51.855Z",
+      "lastActivity": "2025-11-05T01:27:30.756Z"
+    },
+    {
+      "id": "263015307948199@lid",
+      "msg": 89,
+      "cmd": 0,
+      "figu": 12,
+      "pushname": "Vitória",
+      "firstSeen": "2025-11-02T15:17:07.948Z",
+      "lastActivity": "2025-11-05T21:26:49.387Z"
+    },
+    {
+      "id": "98724302868513@lid",
+      "msg": 48,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Hacsa",
+      "firstSeen": "2025-11-04T22:51:03.500Z",
+      "lastActivity": "2025-11-06T12:09:25.390Z"
+    },
+    {
+      "id": "38384173084679@lid",
+      "msg": 8,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Rebeca Sales",
+      "firstSeen": "2025-11-05T00:23:42.434Z",
+      "lastActivity": "2025-11-05T00:55:47.386Z"
+    }
+  ]
+}

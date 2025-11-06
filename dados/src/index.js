@@ -15,6 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 import moment from 'moment-timezone';
+import { error } from 'console';
 
 const packageJson = JSON.parse(fs.readFileSync(pathz.join(__dirname, '..', '..', 'package.json'), 'utf-8'));
 const botVersion = packageJson.version;
@@ -1820,7 +1821,7 @@ async function NazuninhaBotExec(bender, info, store, messagesCache, rentalExpira
     const sender_ou_n = (menc_jid2 && menc_jid2.length > 0) ? menc_jid2[0] : menc_prt || sender;
     const groupMetadata = !isGroup ? {} : await getCachedGroupMetadata(from).catch(() => ({}));
     const groupName = groupMetadata?.subject || '';
-    const groupFile = pathz.join(__dirname, '..', 'database', 'grupos', `${groupName}.json`);
+    const groupFile = pathz.join(__dirname, '..', 'database', 'grupos', `${from}.json`);
     let groupData = {};
     if (isGroup) {
       if (!fs.existsSync(groupFile)) {
@@ -3358,6 +3359,26 @@ async function NazuninhaBotExec(bender, info, store, messagesCache, rentalExpira
 
 //Funções Atalias
 
+/**
+ * Adiciona um valor específico de Bcoins à carteira de um usuário.
+ */
+function addMoneyToWallet(userId, amount) {
+    if (typeof amount !== 'number' || amount <= 0) {
+        console.error(`Tentativa de adicionar valor inválido: ${amount} para o usuário ${userId}`);
+        return null;
+    }
+    try {
+        const econ = loadEconomy(); 
+        const user = getEcoUser(econ, userId); 
+        user.wallet += amount; // <-- A adição do dinheiro
+        saveEconomy(econ); 
+        return user;
+    } catch (error) {
+        console.error(`Erro ao adicionar dinheiro para o usuário ${userId}:`, error);
+        return null;
+    }
+}
+
 // Detectar a palavra "figurinhas" em qualquer mensagem de texto
 if (isGroup && body.includes('figurinha')) {
   (async () => {
@@ -3530,7 +3551,8 @@ function chargeUser(cost, sender) {
     saveEconomy(econ);
 
     // Envia a mensagem de sucesso
-    reply(`💸 Cobrado ${fmt(COST)} BCOINS da sua carteira.\n\n💸 Saldo restante: *${fmt(me.wallet)} BCOINS.*`);
+    //reply(`💸 Cobrado ${fmt(COST)} BCOINS da sua carteira.\n\n💸 Saldo restante: *${fmt(me.wallet)} BCOINS.*`);
+    reply(`🟥📉 - ${fmt(COST)} BCOINS.\nWallet: *${fmt(me.wallet)} BCOINS.*`);
     
     // Retorna TRUE para indicar que a cobrança FOI BEM-SUCEDIDA
     return true;
@@ -6463,7 +6485,7 @@ Exemplo: ${prefix}tradutor espanhol | Olá mundo! ✨`);
           if (!isOwner) return reply('🚫 Este comando é apenas para o dono do bot!');
           const noPrefixCommands = loadNoPrefixCommands();
           if (noPrefixCommands.length === 0) return reply("📜 Nenhum comando sem prefixo definido.");
-          let responseText = `📜 *Comandos Sem Prefixo do Grupo ${groupName}*\n\n`;
+          let responseText = `📜 *Comandos Sem Prefixo do Grupo ${from}*\n\n`;
           noPrefixCommands.forEach((item, index) => {
             
             responseText += `${index + 1}. Mensagem: ${item.trigger}\n   Comando: ${item.command}\n`;
@@ -6838,7 +6860,446 @@ await reply({
     })
   break;
       
-case 'play': {
+// =================================================================
+// CASE 'PLAY' REVISADA COM LISTA DE OPÇÕES (LIST MESSAGE)
+// =================================================================
+case 'play2411243': {
+    if (!chargeUser(5, sender)) {
+        return; 
+    }
+
+    // ----------------------------------------------------
+    // INÍCIO: TENTATIVA DE PESQUISA E DOWNLOAD COM API 1 (Bronxys)
+    // ----------------------------------------------------
+    try {
+        await bender.react('🆗', {key: info.key});
+
+        if (!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`);
+        
+        // 1. Pesquisa na API 1
+        let data = await fetchJson(`https://api.bronxyshost.com.br/api-bronxys/pesquisa_ytb?nome=${q}&apikey=${API_KEY_BRONXYS}`);
+        
+        // Verifica se a pesquisa retornou resultados válidos e se o vídeo não é muito longo
+        if (!data || data.length === 0 || data[0]?.tempo?.length >= 7) {
+            // Se falhar na primeira API (pesquisa ruim ou vídeo longo), lança um erro.
+            throw new Error("Pesquisa na API 1 falhou (ruim ou vídeo muito longo).");
+        }
+        
+        // Dados válidos da API 1 encontrados: Processamos normalmente
+
+        var N_E = " Não encontrado."; // Variável não utilizada, mas mantida por segurança se for usada em outro lugar
+        var bla = `📥 *Baixar vídeo:* \`${prefix}playvid ${q.trim()}\`
+🎧 *Tocando agora no ${assBender}!*`;
+
+        // ----------------------------------------------------
+        // BLOCO ISOLADO PARA TENTAR ENVIAR A IMAGEM DE CAPA
+        // ----------------------------------------------------
+        try {
+            let imageUrl = data[0]?.thumb || logoslink?.logo;
+            let imageBuffer;
+
+            if (imageUrl) {
+                // Tenta o download da imagem
+                const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+                imageBuffer = Buffer.from(response.data); 
+            } else {
+                throw new Error("URL de imagem não encontrada/disponível.");
+            }
+
+            if (imageBuffer) {
+                await bender.sendMessage(from, {
+                    image: imageBuffer,
+                    caption: bla
+                }, {
+                    quoted: info
+                });
+            }
+        } catch (eImage) {
+            // Se o download/envio da imagem falhar, apenas loga e CONTINUA para o áudio
+            console.log("Aviso: Falha ao enviar a imagem de capa. Prosseguindo com o áudio.", eImage.message);
+            // Se a imagem falhar, envia a legenda como uma resposta simples
+            await reply(bla); 
+        }
+        // ----------------------------------------------------
+        
+        // ----------------------------------------------------
+        // ENVIO DO ÁUDIO (URL da API 1)
+        // ----------------------------------------------------
+        await bender.sendMessage(from, {
+            audio: {url: `https://api.bronxyshost.com.br/api-bronxys/play?nome_url=${q}&apikey=${API_KEY_BRONXYS}`},
+            mimetype: "audio/mpeg", 
+            fileName: data[0]?.titulo || "play.mp3"
+        }, {quoted: info}).catch(async (e) => {
+            // Se o envio do áudio da API 1 falhar, lança um erro para o catch externo
+            console.log("Erro no download da API 1 (Áudio):", e);
+            throw new Error("Erro no download do áudio principal (API 1).");
+        });
+        
+    // ----------------------------------------------------
+    // CATCH EXTERNO: Trata falhas na pesquisa e no download da API 1
+    // ----------------------------------------------------
+    } catch (e) {
+        console.log("Falha na API 1:", e.message);
+
+        // Mensagens de erro mais específicas
+        if (e.message.includes("Pesquisa na API 1 falhou")) {
+            return reply("A pesquisa falhou (música não encontrada ou vídeo muito longo).");
+        } else if (e.message.includes("Erro no download do áudio principal")) {
+            return reply("❌ O áudio foi encontrado, mas houve um erro ao baixar/enviar.");
+        } else {
+            // Erro de rede ou outro erro não mapeado
+            return reply("Seja mais específico, não deu pra encontrar com apenas isso... / Erro de Rede ou API fora.");
+        }
+    }
+}
+break;
+
+// =================================================================
+// CASE PARA EXIBIR APENAS OS BOTÕES DE LISTA DE DOWNLOAD
+// COMANDO DE TESTE: !botoesplay nome da musica
+// =================================================================
+
+case 'play':
+case 'musica':
+case 'tocar': {
+    // A query (q) precisa ser definida/passada para este bloco, 
+    // ou você precisa extraí-la da mensagem de info.
+    const query = q.trim();
+
+    if (!query) {
+        return reply(`❌ Por favor, informe a música que deseja pesquisar. Ex: ${prefix}botoesplay nome da música`);
+    }
+
+    try {
+        await bender.react('🔍', {key: info.key});
+
+        // --- 1. PESQUISA NA API BRONXYS ---
+        // A pesquisa é necessária para validar se a música existe e obter a capa/info.
+        let data = await fetchJson(`https://api.bronxyshost.com.br/api-bronxys/pesquisa_ytb?nome=${query}&apikey=${API_KEY_BRONXYS}`);
+        
+        if (!data || data.length === 0 || data[0]?.tempo?.length >= 7) {
+            return reply("A pesquisa falhou ou o vídeo é muito longo. Não foi possível criar os botões.");
+        }
+        
+        // --- 2. MONTAGEM DA MENSAGEM DE LISTA DE OPÇÕES ---
+        const resultado = data[0];
+        const downloadQuery = query;
+
+        // Conteúdo da lista (Estrutura do seu menubuttons.js)
+        const listMessageData = {
+            text: `\n\n🔘 *Selecione o formato de download:*\n\n`,
+            title: `${assBender}`,
+            subtitle: `*Termo Pesquisado:* ${downloadQuery}`,
+            footer: 'Clique em "Selecionar Download" para escolher o formato.',
+            interactiveButtons: [
+                {
+                    name: 'single_select',
+                    buttonParamsJson: JSON.stringify({
+                        title: '📋 Selecionar Download',
+                        sections: [
+                            {
+                                title: 'Escolha o Formato',
+                                rows: [
+                                    {
+                                        // ID que chamará o case 'playaudio'
+                                        header: '🎧 Áudio (MP3)',
+                                        title: 'Baixar Música',
+                                        description: `Comando: ${prefix}playaudio ${downloadQuery}`,
+                                        id: `${prefix}playbtn ${downloadQuery}` 
+                                    },
+                                    {
+                                        // ID que chamará o case 'playvid'
+                                        header: '🎥 Vídeo (MP4)',
+                                        title: 'Baixar Vídeo',
+                                        description: `Comando: ${prefix}playvid ${downloadQuery}`,
+                                        id: `${prefix}playvidbtn ${downloadQuery}` 
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                }
+            ]
+        };
+        
+        // Adiciona detalhes da pesquisa no corpo da mensagem
+        listMessageData.text += 
+                          `\n📌 *Título:* ${resultado.titulo || 'Não Encontrado'}\n` +
+                          `⏳ *Duração:* ${resultado.tempo || 'Não Encontrado'}\n` +
+                          `📅 *Postado:* ${resultado.postado || 'Não Encontrado'}\n`;
+
+
+        // ----------------------------------------------------
+        // ENVIO DA MENSAGEM COM LISTA (com ou sem imagem de capa)
+        // ----------------------------------------------------
+        try {
+
+            let imageUrl = data[0]?.thumb || logoslink?.logo;
+            let imageBuffer;
+
+            // Se for enviar com mídia, o texto precisa ser o 'caption'
+            const fullCaption = listMessageData.subtitle + "\n" + listMessageData.text;
+
+            if (imageUrl) {
+                // Tenta o download da imagem
+                const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+                imageBuffer = Buffer.from(response.data); 
+            
+                // --- ESTRUTURA CORRETA (Baseada no seu 'menu') ---
+                await bender.sendMessage(from, {
+                    image: imageBuffer,
+                    caption: fullCaption, // O texto principal vai no CAPTION
+                    title: listMessageData.title, // Propriedades da Lista/Botão
+                    subtitle: listMessageData.subtitle,
+                    footer: listMessageData.footer,
+                    interactiveButtons: listMessageData.interactiveButtons,
+                    mimetype: 'image/jpeg',
+                    hasMediaAttachment: false // Opcional, mas geralmente ajuda
+                }, { quoted: info });
+
+            } else {
+                // Se a imagem falhar/não existir, envia a lista sem imagem
+                await bender.sendMessage(from, listMessageData, { quoted: info });
+            }
+        } catch (eImage) {
+            console.log("Aviso: Falha ao enviar a imagem de capa. Tentando enviar apenas a lista.", eImage.message);
+            
+            // Tentativa de fallback: Envia SÓ A LISTA se a tentativa com a imagem falhar.
+            try {
+                await bender.sendMessage(from, listMessageData, { quoted: info });
+            } catch (eFallback) {
+                console.error("Falha total no envio da lista:", eFallback);
+                return reply("❌ Ocorreu um erro ao enviar a lista de opções.");
+            }
+        }
+        
+    } catch (error) {
+        console.error("Erro no comando de botões:", error);
+        return reply("❌ Ocorreu um erro ao gerar a lista de opções.");
+    }
+}
+break;
+// =================================================================
+
+case 'playbtn': {
+    if (!chargeUser(5, sender)) {
+        return; 
+    }
+
+    // ----------------------------------------------------
+    // INÍCIO: TENTATIVA DE PESQUISA E DOWNLOAD COM API 1 (Bronxys)
+    // ----------------------------------------------------
+    try {
+        await bender.react('🆗', {key: info.key});
+
+        if (!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`);
+        
+        // 1. Pesquisa na API 1
+        let data = await fetchJson(`https://api.bronxyshost.com.br/api-bronxys/pesquisa_ytb?nome=${q}&apikey=${API_KEY_BRONXYS}`);
+        
+        // Verifica se a pesquisa retornou resultados válidos e se o vídeo não é muito longo
+        if (!data || data.length === 0 || data[0]?.tempo?.length >= 7) {
+            // Se falhar na primeira API (pesquisa ruim ou vídeo longo), lança um erro.
+            throw new Error("Pesquisa na API 1 falhou (ruim ou vídeo muito longo).");
+        }
+        
+        // ENVIO DO ÁUDIO (URL da API 1)
+        // ----------------------------------------------------
+        await bender.sendMessage(from, {
+            audio: {url: `https://api.bronxyshost.com.br/api-bronxys/play?nome_url=${q}&apikey=${API_KEY_BRONXYS}`},
+            mimetype: "audio/mpeg", 
+            fileName: data[0]?.titulo || "play.mp3"
+        }, {quoted: info}).catch(async (e) => {
+            // Se o envio do áudio da API 1 falhar, lança um erro para o catch externo
+            console.log("Erro no download da API 1 (Áudio):", e);
+            throw new Error("Erro no download do áudio principal (API 1).");
+        });
+        
+    // ----------------------------------------------------
+    // CATCH EXTERNO: Trata falhas na pesquisa e no download da API 1
+    // ----------------------------------------------------
+    } catch (e) {
+        console.log("Falha na API 1:", e.message);
+       addMoneyToWallet(sender, COST);
+
+        // Mensagens de erro mais específicas
+        if (e.message.includes("Pesquisa na API 1 falhou")) {
+            return reply(`A pesquisa falhou (música não encontrada ou vídeo muito longo).\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`);
+        } else if (e.message.includes(`Erro no download do áudio principal\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`)) {
+            return reply(`❌ O áudio foi encontrado, mas houve um erro ao baixar/enviar.\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`);
+        } else {
+            // Erro de rede ou outro erro não mapeado
+            return reply(`Seja mais específico, não deu pra encontrar com apenas isso... / Erro de Rede ou API fora.\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`);
+        }
+    }
+}
+break;
+
+case 'playfuncionando': {
+    if (!chargeUser(5, sender)) {
+        return; 
+    }
+
+    // ----------------------------------------------------
+    // INÍCIO: TENTATIVA DE PESQUISA E DOWNLOAD COM API 1 (Bronxys)
+    // ----------------------------------------------------
+    try {
+        await bender.react('🆗', {key: info.key});
+
+        if (!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`);
+        
+        // 1. Pesquisa na API 1
+        let data = await fetchJson(`https://api.bronxyshost.com.br/api-bronxys/pesquisa_ytb?nome=${q}&apikey=${API_KEY_BRONXYS}`);
+        
+        // Verifica se a pesquisa retornou resultados válidos e se o vídeo não é muito longo
+        if (!data || data.length === 0 || data[0]?.tempo?.length >= 7) {
+            // Se falhar na primeira API (pesquisa ruim ou vídeo longo), lança um erro.
+            throw new Error("Pesquisa na API 1 falhou (ruim ou vídeo muito longo).");
+        }
+        
+        // Dados válidos da API 1 encontrados: Processamos normalmente
+
+        var N_E = " Não encontrado."; // Variável não utilizada, mas mantida por segurança se for usada em outro lugar
+        var bla = `📥 *Baixar vídeo:* \`${prefix}playvid ${q.trim()}\`
+🎧 *Tocando agora no ${assBender}!*`;
+
+        // ----------------------------------------------------
+        // BLOCO ISOLADO PARA TENTAR ENVIAR A IMAGEM DE CAPA
+        // ----------------------------------------------------
+        try {
+            let imageUrl = data[0]?.thumb || logoslink?.logo;
+            let imageBuffer;
+
+            if (imageUrl) {
+                // Tenta o download da imagem
+                const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+                imageBuffer = Buffer.from(response.data); 
+            } else {
+                throw new Error("URL de imagem não encontrada/disponível.");
+            }
+
+            if (imageBuffer) {
+                await bender.sendMessage(from, {
+                    image: imageBuffer,
+                    caption: bla
+                }, {
+                    quoted: info
+                });
+            }
+        } catch (eImage) {
+            // Se o download/envio da imagem falhar, apenas loga e CONTINUA para o áudio
+            console.log("Aviso: Falha ao enviar a imagem de capa. Prosseguindo com o áudio.", eImage.message);
+            // Se a imagem falhar, envia a legenda como uma resposta simples
+            await reply(bla); 
+        }
+        // ----------------------------------------------------
+        
+        // ----------------------------------------------------
+        // ENVIO DO ÁUDIO (URL da API 1)
+        // ----------------------------------------------------
+        await bender.sendMessage(from, {
+            audio: {url: `https://api.bronxyshost.com.br/api-bronxys/play?nome_url=${q}&apikey=${API_KEY_BRONXYS}`},
+            mimetype: "audio/mpeg", 
+            fileName: data[0]?.titulo || "play.mp3"
+        }, {quoted: info}).catch(async (e) => {
+            // Se o envio do áudio da API 1 falhar, lança um erro para o catch externo
+            console.log("Erro no download da API 1 (Áudio):", e);
+            throw new Error("Erro no download do áudio principal (API 1).");
+        });
+        
+    // ----------------------------------------------------
+    // CATCH EXTERNO: Trata falhas na pesquisa e no download da API 1
+    // ----------------------------------------------------
+    } catch (e) {
+        console.log("Falha na API 1:", e.message);
+
+        // Mensagens de erro mais específicas
+        if (e.message.includes("Pesquisa na API 1 falhou")) {
+            return reply("A pesquisa falhou (música não encontrada ou vídeo muito longo).");
+        } else if (e.message.includes("Erro no download do áudio principal")) {
+            return reply("❌ O áudio foi encontrado, mas houve um erro ao baixar/enviar.");
+        } else {
+            // Erro de rede ou outro erro não mapeado
+            return reply("Seja mais específico, não deu pra encontrar com apenas isso... / Erro de Rede ou API fora.");
+        }
+    }
+}
+break;
+
+case 'playvidbtn': {
+    if (!chargeUser(15, sender)) {
+        return; 
+    }
+
+    // ----------------------------------------------------
+    // INÍCIO: TENTATIVA DE PESQUISA E DOWNLOAD COM API 1 (Bronxys)
+    // ----------------------------------------------------
+    try {
+        await bender.react('🆗', {key: info.key});
+
+        if (!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`);
+        
+        // 1. Pesquisa na API 1
+        let data = await fetchJson(`https://api.bronxyshost.com.br/api-bronxys/pesquisa_ytb?nome=${q}&apikey=${API_KEY_BRONXYS}`);
+        
+        // Verifica se a pesquisa retornou resultados válidos e se o vídeo não é muito longo
+        if (!data || data.length === 0 || data[0]?.tempo?.length >= 7) {
+            // Se falhar na primeira API (pesquisa ruim ou vídeo longo), lança um erro.
+            throw new Error("Pesquisa na API 1 falhou (ruim ou vídeo muito longo).");
+        }
+        
+        // ENVIO DO ÁUDIO (URL da API 1)
+        // ----------------------------------------------------
+        bender.sendMessage(from, {video: {url: `https://api.bronxyshost.com.br/api-bronxys/play_video?nome_url=${q}&apikey=${API_KEY_BRONXYS}`}, mimetype: "video/mp4", fileName: data[0]?.titulo || "play.mp4", caption: bla}, {quoted: info}).catch(e => {
+            // Se o envio do áudio da API 1 falhar, lança um erro para o catch externo
+            console.log("Erro no download da API 1 (Áudio):", e);
+            throw new Error("Erro no download do áudio principal (API 1).");
+        });
+        
+    // ----------------------------------------------------
+    // CATCH EXTERNO: Trata falhas na pesquisa e no download da API 1
+    // ----------------------------------------------------
+    } catch (e) {
+        console.log("Falha na API 1:", e.message);
+       addMoneyToWallet(sender, COST);
+
+        // Mensagens de erro mais específicas
+        if (e.message.includes("Pesquisa na API 1 falhou")) {
+            return reply(`A pesquisa falhou (música não encontrada ou vídeo muito longo).\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`);
+        } else if (e.message.includes(`Erro no download do áudio principal\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`)) {
+            return reply(`❌ O áudio foi encontrado, mas houve um erro ao baixar/enviar.\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`);
+        } else {
+            // Erro de rede ou outro erro não mapeado
+            return reply(`Seja mais específico, não deu pra encontrar com apenas isso... / Erro de Rede ou API fora.\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`);
+        }
+    }
+}
+break;
+
+case 'playmp4':  case "play_video": case 'playvid': {
+try {
+if(!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`)
+
+let data = await fetchJson(`https://api.bronxyshost.com.br/api-bronxys/pesquisa_ytb?nome=${q}&apikey=${API_KEY_BRONXYS}`)
+
+if(data[0]?.tempo?.length >= 7) return reply("Desculpe, este video ou audio é muito grande, não poderei realizar este pedido, peça outra música abaixo de uma hora.")
+var N_E = " Não encontrado."
+var bla = `🎵 *VÍDEO ENCONTRADO!* 🎵
+📥 *Baixar áudio:* \`${prefix}play ${q.trim()}\`
+🎧 *Tocando agora no ${assBender}!*
+`
+//bender.sendMessage(from, {image: {url: data[0]?.thumb || logoslink?.logo}, caption: bla}, {quoted: info})
+bender.sendMessage(from, {video: {url: `https://api.bronxyshost.com.br/api-bronxys/play_video?nome_url=${q}&apikey=${API_KEY_BRONXYS}`}, mimetype: "video/mp4", fileName: data[0]?.titulo || "play.mp4", caption: bla}, {quoted: info}).catch(e => {
+return reply("Erro..")
+})
+} catch (e) {
+console.log(e)
+return reply("Seja mais específico, não deu pra encontrar com apenas isto... / Erro");
+}
+}
+break;
+
+case 'play2411243': {
     if (!chargeUser(5, sender)) {
         return; 
     }
@@ -6981,8 +7442,8 @@ case 'play': {
 }
 break;
 
-      case 'playvid':
-      case 'ytmp4':
+      case 'playvid534345534':
+      case 'ytmp45343534534':
         if (!chargeUser(15, sender)) {
         return; 
     }
@@ -10222,7 +10683,7 @@ if (!chargeUser(50, sender)) {
               groupData.mark = {};
             }
             groupData.mark[sender] = q.toLowerCase();
-            fs.writeFileSync(__dirname + `/../database/grupos/${groupName}.json`, JSON.stringify(groupData, null, 2));
+            fs.writeFileSync(__dirname + `/../database/grupos/${from}.json`, JSON.stringify(groupData, null, 2));
             return reply(`*${options[q.toLowerCase()]}*`);
           }
           reply(`❌ Opção inválida! Use *${prefix}mention* para ver as opções.`);
@@ -10467,7 +10928,7 @@ if (!chargeUser(50, sender)) {
           if (!isGroupAdmin) return reply('Apenas administradores podem usar este comando 💔');
           if (!q) return reply(`Uso: ${groupPrefix}${command} HH:MM (24h)\nExemplos: ${groupPrefix}${command} 07:00 | ${groupPrefix}${command} off`);
           const arg = q.trim().toLowerCase();
-          const groupFilePath = pathz.join(GRUPOS_DIR, `${groupName}.json`);
+          const groupFilePath = pathz.join(GRUPOS_DIR, `${from}.json`);
           let data = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath, 'utf-8')) : {};
           data.schedule = data.schedule || {};
           
@@ -10503,7 +10964,7 @@ if (!chargeUser(50, sender)) {
           if (!isGroupAdmin) return reply('Apenas administradores podem usar este comando 💔');
           if (!q) return reply(`Uso: ${groupPrefix}${command} HH:MM (24h)\nExemplos: ${groupPrefix}${command} 22:30 | ${groupPrefix}${command} off`);
           const arg = q.trim().toLowerCase();
-          const groupFilePath = pathz.join(GRUPOS_DIR, `${groupName}.json`);
+          const groupFilePath = pathz.join(GRUPOS_DIR, `${from}.json`);
           let data = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath, 'utf-8')) : {};
           data.schedule = data.schedule || {};
           
@@ -11163,7 +11624,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("você precisa ser adm 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           if (!groupData.modobrincadeira || groupData.modobrincadeira === undefined) {
             
             groupData.modobrincadeira = true;
@@ -11191,7 +11652,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("você precisa ser adm 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           if (!groupData.bemvindo || groupData.bemvindo === undefined) {
             
             groupData.bemvindo = true;
@@ -11259,7 +11720,7 @@ Exemplos:
               }
               
               groupData.welcome.image = uploadResult;
-              fs.writeFileSync(__dirname + `/../database/grupos/${groupName}.json`, JSON.stringify(groupData, null, 2));
+              fs.writeFileSync(__dirname + `/../database/grupos/${from}.json`, JSON.stringify(groupData, null, 2));
               await reply('✅ Foto de boas-vindas configurada com sucesso!');
             } else if (q.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') === 'banner') {
               if (!groupData.welcome) {
@@ -11268,7 +11729,7 @@ Exemplos:
               }
               
               groupData.welcome.image = 'banner';
-              fs.writeFileSync(__dirname + `/../database/grupos/${groupName}.json`, JSON.stringify(groupData, null, 2));
+              fs.writeFileSync(__dirname + `/../database/grupos/${from}.json`, JSON.stringify(groupData, null, 2));
               await reply('✅ Foto de boas-vindas configurada com sucesso!');
             } else {
               await reply(`❌ Marque uma imagem ou envie uma imagem com o comando.`);
@@ -11298,7 +11759,7 @@ Exemplos:
             }
             
             groupData.exit.image = uploadResult;
-            fs.writeFileSync(__dirname + `/../database/grupos/${groupName}.json`, JSON.stringify(groupData, null, 2));
+            fs.writeFileSync(__dirname + `/../database/grupos/${from}.json`, JSON.stringify(groupData, null, 2));
             await reply('✅ Foto de saída configurada com sucesso!');
           } catch (error) {
             console.error(error);
@@ -11329,7 +11790,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("Isso só pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             welcome: {}
           };
@@ -11349,7 +11810,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("Isso só pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             exit: {}
           };
@@ -11379,7 +11840,7 @@ Exemplos:
             groupData.exit.enabled = true;
             
             groupData.exit.text = q;
-            fs.writeFileSync(__dirname + `/../database/grupos/${groupName}.json`, JSON.stringify(groupData, null, 2));
+            fs.writeFileSync(__dirname + `/../database/grupos/${from}.json`, JSON.stringify(groupData, null, 2));
             await reply('✅ Mensagem de saída configurada com sucesso!\n\n📝 Mensagem definida como:\n' + q);
           } catch (error) {
             console.error(error);
@@ -11399,7 +11860,7 @@ Exemplos:
             }
             
             groupData.exit.enabled = !groupData.exit.enabled;
-            fs.writeFileSync(__dirname + `/../database/grupos/${groupName}.json`, JSON.stringify(groupData, null, 2));
+            fs.writeFileSync(__dirname + `/../database/grupos/${from}.json`, JSON.stringify(groupData, null, 2));
             await reply(groupData.exit.enabled ? '✅ Mensagens de saída ativadas!' : '❌ Mensagens de saída desativadas!');
           } catch (error) {
             console.error(error);
@@ -11537,7 +11998,7 @@ Exemplos:
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
           if (!menc_os2) return reply("Marque um usuário 🙄");
           const reason = q.includes(' ') ? q.split(' ').slice(1).join(' ') : "Motivo não informado";
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             blacklist: {}
           };
@@ -11564,7 +12025,7 @@ Exemplos:
           if (!isGroup) return reply("Isso só pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
           if (!menc_os2) return reply("Marque um usuário 🙄");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             blacklist: {}
           };
@@ -11585,7 +12046,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("Isso só pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             blacklist: {}
           };
@@ -11613,7 +12074,7 @@ Exemplos:
           if (!menc_os2) return reply("Marque um usuário 🙄");
           if (menc_os2 === botNumber) return reply("❌ Não posso advertir a mim mesma!");
           const reason = q.includes(' ') ? q.split(' ').slice(1).join(' ') : "Motivo não informado";
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             warnings: {}
           };
@@ -11652,7 +12113,7 @@ Exemplos:
           if (!isGroup) return reply("Isso só pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
           if (!menc_os2) return reply("Marque um usuário 🙄");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             warnings: {}
           };
@@ -11675,7 +12136,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("Isso só pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             warnings: {}
           };
@@ -11710,7 +12171,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("você precisa ser adm 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           if (!groupData.soadm || groupData.soadm === undefined) {
             
             groupData.soadm = true;
@@ -11736,7 +12197,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("Isso só pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           if (!groupData.modolite) {
             
             groupData.modolite = true;
@@ -11790,7 +12251,7 @@ Exemplos:
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("você precisa ser adm 💔");
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             antilinkgp: false
           };
@@ -11809,7 +12270,7 @@ Exemplos:
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("você precisa ser adm 💔");
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             antiporn: false
           };
@@ -11827,7 +12288,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("Isso só pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {};
           
           groupData.autoSticker = !groupData.autoSticker;
@@ -11843,7 +12304,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("Isso só pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {};
           
           groupData.autorepo = !groupData.autorepo;
@@ -11865,7 +12326,7 @@ Exemplos:
           }
           if (!isGroup) return reply("Isso só pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("Você precisa ser administrador 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {};
           
           groupData.assistente = !groupData.assistente;
@@ -11881,7 +12342,7 @@ Exemplos:
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("você precisa ser adm 💔");
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             antigore: false
           };
@@ -11901,7 +12362,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("você precisa ser adm 💔");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           if (!q) return reply(`📝 *Configuração da Mensagem de Boas-Vindas*\n\nPara definir uma mensagem personalizada, digite o comando seguido do texto desejado. Você pode usar as seguintes variáveis:\n\n- *#numerodele#* → Marca o novo membro.\n- *#nomedogp#* → Nome do grupo.\n- *#desc#* → Descrição do grupo.\n- *#membros#* → Número total de membros no grupo.\n\n📌 *Exemplo:*\n${prefixo}legendabv Bem-vindo(a) #numerodele# ao grupo *#nomedogp#*! Agora somos #membros# membros. Leia a descrição: #desc#`);
           
           groupData.textbv = q;
@@ -11922,7 +12383,7 @@ Exemplos:
         return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 10.000 BCOINS");}}
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
           if (!menc_os2) return reply("Marque alguém 🙄");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             mutedUsers: {}
           };
@@ -11951,7 +12412,7 @@ Exemplos:
             if (!chargeUser(1000, sender)) {
         return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 1.000 BCOINS");}}
           if (!menc_os2) return reply("Marque alguém 🙄");
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             mutedUsers: {}
           };
@@ -11979,7 +12440,7 @@ Exemplos:
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("você precisa ser adm 💔");
           if (!q) return reply(`❌ Digite o comando que deseja bloquear. Exemplo: ${prefix}blockcmd sticker`);
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             blockedCommands: {}
           };
@@ -11999,7 +12460,7 @@ Exemplos:
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) return reply("você precisa ser adm 💔");
           if (!q) return reply(`❌ Digite o comando que deseja desbloquear. Exemplo: ${prefix}unblockcmd sticker`);
-          const groupFilePath = __dirname + `/../database/grupos/${groupName}.json`;
+          const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {
             blockedCommands: {}
           };

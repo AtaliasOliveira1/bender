@@ -1,0 +1,103 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-26T02:25:33.288Z",
+  "groupName": "⬛7 ANOS BRG⬛",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "171236420268179@lid",
+      "msg": 67,
+      "cmd": 0,
+      "figu": 2,
+      "pushname": "Dias, Patrick",
+      "firstSeen": "2025-10-26T02:25:33.289Z",
+      "lastActivity": "2025-11-06T21:34:24.831Z"
+    },
+    {
+      "id": "18124879470837@lid",
+      "msg": 105,
+      "cmd": 2,
+      "figu": 0,
+      "pushname": "Guilherme Andrade",
+      "firstSeen": "2025-10-26T11:58:44.823Z",
+      "lastActivity": "2025-11-06T15:19:59.594Z"
+    },
+    {
+      "id": "226242318065852@lid",
+      "msg": 68,
+      "cmd": 0,
+      "figu": 3,
+      "pushname": "Guilherme",
+      "firstSeen": "2025-10-26T14:18:13.348Z",
+      "lastActivity": "2025-10-31T14:19:47.233Z"
+    },
+    {
+      "id": "273834263494809@lid",
+      "msg": 8,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "lock",
+      "firstSeen": "2025-10-26T15:29:53.054Z",
+      "lastActivity": "2025-11-03T18:17:06.807Z"
+    },
+    {
+      "id": "133526255050878@lid",
+      "msg": 351,
+      "cmd": 21,
+      "figu": 37,
+      "pushname": "Xande",
+      "firstSeen": "2025-10-26T15:59:03.009Z",
+      "lastActivity": "2025-11-06T21:27:34.431Z"
+    },
+    {
+      "id": "93794183688248@lid",
+      "msg": 105,
+      "cmd": 0,
+      "figu": 12,
+      "pushname": "Xavier",
+      "firstSeen": "2025-10-26T20:10:05.739Z",
+      "lastActivity": "2025-11-06T21:36:33.594Z"
+    },
+    {
+      "id": "108607039352965@lid",
+      "msg": 373,
+      "cmd": 5,
+      "figu": 16,
+      "pushname": "𝓖𝓾𝓲 𝓓𝓮 𝓙𝓮𝓼𝓾𝓼 𓅓🖤",
+      "firstSeen": "2025-10-26T23:22:37.605Z",
+      "lastActivity": "2025-11-06T21:40:41.975Z"
+    },
+    {
+      "id": "6451510693949@lid",
+      "msg": 162,
+      "cmd": 1,
+      "figu": 9,
+      "pushname": "Tayllan",
+      "firstSeen": "2025-10-27T00:04:09.792Z",
+      "lastActivity": "2025-11-02T22:59:13.678Z"
+    },
+    {
+      "id": "254970767122566@lid",
+      "msg": 257,
+      "cmd": 0,
+      "figu": 9,
+      "pushname": "Natan🪽",
+      "firstSeen": "2025-10-27T23:37:27.138Z",
+      "lastActivity": "2025-11-06T20:26:31.840Z"
+    },
+    {
+      "id": "210028883652626@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Guilherme",
+      "firstSeen": "2025-11-06T20:43:03.760Z",
+      "lastActivity": "2025-11-06T20:43:03.760Z"
+    }
+  ]
+}

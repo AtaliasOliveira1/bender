@@ -7,11 +7,17 @@ export default async function menuButtons(prefix, botName = "MeuBot", userName =
     separatorIcon = "❁",
     middleBorder = "┊"
 } = {}) {
+    // No seu arquivo atual
     const formattedHeader = header.replace(/#user#/g, userName);
-    
+
     return {
-        text: formattedHeader + '\n\n🔘 *Selecione uma categoria abaixo:*',
-        title: `🌸 ${botName}`,
+        text: `\n\n🔘 *Selecione uma categoria abaixo:*`,
+        title: `${botName}\n\n                         
+ _             _         
+| |_ ___ ___ _| |___ ___ 
+| . | -_|   | . | -_|  _|
+|___|___|_|_|___|___|_|  
+                         `,
         subtitle: `Olá, ${userName}!`,
         footer: 'Escolha uma opção para ver os comandos',
         interactiveButtons: [
@@ -20,30 +26,6 @@ export default async function menuButtons(prefix, botName = "MeuBot", userName =
                 buttonParamsJson: JSON.stringify({
                     title: '📋 Selecionar Menu',
                     sections: [
-                        {
-                            title: '🤖 Inteligência Artificial',
-                            highlight_label: 'IA',
-                            rows: [
-                                {
-                                    header: '🤖 Menu IA',
-                                    title: 'Comandos de IA',
-                                    description: 'ChatGPT, Gemini e outras IAs',
-                                    id: `${prefix}menuia`
-                                }
-                            ]
-                        },
-                        {
-                            title: '📥 Downloads',
-                            highlight_label: 'Downloads',
-                            rows: [
-                                {
-                                    header: '📥 Menu Downloads',
-                                    title: 'Baixar Conteúdo',
-                                    description: 'YouTube, TikTok, Instagram e mais',
-                                    id: `${prefix}menudown`
-                                }
-                            ]
-                        },
                         {
                             title: '👑 Administração',
                             highlight_label: 'Admin',
@@ -69,18 +51,6 @@ export default async function menuButtons(prefix, botName = "MeuBot", userName =
                             ]
                         },
                         {
-                            title: '🛠️ Ferramentas',
-                            highlight_label: 'Tools',
-                            rows: [
-                                {
-                                    header: '🛠️ Ferramentas',
-                                    title: 'Utilitários',
-                                    description: 'Ferramentas úteis e conversores',
-                                    id: `${prefix}ferramentas`
-                                }
-                            ]
-                        },
-                        {
                             title: '👥 Membros',
                             highlight_label: 'Membros',
                             rows: [
@@ -101,12 +71,6 @@ export default async function menuButtons(prefix, botName = "MeuBot", userName =
                                     title: 'Criar Figurinhas',
                                     description: 'Comandos para criar stickers',
                                     id: `${prefix}menufig`
-                                },
-                                {
-                                    header: '✨ Alteradores',
-                                    title: 'Efeitos de Texto',
-                                    description: 'Modificar textos e imagens',
-                                    id: `${prefix}alteradores`
                                 }
                             ]
                         },

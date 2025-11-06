@@ -1,6 +1,76 @@
 {
-  "mutedUsers": {
-    "92874590941436@lid": true
-  },
-  "warnings": {}
+  "mark": {},
+  "createdAt": "2025-10-25T21:42:39.607Z",
+  "groupName": "Resenha dos abestados",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "191727876972700@lid",
+      "msg": 2308,
+      "cmd": 33,
+      "figu": 99,
+      "pushname": "Lz",
+      "firstSeen": "2025-10-25T21:42:39.609Z",
+      "lastActivity": "2025-11-06T21:33:33.612Z"
+    },
+    {
+      "id": "193793672400970@lid",
+      "msg": 702,
+      "cmd": 1,
+      "figu": 6,
+      "pushname": "José",
+      "firstSeen": "2025-10-25T22:37:56.343Z",
+      "lastActivity": "2025-11-06T19:56:18.765Z"
+    },
+    {
+      "id": "92874590941436@lid",
+      "msg": 240,
+      "cmd": 6,
+      "figu": 98,
+      "pushname": "Luiz",
+      "firstSeen": "2025-10-25T22:40:51.054Z",
+      "lastActivity": "2025-11-02T19:32:34.193Z"
+    },
+    {
+      "id": "10381271544005@lid",
+      "msg": 133,
+      "cmd": 0,
+      "figu": 21,
+      "pushname": "Davi",
+      "firstSeen": "2025-10-25T22:45:14.827Z",
+      "lastActivity": "2025-11-06T20:17:17.610Z"
+    },
+    {
+      "id": "144594469703905@lid",
+      "msg": 758,
+      "cmd": 2,
+      "figu": 22,
+      "pushname": "Pedro Costa",
+      "firstSeen": "2025-10-25T22:54:45.391Z",
+      "lastActivity": "2025-11-06T20:51:25.285Z"
+    },
+    {
+      "id": "271051728674996@lid",
+      "msg": 1361,
+      "cmd": 77,
+      "figu": 89,
+      "pushname": "gabriel",
+      "firstSeen": "2025-10-25T23:08:23.503Z",
+      "lastActivity": "2025-11-06T21:33:46.634Z"
+    },
+    {
+      "id": "66585297461499@lid",
+      "msg": 2055,
+      "cmd": 7,
+      "figu": 464,
+      "pushname": "P.Lucas🥷🏽",
+      "firstSeen": "2025-10-25T23:18:16.524Z",
+      "lastActivity": "2025-11-06T19:49:32.300Z"
+    }
+  ]
 }

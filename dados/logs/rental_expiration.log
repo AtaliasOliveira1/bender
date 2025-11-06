@@ -77,3 +77,276 @@
 [2025-10-21T03:04:57.054Z] RentalExpirationManager initialized successfully
 [2025-10-21T03:09:00.040Z] Scheduler started with interval: 0 */6 * * *
 [2025-10-21T03:09:00.041Z] RentalExpirationManager initialized successfully
+[2025-10-21T03:25:44.340Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-21T03:25:44.340Z] RentalExpirationManager initialized successfully
+[2025-10-21T03:28:27.816Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-21T03:28:27.816Z] RentalExpirationManager initialized successfully
+[2025-10-21T03:29:25.068Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-21T03:29:25.068Z] RentalExpirationManager initialized successfully
+[2025-10-21T09:00:00.037Z] Starting rental expiration check...
+[2025-10-21T09:00:00.043Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-10-21T14:19:50.883Z] RentalExpirationManager initialized successfully
+[2025-10-21T15:00:00.040Z] Starting rental expiration check...
+[2025-10-21T15:00:00.044Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 4ms
+[2025-10-21T21:00:00.036Z] Starting rental expiration check...
+[2025-10-21T21:00:00.040Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 4ms
+[2025-10-21T21:24:10.709Z] RentalExpirationManager initialized successfully
+[2025-10-21T21:31:14.926Z] RentalExpirationManager initialized successfully
+[2025-10-22T00:35:43.527Z] RentalExpirationManager initialized successfully
+[2025-10-22T01:09:33.575Z] RentalExpirationManager initialized successfully
+[2025-10-22T03:00:00.038Z] Starting rental expiration check...
+[2025-10-22T03:00:00.045Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 7ms
+[2025-10-22T09:00:00.030Z] Starting rental expiration check...
+[2025-10-22T09:00:00.034Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 4ms
+[2025-10-22T15:00:00.050Z] Starting rental expiration check...
+[2025-10-22T15:00:00.056Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-10-22T15:23:03.274Z] RentalExpirationManager initialized successfully
+[2025-10-22T16:39:02.037Z] RentalExpirationManager initialized successfully
+[2025-10-22T21:00:00.047Z] Starting rental expiration check...
+[2025-10-22T21:00:00.055Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 8ms
+[2025-10-22T21:43:04.969Z] RentalExpirationManager initialized successfully
+[2025-10-22T21:56:36.472Z] RentalExpirationManager initialized successfully
+[2025-10-23T02:40:05.166Z] RentalExpirationManager initialized successfully
+[2025-10-23T03:00:00.025Z] Starting rental expiration check...
+[2025-10-23T03:00:00.030Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-23T09:00:00.038Z] Starting rental expiration check...
+[2025-10-23T09:00:00.043Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-23T15:00:00.030Z] Starting rental expiration check...
+[2025-10-23T15:00:00.034Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 4ms
+[2025-10-23T19:17:49.309Z] RentalExpirationManager initialized successfully
+[2025-10-23T21:00:00.040Z] Starting rental expiration check...
+[2025-10-23T21:00:00.044Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 4ms
+[2025-10-23T21:10:32.145Z] RentalExpirationManager initialized successfully
+[2025-10-23T21:47:07.856Z] RentalExpirationManager initialized successfully
+[2025-10-23T23:03:42.618Z] RentalExpirationManager initialized successfully
+[2025-10-24T01:50:29.621Z] RentalExpirationManager initialized successfully
+[2025-10-24T03:00:00.043Z] Starting rental expiration check...
+[2025-10-24T03:00:00.048Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-24T09:00:00.044Z] Starting rental expiration check...
+[2025-10-24T09:00:00.049Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-24T12:41:25.414Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-24T12:41:25.415Z] RentalExpirationManager initialized successfully
+[2025-10-24T15:00:00.054Z] Starting rental expiration check...
+[2025-10-24T15:00:00.061Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 7ms
+[2025-10-24T21:00:00.029Z] Starting rental expiration check...
+[2025-10-24T21:00:00.033Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 4ms
+[2025-10-25T03:00:00.032Z] Starting rental expiration check...
+[2025-10-25T03:00:00.039Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 7ms
+[2025-10-25T09:00:00.874Z] Starting rental expiration check...
+[2025-10-25T09:00:01.071Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 197ms
+[2025-10-25T15:00:00.045Z] Starting rental expiration check...
+[2025-10-25T15:00:00.050Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-25T19:52:46.804Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T19:52:46.804Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:00:00.030Z] Starting rental expiration check...
+[2025-10-25T21:00:00.034Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 4ms
+[2025-10-25T21:30:42.937Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:30:42.936Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:31:41.696Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:31:41.697Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:32:39.356Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:32:39.356Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:40:31.865Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:40:31.865Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:49:31.796Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:49:31.796Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:49:48.440Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:49:48.441Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:52:13.865Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:52:13.865Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:52:56.003Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:52:56.003Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:53:25.185Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:53:25.186Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:56:57.806Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:56:57.807Z] RentalExpirationManager initialized successfully
+[2025-10-25T21:59:12.704Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T21:59:12.704Z] RentalExpirationManager initialized successfully
+[2025-10-25T22:02:55.877Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T22:02:55.877Z] RentalExpirationManager initialized successfully
+[2025-10-25T22:03:24.348Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T22:03:24.348Z] RentalExpirationManager initialized successfully
+[2025-10-25T22:12:37.558Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T22:12:37.559Z] RentalExpirationManager initialized successfully
+[2025-10-25T22:15:37.533Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T22:15:37.534Z] RentalExpirationManager initialized successfully
+[2025-10-25T22:16:54.664Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T22:16:54.664Z] RentalExpirationManager initialized successfully
+[2025-10-25T22:23:13.061Z] RentalExpirationManager initialized successfully
+[2025-10-25T22:23:13.060Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T22:29:31.434Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T22:29:31.434Z] RentalExpirationManager initialized successfully
+[2025-10-25T22:32:27.498Z] RentalExpirationManager initialized successfully
+[2025-10-25T22:32:27.498Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:33:21.283Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:33:21.283Z] RentalExpirationManager initialized successfully
+[2025-10-25T23:36:38.108Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:36:38.109Z] RentalExpirationManager initialized successfully
+[2025-10-25T23:42:16.460Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:42:16.461Z] RentalExpirationManager initialized successfully
+[2025-10-25T23:43:36.578Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:43:36.579Z] RentalExpirationManager initialized successfully
+[2025-10-25T23:44:22.347Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:44:22.347Z] RentalExpirationManager initialized successfully
+[2025-10-25T23:45:15.448Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:45:15.449Z] RentalExpirationManager initialized successfully
+[2025-10-25T23:48:56.542Z] RentalExpirationManager initialized successfully
+[2025-10-25T23:48:56.542Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:54:34.332Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:54:34.332Z] RentalExpirationManager initialized successfully
+[2025-10-25T23:57:24.168Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:57:24.168Z] RentalExpirationManager initialized successfully
+[2025-10-25T23:59:57.004Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-25T23:59:57.005Z] RentalExpirationManager initialized successfully
+[2025-10-26T00:02:10.451Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T00:02:10.451Z] RentalExpirationManager initialized successfully
+[2025-10-26T00:05:52.347Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T00:05:52.347Z] RentalExpirationManager initialized successfully
+[2025-10-26T00:06:53.136Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T00:06:53.137Z] RentalExpirationManager initialized successfully
+[2025-10-26T00:09:11.442Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T00:09:11.443Z] RentalExpirationManager initialized successfully
+[2025-10-26T00:25:51.439Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T00:25:51.440Z] RentalExpirationManager initialized successfully
+[2025-10-26T00:33:36.116Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T00:33:36.116Z] RentalExpirationManager initialized successfully
+[2025-10-26T00:35:44.176Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T00:35:44.176Z] RentalExpirationManager initialized successfully
+[2025-10-26T00:41:08.452Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T00:41:08.452Z] RentalExpirationManager initialized successfully
+[2025-10-26T00:45:45.953Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T00:45:45.954Z] RentalExpirationManager initialized successfully
+[2025-10-26T00:46:20.754Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T00:46:20.754Z] RentalExpirationManager initialized successfully
+[2025-10-26T01:08:00.743Z] RentalExpirationManager initialized successfully
+[2025-10-26T01:08:00.742Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T01:10:38.277Z] Scheduler started with interval: 0 */6 * * *
+[2025-10-26T01:10:38.277Z] RentalExpirationManager initialized successfully
+[2025-10-26T02:59:07.100Z] RentalExpirationManager initialized successfully
+[2025-10-26T03:00:00.041Z] Starting rental expiration check...
+[2025-10-26T03:00:00.046Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-26T09:00:00.050Z] Starting rental expiration check...
+[2025-10-26T09:00:00.067Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 17ms
+[2025-10-26T15:00:00.036Z] Starting rental expiration check...
+[2025-10-26T15:00:00.041Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-26T21:00:00.044Z] Starting rental expiration check...
+[2025-10-26T21:00:00.050Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 7ms
+[2025-10-27T03:00:00.053Z] Starting rental expiration check...
+[2025-10-27T03:00:00.063Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 10ms
+[2025-10-27T09:00:00.037Z] Starting rental expiration check...
+[2025-10-27T09:00:00.043Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-10-27T15:00:00.041Z] Starting rental expiration check...
+[2025-10-27T15:00:00.052Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 11ms
+[2025-10-27T21:00:00.042Z] Starting rental expiration check...
+[2025-10-27T21:00:00.049Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 7ms
+[2025-10-27T23:00:12.027Z] RentalExpirationManager initialized successfully
+[2025-10-27T23:00:27.708Z] RentalExpirationManager initialized successfully
+[2025-10-27T23:07:23.106Z] RentalExpirationManager initialized successfully
+[2025-10-28T03:00:00.036Z] Starting rental expiration check...
+[2025-10-28T03:00:00.041Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-28T03:55:26.766Z] RentalExpirationManager initialized successfully
+[2025-10-28T09:00:00.041Z] Starting rental expiration check...
+[2025-10-28T09:00:00.047Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-10-28T10:36:10.123Z] RentalExpirationManager initialized successfully
+[2025-10-28T15:00:00.036Z] Starting rental expiration check...
+[2025-10-28T15:00:00.043Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 7ms
+[2025-10-28T20:10:53.762Z] RentalExpirationManager initialized successfully
+[2025-10-28T21:00:00.043Z] Starting rental expiration check...
+[2025-10-28T21:00:00.050Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 7ms
+[2025-10-28T23:04:59.348Z] RentalExpirationManager initialized successfully
+[2025-10-28T23:45:19.270Z] RentalExpirationManager initialized successfully
+[2025-10-29T03:00:00.032Z] Starting rental expiration check...
+[2025-10-29T03:00:00.037Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-29T09:00:00.042Z] Starting rental expiration check...
+[2025-10-29T09:00:00.047Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-29T15:00:00.034Z] Starting rental expiration check...
+[2025-10-29T15:00:00.040Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-10-29T20:11:00.945Z] RentalExpirationManager initialized successfully
+[2025-10-29T21:00:00.042Z] Starting rental expiration check...
+[2025-10-29T21:00:00.048Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-10-29T21:44:57.616Z] RentalExpirationManager initialized successfully
+[2025-10-30T00:47:32.759Z] RentalExpirationManager initialized successfully
+[2025-10-30T03:00:00.035Z] Starting rental expiration check...
+[2025-10-30T03:00:00.040Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-30T06:40:29.970Z] RentalExpirationManager initialized successfully
+[2025-10-30T09:00:00.040Z] Starting rental expiration check...
+[2025-10-30T09:00:00.051Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 11ms
+[2025-10-30T15:00:00.041Z] Starting rental expiration check...
+[2025-10-30T15:00:00.045Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 4ms
+[2025-10-30T20:15:36.905Z] RentalExpirationManager initialized successfully
+[2025-10-30T21:00:00.036Z] Starting rental expiration check...
+[2025-10-30T21:00:00.040Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 4ms
+[2025-10-30T21:39:08.126Z] RentalExpirationManager initialized successfully
+[2025-10-30T21:39:31.889Z] RentalExpirationManager initialized successfully
+[2025-10-30T22:08:34.298Z] RentalExpirationManager initialized successfully
+[2025-10-31T03:00:00.039Z] Starting rental expiration check...
+[2025-10-31T03:00:00.044Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-31T05:28:34.790Z] RentalExpirationManager initialized successfully
+[2025-10-31T09:00:00.039Z] Starting rental expiration check...
+[2025-10-31T09:00:00.044Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-10-31T15:00:00.043Z] Starting rental expiration check...
+[2025-10-31T15:00:00.050Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 7ms
+[2025-10-31T21:00:00.047Z] Starting rental expiration check...
+[2025-10-31T21:00:00.053Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-11-01T03:00:00.051Z] Starting rental expiration check...
+[2025-11-01T03:00:00.058Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 7ms
+[2025-11-01T09:00:00.040Z] Starting rental expiration check...
+[2025-11-01T09:00:00.045Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-11-01T13:23:18.764Z] RentalExpirationManager initialized successfully
+[2025-11-01T15:00:00.038Z] Starting rental expiration check...
+[2025-11-01T15:00:00.050Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 12ms
+[2025-11-01T21:00:00.033Z] Starting rental expiration check...
+[2025-11-01T21:00:00.039Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-11-01T22:00:57.453Z] RentalExpirationManager initialized successfully
+[2025-11-02T03:00:00.042Z] Starting rental expiration check...
+[2025-11-02T03:00:00.051Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 9ms
+[2025-11-02T09:00:00.040Z] Starting rental expiration check...
+[2025-11-02T09:00:00.048Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 8ms
+[2025-11-02T15:00:00.040Z] Starting rental expiration check...
+[2025-11-02T15:00:00.052Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 12ms
+[2025-11-02T21:00:00.053Z] Starting rental expiration check...
+[2025-11-02T21:00:00.059Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-11-03T03:00:00.044Z] Starting rental expiration check...
+[2025-11-03T03:00:00.051Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 7ms
+[2025-11-03T09:00:00.042Z] Starting rental expiration check...
+[2025-11-03T09:00:00.047Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-11-03T15:00:00.035Z] Starting rental expiration check...
+[2025-11-03T15:00:00.041Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-11-03T17:34:47.965Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-03T17:34:47.966Z] RentalExpirationManager initialized successfully
+[2025-11-03T21:00:00.037Z] Starting rental expiration check...
+[2025-11-03T21:00:00.052Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 15ms
+[2025-11-04T03:00:00.044Z] Starting rental expiration check...
+[2025-11-04T03:00:00.068Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 24ms
+[2025-11-04T09:00:00.031Z] Starting rental expiration check...
+[2025-11-04T09:00:00.040Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 9ms
+[2025-11-04T13:23:45.221Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-04T13:23:45.221Z] RentalExpirationManager initialized successfully
+[2025-11-04T15:00:00.039Z] Starting rental expiration check...
+[2025-11-04T15:00:00.052Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 13ms
+[2025-11-04T17:19:50.802Z] RentalExpirationManager initialized successfully
+[2025-11-04T21:00:00.043Z] Starting rental expiration check...
+[2025-11-04T21:00:00.054Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 11ms
+[2025-11-04T23:02:42.470Z] RentalExpirationManager initialized successfully
+[2025-11-04T23:09:37.271Z] RentalExpirationManager initialized successfully
+[2025-11-04T23:21:12.731Z] RentalExpirationManager initialized successfully
+[2025-11-05T03:00:00.046Z] Starting rental expiration check...
+[2025-11-05T03:00:00.061Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 15ms
+[2025-11-05T09:00:00.048Z] Starting rental expiration check...
+[2025-11-05T09:00:00.065Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 17ms
+[2025-11-05T15:00:00.032Z] Starting rental expiration check...
+[2025-11-05T15:00:00.047Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 15ms
+[2025-11-05T21:00:00.035Z] Starting rental expiration check...
+[2025-11-05T21:00:00.045Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 10ms
+[2025-11-06T00:32:14.258Z] RentalExpirationManager initialized successfully
+[2025-11-06T00:46:07.089Z] RentalExpirationManager initialized successfully
+[2025-11-06T03:00:00.041Z] Starting rental expiration check...
+[2025-11-06T03:00:00.047Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 6ms
+[2025-11-06T09:00:00.043Z] Starting rental expiration check...
+[2025-11-06T09:00:00.054Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 11ms
+[2025-11-06T15:00:00.031Z] Starting rental expiration check...
+[2025-11-06T15:00:00.036Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-11-06T17:02:19.623Z] RentalExpirationManager initialized successfully
+[2025-11-06T18:14:00.490Z] RentalExpirationManager initialized successfully
+[2025-11-06T21:00:00.048Z] Starting rental expiration check...
+[2025-11-06T21:00:00.053Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms

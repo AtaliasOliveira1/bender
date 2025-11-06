@@ -1,0 +1,22 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-27T16:50:02.598Z",
+  "groupName": "Arquivos",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "58587749585006@lid",
+      "msg": 10,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "D.",
+      "firstSeen": "2025-10-27T16:50:02.599Z",
+      "lastActivity": "2025-11-06T14:08:16.348Z"
+    }
+  ]
+}

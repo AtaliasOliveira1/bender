@@ -1,0 +1,85 @@
+{
+  "mark": {},
+  "createdAt": "2025-10-27T14:55:32.416Z",
+  "groupName": "Bumbum Guloso 🍑",
+  "modogold": true,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": true,
+  "contador": [
+    {
+      "id": "200897246326940@lid",
+      "msg": 12,
+      "cmd": 0,
+      "figu": 3,
+      "pushname": "Denilson",
+      "firstSeen": "2025-10-27T14:55:32.421Z",
+      "lastActivity": "2025-11-01T18:56:30.140Z"
+    },
+    {
+      "id": "131697135865909@lid",
+      "msg": 22,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Carlos Lobo",
+      "firstSeen": "2025-10-27T15:31:22.924Z",
+      "lastActivity": "2025-11-05T01:28:48.258Z"
+    },
+    {
+      "id": "13713880940589@lid",
+      "msg": 17,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Teo",
+      "firstSeen": "2025-10-27T19:33:56.022Z",
+      "lastActivity": "2025-11-01T20:09:17.825Z"
+    },
+    {
+      "id": "82235738820857@lid",
+      "msg": 27,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "๛αταℓiαs ℓσ-αмiㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ",
+      "firstSeen": "2025-10-28T21:28:34.697Z",
+      "lastActivity": "2025-11-05T00:50:33.309Z"
+    },
+    {
+      "id": "105810931757278@lid",
+      "msg": 4,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Jardel",
+      "firstSeen": "2025-10-29T01:27:27.091Z",
+      "lastActivity": "2025-11-05T00:54:54.473Z"
+    },
+    {
+      "id": "60911695990791@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Fillipe Gregory 🀄",
+      "firstSeen": "2025-10-29T20:16:34.019Z",
+      "lastActivity": "2025-10-29T20:16:34.019Z"
+    },
+    {
+      "id": "225730847838325@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "alef",
+      "firstSeen": "2025-10-30T21:54:21.577Z",
+      "lastActivity": "2025-11-01T19:07:39.940Z"
+    },
+    {
+      "id": "208426206527706@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Caio",
+      "firstSeen": "2025-10-31T00:31:09.192Z",
+      "lastActivity": "2025-11-01T19:05:14.146Z"
+    }
+  ]
+}
