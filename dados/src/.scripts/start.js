@@ -104,7 +104,7 @@ am startservice --user 0 \\
 
 function setupGracefulShutdown() {
   const shutdown = () => {
-    mensagem('🛑 Encerrando o Nazuna... Até logo!');
+    mensagem('⛔ Encerrando o Nazuna... Até logo!');
     if (botProcess) {
       botProcess.removeAllListeners();
       botProcess.kill();

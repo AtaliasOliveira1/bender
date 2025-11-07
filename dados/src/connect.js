@@ -229,7 +229,7 @@ class MessageQueue {
     }
 
     async shutdown() {
-        console.log('🛑 Finalizando MessageQueue...');
+        console.log('⛔ Finalizando MessageQueue...');
         this.stopProcessing();
         
         // Aguarda workers ativos terminarem (timeout de 10s)

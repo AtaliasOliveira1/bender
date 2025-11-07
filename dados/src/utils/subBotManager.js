@@ -525,7 +525,7 @@ async function initializeAllSubBots() {
  */
 async function disconnectAllSubBots() {
     try {
-        console.log('🛑 Desconectando todos os sub-bots...');
+        console.log('⛔ Desconectando todos os sub-bots...');
         
         for (const [botId, sock] of activeSubBots.entries()) {
             try {

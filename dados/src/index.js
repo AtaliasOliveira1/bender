@@ -2763,6 +2763,59 @@ Código: *${roleCode}*`,
 
 //Funções Atalias
 
+//comandos sem prefixo
+
+const path = require('path');
+
+async function sendSticker(from, info, bender) {
+    // Lista de figurinhas permitidas
+    const allowedStickers = [
+        "benderdiga.webp",
+        "benderfalahumano.webp",
+        "benderCheguei.webp",
+        "bendertoaqui.webp"
+    ];
+
+    // Seleciona uma figurinha aleatória da lista permitida
+    const randomSticker = allowedStickers[Math.floor(Math.random() * allowedStickers.length)];
+
+    // Lê o arquivo da figurinha selecionada
+    const stickerPath = path.join("./dados/database/figurinhas/", randomSticker);
+    let stickerBuffer;
+    try {
+        stickerBuffer = fs.readFileSync(stickerPath);
+    } catch (error) {
+        console.error('Erro ao ler a figurinha:', error);
+        return; // Sai da função se não conseguir ler o arquivo
+    }
+
+    let enviadoComSucesso = false; // Flag para verificar se a figurinha foi enviada com sucesso
+
+    for (let attempt = 1; attempt <= 1; attempt++) { // 5 tentativas de envio
+        try {
+            // Envia a figurinha
+            await bender.sendMessage(from, { sticker: stickerBuffer }, { quoted: info });
+            console.log(`Figurinha enviada com sucesso na tentativa ${attempt}`);
+            enviadoComSucesso = true;
+            break; // Sai do loop se o envio for bem-sucedido
+        } catch (error) {
+            //console.error(`Erro ao enviar a figurinha na tentativa ${attempt}:`, error);
+            if (attempt < 5) { // Espera um pouco antes de tentar novamente
+                await new Promise(resolve => setTimeout(resolve, 2000)); // 2 segundos de intervalo
+            }
+        }
+    }
+
+    if (!enviadoComSucesso) {
+        console.error('Não foi possível enviar a figurinha após várias tentativas.');
+        // Aqui você pode decidir o que fazer caso não consiga enviar a figurinha
+    }
+}
+
+if (budy2 === "bender") {
+    
+    sendSticker(from, info, bender);
+}
 
 // Detectar a palavra "figurinhas" em qualquer mensagem de texto
 if (isGroup && body.includes('figurinha')) {
@@ -2993,6 +3046,41 @@ function chargeUser(cost, sender) {
 
     switch (command) {
     
+case 'sendstickers':
+case 'figurinhas':
+case 'figurinha':
+case 'sendsticker':
+  try {
+    const args = body.trim().split(/\s+/);
+    let quantidade = parseInt(args[1]);
+    if (isNaN(quantidade)) quantidade = 3;
+    quantidade = Math.min(Math.max(1, quantidade), 10);
+
+    // Função delay
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    const totalFigurinhas = 5532;
+
+    for (let i = 0; i < quantidade; i++) {
+      const num = Math.floor(Math.random() * totalFigurinhas);
+      const repoIndex = Math.floor(num / 1000) + 1;
+      const url = `https://raw.githubusercontent.com/AtaliasOliveira1/stickers-${repoIndex}/main/fig%20(${num}).webp`;
+
+      try {
+        await bender.sendMessage(from, { sticker: { url: url } });
+        await delay(1000); // delay de 1s entre envios
+      } catch (err) {
+        console.error(`Erro ao enviar figurinha ${num}:`, err.message);
+        await reply(`❌ Não consegui enviar uma das figurinhas. Tenta de novo!`);
+        break;
+      }
+    }
+
+  } catch (e) {
+    console.error(e);
+    await reply("⚠️ Deu ruim aqui... tenta de novo em instantes! 😖");
+  }
+break
 
 case 'lembrete':
 case 'lembrar': {
@@ -5398,7 +5486,6 @@ break;
 case 'play':
 case 'musica':
 case 'tocar': {
-  return reply("Manutenção!");
     // A query (q) precisa ser definida/passada para este bloco, 
     // ou você precisa extraí-la da mensagem de info.
     const query = q.trim();
@@ -6188,8 +6275,8 @@ break;
 ┗ 📂 4 ɢʙ ]
 ╰══𝐅𝐈𝐆𝐔𝐑𝐈𝐍𝐇𝐀𝐒══⪨
 ⋟📸 ${prefix}s (ᴍᴀʀᴄᴀʀ ғᴏᴛᴏ)
-⋟✏️ ${prefix}ʀᴇɴᴀᴍᴇ (ɴᴏᴍᴇ/ɴᴏᴍᴇ) 🪙
-⋟🖼️ ${prefix}ғɪɢᴜʀɪɴʜᴀs (5) 🪙
+⋟✏️ ${prefix}ʀᴇɴᴀᴍᴇ (ɴᴏᴍᴇ/ɴᴏᴍᴇ) 
+⋟🖼️ ${prefix}ғɪɢᴜʀɪɴʜᴀs (5) 
 ⋟📝 ${prefix}ᴍᴇɴᴜғɪɢ
 ╰┈┈┈◜❁◞┈┈┈
 ⋟📂 ${prefix}ᴍᴇɴᴜᴀᴅᴍ
@@ -6556,11 +6643,11 @@ break;
             
             let menuText = `${cabecalhomenu}
 ╰══𝐀𝐃𝐌𝐈𝐍𝐈𝐒𝐓𝐑𝐀𝐂𝐀𝐎══⪨
-⋟🚫 ${prefix}ban 🪙
+⋟🚫 ${prefix}ban
 ⋟⬆️ ${prefix}promover
 ⋟⬇️ ${prefix}rebaixar
-⋟🔇 ${prefix}mute 🪙
-⋟🔊 ${prefix}desmute 🪙
+⋟🔇 ${prefix}mute 
+⋟🔊 ${prefix}desmute
 ⋟⚠️ ${prefix}adv
 ⋟✅ ${prefix}rmadv
 ⋟📜 ${prefix}listadv
@@ -6573,10 +6660,10 @@ break;
 ⋟🧹 ${prefix}limparrank
 ⋟🔄 ${prefix}resetrank
 ╰══𝐆𝐄𝐑𝐄𝐍𝐂𝐈𝐀𝐌𝐄𝐍𝐓𝐎══⪨
-⋟🗑️ ${prefix}del 🪙
+⋟🗑️ ${prefix}del 
 ⋟🧼 ${prefix}limpar
 ⋟👻 ${prefix}banghost
-⋟👁️‍🗨️ ${prefix}hidetag 🪙
+⋟👁️‍🗨️ ${prefix}hidetag 
 ⋟📌 ${prefix}marcar
 ⋟🎁 ${prefix}sorteio
 ⋟🔗 ${prefix}linkgp
@@ -6688,7 +6775,7 @@ break;
 ⋟👤 ${prefix}perfil
 ⋟👑 ${prefix}dono
 ⋟📢 ${prefix}mention
-⋟😈 ${prefix}rvisu 🪙
+⋟😈 ${prefix}rvisu 
 ⋟😴 ${prefix}afk
 ╰═𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂𝐎𝐄𝐒═ ⪨
 ⋟🔢 ${prefix}totalcmd
@@ -7832,9 +7919,6 @@ break;
       case 'rvisu':
       case 'open':
       case 'revelar':
-      if (!chargeUser(2000, sender)) {
-        return; 
-    }
         try {
           var RSMM = info.message?.extendedTextMessage?.contextInfo?.quotedMessage;
           var boij22 = RSMM?.imageMessage || info.message?.imageMessage || RSMM?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessage?.message?.imageMessage || RSMM?.viewOnceMessage?.message?.imageMessage;
@@ -8984,17 +9068,18 @@ break;
     if (isVideo2 && boij.seconds > 9.9) return reply(`O vídeo precisa ter no máximo 9.9 segundos para ser convertido em figurinha.`);
     var buffer = await getFileBuffer(isVideo2 ? boij : boij2, isVideo2 ? 'video' : 'image')
     //await sendSticker(bender, from, { sticker: buffer, author: `✦ ${nomedono} ✦\n● https://info.loami.shop - ${day} ●`, packname: `👤 Usuario(a): ➔ ${pushname}\n🤖 Bot ➔ ${nomebot}\n👑 Dono: ➔`, type: isVideo2 ? 'video' : 'image'}, { quoted: info });
-    await sendSticker(bender, from, { sticker: buffer, author: `${figautor2}`, packname: `${figpackname2}`, type: isVideo2 ? 'video' : 'image', forceSquare: true}, { quoted: info });
+    await sendSticker(bender, from, { sticker: buffer, author: `${figautor2}`, packname: `${figpackname2}`, type: isVideo2 ? 'video' : 'image', forceSquare: true});
+    await sendSticker(bender, from, { sticker: buffer, author: `${figautor2}`, packname: `${figpackname2}`, type: isVideo2 ? 'video' : 'image'});
   } catch(e) {
   console.error(e);
   await reply("⚠️ Oh não! Aconteceu um errinho inesperado aqui. Tente de novo daqui a pouquinho, por favor! ⚠️");
   };
   break
 
-      case 'st2':
-      case 'stk2':
-      case 'sticker2':
-      case 's2':
+  case 'st3':
+      case 'stk3':
+      case 'sticker3':
+      case 's3':
         try {
           var RSM = info.message?.extendedTextMessage?.contextInfo?.quotedMessage;
           var boij2 = RSM?.imageMessage || info.message?.imageMessage || RSM?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessage?.message?.imageMessage || RSM?.viewOnceMessage?.message?.imageMessage;
@@ -9016,13 +9101,24 @@ break;
           await reply("❌ Ocorreu um erro interno. Tente novamente em alguns minutos.");
         }
         break;
-      case 'figualeatoria':
-      case 'randomsticker':
+
+      case 'st2':
+      case 'stk2':
+      case 'sticker2':
+      case 's2':
         try {
-          await bender.sendMessage(from, {
-            sticker: {
-              url: `https://raw.githubusercontent.com/badDevelopper/Testfigu/main/fig (${Math.floor(Math.random() * 8051)}).webp`
-            }
+          var RSM = info.message?.extendedTextMessage?.contextInfo?.quotedMessage;
+          var boij2 = RSM?.imageMessage || info.message?.imageMessage || RSM?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessage?.message?.imageMessage || RSM?.viewOnceMessage?.message?.imageMessage;
+          var boij = RSM?.videoMessage || info.message?.videoMessage || RSM?.viewOnceMessageV2?.message?.videoMessage || info.message?.viewOnceMessageV2?.message?.videoMessage || info.message?.viewOnceMessage?.message?.videoMessage || RSM?.viewOnceMessage?.message?.videoMessage;
+          if (!boij && !boij2) return reply(`Marque uma imagem ou um vídeo de até 9.9 segundos para fazer figurinha, com o comando: ${prefix + command} (mencionando a mídia)`);
+          var isVideo2 = !!boij;
+          if (isVideo2 && boij.seconds > 9.9) return reply(`O vídeo precisa ter no máximo 9.9 segundos para ser convertido em figurinha.`);
+          var buffer = await getFileBuffer(isVideo2 ? boij : boij2, isVideo2 ? 'video' : 'image');
+          await sendSticker(bender, from, {
+            sticker: buffer,
+            author: `『${pushname}』\n『${nomebot}』\n『${nomedono}』\n『cognima.com.br』`,
+            packname: '👤 Usuario(a)ᮀ۟❁’￫\n🤖 Botᮀ۟❁’￫\n👑 Donoᮀ۟❁’￫\n🌐 Siteᮀ۟❁’￫',
+            type: isVideo2 ? 'video' : 'image'
           }, {
             quoted: info
           });
@@ -9052,9 +9148,6 @@ case 'atalias2':
     break;
       
  case 'rename':
-if (!chargeUser(50, sender)) {
-        return; 
-    }
     try {
         if (!isQuotedSticker) return reply('Você usou de forma errada... Marque uma figurinha.');
 
@@ -9223,8 +9316,7 @@ case 'roubar':
       case 'del':
       case 'd':
         if (!isGroupAdmin) {
-            if (!chargeUser(5000, sender)) {
-        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 5.000 BCOINS");}}
+         return reply("Comando restrito a Administradores ou Moderadores com permissão.");}
         if (!menc_prt) return reply("Marque uma mensagem.");
         let stanzaId, participant;
         if (info.message.extendedTextMessage) {
@@ -9315,9 +9407,7 @@ case 'roubar':
       case 'kick':
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
-          if (!isGroupAdmin) {
-            if (!chargeUser(15000, sender)) {
-        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 15.000 BCOINS");}}
+          if (!isGroupAdmin) { return reply("Comando restrito a Administradores ou Moderadores com permissão.");}
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
           if (!menc_os2) return reply("Marque alguém 🙄");
           if (menc_os2 === nmrdn) return reply("❌ Não posso banir o dono do bot.");
@@ -9992,8 +10082,7 @@ A mensagem será enviada todos os dias às ${normalizedTime} (horário de São P
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) {
-            if (!chargeUser(10000, sender)) {
-        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 10.000 BCOINS");}}
+           return reply("Comando restrito a Administradores ou Moderadores com permissão.");}
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
           var DFC4 = "";
           var rsm4 = info.message?.extendedTextMessage?.contextInfo?.quotedMessage;
@@ -11189,8 +11278,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) {
-            if (!chargeUser(10000, sender)) {
-        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 10.000 BCOINS");}}
+           return reply("Comando restrito a Administradores ou Moderadores com permissão.");}
           if (!isBotAdmin) return reply("Eu preciso ser adm 💔");
           if (!menc_os2) return reply("Marque alguém 🙄");
           const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
@@ -11221,8 +11309,7 @@ Exemplos:
         try {
           if (!isGroup) return reply("isso so pode ser usado em grupo 💔");
           if (!isGroupAdmin) {
-            if (!chargeUser(1000, sender)) {
-        return reply("Comando restrito a Administradores ou Moderadores com permissão. 💔\n\nou 🪙 1.000 BCOINS");}}
+          return reply("Comando restrito a Administradores ou Moderadores com permissão.");}
           if (!menc_os2) return reply("Marque alguém 🙄");
           const groupFilePath = __dirname + `/../database/grupos/${from}.json`;
           let groupData = fs.existsSync(groupFilePath) ? JSON.parse(fs.readFileSync(groupFilePath)) : {

@@ -3,6 +3,7 @@ const fs = require('fs/promises');
 const { execSync } = require('child_process');
 const path = require('path');
 const zlib = require('zlib');
+const os = require('os');
 
 
 class SystemMonitor {
@@ -38,7 +39,7 @@ class SystemMonitor {
 
     /**
      * Obtém informações de uso de memória
-     */
+     
     async getMemoryUsage() {
         try {
             const memInfo = await fs.readFile('/proc/meminfo', 'utf8');
@@ -67,7 +68,53 @@ class SystemMonitor {
             console.error('❌ Erro ao obter uso de memória:', error.message);
             return { total: 0, used: 0, free: 0, usedPercent: 0 };
         }
+    }*/
+
+    async getMemoryUsage() {
+    try {
+        if (process.platform === 'win32') {
+            // 🪟 Windows → usa API nativa do Node
+            const total = os.totalmem();
+            const free = os.freemem();
+            const used = total - free;
+            const usedPercent = Math.round((used / total) * 100);
+
+            return {
+                total: Math.round(total / 1024 / 1024), // MB
+                used: Math.round(used / 1024 / 1024),   // MB
+                free: Math.round(free / 1024 / 1024),   // MB
+                usedPercent
+            };
+        } else {
+            // 🐧 Linux/macOS → lê /proc/meminfo
+            const memInfo = await fs.readFile('/proc/meminfo', 'utf8');
+            const lines = memInfo.split('\n');
+
+            const getMemValue = (key) => {
+                const line = lines.find(l => l.startsWith(key));
+                return line ? parseInt(line.match(/\d+/)[0]) : 0;
+            };
+
+            const memTotal = getMemValue('MemTotal');
+            const memFree = getMemValue('MemFree');
+            const memBuffers = getMemValue('Buffers');
+            const memCached = getMemValue('Cached');
+
+            const memUsed = memTotal - memFree - memBuffers - memCached;
+            const memUsedPercent = Math.round((memUsed / memTotal) * 100);
+
+            return {
+                total: Math.round(memTotal / 1024), // MB
+                used: Math.round(memUsed / 1024),   // MB
+                free: Math.round((memTotal - memUsed) / 1024), // MB
+                usedPercent: memUsedPercent
+            };
+        }
+    } catch (error) {
+        console.error('❌ Erro ao obter uso de memória:', error.message);
+        return { total: 0, used: 0, free: 0, usedPercent: 0 };
     }
+}
 
     /**
      * Limpa arquivos temporários antigos

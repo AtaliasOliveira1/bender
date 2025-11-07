@@ -352,3 +352,30 @@
 [2025-11-06T21:00:00.053Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
 [2025-11-07T00:58:14.169Z] Scheduler started with interval: 0 */6 * * *
 [2025-11-07T00:58:14.169Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:21:40.157Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:21:40.157Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T02:28:57.108Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:28:57.108Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T02:30:04.864Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T02:30:04.864Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:36:41.269Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T02:36:41.269Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:38:53.134Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:38:53.134Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T02:40:03.839Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:40:42.949Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T02:40:42.949Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:42:59.088Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T02:42:59.089Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:48:00.265Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T02:48:00.265Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:52:20.363Z] RentalExpirationManager initialized successfully
+[2025-11-07T02:52:20.363Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T02:53:39.252Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T02:53:39.252Z] RentalExpirationManager initialized successfully
+[2025-11-07T03:00:00.021Z] Starting rental expiration check...
+[2025-11-07T03:00:00.025Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 4ms
+[2025-11-07T03:03:52.403Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T03:03:52.403Z] RentalExpirationManager initialized successfully
+[2025-11-07T03:04:19.664Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T03:04:19.665Z] RentalExpirationManager initialized successfully

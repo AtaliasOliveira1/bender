@@ -49,7 +49,7 @@ function printSeparator() {
 function setupGracefulShutdown() {
   const shutdown = () => {
     console.log('\n');
-    printWarning('🛑 Atualização cancelada pelo usuário.');
+    printWarning('⛔ Atualização cancelada pelo usuário.');
     process.exit(0);
   };
 
@@ -104,7 +104,7 @@ async function checkRequirements() {
 async function confirmUpdate() {
   printWarning('⚠️ Atenção: A atualização sobrescreverá arquivos existentes, exceto configurações e dados salvos.');
   printInfo('📂 Um backup será criado automaticamente.');
-  printWarning('🛑 Pressione Ctrl+C para cancelar a qualquer momento.');
+  printWarning('⛔ Pressione Ctrl+C para cancelar a qualquer momento.');
 
   return new Promise((resolve) => {
     let countdown = 5;

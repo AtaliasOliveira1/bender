@@ -649,7 +649,7 @@ class RelationshipManager {
     const userOneName = getUserName(userA);
     const userTwoName = getUserName(userB);
     const lines = [
-      '💔 *Relacionamento encerrado!*',
+      '⛔ *Relacionamento encerrado!*',
       '',
       `${config.emoji} Status encerrado: ${config.label}`
     ];
@@ -875,7 +875,7 @@ class RelationshipManager {
     const lines = [
       '😈 *TRAIÇÃO CONFIRMADA!*',
       '',
-      `💔 @${traitorName} traiu @${victimName}!`,
+      `⛔ @${traitorName} traiu @${victimName}!`,
       `👤 Cúmplice: @${accompliceName} aceitou participar!`,
       ''
     ];
@@ -884,7 +884,7 @@ class RelationshipManager {
 
     if (targetInRelationship && targetPartner) {
       lines.push(`⚠️ @${accompliceName} também está em um relacionamento!`);
-      lines.push(`💔 @${getUserName(targetPartner)} também foi traído(a)!`);
+      lines.push(`⛔ @${getUserName(targetPartner)} também foi traído(a)!`);
       lines.push('');
       mentions.push(targetPartner);
     }
@@ -940,7 +940,7 @@ class RelationshipManager {
       '📜 *HISTÓRICO DE TRAIÇÕES*',
       '',
       `👥 Casal: @${partnerA} & @${partnerB}`,
-      `💔 Total de traições: ${betrayals.length}`,
+      `⛔ Total de traições: ${betrayals.length}`,
       ''
     ];
 

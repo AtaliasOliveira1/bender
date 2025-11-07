@@ -228,7 +228,7 @@ async function installNodeDependencies() {
 }
 
 async function main() {
-    process.on('SIGINT', () => { print.warning('\n🛑 Configuração cancelada.'); process.exit(0); });
+    process.on('SIGINT', () => { print.warning('\n⛔ Configuração cancelada.'); process.exit(0); });
 
     await SystemInfo.detect();
 
