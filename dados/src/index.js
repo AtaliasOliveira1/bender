@@ -14,6 +14,7 @@ const ia = require('./funcs/private/ia');
 
 //import moment from 'moment-timezone';
 const moment = require('moment-timezone');
+const pathfig = require('path');
 
 const { formatUptime, normalizar, isGroupId, isUserId, isValidLid, isValidJid, getUserName, getLidFromJid, buildUserId, getBotId, ensureDirectoryExists, ensureJsonFileExists, loadJsonFile, initJidLidCache, saveJidLidCache, getLidFromJidCached, normalizeUserId, convertIdsToLid, idsMatch, idInArray } = require('./utils/helpers');
 const {
@@ -158,7 +159,7 @@ const OWNER_ONLY_MESSAGE = '🚫 Este comando é apenas para o dono do bot!';
 const API_KEY_BRONXYS = "benderbot"
 const API_KEY_ZEROTWO = "benderbot"
 var zerosite = "https://zero-two-apis.com.br"
-const assBender = '𝑩𝒆𝒏𝒅𝒆𝒓𝑿 𝒗3.0'
+const assBender = '𝑩𝒆𝒏𝒅𝒆𝒓𝑿 𝒗3.1'
 const dattofc = moment.tz('America/Sao_Paulo').format('DD/MM/YYYY');
 const hourofc = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
 
@@ -2765,9 +2766,9 @@ Código: *${roleCode}*`,
 
 //comandos sem prefixo
 
-const path = require('path');
-
-async function sendSticker(from, info, bender) {
+  //
+  //auto repo
+async function sendStickerBender(from, info, bender) {
     // Lista de figurinhas permitidas
     const allowedStickers = [
         "benderdiga.webp",
@@ -2780,7 +2781,7 @@ async function sendSticker(from, info, bender) {
     const randomSticker = allowedStickers[Math.floor(Math.random() * allowedStickers.length)];
 
     // Lê o arquivo da figurinha selecionada
-    const stickerPath = path.join("./dados/database/figurinhas/", randomSticker);
+    const stickerPath = pathfig.join("./dados/database/figurinhas/", randomSticker);
     let stickerBuffer;
     try {
         stickerBuffer = fs.readFileSync(stickerPath);
@@ -2814,8 +2815,9 @@ async function sendSticker(from, info, bender) {
 
 if (budy2 === "bender") {
     
-    sendSticker(from, info, bender);
+    sendStickerBender(from, info, bender);
 }
+
 
 // Detectar a palavra "figurinhas" em qualquer mensagem de texto
 if (isGroup && body.includes('figurinha')) {
@@ -5509,97 +5511,79 @@ case 'tocar': {
         const resultado = data[0];
         const downloadQuery = query;
 
-        // Conteúdo da lista (Estrutura do seu menubuttons.js)
-        const listMessageData = {
-            text: `\n\n🔘 *Selecione o formato de download:*\n\n`,
-            title: `${assBender}`,
-            subtitle: `*Termo Pesquisado:* ${downloadQuery}`,
-            footer: 'Clique em "Selecionar Download" para escolher o formato.',
-            interactiveButtons: [
-                {
-                    name: 'single_select',
-                    buttonParamsJson: JSON.stringify({
-                        title: '📋 Selecionar Download',
-                        sections: [
-                            {
-                                title: 'Escolha o Formato',
-                                rows: [
-                                    {
-                                        // ID que chamará o case 'playaudio'
-                                        header: '🎧 Áudio (MP3)',
-                                        title: 'Baixar Música',
-                                        description: `Comando: ${prefix}playaudio ${downloadQuery}`,
-                                        id: `${prefix}playbtn ${downloadQuery}` 
-                                    },
-                                    {
-                                        // ID que chamará o case 'playvid'
-                                        header: '🎥 Vídeo (MP4)',
-                                        title: 'Baixar Vídeo',
-                                        description: `Comando: ${prefix}playvid ${downloadQuery}`,
-                                        id: `${prefix}playvidbtn ${downloadQuery}` 
-                                    }
-                                ]
-                            }
-                        ]
-                    })
-                }
-            ]
-        };
+        await bender.react('🆗', {key: info.key});
+
+        if (!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`);
         
-        // Adiciona detalhes da pesquisa no corpo da mensagem
-        listMessageData.text += 
-                          `\n📌 *Título:* ${resultado.titulo || 'Não Encontrado'}\n` +
-                          `⏳ *Duração:* ${resultado.tempo || 'Não Encontrado'}\n` +
-                          `📅 *Postado:* ${resultado.postado || 'Não Encontrado'}\n`;
-
+        // Verifica se a pesquisa retornou resultados válidos e se o vídeo não é muito longo
+        if (!data || data.length === 0 || data[0]?.tempo?.length >= 7) {
+            // Se falhar na primeira API (pesquisa ruim ou vídeo longo), lança um erro.
+            throw new Error("Pesquisa na API 1 falhou (ruim ou vídeo muito longo).");
+        }
 
         // ----------------------------------------------------
-        // ENVIO DA MENSAGEM COM LISTA (com ou sem imagem de capa)
+        // BLOCO ISOLADO PARA TENTAR ENVIAR A IMAGEM DE CAPA
         // ----------------------------------------------------
+        var N_E = " Não encontrado."; // Variável não utilizada, mas mantida por segurança se for usada em outro lugar
+        var bla2 = `*Titulo:* ${data[0]?.titulo||N_E}\n*Tempo:* ${data[0]?.tempo||N_E}\n\n🎧 *Tocando agora no ${assBender}!*`;
+        var bla = `📥 *Baixar vídeo:* \`${prefix}playvid ${q.trim()}\`
+🎧 *Tocando agora no ${assBender}!*`;
+
         try {
-
             let imageUrl = data[0]?.thumb || logoslink?.logo;
             let imageBuffer;
-
-            // Se for enviar com mídia, o texto precisa ser o 'caption'
-            const fullCaption = listMessageData.subtitle + "\n" + listMessageData.text;
 
             if (imageUrl) {
                 // Tenta o download da imagem
                 const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
                 imageBuffer = Buffer.from(response.data); 
-            
-                // --- ESTRUTURA CORRETA (Baseada no seu 'menu') ---
+            } else {
+                throw new Error("URL de imagem não encontrada/disponível.");
+            }
+
+            if (imageBuffer) {
                 await bender.sendMessage(from, {
                     image: imageBuffer,
-                    caption: fullCaption, // O texto principal vai no CAPTION
-                    title: listMessageData.title, // Propriedades da Lista/Botão
-                    subtitle: listMessageData.subtitle,
-                    footer: listMessageData.footer,
-                    interactiveButtons: listMessageData.interactiveButtons,
-                    mimetype: 'image/jpeg',
-                    hasMediaAttachment: false // Opcional, mas geralmente ajuda
-                }, { quoted: info });
-
-            } else {
-                // Se a imagem falhar/não existir, envia a lista sem imagem
-                await bender.sendMessage(from, listMessageData, { quoted: info });
+                    caption: bla2
+                }, {
+                    quoted: info
+                });
             }
         } catch (eImage) {
-            console.log("Aviso: Falha ao enviar a imagem de capa. Tentando enviar apenas a lista.", eImage.message);
-            
-            // Tentativa de fallback: Envia SÓ A LISTA se a tentativa com a imagem falhar.
-            try {
-                await bender.sendMessage(from, listMessageData, { quoted: info });
-            } catch (eFallback) {
-                console.error("Falha total no envio da lista:", eFallback);
-                return reply("❌ Ocorreu um erro ao enviar a lista de opções.");
-            }
+            // Se o download/envio da imagem falhar, apenas loga e CONTINUA para o áudio
+            console.log("Aviso: Falha ao enviar a imagem de capa. Prosseguindo com o áudio.", eImage.message);
+            // Se a imagem falhar, envia a legenda como uma resposta simples
+            await reply(bla); 
         }
         
-    } catch (error) {
-        console.error("Erro no comando de botões:", error);
-        return reply("❌ Ocorreu um erro ao gerar a lista de opções.");
+        // ENVIO DO ÁUDIO (URL da API 1)
+        // ----------------------------------------------------
+        await bender.sendMessage(from, {
+            audio: {url: `https://api.bronxyshost.com.br/api-bronxys/play?nome_url=${q}&apikey=${API_KEY_BRONXYS}`},
+            mimetype: "audio/mpeg", 
+            fileName: data[0]?.titulo || "play.mp3"
+        }, {quoted: info}).catch(async (e) => {
+            // Se o envio do áudio da API 1 falhar, lança um erro para o catch externo
+            console.log("Erro no download da API 1 (Áudio):", e);
+            throw new Error("Erro no download do áudio principal (API 1).");
+        });
+        
+    // ----------------------------------------------------
+    // CATCH EXTERNO: Trata falhas na pesquisa e no download da API 1
+    // ----------------------------------------------------
+    } catch (e) {
+        console.log("Falha na API 1:", e.message);
+       addMoneyToWallet(sender, COST);
+
+        // Mensagens de erro mais específicas
+        if (e.message.includes("Pesquisa na API 1 falhou")) {
+            return reply(`A pesquisa falhou (música não encontrada ou vídeo muito longo).\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`);
+        } else if (e.message.includes(`Erro no download do áudio principal\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`)) {
+            return reply(`❌ O áudio foi encontrado, mas houve um erro ao baixar/enviar.\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`);
+        } else {
+            // Erro de rede ou outro erro não mapeado
+            return reply(`Seja mais específico, não deu pra encontrar com apenas isso... / Erro de Rede ou API fora.\nO valor de ${fmt(COST)} Bcoins foi *devolvido* para sua carteira.`);
+        }
     }
 }
 break;
@@ -5847,6 +5831,7 @@ case 'play2411243': {
         // Dados válidos da API 1 encontrados: Processamos normalmente
 
         var N_E = " Não encontrado.";
+        var bla2 = `*Titulo:* ${data[0]?.titulo||N_E}\n*Tempo:* ${data[0]?.tempo||N_E}\n\n🎧 *Tocando agora no ${assBender}!*`;
         var bla = `📥 *Baixar vídeo:* \`${prefix}playvid ${q.trim()}\`
 🎧 *Tocando agora no ${assBender}!*`;
 
@@ -5868,7 +5853,7 @@ case 'play2411243': {
             if (imageBuffer) {
                 await bender.sendMessage(from, {
                     image: imageBuffer,
-                    caption: bla
+                    caption: bla2
                 }, {
                     quoted: info
                 });
