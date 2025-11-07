@@ -3,8 +3,8 @@ const path = require('path');
 const cron = require('node-cron');
 
 class RentalExpirationManager {
-  constructor(nazu, config = {}) {
-    this.nazu = nazu;
+  constructor(bender, config = {}) {
+    this.bender = bender;
 
     this.config = {
       checkInterval: config.checkInterval || '0 */6 * * *', // Every 6 hours
@@ -159,7 +159,7 @@ class RentalExpirationManager {
   async processExpiredRental(groupId, groupInfo, rentalData) {
     try {
 
-      const groupMetadata = await this.nazu.groupMetadata(groupId).catch(() => null);
+      const groupMetadata = await this.bender.groupMetadata(groupId).catch(() => null);
 
       
       if (!groupMetadata) {
@@ -190,7 +190,7 @@ class RentalExpirationManager {
   async sendExpirationNotification(groupId, type, daysUntilExpiry) {
     try {
 
-      const groupMetadata = await this.nazu.groupMetadata(groupId).catch(() => null);
+      const groupMetadata = await this.bender.groupMetadata(groupId).catch(() => null);
 
       if (!groupMetadata) return;
 
@@ -199,7 +199,7 @@ class RentalExpirationManager {
 
       // Send to group
 
-      await this.nazu.sendMessage(groupId, {
+      await this.bender.sendMessage(groupId, {
 
         text: message
       }).catch(error => {
@@ -212,7 +212,7 @@ class RentalExpirationManager {
       
       for (const admin of admins) {
 
-        await this.nazu.sendMessage(admin.id, {
+        await this.bender.sendMessage(admin.id, {
 
           text: message
         }).catch(error => {
@@ -303,14 +303,14 @@ O aluguel deste grupo expirou e o bot está saindo agora. Para voltar a usar o b
 🤖 *Obrigado por usar nossos serviços! Até breve!*`;
 
 
-      await this.nazu.sendMessage(groupId, {
+      await this.bender.sendMessage(groupId, {
 
         text: goodbyeMessage
       });
 
       // Leave the group
 
-      await this.nazu.groupLeave(groupId);
+      await this.bender.groupLeave(groupId);
 
       
       // Remove from rental data

@@ -19,18 +19,17 @@
     "author": "Hiudy",
     "license": "ISC",
     "dependencies": {
-
-        "node-cache": "latest",
         "@hapi/boom": "latest",
-        "whaileys": "latest",
         "axios": "latest",
         "fluent-ffmpeg": "latest",
         "linkedom": "latest",
+        "moment-timezone": "^0.6.0",
+        "node-cache": "latest",
         "node-cron": "latest",
-
         "node-webpmux": "latest",
         "pino": "latest",
         "qrcode-terminal": "latest",
+        "whaileys": "latest",
         "yt-search": "latest"
     },
     "devDependencies": {

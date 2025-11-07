@@ -11,6 +11,10 @@ const crypto = require('crypto');
 const PerformanceOptimizer = require('./utils/performanceOptimizer');
 const cron = require('node-cron');
 const ia = require('./funcs/private/ia');
+
+//import moment from 'moment-timezone';
+const moment = require('moment-timezone');
+
 const { formatUptime, normalizar, isGroupId, isUserId, isValidLid, isValidJid, getUserName, getLidFromJid, buildUserId, getBotId, ensureDirectoryExists, ensureJsonFileExists, loadJsonFile, initJidLidCache, saveJidLidCache, getLidFromJidCached, normalizeUserId, convertIdsToLid, idsMatch, idInArray } = require('./utils/helpers');
 const {
   loadMsgPrefix,
@@ -170,6 +174,8 @@ const writeJsonFile = (filePath, data) => {
 
 //=======Atalias Horario de Brasilia=============\\
 
+
+
 /* ------- [ Horário Oficial de Brasília Loami ] ------- */
 /* Data & Hora */
 const time = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
@@ -264,7 +270,7 @@ setInterval(() => {
   saveJidLidCache();
 }, 5 * 60 * 1000);
   
-async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirationManager = null) {
+async function NazuninhaBotExec(bender, info, store, messagesCache, rentalExpirationManager = null) {
   // Log de início de processamento para debug paralelo
   const msgId = info?.key?.id?.slice(-6) || 'unknown';
   const from = info?.key?.remoteJid || 'unknown';
@@ -294,9 +300,9 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
         return freshData;
       }
 
-      return await nazu.groupMetadata(groupId).catch(() => ({}));
+      return await bender.groupMetadata(groupId).catch(() => ({}));
     } catch (error) {
-      return await nazu.groupMetadata(groupId).catch(() => ({}));
+      return await bender.groupMetadata(groupId).catch(() => ({}));
     }
   }
 
@@ -377,7 +383,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
     return { changed };
   }
 
-  async function handleAutoDownload(nazu, from, url, info) {
+  async function handleAutoDownload(bender, from, url, info) {
     try {
       if (url.includes('tiktok.com')) {
         if (!KeyCog) {
@@ -387,7 +393,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
         
         const datinha = await tiktok.dl(url, KeyCog);
         if (datinha.ok) {
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             [datinha.type]: {
               url: datinha.urls[0]
             },
@@ -408,7 +414,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
         
         const datinha = await igdl.dl(url, KeyCog);
         if (datinha.ok) {
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             [datinha.data[0].type]: datinha.data[0].buff,
             caption: '📸 Download automático do Instagram!'
           }, {
@@ -422,7 +428,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
       } else if (url.includes('pinterest.com') || url.includes('pin.it')) {
         const datinha = await pinterest.dl(url);
         if (datinha.ok) {
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             [datinha.type]: {
               url: datinha.urls[0]
             },
@@ -538,14 +544,14 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
       
       // Se for JID, converte para LID usando cache
       if (sender && isValidJid(sender)) {
-        sender = await getLidFromJidCached(nazu, sender);
+        sender = await getLidFromJidCached(bender, sender);
       }
     } else {
       sender = info.key.remoteJid;
       
       // Se for JID no PV, converte para LID usando cache
       if (sender && isValidJid(sender)) {
-        sender = await getLidFromJidCached(nazu, sender);
+        sender = await getLidFromJidCached(bender, sender);
       }
     }
     
@@ -559,8 +565,8 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
     const subDonoList = loadSubdonos();
     const isSubOwner = isSubdono(sender);
     const ownerJid = `${numerodono}@s.whatsapp.net`;
-    const botId = getBotId(nazu);
-    const isBotSender = sender === botId || sender === nazu.user?.id?.split(':')[0] + '@s.whatsapp.net' || sender === nazu.user?.id?.split(':')[0] + '@lid';
+    const botId = getBotId(bender);
+    const isBotSender = sender === botId || sender === bender.user?.id?.split(':')[0] + '@s.whatsapp.net' || sender === bender.user?.id?.split(':')[0] + '@lid';
     
     // Verificação melhorada de dono (compara base do número sem sufixo)
     const senderBase = sender.split('@')[0];
@@ -705,7 +711,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
       try {
         if (!roleData || !roleData.announcementKey || !roleData.announcementKey.id) return;
         try {
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             delete: {
               remoteJid: from,
               fromMe: roleData.announcementKey.fromMe !== undefined ? roleData.announcementKey.fromMe : true,
@@ -723,7 +729,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
           ...goingList.slice(0, MAX_MENTIONS_IN_ANNOUNCE),
           ...notGoingList.slice(0, MAX_MENTIONS_IN_ANNOUNCE)
         ];
-        const sentMessage = await nazu.sendMessage(from, { text: announcementText, mentions });
+        const sentMessage = await bender.sendMessage(from, { text: announcementText, mentions });
         if (sentMessage?.key?.id) {
           if (!groupData.roleMessages || typeof groupData.roleMessages !== 'object') {
             groupData.roleMessages = {};
@@ -890,8 +896,8 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
       groupMetadata.participants?.filter(p => p.admin === 'admin' || p.admin === 'superadmin').map(extractParticipantId).filter(Boolean) || [];
 
     // Converte todos os membros e admins para LID (usando cache)
-    const AllgroupMembers = await convertIdsToLid(nazu, rawMembers);
-    const groupAdmins = await convertIdsToLid(nazu, rawAdmins);
+    const AllgroupMembers = await convertIdsToLid(bender, rawMembers);
+    const groupAdmins = await convertIdsToLid(bender, rawAdmins);
     
     // Debug log
     debugLog('Membros e Admins convertidos:', {
@@ -901,28 +907,28 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
     });
 
     // Robust bot ID extraction with multiple fallback mechanisms
-    const getBotNumber = (nazu) => {
+    const getBotNumber = (bender) => {
       try {
         // Tenta pegar LID primeiro
-        if (nazu.user?.lid) {
+        if (bender.user?.lid) {
           // Remove o sufixo `:XX` se existir (ex: 267955023654984:13@lid -> 267955023654984@lid)
-          const lid = nazu.user.lid;
+          const lid = bender.user.lid;
           const cleanLid = lid.includes(':') ? lid.split(':')[0] + '@lid' : lid;
           return cleanLid;
         }
         
         // Fallback para ID padrão
-        if (nazu.user?.id) {
-          const botId = nazu.user.id.split(':')[0];
+        if (bender.user?.id) {
+          const botId = bender.user.id.split(':')[0];
           return `${botId}@s.whatsapp.net`;
         }
 
         // Usa helper se disponível
         if (typeof getBotId === 'function') {
-          return getBotId(nazu);
+          return getBotId(bender);
         }
 
-        console.warn('Unable to determine bot number - user object:', nazu.user);
+        console.warn('Unable to determine bot number - user object:', bender.user);
         return null;
       } catch (error) {
         console.error('Error extracting bot number:', error);
@@ -930,11 +936,11 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
       }
     };
 
-    const botNumber = getBotNumber(nazu);
+    const botNumber = getBotNumber(bender);
     
     // Converte o botNumber para LID se for JID
     const botNumberLid = botNumber && isValidJid(botNumber) 
-      ? await getLidFromJidCached(nazu, botNumber) 
+      ? await getLidFromJidCached(bender, botNumber) 
       : botNumber;
     
     const isBotAdmin = !isGroup || !botNumberLid ? false : idInArray(botNumberLid, groupAdmins);
@@ -1011,7 +1017,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
     if (isGroup && isStatusMention && isAntiStatus && !isGroupAdmin) {
       if (!isUserWhitelisted(sender, 'antistatus')) {
         if (isBotAdmin) {
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             delete: {
               remoteJid: from,
               fromMe: false,
@@ -1019,7 +1025,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
               participant: sender
             }
           });
-          await nazu.groupParticipantsUpdate(from, [sender], 'remove');
+          await bender.groupParticipantsUpdate(from, [sender], 'remove');
         } else {
           await reply("⚠️ Não posso remover o usuário porque não sou administrador.");
         }
@@ -1028,7 +1034,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
     if (isGroup && isButtonMessage && isAntiBtn && !isGroupAdmin) {
       if (!isUserWhitelisted(sender, 'antibtn')) {
         if (isBotAdmin) {
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             delete: {
               remoteJid: from,
               fromMe: false,
@@ -1036,7 +1042,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
               participant: sender
             }
           });
-          await nazu.groupParticipantsUpdate(from, [sender], 'remove');
+          await bender.groupParticipantsUpdate(from, [sender], 'remove');
         } else {
           await reply("⚠️ Não posso remover o usuário porque não sou administrador.");
         }
@@ -1117,13 +1123,13 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
     }
     if (isGroup && isMuted) {
       try {
-        //await nazu.sendMessage(from, {
+        //await bender.sendMessage(from, {
          // text: `🤫 *Usuário mutado detectado*\n\n@${getUserName(sender)}, você está tentando falar enquanto está mutado neste grupo. Você será removido conforme as regras.`,
         //  mentions: [sender]
        // }, {
        //   quoted: info
        // });
-        await nazu.sendMessage(from, {
+        await bender.sendMessage(from, {
           delete: {
             remoteJid: from,
             fromMe: false,
@@ -1369,7 +1375,7 @@ async function NazuninhaBotExec(nazu, info, store, messagesCache, rentalExpirati
                 const confirmationText = isGoingEmoji(emoji)
                   ? `🙋 Presença confirmada no rolê *${roleData.title || roleCode}*.`
                   : `🤷 Você sinalizou que não vai mais no rolê *${roleData.title || roleCode}*.`;
-                await nazu.sendMessage(actorId, {
+                await bender.sendMessage(actorId, {
                   text: `${confirmationText}
 Código: *${roleCode}*`,
                   mentions: [actorId]
@@ -2042,7 +2048,7 @@ Código: *${roleCode}*`,
       }
     };
     
-    startAutoMensagensWorker(nazu);
+    startAutoMensagensWorker(bender);
 
     const getFileBuffer = async (mediakey, mediaType, options = {}) => {
       try {
@@ -2171,10 +2177,10 @@ Código: *${roleCode}*`,
                 await reply(`🚨 Conteúdo impróprio detectado! (${reason})`);
                 if (isBotAdmin) {
                   try {
-                    await nazu.sendMessage(from, {
+                    await bender.sendMessage(from, {
                       delete: info.key
                     });
-                    await nazu.groupParticipantsUpdate(from, [sender], 'remove');
+                    await bender.groupParticipantsUpdate(from, [sender], 'remove');
                     await reply(`🔞 @${getUserName(sender)}, conteúdo impróprio detectado. Você foi removido do grupo.`, {
                       mentions: [sender]
                     });
@@ -2203,7 +2209,7 @@ Código: *${roleCode}*`,
     if (isGroup && groupData.antiloc && !isGroupAdmin && type === 'locationMessage') {
 
       if (!isUserWhitelisted(sender, 'antiloc')) {
-        await nazu.sendMessage(from, {
+        await bender.sendMessage(from, {
           delete: {
             remoteJid: from,
             fromMe: false,
@@ -2211,7 +2217,7 @@ Código: *${roleCode}*`,
             participant: sender
           }
         });
-        await nazu.groupParticipantsUpdate(from, [sender], 'remove');
+        await bender.groupParticipantsUpdate(from, [sender], 'remove');
         await reply(`🗺️ @${getUserName(sender)}, localização não permitida. Você foi removido do grupo.`, {
           mentions: [sender]
         });
@@ -2234,7 +2240,7 @@ Código: *${roleCode}*`,
     if (isGroup && groupData.antidoc && !isGroupAdmin && (type === 'documentMessage' || type === 'documentWithCaptionMessage')) {
 
       if (!isUserWhitelisted(sender, 'antidoc')) {
-        await nazu.sendMessage(from, {
+        await bender.sendMessage(from, {
           delete: {
             remoteJid: from,
             fromMe: false,
@@ -2242,7 +2248,7 @@ Código: *${roleCode}*`,
             participant: sender
           }
         });
-        await nazu.groupParticipantsUpdate(from, [sender], 'remove');
+        await bender.groupParticipantsUpdate(from, [sender], 'remove');
         await reply(`📄 @${getUserName(sender)}, documentos não são permitidos. Você foi removido do grupo.`, {
           mentions: [sender]
         });
@@ -2290,7 +2296,7 @@ Código: *${roleCode}*`,
     if (isGroup && groupData.antilinkhard && !isGroupAdmin && budy2.includes('http') && !isOwner) {
       if (!isUserWhitelisted(sender, 'antilinkhard')) {
         try {
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             delete: {
               remoteJid: from,
               fromMe: false,
@@ -2299,7 +2305,7 @@ Código: *${roleCode}*`,
             }
           });
           if (isBotAdmin) {
-            await nazu.groupParticipantsUpdate(from, [sender], 'remove');
+            await bender.groupParticipantsUpdate(from, [sender], 'remove');
             await reply(`🔗 @${getUserName(sender)}, links não são permitidos. Você foi removido do grupo.`, {
               mentions: [sender]
             });
@@ -2393,21 +2399,21 @@ Código: *${roleCode}*`,
         try {
           if (budy2.includes('chat.whatsapp.com')) {
             foundGroupLink = true;
-            link_dgp = await nazu.groupInviteCode(from);
+            link_dgp = await bender.groupInviteCode(from);
             if (budy2.includes(link_dgp)) foundGroupLink = false;
           }
           if (!foundGroupLink && info.message?.requestPaymentMessage) {
             const paymentText = info.message.requestPaymentMessage?.noteMessage?.extendedTextMessage?.text || '';
             if (paymentText.includes('chat.whatsapp.com')) {
               foundGroupLink = true;
-              link_dgp = link_dgp || await nazu.groupInviteCode(from);
+              link_dgp = link_dgp || await bender.groupInviteCode(from);
               if (paymentText.includes(link_dgp)) foundGroupLink = false;
             }
 
           }
           if (foundGroupLink) {
             if (isOwner) return;
-            await nazu.sendMessage(from, {
+            await bender.sendMessage(from, {
               delete: {
                 remoteJid: from,
                 fromMe: false,
@@ -2417,7 +2423,7 @@ Código: *${roleCode}*`,
             });
             if (!AllgroupMembers.includes(sender)) return;
             if (isBotAdmin) {
-              await nazu.groupParticipantsUpdate(from, [sender], 'remove');
+              await bender.groupParticipantsUpdate(from, [sender], 'remove');
               await reply(`🔗 @${getUserName(sender)}, links de outros grupos não são permitidos. Você foi removido do grupo.`, {
                 mentions: [sender]
               });
@@ -2460,7 +2466,7 @@ Código: *${roleCode}*`,
           if (relResponse) {
             // Apenas envia mensagem se for sucesso, ignora respostas inválidas
             if (relResponse.success && relResponse.message) {
-              await nazu.sendMessage(from, {
+              await bender.sendMessage(from, {
                 text: relResponse.message,
                 mentions: relResponse.mentions || []
               });
@@ -2474,7 +2480,7 @@ Código: *${roleCode}*`,
           if (betrayalResponse) {
             // Apenas envia mensagem se for sucesso, ignora respostas inválidas
             if (betrayalResponse.success && betrayalResponse.message) {
-              await nazu.sendMessage(from, {
+              await bender.sendMessage(from, {
                 text: betrayalResponse.message,
                 mentions: betrayalResponse.mentions || []
               });
@@ -2547,8 +2553,8 @@ Código: *${roleCode}*`,
     }
     if (budy2.match(/^(\d+)d(\d+)$/)) reply(+budy2.match(/^(\d+)d(\d+)$/)[1] > 50 || +budy2.match(/^(\d+)d(\d+)$/)[2] > 100 ? "❌ Limite: max 50 dados e 100 lados" : "🎲 Rolando " + budy2.match(/^(\d+)d(\d+)$/)[1] + "d" + budy2.match(/^(\d+)d(\d+)$/)[2] + "...\n🎯 Resultados: " + (r = [...Array(+budy2.match(/^(\d+)d(\d+)$/)[1])].map(_ => 1 + Math.floor(Math.random() * +budy2.match(/^(\d+)d(\d+)$/)[2]))).join(", ") + "\n📊 Total: " + r.reduce((a, b) => a + b, 0));
 
-    const _botShort = (nazu && nazu.user && (nazu.user.id || nazu.user.lid)) ? String((nazu.user.id || nazu.user.lid).split(':')[0]) : '';
-    if (!info.key.fromMe && isAssistente && !isCmd && ((_botShort && budy2.includes(_botShort)) || (menc_os2 && menc_os2 == await getBotNumber(nazu))) && KeyCog) {
+    const _botShort = (bender && bender.user && (bender.user.id || bender.user.lid)) ? String((bender.user.id || bender.user.lid).split(':')[0]) : '';
+    if (!info.key.fromMe && isAssistente && !isCmd && ((_botShort && budy2.includes(_botShort)) || (menc_os2 && menc_os2 == await getBotNumber(bender))) && KeyCog) {
       if (budy2.replaceAll('@' + _botShort, '').length > 2) {
         try {
           const jSoNzIn = {
@@ -2588,7 +2594,7 @@ Código: *${roleCode}*`,
           }
 
             if (!KeyCog) {
-              await nazu.sendMessage(nmrdn, {
+              await bender.sendMessage(nmrdn, {
                 text: '🤖 *Sistema de IA desativado*\n\n😅 O sistema de IA está desativado porque a API key não foi configurada.\n\n⚙️ Para configurar, use o comando: `!apikey SUA_API_KEY`\n📞 Suporte: wa.me/553399285117'
               });
               return;
@@ -2598,7 +2604,7 @@ Código: *${roleCode}*`,
             const respAssist = await ia.makeAssistentRequest({
               mensagens: [jSoNzIn]
 
-            }, KeyCog, nazu, nmrdn);
+            }, KeyCog, bender, nmrdn);
 
             
             if (respAssist.erro === 'Sistema de IA temporariamente desativado') {
@@ -2700,7 +2706,7 @@ Código: *${roleCode}*`,
 
       if (!isUserWhitelisted(sender, 'antifig')) {
         try {
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             delete: {
               remoteJid: from,
               fromMe: false,
@@ -2720,10 +2726,10 @@ Código: *${roleCode}*`,
           let warnMessage = `🚫 @${getUserName(sender)}, figurinhas não são permitidas neste grupo! Advertência ${warnCount}/${warnLimit}.`;
           if (warnCount >= warnLimit && isBotAdmin) {
             warnMessage += `\n⚠️ Você atingiu o limite de advertências e será removido.`;
-            await nazu.groupParticipantsUpdate(from, [sender], 'remove');
+            await bender.groupParticipantsUpdate(from, [sender], 'remove');
             delete groupData.warnings[sender];
           }
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             text: warnMessage,
             mentions: [sender]
           });
@@ -2939,7 +2945,7 @@ function chargeUser(cost, sender) {
           } else if (processedResponse.type === 'image') {
             const imageBuffer = processedResponse.buffer ? Buffer.from(processedResponse.buffer, 'base64') : null;
             if (imageBuffer) {
-              await nazu.sendMessage(from, {
+              await bender.sendMessage(from, {
                 image: imageBuffer,
                 caption: processedResponse.caption || ''
               }, { quoted: info });
@@ -2947,7 +2953,7 @@ function chargeUser(cost, sender) {
           } else if (processedResponse.type === 'video') {
             const videoBuffer = processedResponse.buffer ? Buffer.from(processedResponse.buffer, 'base64') : null;
             if (videoBuffer) {
-              await nazu.sendMessage(from, {
+              await bender.sendMessage(from, {
                 video: videoBuffer,
                 caption: processedResponse.caption || ''
               }, { quoted: info });
@@ -2955,7 +2961,7 @@ function chargeUser(cost, sender) {
           } else if (processedResponse.type === 'audio') {
             const audioBuffer = processedResponse.buffer ? Buffer.from(processedResponse.buffer, 'base64') : null;
             if (audioBuffer) {
-              await nazu.sendMessage(from, {
+              await bender.sendMessage(from, {
                 audio: audioBuffer,
                 mimetype: 'audio/mp4',
                 ptt: processedResponse.ptt || false
@@ -2964,7 +2970,7 @@ function chargeUser(cost, sender) {
           } else if (processedResponse.type === 'sticker') {
             const stickerBuffer = processedResponse.buffer ? Buffer.from(processedResponse.buffer, 'base64') : null;
             if (stickerBuffer) {
-              await nazu.sendMessage(from, {
+              await bender.sendMessage(from, {
                 sticker: stickerBuffer
               }, { quoted: info });
             }
@@ -3171,7 +3177,7 @@ case 'lembrar': {
         if (!q) return reply(`📔 Qual palavra você quer procurar no dicionário? Me diga após o comando ${prefix}${command}! 😊`);
         if (!KeyCog) {
 
-          await ia.notifyOwnerAboutApiKey(nazu, nmrdn, 'API key não configurada');
+          await ia.notifyOwnerAboutApiKey(bender, nmrdn, 'API key não configurada');
           return reply(API_KEY_REQUIRED_MESSAGE);
 
         }
@@ -3263,7 +3269,7 @@ case 'lembrar': {
             } else {
               // Se não for grupo, usar onWhatsApp para pegar LID
               try {
-                const [result] = await nazu.onWhatsApp(targetUserId.replace(/@s\.whatsapp\.net|@lid/g, ''));
+                const [result] = await bender.onWhatsApp(targetUserId.replace(/@s\.whatsapp\.net|@lid/g, ''));
                 if (result && result.jid) {
                   targetUserId = result.jid;
                 }
@@ -3289,7 +3295,7 @@ case 'lembrar': {
               } else {
                 // Se não for grupo, usar onWhatsApp para pegar LID
                 try {
-                  const [result] = await nazu.onWhatsApp(cleanNumber);
+                  const [result] = await bender.onWhatsApp(cleanNumber);
                   if (result && result.jid) {
                     targetUserId = result.jid;
                   }
@@ -3336,7 +3342,7 @@ case 'lembrar': {
             } else {
               // Se não for grupo, usar onWhatsApp para pegar LID
               try {
-                const [result] = await nazu.onWhatsApp(targetUserId.replace(/@s\.whatsapp\.net|@lid/g, ''));
+                const [result] = await bender.onWhatsApp(targetUserId.replace(/@s\.whatsapp\.net|@lid/g, ''));
                 if (result && result.jid) {
                   targetUserId = result.jid;
                 }
@@ -3362,7 +3368,7 @@ case 'lembrar': {
               } else {
                 // Se não for grupo, usar onWhatsApp para pegar LID
                 try {
-                  const [result] = await nazu.onWhatsApp(cleanNumber);
+                  const [result] = await bender.onWhatsApp(cleanNumber);
                   if (result && result.jid) {
                     targetUserId = result.jid;
                   }
@@ -3440,7 +3446,7 @@ case 'lembrar': {
           
           // Verifica se o número existe no WhatsApp e pega o LID
           try {
-            const [result] = await nazu.onWhatsApp(phoneNumber);
+            const [result] = await bender.onWhatsApp(phoneNumber);
             
             if (!result || !result.exists) {
               return reply(`❌ O número ${phoneNumber} não está registrado no WhatsApp!`);
@@ -3601,7 +3607,7 @@ case 'lembrar': {
       case 'limitarcmd':
         try {
           const { cmdLimitAdd } = require('./funcs/utils/cmdlimit.js');
-          await cmdLimitAdd(nazu, from, q, reply, prefix, isOwnerOrSub);
+          await cmdLimitAdd(bender, from, q, reply, prefix, isOwnerOrSub);
         } catch (error) {
           console.error('Error in cmdlimitar:', error);
           await reply('❌ Erro interno!');
@@ -3613,7 +3619,7 @@ case 'lembrar': {
       case 'rmcmdlimit':
         try {
           const { cmdLimitRemove } = require('./funcs/utils/cmdlimit.js');
-          await cmdLimitRemove(nazu, from, q, reply, prefix, isOwnerOrSub);
+          await cmdLimitRemove(bender, from, q, reply, prefix, isOwnerOrSub);
         } catch (error) {
           console.error('Error in cmddeslimitar:', error);
           await reply('❌ Erro interno!');
@@ -3625,7 +3631,7 @@ case 'lembrar': {
       case 'listcmdlimites':
         try {
           const { cmdLimitList } = require('./funcs/utils/cmdlimit.js');
-          await cmdLimitList(nazu, from, q, reply, prefix, isOwnerOrSub);
+          await cmdLimitList(bender, from, q, reply, prefix, isOwnerOrSub);
         } catch (error) {
           console.error('Error in cmdlimites:', error);
           await reply('❌ Erro interno!');
@@ -4039,7 +4045,7 @@ case 'lembrar': {
           commands: 0
         };
         userDataAdd.xp += xpToAdd;
-        checkLevelUp(menc_os2, userDataAdd, levelingDataAdd, nazu, from);
+        checkLevelUp(menc_os2, userDataAdd, levelingDataAdd, bender, from);
   writeJsonFile(LEVELING_FILE, levelingDataAdd);
 
         await reply(`✅ Adicionado ${xpToAdd} XP para @${getUserName(menc_os2)}`, {
@@ -5011,7 +5017,7 @@ case 'lembrar': {
                 .replace(/{user}/gi, pushname || 'Usuário')
                 .replace(/{grupo}/gi, isGroup ? groupName : 'Privado');
               
-              await nazu.sendMessage(from, {
+              await bender.sendMessage(from, {
                 image: imageBuffer,
                 caption: caption
               }, { quoted: info });
@@ -5029,7 +5035,7 @@ case 'lembrar': {
                 .replace(/{user}/gi, pushname || 'Usuário')
                 .replace(/{grupo}/gi, isGroup ? groupName : 'Privado');
               
-              await nazu.sendMessage(from, {
+              await bender.sendMessage(from, {
                 video: videoBuffer,
                 caption: caption
               }, { quoted: info });
@@ -5037,7 +5043,7 @@ case 'lembrar': {
           } else if (processedResponse.type === 'audio') {
             const audioBuffer = processedResponse.buffer ? Buffer.from(processedResponse.buffer, 'base64') : null;
             if (audioBuffer) {
-              await nazu.sendMessage(from, {
+              await bender.sendMessage(from, {
                 audio: audioBuffer,
                 mimetype: 'audio/mp4',
                 ptt: processedResponse.ptt || false
@@ -5046,7 +5052,7 @@ case 'lembrar': {
           } else if (processedResponse.type === 'sticker') {
             const stickerBuffer = processedResponse.buffer ? Buffer.from(processedResponse.buffer, 'base64') : null;
             if (stickerBuffer) {
-              await nazu.sendMessage(from, {
+              await bender.sendMessage(from, {
                 sticker: stickerBuffer
               }, { quoted: info });
             }
@@ -5182,7 +5188,7 @@ case 'lembrar': {
           
           // Verificar se tem API key
           if (!KeyCog) {
-            await ia.notifyOwnerAboutApiKey(nazu, nmrdn, 'API key não configurada');
+            await ia.notifyOwnerAboutApiKey(bender, nmrdn, 'API key não configurada');
             return reply(API_KEY_REQUIRED_MESSAGE);
           }
           
@@ -5191,7 +5197,7 @@ case 'lembrar': {
           datyz = await FilmesDL(q, KeyCog);
           if (!datyz || !datyz.url) return reply('Desculpe, não consegui encontrar nada. Tente com outro nome de filme ou série. 😔');
           
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             image: { url: datyz.img },
             caption: `Aqui está o que encontrei! 🎬\n\n*Nome*: ${datyz.name}\n🔗 *Assista:* ${datyz.url}`
           }, { quoted: info });
@@ -5224,7 +5230,7 @@ case 'lembrar': {
       case 'shazam':
         if (!KeyCog) {
 
-          await ia.notifyOwnerAboutApiKey(nazu, nmrdn, 'API key não configurada');
+          await ia.notifyOwnerAboutApiKey(bender, nmrdn, 'API key não configurada');
           return reply(API_KEY_REQUIRED_MESSAGE);
 
         }
@@ -5392,6 +5398,7 @@ break;
 case 'play':
 case 'musica':
 case 'tocar': {
+  return reply("Manutenção!");
     // A query (q) precisa ser definida/passada para este bloco, 
     // ou você precisa extraí-la da mensagem de info.
     const query = q.trim();
@@ -5882,7 +5889,7 @@ break;
           
           // Verificar se tem API key
           if (!KeyCog) {
-            await ia.notifyOwnerAboutApiKey(nazu, nmrdn, 'API key não configurada');
+            await ia.notifyOwnerAboutApiKey(bender, nmrdn, 'API key não configurada');
             return reply(API_KEY_REQUIRED_MESSAGE);
           }
 
@@ -6009,7 +6016,7 @@ break;
           
           // Verificar se tem API key
           if (!KeyCog) {
-            await ia.notifyOwnerAboutApiKey(nazu, nmrdn, 'API key não configurada');
+            await ia.notifyOwnerAboutApiKey(bender, nmrdn, 'API key não configurada');
             return reply(API_KEY_REQUIRED_MESSAGE);
           }
 
@@ -6059,7 +6066,7 @@ break;
           
           // Verificar se tem API key
           if (!KeyCog) {
-            await ia.notifyOwnerAboutApiKey(nazu, nmrdn, 'API key não configurada');
+            await ia.notifyOwnerAboutApiKey(bender, nmrdn, 'API key não configurada');
             return reply(API_KEY_REQUIRED_MESSAGE);
 
           }
@@ -6120,7 +6127,7 @@ break;
             const message = isPinUrl && datinha.type === 'video'
               ? { video: { url }, caption: '📌 Download do Pinterest' }
               : { image: { url }, caption: isPinUrl ? '📌 Download do Pinterest' : `📌 Resultado da pesquisa por "${searchTerm}"` };
-            await nazu.sendMessage(from, message, { quoted: info });
+            await bender.sendMessage(from, message, { quoted: info });
 
           }
         } catch (e) {
@@ -6185,7 +6192,6 @@ break;
 ⋟🖼️ ${prefix}ғɪɢᴜʀɪɴʜᴀs (5) 🪙
 ⋟📝 ${prefix}ᴍᴇɴᴜғɪɢ
 ╰┈┈┈◜❁◞┈┈┈
-⋟🪙 ${prefix}ʙᴄᴏɪɴs
 ⋟📂 ${prefix}ᴍᴇɴᴜᴀᴅᴍ
 ⋟👥 ${prefix}ᴍᴇɴᴜᴍᴇᴍʙʀᴏ
 ⋟🎲 ${prefix}ʙʀɪɴᴄᴀᴅᴇɪʀᴀs
@@ -7573,7 +7579,7 @@ break;
           if (!menc_os2) return reply("Marque alguém 🙄");
           if (!!premiumListaZinha[menc_os2]) return reply('O usuário ja esta na lista premium.');
           premiumListaZinha[menc_os2] = true;
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             text: `✅ @${getUserName(menc_os2)} foi adicionado(a) a lista premium.`,
             mentions: [menc_os2]
           }, {
@@ -7594,7 +7600,7 @@ break;
           if (!menc_os2) return reply("Marque alguém 🙄");
           if (!premiumListaZinha[menc_os2]) return reply('O usuário não esta na lista premium.');
           delete premiumListaZinha[menc_os2];
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             text: `🫡 @${getUserName(menc_os2)} foi removido(a) da lista premium.`,
             mentions: [menc_os2]
           }, {
@@ -7683,7 +7689,7 @@ break;
             
             teks += `   Nenhum grupo premium encontrado.\n`;
           }
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             text: teks,
             mentions: usersPremium
           }, {
@@ -7724,7 +7730,7 @@ break;
           
           writeJsonFile(indicacoesFile, indicacoesData);
           
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             text: `✅ *Indicação adicionada com sucesso!*\n\n👤 @${getUserName(menc_os2)} agora tem *${indicacoesData.users[menc_os2].count}* indicação(ões)! 🎉`,
             mentions: [menc_os2]
           }, { quoted: info });
@@ -7770,7 +7776,7 @@ break;
           
           const mentions = usersArray.slice(0, maxShow).map(u => u.userId);
           
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             text: mensagem,
             mentions: mentions
           }, { quoted: info });
@@ -7811,7 +7817,7 @@ break;
             ? `✅ Removidas *${Math.min(parseInt(q), countBefore)}* indicação(ões) de @${getUserName(menc_os2)}!\n\n📊 Total restante: *${indicacoesData.users[menc_os2]?.count || 0}*`
             : `✅ Todas as indicações de @${getUserName(menc_os2)} foram removidas! (Total: *${countBefore}*)`;
           
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             text: finalMsg,
             mentions: [menc_os2]
           }, { quoted: info });
@@ -8147,7 +8153,7 @@ break;
               }
             }
           }
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             text: blad,
             mentions: menc
           }, {
@@ -8207,7 +8213,7 @@ break;
               menc.push(blue67[i6].id);
             }
           }
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             text: blad,
             mentions: menc
           }, {
@@ -9121,7 +9127,7 @@ case 'roubar':
       info.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage,
       'sticker'
     );
-    await sendSticker(nazu, from, {
+    await sendSticker(bender, from, {
       sticker: `data:image/jpeg;base64,${encmediats.toString('base64')}`,
       author: packname,
       packname: author,
@@ -9410,7 +9416,7 @@ case 'roubar':
           if (!membros.length) return reply('❌ Nenhum membro para mencionar.');
           let msg = `📢 *Membros mencionados:* ${q ? `\n💬 *Mensagem:* ${q}` : ''}\n\n`;
 
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
 
             text: msg + membros.map(m => `➤ @${getUserName(m)}`).join('\n'),
             mentions: membros
@@ -9490,7 +9496,7 @@ case 'roubar':
           writeJsonFile(groupFilePath, data);
 
           // (Re)agendar job em memória
-          try { scheduleGroupJob(from, 'open', normalizedTime, nazu); } catch (e) { console.error('Erro ao agendar open cron:', e); }
+          try { scheduleGroupJob(from, 'open', normalizedTime, bender); } catch (e) { console.error('Erro ao agendar open cron:', e); }
           
           let msg = `✅ Agendamento salvo! O grupo será ABERTO todos os dias às ${normalizedTime} (horário de São Paulo).`;
 
@@ -9552,7 +9558,7 @@ case 'roubar':
           writeJsonFile(groupFilePath, data);
 
           // (Re)agendar job em memória
-          try { scheduleGroupJob(from, 'close', normalizedTime, nazu); } catch (e) { console.error('Erro ao agendar close cron:', e); }
+          try { scheduleGroupJob(from, 'close', normalizedTime, bender); } catch (e) { console.error('Erro ao agendar close cron:', e); }
           
           let msg = `✅ Agendamento salvo! O grupo será FECHADO todos os dias às ${normalizedTime} (horário de São Paulo).`;
 
@@ -9720,7 +9726,7 @@ A mensagem será enviada todos os dias no horário especificado.`);
               writeJsonFile(groupFilePath, data);
               
               // Agendar
-              scheduleAutoMessage(from, msgConfig, nazu);
+              scheduleAutoMessage(from, msgConfig, bender);
               
               await reply(`✅ Mensagem automática adicionada!
 
@@ -9803,7 +9809,7 @@ A mensagem será enviada todos os dias às ${normalizedTime} (horário de São P
               writeJsonFile(groupFilePath, data);
               
               // Reagendar
-              scheduleAutoMessage(from, onMsg, nazu);
+              scheduleAutoMessage(from, onMsg, bender);
               
               await reply(`✅ Mensagem automática ativada!\n\n🆔 ID: ${onMsgId}`);
               break;
@@ -10078,7 +10084,7 @@ A mensagem será enviada todos os dias às ${normalizedTime} (horário de São P
             
             aud_d4.ptt = true;
           }
-          await nazu.sendMessage(from, DFC4).catch(error => {});
+          await bender.sendMessage(from, DFC4).catch(error => {});
 
         } catch (e) {
           console.error(e);
@@ -11125,7 +11131,7 @@ Exemplos:
         try {
           if (!KeyCog) {
 
-            await ia.notifyOwnerAboutApiKey(nazu, nmrdn, 'API key não configurada');
+            await ia.notifyOwnerAboutApiKey(bender, nmrdn, 'API key não configurada');
             return reply(API_KEY_REQUIRED_MESSAGE);
 
           }
@@ -11197,7 +11203,7 @@ Exemplos:
           groupData.mutedUsers[menc_os2] = true;
           fs.writeFileSync(groupFilePath, JSON.stringify(groupData));
 
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
             text: `✅ @${getUserName(menc_os2)} foi mutado. Se enviar mensagens, será banido.`,
 
             mentions: [menc_os2]
@@ -11228,7 +11234,7 @@ Exemplos:
             delete groupData.mutedUsers[menc_os2];
             fs.writeFileSync(groupFilePath, JSON.stringify(groupData));
 
-            await nazu.sendMessage(from, {
+            await bender.sendMessage(from, {
 
               text: `✅ @${getUserName(menc_os2)} foi desmutado e pode enviar mensagens novamente.`,
               mentions: [menc_os2]
@@ -11379,7 +11385,7 @@ ${tempo.includes('nunca') ? '😂 Brincadeira! Nunca desista dos seus sonhos!' :
         const requestResult = relationshipManager.createRequest('brincadeira', from, sender, menc_os2);
         if (!requestResult.success) {
           if (requestResult.mentions && requestResult.mentions.length > 0) {
-            await nazu.sendMessage(from, {
+            await bender.sendMessage(from, {
               text: requestResult.message,
               mentions: requestResult.mentions
             }, { quoted: info });
@@ -11388,7 +11394,7 @@ ${tempo.includes('nunca') ? '😂 Brincadeira! Nunca desista dos seus sonhos!' :
           }
           break;
         }
-        await nazu.sendMessage(from, {
+        await bender.sendMessage(from, {
           text: requestResult.message,
           mentions: requestResult.mentions || [sender, menc_os2]
         });
@@ -11415,7 +11421,7 @@ ${tempo.includes('nunca') ? '😂 Brincadeira! Nunca desista dos seus sonhos!' :
         const requestResult = relationshipManager.createRequest('namoro', from, sender, menc_os2);
         if (!requestResult.success) {
           if (requestResult.mentions && requestResult.mentions.length > 0) {
-            await nazu.sendMessage(from, {
+            await bender.sendMessage(from, {
               text: requestResult.message,
               mentions: requestResult.mentions
             }, { quoted: info });
@@ -11424,7 +11430,7 @@ ${tempo.includes('nunca') ? '😂 Brincadeira! Nunca desista dos seus sonhos!' :
           }
           break;
         }
-        await nazu.sendMessage(from, {
+        await bender.sendMessage(from, {
           text: requestResult.message,
           mentions: requestResult.mentions || [sender, menc_os2]
         });
@@ -11451,7 +11457,7 @@ ${tempo.includes('nunca') ? '😂 Brincadeira! Nunca desista dos seus sonhos!' :
         const requestResult = relationshipManager.createRequest('casamento', from, sender, menc_os2);
         if (!requestResult.success) {
           if (requestResult.mentions && requestResult.mentions.length > 0) {
-            await nazu.sendMessage(from, {
+            await bender.sendMessage(from, {
               text: requestResult.message,
               mentions: requestResult.mentions
             }, { quoted: info });
@@ -11460,7 +11466,7 @@ ${tempo.includes('nunca') ? '😂 Brincadeira! Nunca desista dos seus sonhos!' :
           }
           break;
         }
-        await nazu.sendMessage(from, {
+        await bender.sendMessage(from, {
           text: requestResult.message,
           mentions: requestResult.mentions || [sender, menc_os2]
         });
@@ -11498,7 +11504,7 @@ ${tempo.includes('nunca') ? '😂 Brincadeira! Nunca desista dos seus sonhos!' :
           break;
         }
 
-        await nazu.sendMessage(from, {
+        await bender.sendMessage(from, {
           text: summary.message,
           mentions: summary.mentions || [userOne, userTwo]
         }, { quoted: info });
@@ -11554,7 +11560,7 @@ ${tempo.includes('nunca') ? '😂 Brincadeira! Nunca desista dos seus sonhos!' :
           break;
         }
 
-        await nazu.sendMessage(from, {
+        await bender.sendMessage(from, {
           text: endResult.message,
           mentions: endResult.mentions || participants
         });
@@ -11589,7 +11595,7 @@ ${tempo.includes('nunca') ? '😂 Brincadeira! Nunca desista dos seus sonhos!' :
           break;
         }
 
-        await nazu.sendMessage(from, {
+        await bender.sendMessage(from, {
           text: betrayalResult.message,
           mentions: betrayalResult.mentions || [sender, menc_os2]
         });
@@ -11638,7 +11644,7 @@ ${tempo.includes('nunca') ? '😂 Brincadeira! Nunca desista dos seus sonhos!' :
           break;
         }
 
-        await nazu.sendMessage(from, {
+        await bender.sendMessage(from, {
           text: historyResult.message,
           mentions: historyResult.mentions || [userOne, userTwo]
         });
@@ -11857,7 +11863,7 @@ ${nivelSorte >= 70 ? '🎉 Hoje é seu dia de sorte!' : nivelSorte >= 40 ? '🤔
           let membros = groupAdmins;
           let msg = `📢 *Mencionando os admins do grupo:* ${q ? `\n💬 *Mensagem:* ${q}` : ''}\n\n`;
 
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
 
             text: msg + membros.map(m => `➤ @${getUserName(m)}`).join('\n'),
             mentions: membros
@@ -11910,7 +11916,7 @@ ${nivelSorte >= 70 ? '🎉 Hoje é seu dia de sorte!' : nivelSorte >= 40 ? '🤔
           const perfilText = `📋 Perfil de ${targetName} 📋\n\n👤 *Nome*: ${pushname || 'Desconhecido'}\n📱 *Número*: ${targetId}\n📜 *Bio*: ${bio}${bioSetAt ? `\n🕒 *Bio atualizada em*: ${bioSetAt}` : ''}\n💰 *Valor do Pacote*: ${pacoteValue} 🫦\n😸 *Humor*: ${randomHumor}\n\n🎭 *Níveis*:\n  • Puta: ${levels.puta}%\n  • Gado: ${levels.gado}%\n  • Corno: ${levels.corno}%\n  • Sortudo: ${levels.sortudo}%\n  • Carisma: ${levels.carisma}%\n  • Rico: ${levels.rico}%\n  • Gostosa: ${levels.gostosa}%\n  • Feio: ${levels.feio}%`.trim();
           
 
-          await nazu.sendMessage(from, { image: { url: profilePic }, caption: perfilText, mentions: [target] }, { quoted: info });
+          await bender.sendMessage(from, { image: { url: profilePic }, caption: perfilText, mentions: [target] }, { quoted: info });
 
         } catch (error) {
           console.error('Erro ao processar comando perfil:', error);
@@ -12022,7 +12028,7 @@ ${nivelSorte >= 70 ? '🎉 Hoje é seu dia de sorte!' : nivelSorte >= 40 ? '🤔
             mencts.push(menb);
           }
 
-          await nazu.sendMessage(from, {
+          await bender.sendMessage(from, {
 
             image: {
               url: 'https://raw.githubusercontent.com/nazuninha/uploads/main/outros/1747545773146_rrv7of.bin'
@@ -13127,7 +13133,7 @@ ${prefix}wl.add @usuario | antilink,antistatus`);
       const avatarUrl = basic.avatars.png;
       try {
 
-        await nazu.sendMessage(from, {image: {url: avatarUrl}, caption: msg}, {quoted: info});
+        await bender.sendMessage(from, {image: {url: avatarUrl}, caption: msg}, {quoted: info});
 
       } catch (err) {
         await reply(msg);
@@ -13607,12 +13613,12 @@ ${prefix}wl.add @usuario | antilink,antistatus`);
               console.log(`🔍 Comando não encontrado: "${commandName}" por ${userName} (${sender}) no grupo ${isGroup ? groupMetadata.subject : 'privado'}`);
             } catch (error) {
               console.error('❌ Erro ao enviar mensagem de comando não encontrado:', error);
-              await nazu.react('❌', {
+              await bender.react('❌', {
                 key: info.key
               });
             }
           } else {
-            await nazu.react('❌', {
+            await bender.react('❌', {
 
               key: info.key
             });

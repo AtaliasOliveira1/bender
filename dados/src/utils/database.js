@@ -1259,7 +1259,7 @@ function isPeriodCompleted(ch){
   if (!ch) return false; return ch.tasks.every(t=> (t.progress||0) >= t.target);
 }
 
-function checkLevelUp(userId, userData, levelingData, nazu, from) {
+function checkLevelUp(userId, userData, levelingData, bender, from) {
   const nextLevelXp = calculateNextLevelXp(userData.level);
   if (userData.xp >= nextLevelXp) {
     userData.level++;
@@ -1278,7 +1278,7 @@ function checkLevelUp(userId, userData, levelingData, nazu, from) {
     levelUpText += `╰━━━━━━━━━━━━━━━━━━━━━━╯\n`;
     levelUpText += `\n🎊 *Parabéns pelo progresso!* 🎊`;
     
-    nazu.sendMessage(from, {
+    bender.sendMessage(from, {
       text: levelUpText,
       mentions: [userId]
     });
@@ -1428,7 +1428,7 @@ const deleteAutoResponse = (groupId, responseId, isGlobal = false) => {
   }
 };
 
-const processAutoResponse = async (nazu, from, triggerText, info) => {
+const processAutoResponse = async (bender, from, triggerText, info) => {
   try {
     const normalizedTrigger = normalizar(triggerText);
     
@@ -1436,7 +1436,7 @@ const processAutoResponse = async (nazu, from, triggerText, info) => {
     const globalResponses = loadCustomAutoResponses();
     for (const response of globalResponses) {
       if (normalizedTrigger.includes(response.trigger || response.received)) {
-        await sendAutoResponse(nazu, from, response, info);
+        await sendAutoResponse(bender, from, response, info);
         return true;
       }
     }
@@ -1446,7 +1446,7 @@ const processAutoResponse = async (nazu, from, triggerText, info) => {
       const groupResponses = loadGroupAutoResponses(from);
       for (const response of groupResponses) {
         if (normalizedTrigger.includes(response.trigger)) {
-          await sendAutoResponse(nazu, from, response, info);
+          await sendAutoResponse(bender, from, response, info);
           return true;
         }
       }
@@ -1459,13 +1459,13 @@ const processAutoResponse = async (nazu, from, triggerText, info) => {
   }
 };
 
-const sendAutoResponse = async (nazu, from, response, quotedMessage) => {
+const sendAutoResponse = async (bender, from, response, quotedMessage) => {
   try {
     const responseData = response.response || response;
     
     // Compatibilidade com sistema antigo (apenas texto)
     if (typeof responseData === 'string') {
-      await nazu.sendMessage(from, { text: responseData }, { quoted: quotedMessage });
+      await bender.sendMessage(from, { text: responseData }, { quoted: quotedMessage });
       return;
     }
 
@@ -1522,7 +1522,7 @@ const sendAutoResponse = async (nazu, from, response, quotedMessage) => {
         messageContent.text = responseData.content || 'Resposta automática';
     }
 
-    await nazu.sendMessage(from, messageContent, sendOptions);
+    await bender.sendMessage(from, messageContent, sendOptions);
   } catch (error) {
     console.error('❌ Erro ao enviar auto-resposta:', error);
   }

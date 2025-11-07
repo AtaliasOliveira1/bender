@@ -13,7 +13,6 @@ const { fileURLToPath } = require('url');
 const { dirname, join } = require('path');
 const crypto = require('crypto');
 
-
 const PerformanceOptimizer = require('./utils/performanceOptimizer.js');
 const RentalExpirationManager = require('./utils/rentalExpirationManager.js');
 
@@ -267,6 +266,18 @@ let config = JSON.parse(readFileSync(configPath, "utf8"));
 
 const indexModule = require('./index.js');
 
+const performanceOptimizer = new PerformanceOptimizer();
+
+const rentalExpirationManager = new RentalExpirationManager(null, {
+    checkInterval: '0 */6 * * *',
+    warningDays: 3,
+    finalWarningDays: 1,
+    cleanupDelayHours: 24,
+    enableNotifications: true,
+    enableAutoCleanup: true,
+    logFile: path.join(__dirname, '../logs/rental_expiration.log')
+});
+
 const logger = pino({
     level: 'silent'
 });
@@ -482,6 +493,7 @@ async function handleGroupParticipantsUpdate(NazunaSock, inf) {
                     await NazunaSock.groupParticipantsUpdate(from, membersToRemove, 'remove').catch(err => {
                         console.error(`❌ Erro ao remover membros do grupo ${from}: ${err.message}`);
                     });
+                    
                     await NazunaSock.sendMessage(from, {
                         text: `🚫 Foram removidos ${membersToRemove.length} membros por regras de moderação:\n- ${removalReasons.join('\n- ')}`,
                         mentions: membersToRemove,
@@ -512,7 +524,6 @@ async function handleGroupParticipantsUpdate(NazunaSock, inf) {
             }
             case 'promote':
             case 'demote': {
-
                 // Notificação X9 (sem bloqueio de ação)
                 if (groupSettings.x9 && inf.author) {
                     for (const participant of inf.participants) {
@@ -1030,7 +1041,7 @@ async function createBotSocket(authDir) {
                 await updateOwnerLid(NazunaSock);
                 await performMigration(NazunaSock);
                 
-                rentalExpirationManager.nazu = NazunaSock;
+                rentalExpirationManager.bender = NazunaSock;
                 await rentalExpirationManager.initialize();
                 
                 attachMessagesListener();

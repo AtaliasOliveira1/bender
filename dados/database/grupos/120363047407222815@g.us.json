@@ -1,0 +1,97 @@
+{
+  "mark": {},
+  "createdAt": "2025-11-07T00:58:16.062Z",
+  "groupName": "Grupo do Sensa - VIP 🫣📸",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "resenha": {
+    "active": false,
+    "createdAt": null,
+    "createdBy": null,
+    "link": "",
+    "items": [],
+    "payments": {},
+    "lastItemId": 0
+  },
+  "contador": [
+    {
+      "id": "234659866783751@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Whenderson Brito",
+      "firstSeen": "2025-11-07T00:58:16.065Z",
+      "lastActivity": "2025-11-07T00:58:16.065Z"
+    },
+    {
+      "id": "110935230390418@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": ".",
+      "firstSeen": "2025-11-07T00:58:51.110Z",
+      "lastActivity": "2025-11-07T00:58:59.664Z"
+    },
+    {
+      "id": "125774191452411@lid",
+      "msg": 6,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Márissom_Amorim🇧🇷",
+      "firstSeen": "2025-11-07T01:00:11.032Z",
+      "lastActivity": "2025-11-07T01:06:39.867Z"
+    },
+    {
+      "id": "102370662998162@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Cantinho Doce da Poly",
+      "firstSeen": "2025-11-07T01:00:15.924Z",
+      "lastActivity": "2025-11-07T01:01:32.288Z"
+    },
+    {
+      "id": "241541058682993@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 1,
+      "pushname": "Morena S🦋🥰",
+      "firstSeen": "2025-11-07T01:00:44.074Z",
+      "lastActivity": "2025-11-07T01:04:19.962Z"
+    },
+    {
+      "id": "161658324410552@lid",
+      "msg": 3,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Ellys Magalhães",
+      "firstSeen": "2025-11-07T01:00:51.438Z",
+      "lastActivity": "2025-11-07T01:03:51.542Z"
+    },
+    {
+      "id": "135094169776242@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "rafael motta🌱",
+      "firstSeen": "2025-11-07T01:01:11.947Z",
+      "lastActivity": "2025-11-07T01:01:13.765Z"
+    },
+    {
+      "id": "97843750662387@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "...",
+      "firstSeen": "2025-11-07T01:06:06.692Z",
+      "lastActivity": "2025-11-07T01:06:13.782Z"
+    }
+  ]
+}

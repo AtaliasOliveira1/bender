@@ -1301,8 +1301,8 @@ async function processUserMessages(data, key, bender = null, ownerNumber = null)
       } catch (apiError) {
         console.error('Erro na API Cognima:', apiError.message);
         
-        if (isApiKeyError(apiError) && nazu && ownerNumber) {
-          notifyOwnerAboutApiKey(nazu, ownerNumber, apiError.message);
+        if (isApiKeyError(apiError) && bender && ownerNumber) {
+          notifyOwnerAboutApiKey(bender, ownerNumber, apiError.message);
           
           return {
             resp: [],

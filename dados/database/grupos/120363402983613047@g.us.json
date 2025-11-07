@@ -1,0 +1,43 @@
+{
+  "mark": {},
+  "createdAt": "2025-11-07T01:00:26.755Z",
+  "groupName": "🄱🄳🄲+18",
+  "modorpg": false,
+  "minMessage": null,
+  "moderators": [],
+  "allowedModCommands": [],
+  "mutedUsers": {},
+  "levelingEnabled": false,
+  "adminWhitelist": {},
+  "roles": {},
+  "roleMessages": {},
+  "resenha": {
+    "active": false,
+    "createdAt": null,
+    "createdBy": null,
+    "link": "",
+    "items": [],
+    "payments": {},
+    "lastItemId": 0
+  },
+  "contador": [
+    {
+      "id": "273044341809203@lid",
+      "msg": 2,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Carlos Eduardo",
+      "firstSeen": "2025-11-07T01:00:26.758Z",
+      "lastActivity": "2025-11-07T01:03:56.861Z"
+    },
+    {
+      "id": "157131529539806@lid",
+      "msg": 1,
+      "cmd": 0,
+      "figu": 0,
+      "pushname": "Noza prey",
+      "firstSeen": "2025-11-07T01:03:13.129Z",
+      "lastActivity": "2025-11-07T01:03:13.129Z"
+    }
+  ]
+}

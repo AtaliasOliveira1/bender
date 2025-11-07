@@ -350,3 +350,5 @@
 [2025-11-06T18:14:00.490Z] RentalExpirationManager initialized successfully
 [2025-11-06T21:00:00.048Z] Starting rental expiration check...
 [2025-11-06T21:00:00.053Z] Rental check completed. Processed: 0, Warnings: 0, Final Warnings: 0, Expired: 0. Duration: 5ms
+[2025-11-07T00:58:14.169Z] Scheduler started with interval: 0 */6 * * *
+[2025-11-07T00:58:14.169Z] RentalExpirationManager initialized successfully
