@@ -4,8 +4,8 @@
  * Versão: 2.0.0
  */
 
-import axios from 'axios';
-import { DOMParser } from 'linkedom';
+const axios = require('axios');
+const { DOMParser } = require('linkedom');
 
 // Configurações
 const CONFIG = {
@@ -239,4 +239,4 @@ async function apkMod(searchText) {
   }
 }
 
-export default apkMod;
+module.exports = apkMod;

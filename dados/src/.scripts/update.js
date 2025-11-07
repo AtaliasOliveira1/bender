@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-import fs from 'fs/promises';
-import * as fsSync from 'fs';
-import path from 'path';
-import { execSync, exec } from 'child_process';
-import readline from 'readline';
-import os from 'os';
-import { promisify } from 'util';
+const fs = require('fs/promises');
+const fsSync = require('fs');
+const path = require('path');
+const { execSync, exec } = require('child_process');
+const readline = require('readline');
+const os = require('os');
+const { promisify } = require('util');
 const execAsync = promisify(exec);
 
 const REPO_URL = 'https://github.com/hiudyy/nazuna.git';
@@ -295,7 +295,8 @@ async function downloadUpdate() {
   }
 }
 
-async function cleanOldFiles() {
+async function cleanOldFiles(options = {}) {
+  const { removeNodeModules = true, removePackageLock = true } = options;
   printMessage('🧹 Limpando arquivos antigos...');
 
   try {
@@ -303,10 +304,20 @@ async function cleanOldFiles() {
       { path: path.join(process.cwd(), '.git'), type: 'dir', name: '.git' },
       { path: path.join(process.cwd(), '.github'), type: 'dir', name: '.github' },
       { path: path.join(process.cwd(), '.npm'), type: 'dir', name: '.npm' },
-      { path: path.join(process.cwd(), 'node_modules'), type: 'dir', name: 'node_modules' },
-      { path: path.join(process.cwd(), 'package-lock.json'), type: 'file', name: 'package-lock.json' },
       { path: path.join(process.cwd(), 'README.md'), type: 'file', name: 'README.md' },
     ];
+
+    if (removeNodeModules) {
+      itemsToDelete.push({ path: path.join(process.cwd(), 'node_modules'), type: 'dir', name: 'node_modules' });
+    } else {
+      printDetail('🛠️ Mantendo node_modules existente.');
+    }
+
+    if (removePackageLock) {
+      itemsToDelete.push({ path: path.join(process.cwd(), 'package-lock.json'), type: 'file', name: 'package-lock.json' });
+    } else {
+      printDetail('🛠️ Mantendo package-lock.json existente.');
+    }
 
     for (const item of itemsToDelete) {
       if (fsSync.existsSync(item.path)) {
@@ -405,99 +416,45 @@ async function checkDependencyChanges() {
   try {
     const currentPackageJsonPath = path.join(process.cwd(), 'package.json');
     const newPackageJsonPath = path.join(TEMP_DIR, 'package.json');
-    
+
     if (!fsSync.existsSync(currentPackageJsonPath) || !fsSync.existsSync(newPackageJsonPath)) {
       printDetail('📦 Arquivo package.json não encontrado, instalação será necessária');
       return 'MISSING_PACKAGE_JSON';
     }
-    
     const currentPackage = JSON.parse(await fs.readFile(currentPackageJsonPath, 'utf8'));
     const newPackage = JSON.parse(await fs.readFile(newPackageJsonPath, 'utf8'));
-    
-    // Check for version compatibility
-    if (currentPackage.version && newPackage.version && currentPackage.version !== newPackage.version) {
-      printDetail(`📦 Versão alterada de ${currentPackage.version} para ${newPackage.version}`);
+    // Checa se o package.json mudou (apenas dependências e scripts)
+    const relevantKeys = ['dependencies', 'devDependencies', 'optionalDependencies', 'scripts'];
+    let changed = false;
+    for (const key of relevantKeys) {
+      const a = JSON.stringify(currentPackage[key] || {});
+      const b = JSON.stringify(newPackage[key] || {});
+      if (a !== b) changed = true;
     }
-    
-    // Check Node.js version requirements
-    if (newPackage.engines && newPackage.engines.node) {
-      const currentNodeVersion = process.version;
-      const requiredNodeVersion = newPackage.engines.node;
-      
-      if (!satisfiesNodeVersion(currentNodeVersion, requiredNodeVersion)) {
-        printWarning(`⚠️ Versão do Node.js não compatível. Requer: ${requiredNodeVersion}, Atual: ${currentNodeVersion}`);
-        return 'NODE_VERSION_MISMATCH';
-      }
-    }
-    
-    // Check main dependencies
-    const currentDeps = JSON.stringify(currentPackage.dependencies || {});
-    const newDeps = JSON.stringify(newPackage.dependencies || {});
-    
-    // Check dev dependencies
-    const currentDevDeps = JSON.stringify(currentPackage.devDependencies || {});
-    const newDevDeps = JSON.stringify(newPackage.devDependencies || {});
-    
-    // Check optional dependencies
-    const currentOptDeps = JSON.stringify(currentPackage.optionalDependencies || {});
-    const newOptDeps = JSON.stringify(newPackage.optionalDependencies || {});
-    
-    // Check npm scripts
-    const currentScripts = JSON.stringify(currentPackage.scripts || {});
-    const newScripts = JSON.stringify(newPackage.scripts || {});
-    
-    // Check for package.json structure changes
-    const currentStructure = JSON.stringify({
-      version: currentPackage.version,
-      main: currentPackage.main,
-      engines: currentPackage.engines,
-      dependencies: currentPackage.dependencies,
-      devDependencies: currentPackage.devDependencies,
-      optionalDependencies: currentPackage.optionalDependencies,
-      scripts: currentPackage.scripts
-    });
-    
-    const newStructure = JSON.stringify({
-      version: newPackage.version,
-      main: newPackage.main,
-      engines: newPackage.engines,
-      dependencies: newPackage.dependencies,
-      devDependencies: newPackage.devDependencies,
-      optionalDependencies: newPackage.optionalDependencies,
-      scripts: newPackage.scripts
-    });
-    
-    if (currentDeps !== newDeps ||
-        currentDevDeps !== newDevDeps ||
-        currentOptDeps !== newOptDeps ||
-        currentScripts !== newScripts ||
-        currentStructure !== newStructure) {
-      printDetail('📦 Configurações alteradas, reinstalação necessária');
+    if (changed) {
+      printDetail('📦 Dependências/scripts alterados, reinstalação necessária');
       return 'DEPENDENCIES_CHANGED';
     }
-    
+    // Checa se node_modules existe
     const nodeModulesPath = path.join(process.cwd(), 'node_modules');
     if (!fsSync.existsSync(nodeModulesPath)) {
-      printDetail('📦 Diretório node_modules não encontrado, instalação necessária');
+      printDetail('📦 node_modules não encontrado, instalação necessária');
       return 'MISSING_NODE_MODULES';
     }
-    
-    // Verify all dependencies in package.json are installed
-    const allDeps = {
+    // Checa se todas dependências estão instaladas
+    const allDeps = Object.keys({
       ...currentPackage.dependencies,
       ...currentPackage.devDependencies,
       ...currentPackage.optionalDependencies
-    };
-    
-    for (const [depName, depVersion] of Object.entries(allDeps)) {
+    });
+    for (const depName of allDeps) {
       const depPath = path.join(nodeModulesPath, depName);
       if (!fsSync.existsSync(depPath)) {
         printDetail(`📦 Dependência não encontrada: ${depName}`);
         return 'MISSING_DEPENDENCIES';
       }
     }
-    
-    printDetail('✅ Dependências inalteradas, reinstalação não necessária');
+    printDetail('✅ Nenhuma dependência alterada, reinstalação não necessária');
     return 'NO_CHANGES';
   } catch (error) {
     printWarning(`❌ Erro ao verificar dependências: ${error.message}`);
@@ -522,49 +479,27 @@ function satisfiesNodeVersion(currentVersion, requiredVersion) {
   return true; // Versions are equal or current satisfies requirement
 }
 
-async function installDependencies() {
-  const checkResult = await checkDependencyChanges();
-  
-  // Handle different check results
+async function installDependencies(precomputedResult) {
+  const checkResult = precomputedResult ?? await checkDependencyChanges();
   if (checkResult === 'NO_CHANGES') {
     printMessage('⚡ Dependências já estão atualizadas, pulando instalação');
     return;
   }
-  
-  // Provide specific feedback based on the check result
-  if (checkResult === 'MISSING_PACKAGE_JSON') {
-    printWarning('❌ Arquivo package.json não encontrado. Instalação necessária.');
-  } else if (checkResult === 'NODE_VERSION_MISMATCH') {
-    printWarning('❌ Versão do Node.js não compatível. Instalação necessária.');
-  } else if (checkResult === 'DEPENDENCIES_CHANGED') {
-    printMessage('📦 Configurações de dependências alteradas, iniciando instalação...');
-  } else if (checkResult === 'MISSING_NODE_MODULES') {
-    printMessage('📦 Diretório node_modules não encontrado, iniciando instalação...');
-  } else if (checkResult === 'MISSING_DEPENDENCIES') {
-    printMessage('📦 Dependências ausentes detectadas, iniciando instalação...');
-  } else if (checkResult === 'ERROR') {
-    printWarning('❌ Erro ao verificar dependências. Tentando instalação como medida de segurança...');
-  }
-  
   printMessage('📦 Instalando dependências...');
-
   try {
     await new Promise((resolve, reject) => {
       const npmProcess = exec('npm run config:install', { shell: isWindows }, (error) =>
         error ? reject(error) : resolve()
       );
-
       const spinner = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
       let i = 0;
       const interval = setInterval(() => {
         process.stdout.write(`\r${spinner[i]} Instalando dependências...`);
         i = (i + 1) % spinner.length;
       }, 100);
-
       npmProcess.on('close', (code) => {
         clearInterval(interval);
         process.stdout.write('\r                                \r');
-        
         if (code === 0) {
           resolve();
         } else {
@@ -573,12 +508,10 @@ async function installDependencies() {
       });
     });
 
-    // Verify installation was successful
     const nodeModulesPath = path.join(process.cwd(), 'node_modules');
     if (!fsSync.existsSync(nodeModulesPath)) {
       throw new Error('Diretório node_modules não foi criado após a instalação');
     }
-
     printMessage('✅ Dependências instaladas com sucesso.');
   } catch (error) {
     printWarning(`❌ Falha ao instalar dependências: ${error.message}`);
@@ -615,86 +548,44 @@ async function main() {
   let backupCreated = false;
   let downloadSuccessful = false;
   let updateApplied = false;
+  let dependencyCheckResult = null;
   
   try {
     setupGracefulShutdown();
     await displayHeader();
-
-    const steps = [
-      { name: 'Verificando requisitos do sistema', func: checkRequirements },
-      { name: 'Confirmando atualização', func: confirmUpdate },
-      { name: 'Criando backup', func: async () => {
-        await createBackup();
-        backupCreated = true;
-        // Verify backup was actually created before proceeding
-        if (!fsSync.existsSync(BACKUP_DIR)) {
-          throw new Error('Falha ao criar diretório de backup');
-        }
-      } },
-      { name: 'Baixando a versão mais recente', func: async () => {
-        await downloadUpdate();
-        downloadSuccessful = true;
-        // Verify download was successful before proceeding
-        if (!fsSync.existsSync(TEMP_DIR)) {
-          throw new Error('Falha ao baixar atualização');
-        }
-      } },
-      { name: 'Limpando arquivos antigos', func: cleanOldFiles },
-      { name: 'Aplicando atualização', func: async () => {
-        await applyUpdate();
-        updateApplied = true;
-        // Verify update was applied successfully
-        const newPackageJson = path.join(process.cwd(), 'package.json');
-        if (!fsSync.existsSync(newPackageJson)) {
-          throw new Error('Falha ao aplicar atualização - package.json ausente');
-        }
-      } },
-      { name: 'Restaurando backup', func: restoreBackup },
-      { name: 'Instalando dependências', func: installDependencies },
-      { name: 'Finalizando e limpando', func: cleanup },
-    ];
-
-    let completedSteps = 0;
-    const totalSteps = steps.length;
-
-    for (const step of steps) {
-      try {
-        await step.func();
-        completedSteps++;
-        printDetail(`📊 Progresso: ${completedSteps}/${totalSteps} etapas concluídas.`);
-      } catch (stepError) {
-        printWarning(`❌ Falha na etapa "${step.name}": ${stepError.message}`);
-        
-        // If backup was created but update failed, try to restore
-        if (backupCreated && !updateApplied && step.name !== 'Restaurando backup') {
-          printInfo('🔄 Tentando restaurar backup devido a falha na atualização...');
-          try {
-            await restoreBackup();
-            printInfo('✅ Backup restaurado com sucesso.');
-          } catch (restoreError) {
-            printWarning(`❌ Falha ao restaurar backup: ${restoreError.message}`);
-          }
-        }
-        
-        throw stepError; // Re-throw to be caught by the outer try-catch
-      }
-    }
-
+    // Ordem corrigida: backup -> download -> limpeza -> update -> restaura backup -> dependências -> cleanup
+    await checkRequirements();
+    await confirmUpdate();
+    await createBackup();
+    backupCreated = true;
+    if (!fsSync.existsSync(BACKUP_DIR)) throw new Error('Falha ao criar diretório de backup');
+    await downloadUpdate();
+    downloadSuccessful = true;
+    if (!fsSync.existsSync(TEMP_DIR)) throw new Error('Falha ao baixar atualização');
+    dependencyCheckResult = await checkDependencyChanges();
+    const shouldRemoveModules = dependencyCheckResult !== 'NO_CHANGES';
+    await cleanOldFiles({
+      removeNodeModules: shouldRemoveModules,
+      removePackageLock: shouldRemoveModules,
+    });
+    await applyUpdate();
+    updateApplied = true;
+    const newPackageJson = path.join(process.cwd(), 'package.json');
+    if (!fsSync.existsSync(newPackageJson)) throw new Error('Falha ao aplicar atualização - package.json ausente');
+    await restoreBackup();
+    await installDependencies(dependencyCheckResult);
+    await cleanup();
     printMessage('🔄 Buscando informações do último commit...');
     const response = await fetch('https://api.github.com/repos/hiudyy/nazuna/commits?per_page=1', {
       headers: { Accept: 'application/vnd.github+json' },
     });
-
     if (!response.ok) {
       throw new Error(`Erro ao buscar commits: ${response.status} ${response.statusText}`);
     }
-
     const linkHeader = response.headers.get('link');
     const NumberUp = linkHeader?.match(/page=(\d+)>;\s*rel="last"/)?.[1];
-
     const jsonUp = { total: Number(NumberUp) || 0 };
     await fs.writeFile(path.join(process.cwd(), 'dados', 'database', 'updateSave.json'), JSON.stringify(jsonUp));
-
     printSeparator();
     printMessage('🎉 Atualização concluída com sucesso!');
     printMessage('🚀 Inicie o bot com: npm start');

@@ -1,12 +1,9 @@
-import fs from 'fs/promises';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-import path from 'path';
-import { fileURLToPath } from 'url';
+const fs = require('fs/promises');
+const { exec } = require('child_process');
+const { promisify } = require('util');
+const path = require('path');
+const zlib = require('zlib');
 
-// Configuração de caminhos para o ambiente ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const execAsync = promisify(exec);
 
@@ -20,37 +17,42 @@ class MediaCompressor {
         
         this.settings = {
             image: {
-                quality: 80,
+                quality: 85,
                 maxWidth: 1920,
                 maxHeight: 1920,
-                format: 'auto', // auto, jpg, webp, png
-                stripMetadata: true
+                format: 'auto', // auto, jpg, webp, png, avif
+                stripMetadata: true,
+                progressive: true
             },
             video: {
-                quality: 28, // CRF value (lower = better quality)
+                quality: 25, // CRF value (lower = better quality)
                 maxWidth: 1280,
                 maxHeight: 720,
                 fps: 30,
                 audioBitrate: '128k',
-                codec: 'h264' // h264, h265, vp9
+                codec: 'h264', // h264, h265, vp9, av1
+                preset: 'medium'
             },
             audio: {
                 bitrate: '128k',
-                format: 'mp3', // mp3, aac, ogg
-                normalize: true
+                format: 'mp3', // mp3, aac, ogg, opus
+                normalize: true,
+                sampleRate: 44100
             },
             general: {
                 autoCompress: true,
                 sizeThreshold: 5 * 1024 * 1024, // 5MB
                 compressionRatio: 0.7, // Mínimo 30% de redução
-                keepOriginal: false
+                keepOriginal: false,
+                enableZlib: false // For compressing metadata
+
             }
         };
 
         this.supportedFormats = {
-            image: ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp'],
-            video: ['.mp4', '.avi', '.mov', '.mkv', '.webm', '.flv', '.wmv'],
-            audio: ['.mp3', '.wav', '.flac', '.aac', '.ogg', '.m4a']
+            image: ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp', '.heic', '.avif'],
+            video: ['.mp4', '.avi', '.mov', '.mkv', '.webm', '.flv', '.wmv', '.3gp', '.m4v'],
+            audio: ['.mp3', '.wav', '.flac', '.aac', '.ogg', '.m4a', '.wma']
         };
 
         this.init();
@@ -85,8 +87,7 @@ class MediaCompressor {
      */
     async checkDependencies() {
         const dependencies = [
-            { cmd: 'ffmpeg -version', name: 'FFmpeg' },
-            { cmd: 'convert -version', name: 'ImageMagick' }
+            { cmd: 'ffmpeg -version', name: 'FFmpeg' }
         ];
 
         for (const dep of dependencies) {
@@ -174,7 +175,9 @@ class MediaCompressor {
      * Processa fila de compressão
      */
     async processQueue() {
-        if (this.compressionQueue.length === 0 || 
+
+        if (this.compressionQueue.length === 0 ||
+
             this.activeCompressions >= this.maxConcurrentCompressions) {
             return;
         }
@@ -190,6 +193,10 @@ class MediaCompressor {
             if (task.retries < task.maxRetries) {
                 task.retries++;
                 this.compressionQueue.unshift(task);
+
+            } else {
+                console.error(`❌ Máximo de tentativas atingido para ${task.filePath}`);
+
             }
         } finally {
             this.activeCompressions--;
@@ -219,18 +226,29 @@ class MediaCompressor {
         }
 
         // Verifica se a compressão foi efetiva
+
+        const producedPath = result.outputPath || outputPath;
         const compressionRatio = 1 - (result.newSize / originalSize);
         if (compressionRatio < (options.compressionRatio || this.settings.general.compressionRatio)) {
             // Compressão não foi efetiva, remove arquivo comprimido
-            await fs.unlink(outputPath);
+            if (producedPath) {
+                await fs.unlink(producedPath).catch(() => {});
+            }
+
             throw new Error('Compressão não atingiu redução mínima');
         }
 
         // Substitui arquivo original se configurado
         if (!this.settings.general.keepOriginal) {
-            await fs.unlink(filePath);
-            await fs.rename(outputPath, filePath);
+
+            if (producedPath !== filePath) {
+                await fs.unlink(filePath);
+                await fs.rename(producedPath, filePath);
+            }
             result.outputPath = filePath;
+        } else {
+            result.outputPath = producedPath;
+
         }
 
         return {
@@ -246,34 +264,23 @@ class MediaCompressor {
     async compressImage(inputPath, outputPath, options) {
         try {
             const { quality, maxWidth, maxHeight, format, stripMetadata } = options;
-            
-            // Tenta usar ImageMagick primeiro
-            try {
-                let cmd = `convert "${inputPath}"`;
-                
-                if (stripMetadata) {
-                    cmd += ' -strip';
-                }
-                
-                cmd += ` -resize ${maxWidth}x${maxHeight}>`;
-                cmd += ` -quality ${quality}`;
-                
-                if (format !== 'auto') {
-                    cmd += ` -format ${format}`;
-                }
-                
-                cmd += ` "${outputPath}"`;
-                
-                await execAsync(cmd, { timeout: 30000 });
-            } catch (imageMagickError) {
-                // Fallback para FFmpeg
-                let cmd = `ffmpeg -i "${inputPath}"`;
-                cmd += ` -vf "scale=min(${maxWidth}\\,iw):min(${maxHeight}\\,ih):force_original_aspect_ratio=decrease"`;
-                cmd += ` -q:v ${Math.round(quality / 10)}`;
-                cmd += ` -y "${outputPath}"`;
-                
-                await execAsync(cmd, { timeout: 30000 });
+
+            const ffmpegQuality = Math.min(31, Math.max(1, Math.round(quality / 10)));
+            const formatNormalized = format !== 'auto' ? format.replace(/^\./, '') : null;
+
+            let cmd = `ffmpeg -hide_banner -loglevel error -i "${inputPath}"`;
+            cmd += ` -vf "scale=min(${maxWidth}\\,iw):min(${maxHeight}\\,ih):force_original_aspect_ratio=decrease"`;
+            cmd += ` -q:v ${ffmpegQuality}`;
+            if (stripMetadata) {
+                cmd += ' -map_metadata -1';
             }
+            if (formatNormalized) {
+                cmd += ` -f ${formatNormalized}`;
+            }
+            cmd += ` -y "${outputPath}"`;
+
+            await execAsync(cmd, { timeout: 30000 });
+
 
             const stats = await fs.stat(outputPath);
             return {
@@ -292,7 +299,9 @@ class MediaCompressor {
      */
     async compressVideo(inputPath, outputPath, options) {
         try {
-            const { quality, maxWidth, maxHeight, fps, audioBitrate, codec } = options;
+
+            const { quality, maxWidth, maxHeight, fps, audioBitrate, codec, preset } = options;
+
             
             let cmd = `ffmpeg -i "${inputPath}"`;
             
@@ -301,6 +310,10 @@ class MediaCompressor {
                 cmd += ` -c:v libx265 -crf ${quality}`;
             } else if (codec === 'vp9') {
                 cmd += ` -c:v libvpx-vp9 -crf ${quality}`;
+
+            } else if (codec === 'av1') {
+                cmd += ` -c:v libaom-av1 -crf ${quality}`;
+
             } else {
                 cmd += ` -c:v libx264 -crf ${quality}`;
             }
@@ -315,7 +328,9 @@ class MediaCompressor {
             cmd += ` -c:a aac -b:a ${audioBitrate}`;
             
             // Otimizações
-            cmd += ` -preset fast -movflags +faststart`;
+
+            cmd += ` -preset ${preset || 'fast'} -movflags +faststart`;
+
             
             cmd += ` -y "${outputPath}"`;
             
@@ -338,16 +353,32 @@ class MediaCompressor {
      */
     async compressAudio(inputPath, outputPath, options) {
         try {
-            const { bitrate, format, normalize } = options;
+
+            const { bitrate, format, normalize, sampleRate } = options;
+
             
             let cmd = `ffmpeg -i "${inputPath}"`;
             
             if (normalize) {
-                cmd += ` -filter:a "volume=0.5"`;
+
+                cmd += ` -filter:a "loudnorm"`;
             }
             
-            cmd += ` -c:a ${format === 'mp3' ? 'libmp3lame' : 'aac'}`;
+            if (format === 'mp3') {
+                cmd += ` -c:a libmp3lame`;
+            } else if (format === 'aac') {
+                cmd += ` -c:a aac`;
+            } else if (format === 'ogg') {
+                cmd += ` -c:a libvorbis`;
+            } else if (format === 'opus') {
+                cmd += ` -c:a libopus`;
+            }
+            
             cmd += ` -b:a ${bitrate}`;
+            if (sampleRate) {
+                cmd += ` -ar ${sampleRate}`;
+            }
+
             cmd += ` -y "${outputPath}"`;
             
             await execAsync(cmd, { timeout: 120000 }); // 2 minutos timeout
@@ -542,4 +573,6 @@ class MediaCompressor {
     }
 }
 
-export default MediaCompressor;
+
+module.exports = MediaCompressor;
+

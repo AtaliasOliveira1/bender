@@ -4,8 +4,8 @@
  * Versão: 2.0.0
  */
 
-import axios from 'axios';
-import { parseHTML } from 'linkedom';
+const axios = require('axios');
+const { parseHTML } = require('linkedom');
 
 // Configurações
 const CONFIG = {
@@ -263,7 +263,7 @@ async function pinterestDL(url) {
   }
 }
 
-export default {
+module.exports = {
   search: (text) => pinterestSearch(text),
   dl: (url) => pinterestDL(url)
 };

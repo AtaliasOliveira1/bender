@@ -1,10 +1,9 @@
-import fs from 'fs/promises';
-import { execSync } from 'child_process';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const fs = require('fs/promises');
+const { execSync } = require('child_process');
+const path = require('path');
+const zlib = require('zlib');
+
 
 class SystemMonitor {
     constructor() {
@@ -321,16 +320,31 @@ class SystemMonitor {
     }
 
     /**
-     * Comprime um arquivo (placeholder - implementar compressão real)
+
+     * Comprime um arquivo usando zlib
      */
     async compressFile(filePath) {
         try {
-            // Implementar compressão real aqui (ffmpeg para vídeos, sharp para imagens, etc.)
             const stats = await fs.stat(filePath);
+            const originalSize = stats.size;
+            
+            if (originalSize < 1024) { // Não comprime arquivos pequenos
+                return { success: false, originalSize, newSize: originalSize };
+            }
+            
+            const data = await fs.readFile(filePath);
+            const compressed = zlib.gzipSync(data);
+            
+            await fs.writeFile(filePath + '.gz', compressed);
+            await fs.unlink(filePath);
+            await fs.rename(filePath + '.gz', filePath);
+            
+            const newStats = await fs.stat(filePath);
             return {
-                success: false, // Por enquanto retorna false até implementar compressão real
-                originalSize: stats.size,
-                newSize: stats.size
+                success: true,
+                originalSize,
+                newSize: newStats.size
+
             };
         } catch (error) {
             return { success: false, error: error.message };
@@ -354,4 +368,6 @@ class SystemMonitor {
     }
 }
 
-export default SystemMonitor;
+
+module.exports = SystemMonitor;
+

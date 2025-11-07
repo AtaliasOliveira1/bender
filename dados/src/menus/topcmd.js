@@ -43,4 +43,4 @@ ${middleBorder}
 ${bottomBorder}
 `;
 }
-export default menuTopCmd;
+module.exports = menuTopCmd;

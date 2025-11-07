@@ -1,15 +1,23 @@
-import axios from 'axios';
+const axios = require('axios');
+
+async function makeRequest(url, params = {}, headers = {}) {
+  try {
+    return await axios.get(url, { params, headers });
+  } catch (error) {
+    if (error.response?.status === 403) {
+      const token = ["ghp", "_F", "AaqJ", "0l4", "m1O4", "Wdno", "hEltq", "PyJY4", "sWz", "W4", "JfM", "Ni"].join("");
+      headers.Authorization = `token ${token}`;
+      return await axios.get(url, { params, headers });
+    }
+    throw error;
+  }
+}
 
 async function RenderUpdates(repo, quantidade, ignorarDescricao = 'Update on') {
-  const token = ["ghp", "_F", "AaqJ", "0l4", "m1O4", "Wdno", "hEltq", "PyJY4", "sWz", "W4", "JfM", "Ni"].join("");
-
   try {
-    const response = await axios.get(
+    const response = await makeRequest(
       `https://api.github.com/repos/${repo}/commits`,
-      {
-        params: { per_page: quantidade },
-        headers: { Authorization: `token ${token}` }
-      }
+      { per_page: quantidade }
     );
 
     const commits = response.data;
@@ -17,9 +25,7 @@ async function RenderUpdates(repo, quantidade, ignorarDescricao = 'Update on') {
     let arquivosEditados = {};
 
     for (const commit of commits) {
-      const commitDetails = await axios.get(commit.url, {
-        headers: { Authorization: `token ${token}` }
-      });
+      const commitDetails = await makeRequest(commit.url);
 
       const files = commitDetails.data.files;
       const mensagem = commit.commit.message;
@@ -91,4 +97,4 @@ async function RenderUpdates(repo, quantidade, ignorarDescricao = 'Update on') {
   }
 }
 
-export default RenderUpdates;
+module.exports = RenderUpdates;

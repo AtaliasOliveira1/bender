@@ -1,15 +1,11 @@
-import fs from 'fs/promises';
-import path from 'path';
-import cron from 'node-cron';
-import { fileURLToPath } from 'url';
-
-// Configuração de caminhos para o ambiente ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const fs = require('fs/promises');
+const path = require('path');
+const cron = require('node-cron');
 
 class RentalExpirationManager {
-  constructor(bender, config = {}) {
-    this.bender = bender;
+  constructor(nazu, config = {}) {
+    this.nazu = nazu;
+
     this.config = {
       checkInterval: config.checkInterval || '0 */6 * * *', // Every 6 hours
       warningDays: config.warningDays || 3,
@@ -162,7 +158,9 @@ class RentalExpirationManager {
 
   async processExpiredRental(groupId, groupInfo, rentalData) {
     try {
-      const groupMetadata = await this.bender.groupMetadata(groupId).catch(() => null);
+
+      const groupMetadata = await this.nazu.groupMetadata(groupId).catch(() => null);
+
       
       if (!groupMetadata) {
         await this.log(`Group ${groupId} not found, removing from rental data`);
@@ -191,14 +189,18 @@ class RentalExpirationManager {
 
   async sendExpirationNotification(groupId, type, daysUntilExpiry) {
     try {
-      const groupMetadata = await this.bender.groupMetadata(groupId).catch(() => null);
+
+      const groupMetadata = await this.nazu.groupMetadata(groupId).catch(() => null);
+
       if (!groupMetadata) return;
 
       const ownerInfo = await this.getOwnerInfo();
       const message = this.buildExpirationMessage(type, daysUntilExpiry, groupMetadata, ownerInfo);
 
       // Send to group
-      await this.bender.sendMessage(groupId, {
+
+      await this.nazu.sendMessage(groupId, {
+
         text: message
       }).catch(error => {
         console.error(`❌ Failed to send message to group ${groupId}:`, error);
@@ -209,7 +211,9 @@ class RentalExpirationManager {
       const admins = participants.filter(p => p.admin === true);
       
       for (const admin of admins) {
-        await this.bender.sendMessage(admin.id, {
+
+        await this.nazu.sendMessage(admin.id, {
+
           text: message
         }).catch(error => {
           console.error(`❌ Failed to send message to admin ${admin.id}:`, error);
@@ -298,12 +302,16 @@ O aluguel deste grupo expirou e o bot está saindo agora. Para voltar a usar o b
 
 🤖 *Obrigado por usar nossos serviços! Até breve!*`;
 
-      await this.bender.sendMessage(groupId, {
+
+      await this.nazu.sendMessage(groupId, {
+
         text: goodbyeMessage
       });
 
       // Leave the group
-      await this.bender.groupLeave(groupId);
+
+      await this.nazu.groupLeave(groupId);
+
       
       // Remove from rental data
       const rentalData = await this.loadRentalData();
@@ -425,4 +433,6 @@ O aluguel deste grupo expirou e o bot está saindo agora. Para voltar a usar o b
   }
 }
 
-export default RentalExpirationManager;
+
+module.exports = RentalExpirationManager;
+

@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import fs from 'fs/promises';
-import fsSync from 'fs';
-import path from 'path';
-import { spawn, execSync } from 'child_process';
-import readline from 'readline/promises';
-import os from 'os';
+const fs = require('fs/promises');
+const fsSync = require('fs');
+const path = require('path');
+const { spawn, execSync } = require('child_process');
+const readline = require('readline/promises');
+const os = require('os');
 
 const CONFIG_PATH = path.join(process.cwd(), 'dados', 'src', 'config.json');
 const NODE_MODULES_PATH = path.join(process.cwd(), 'node_modules');
@@ -196,21 +196,23 @@ function startBot(codeMode = false) {
   });
 
   botProcess.on('close', (code) => {
-    if (code !== 0) {
-      aviso(`⚠️ O bot terminou com erro (código: ${code}).`);
-      restartBot(codeMode);
+    if (code === 0) {
+      info(`✅ O bot terminou normalmente (código: ${code}). Reiniciando...`);
+    } else {
+      aviso(`⚠️ O bot terminou com erro (código: ${code}). Reiniciando...`);
     }
+    restartBot(codeMode);
   });
 
   return botProcess;
 }
 
 function restartBot(codeMode) {
-  aviso('🔄 Reiniciando o bot em 1 segundo...');
+  aviso('🔄 Reiniciando o bot em 500ms...');
   setTimeout(() => {
     if (botProcess) botProcess.removeAllListeners();
     startBot(codeMode);
-  }, 1000);
+  }, 500);
 }
 
 async function checkAutoConnect() {
@@ -279,4 +281,6 @@ async function main() {
   }
 }
 
-await main();
+(async () => {
+  await main();
+})();

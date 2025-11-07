@@ -219,9 +219,18 @@ class GameManager {
 // --- EXPORTAÇÃO DIRETA DAS FUNÇÕES ---
 const manager = new GameManager();
 
-export const invitePlayer = (...args) => manager.invitePlayer(...args);
-export const processInvitationResponse = (...args) => manager.processInvitationResponse(...args);
-export const makeMove = (...args) => manager.makeMove(...args);
-export const endGame = (...args) => manager.endGame(...args);
-export const hasActiveGame = (...args) => manager.hasActiveGame(...args);
-export const hasPendingInvitation = (...args) => manager.hasPendingInvitation(...args);
+const invitePlayer = (...args) => manager.invitePlayer(...args);
+const processInvitationResponse = (...args) => manager.processInvitationResponse(...args);
+const makeMove = (...args) => manager.makeMove(...args);
+const endGame = (...args) => manager.endGame(...args);
+const hasActiveGame = (...args) => manager.hasActiveGame(...args);
+const hasPendingInvitation = (...args) => manager.hasPendingInvitation(...args);
+
+module.exports = {
+  invitePlayer,
+  processInvitationResponse,
+  makeMove,
+  endGame,
+  hasActiveGame,
+  hasPendingInvitation
+};

@@ -10,7 +10,7 @@ Benefícios incluídos no combo:
 - ✅ Ajuda na configuração inicial e otimização
 - ✅ Menos risco de queda ou ban por má configuração
 
-👉 Garanta agora: [Falar no WhatsApp](https://wa.me/5533999285117)  
+👉 Garante agora: [Falar no WhatsApp](https://wa.me/5533999285117)  
 Ou copie e abra: `https://wa.me/5533999285117`
 
 > Vagas promocionais limitadas. Ideal para quem quer profissionalizar o uso do bot sem dor de cabeça!
@@ -29,6 +29,9 @@ Bem-vindo ao repositório oficial do **nazuna Bot**! Este projeto é um bot avan
 
 ## ✨ Por que o nazuna Bot se Destaca?
 
+<details>
+<summary><strong>🔍 Clique para ver as principais características</strong></summary>
+
 O nazuna Bot foi projetado para ser mais do que um simples assistente; ele é um parceiro digital que simplifica suas interações no WhatsApp. Veja o que o torna tão especial:
 
 - **Configuração Simplificada e Intuitiva**: Conecte-se ao WhatsApp em questão de minutos, utilizando um prático QR code ou um código de pareamento, eliminando complexidades iniciais.
@@ -38,10 +41,14 @@ O nazuna Bot foi projetado para ser mais do que um simples assistente; ele é um
 - **Segurança Reforçada e Estabilidade Comprovada**: Desenvolvido com base no modo multi-dispositivos do WhatsApp, o nazuna Bot oferece uma operação fluida, segura e confiável, minimizando interrupções e protegendo seus dados.
 
 > 💡 **Explore o Potencial**: Após a configuração inicial, basta digitar `/menu` no WhatsApp para desvendar um universo de comandos e funcionalidades que o nazuna Bot oferece!
+</details>
 
 ---
 
 ## 📊 Estatísticas Detalhadas do Projeto
+
+<details>
+<summary><strong>📈 Métricas e números do projeto</strong></summary>
 
 Acompanhe o progresso e a vitalidade do nazuna Bot através de métricas em tempo real, que refletem o engajamento da comunidade e o desenvolvimento contínuo do projeto:
 
@@ -64,19 +71,27 @@ Acompanhe o progresso e a vitalidade do nazuna Bot através de métricas em temp
 📈 **Visitas Totais ao Repositório**:  
 ![Contador de Visitas](https://count.getloli.com/@nazuninha-bot?name=nazuninha-bot&theme=booru-lewd&padding=8&offset=0&align=top&scale=2&pixelated=1&darkmode=1)  
 *Este contador registra o número total de visualizações que o repositório do nazuna Bot recebeu, refletindo o interesse geral no projeto.*
+</details>
 
 ---
 
 ## 📢 Conecte-se à Comunidade Oficial
 
+<details>
+<summary><strong>👥 Junte-se à nossa comunidade</strong></summary>
+
 Mantenha-se sempre atualizado com as últimas notícias, receba dicas exclusivas e acesse suporte direto da comunidade do nazuna Bot. Junte-se a nós!
 
 [![Grupo WhatsApp](https://img.shields.io/badge/Entrar-WhatsApp-25D366?style=flat-square&logo=whatsapp)](https://chat.whatsapp.com/EvgIsHK0NJmGbErpy4G3aB?mode=ac_t)  
 *Clique para entrar no nosso grupo oficial do WhatsApp e faça parte da nossa crescente comunidade!* 
+</details>
 
 ---
 
 ## 📜 Índice Detalhado
+
+<details>
+<summary><strong>📋 Navegue pelas seções do README</strong></summary>
 
 Navegue facilmente por todas as seções deste README para encontrar as informações que você precisa:
 
@@ -96,10 +111,14 @@ Navegue facilmente por todas as seções deste README para encontrar as informa�
 10. [📜 Licença de Uso e Direitos Autorais](#-licença-de-uso-e-direitos-autorais)
 11. [👤 Sobre o Criador: Hiudy](#-sobre-o-criador-hiudy)
 12. [❔ FAQ Avançado e Dúvidas Frequentes](#-faq-avançado-e-dúvidas-frequentes)
+</details>
 
 ---
 
 ## 🚀 Primeiros Passos: Guia Rápido
+
+<details>
+<summary><strong>⚡ Início rápido para quem tem experiência</strong></summary>
 
 Se você é novo no mundo dos bots de WhatsApp e nunca instalou o nazuna Bot antes, é altamente recomendável que você siga o tutorial específico para a sua plataforma (Windows, Linux, Termux ou Pterodactyl), detalhado na seção [Tutoriais de Instalação por Plataforma](#-tutoriais-de-instalação-por-plataforma). Esses guias foram elaborados para cobrir cada etapa, minimizando possíveis erros.
 
@@ -111,10 +130,14 @@ Para aqueles que já têm alguma familiaridade ou já possuem os pré-requisitos
 4. **Explore os Comandos**: Após a conexão bem-sucedida, envie `/menu` para o bot no WhatsApp para descobrir todas as funcionalidades e comandos disponíveis.
 
 > 💡 **Dica para Iniciantes**: Não se sinta sobrecarregado se os termos parecerem complexos. Cada seção deste documento foi cuidadosamente elaborada para fornecer instruções claras e passo a passo, tornando o processo acessível a todos.
+</details>
 
 ---
 
 ## 📋 Pré-requisitos Essenciais
+
+<details>
+<summary><strong>🛠️ O que você precisa antes de começar</strong></summary>
 
 Para garantir que o nazuna Bot funcione perfeitamente em seu sistema, você precisará dos seguintes componentes. Certifique-se de que todos estejam instalados e configurados corretamente antes de prosseguir com a instalação do bot:
 
@@ -125,13 +148,17 @@ Para garantir que o nazuna Bot funcione perfeitamente em seu sistema, você prec
 | **WhatsApp**        | Um **número de telefone dedicado e secundário** para o bot. É crucial **NÃO** utilizar seu número principal, pois o uso de bots pode, em casos raros, levar a banimentos temporários ou permanentes da conta pelo WhatsApp. |
 | **Internet Estável**| Uma conexão à internet contínua e estável é fundamental para a configuração inicial, conexão com o WhatsApp e o funcionamento ininterrupto do bot.                                  |
 | **Dispositivo Compatível**| Você pode rodar o nazuna Bot em uma variedade de plataformas: um computador (Windows, Linux, macOS), um dispositivo Android (com o aplicativo Termux instalado) ou um servidor dedicado (como os que utilizam Pterodactyl).    |
-| **Recursos Mínimos de Hardware**| Para um funcionamento básico, o bot requer **256MB de RAM** e **256MB de armazenamento** disponível. Para um desempenho otimizado e mais fluidez, recomendamos **512MB de RAM** e **512MB de espaço em disco**.
+| **Recursos Mínimos de Hardware**| Para um funcionamento básico, o bot requer **256MB de RAM** e **256MB de armazenamento** disponível. Para um desempenho otimizado e mais fluidez, recomendamos **512MB de RAM** e **512MB de espaço em disco**. |
 
 > ⚠️ **Alerta de Segurança**: Reafirmamos a importância de utilizar um número de telefone secundário para o nazuna Bot. Esta prática protege sua conta pessoal do WhatsApp de quaisquer riscos associados ao uso de automação.
+</details>
 
 ---
 
 ## 📥 Instalação do nazuna Bot
+
+<details>
+<summary><strong>📦 Passo a passo da instalação</strong></summary>
 
 Siga este guia passo a passo para instalar o nazuna Bot em seu sistema. Certifique-se de ter todos os [Pré-requisitos Essenciais](#-pré-requisitos-essenciais) instalados antes de começar.
 
@@ -158,10 +185,14 @@ Siga este guia passo a passo para instalar o nazuna Bot em seu sistema. Certifiq
      - **`npm: command not found`**: Este erro geralmente indica que o Node.js (e, consequentemente, o npm) não foi instalado corretamente ou não está no PATH do seu sistema. Verifique a instalação do Node.js executando `node -v` e `npm -v`. Se não retornarem versões, reinstale o Node.js.
      - **Erros de Permissão**: Em alguns sistemas, especialmente Linux ou Termux, você pode encontrar erros de permissão. Certifique-se de que você tem permissões de escrita no diretório onde o bot foi clonado. No Termux, verifique se `termux-setup-storage` foi executado e a permissão concedida.
      - **Outros Erros de Instalação**: Se os comandos `npm run config` ou `npm run config:install` falharem, tente executar `npm install` diretamente. Este comando reinstala todas as dependências do zero e pode resolver problemas de pacotes corrompidos.
+</details>
 
 ---
 
 ## 🚀 Rodando o Bot pela Primeira Vez
+
+<details>
+<summary><strong>▶️ Como executar o bot</strong></summary>
 
 Após a instalação bem-sucedida de todas as dependências, você está pronto para iniciar o nazuna Bot. Execute o seguinte comando no terminal, dentro do diretório do projeto `nazuna`:
 
@@ -172,10 +203,14 @@ npm start
 Este comando iniciará o processo do bot e o guiará através da conexão com o WhatsApp, que será detalhada na próxima seção.
 
 > 💡 **Primeira Execução e Autenticação**: Na primeira vez que você rodar o bot, ele solicitará uma autenticação com o WhatsApp. Isso pode ser feito via QR code ou código de pareamento. Uma vez autenticado, a sessão será salva, e o bot se reconectará automaticamente em execuções futuras, a menos que a sessão seja explicitamente desconectada ou corrompida.
+</details>
 
 ---
 
 ## 🔌 Conectando o Bot ao WhatsApp
+
+<details>
+<summary><strong>📱 Métodos de conexão</strong></summary>
 
 O nazuna Bot aproveita o **modo multi-dispositivos** do WhatsApp, o que significa que, após a configuração inicial, seu celular não precisa permanecer conectado à internet para que o bot funcione. Escolha o método de conexão que melhor se adapta às suas necessidades:
 
@@ -208,10 +243,14 @@ Este método é útil se você não consegue escanear o QR code diretamente (por
 > - **Número Secundário**: Reforçamos a importância de usar um número de telefone **secundário e exclusivo** para o bot. Isso minimiza o risco de banimento da sua conta principal do WhatsApp, que pode ocorrer devido às políticas de uso de automação.
 > - **QR Code Expirado**: Se o QR code exibido no terminal expirar antes que você consiga escanear o código, simplesmente execute `npm start` novamente para gerar um novo QR code.
 > - **Sessão Salva Automaticamente**: A sessão de conexão do bot é salva automaticamente em um arquivo. Isso garante que, em futuras execuções, o bot se reconecte ao WhatsApp sem a necessidade de um novo QR code ou código de pareamento, a menos que a sessão seja corrompida ou você a desconecte manualmente.
+</details>
 
 ---
 
 ## 🔄 Atualizando o nazuna Bot
+
+<details>
+<summary><strong>🔃 Como manter seu bot atualizado</strong></summary>
 
 Manter seu nazuna Bot atualizado é essencial para garantir acesso às últimas funcionalidades, melhorias de desempenho e correções de segurança. O processo de atualização é simples e seguro:
 
@@ -224,14 +263,21 @@ npm run update
 Este comando irá baixar as últimas alterações do repositório e atualizar as dependências, tudo isso sem afetar suas configurações personalizadas ou o histórico de conversas do bot.
 
 > ✅ **Atualização Segura e Sem Perdas**: O processo de atualização foi projetado para ser não-destrutivo. Suas configurações (como o arquivo `config.json`) e os dados de sessão do bot não serão apagados, garantindo uma transição suave para a nova versão.
+</details>
 
 ---
 
 ## 💻 Tutoriais de Instalação por Plataforma
 
+<details>
+<summary><strong>🖥️ Guias detalhados por sistema operacional</strong></summary>
+
 O nazuna Bot é incrivelmente versátil e pode ser executado em diversas plataformas. Escolha o tutorial que corresponde ao seu ambiente para um guia de instalação detalhado e otimizado:
 
 ### 🖥️ Windows: Guia Completo
+
+<details>
+<summary><strong>👨‍💻 Tutorial para Windows</strong></summary>
 
 Este guia detalha a instalação do nazuna Bot em sistemas operacionais Windows, desde a preparação do ambiente até a execução e manutenção do bot.
 
@@ -274,8 +320,12 @@ Este guia detalha a instalação do nazuna Bot em sistemas operacionais Windows,
    - **Alternativa Simples**: Se você não quiser usar o NSSM, pode simplesmente deixar a janela do Prompt de Comando ou PowerShell aberta. No entanto, fechar a janela encerrará o processo do bot.
 
 > 💡 **Dica para Windows**: Se o bot parar de funcionar inesperadamente, verifique sua conexão com a internet, certifique-se de que o processo não foi encerrado e, se necessário, reinicie-o com `npm start`.
+</details>
 
 ### 🐧 Linux: Instalação e Configuração
+
+<details>
+<summary><strong>🐧 Tutorial para Linux</strong></summary>
 
 Este guia abrange a instalação do nazuna Bot em distribuições Linux baseadas em Debian/Ubuntu, mas os princípios podem ser aplicados a outras distribuições com pequenas adaptações.
 
@@ -324,8 +374,12 @@ Este guia abrange a instalação do nazuna Bot em distribuições Linux baseadas
    - **Monitoramento**: Você pode monitorar os logs do bot em tempo real com `pm2 logs nazuna` e verificar o status com `pm2 status`.
 
 > 💡 **Dica para Linux**: Se o bot desconectar ou parar de funcionar, você pode reiniciá-lo facilmente com o comando `pm2 restart nazuna`. Para parar o bot, use `pm2 stop nazuna`.
+</details>
 
 ### 📱 Termux (Android): Passo a Passo Detalhado
+
+<details>
+<summary><strong>📱 Tutorial para Android via Termux</strong></summary>
 
 Este tutorial abrangente detalha a instalação do nazuna Bot no Termux, desde o download do aplicativo até a execução do bot, com foco em evitar e solucionar erros comuns.
 
@@ -396,8 +450,12 @@ Este tutorial abrangente detalha a instalação do nazuna Bot no Termux, desde o
    - **Solução de Problemas Pós-Atualização**: Se o bot parar de funcionar após uma atualização ou por qualquer outro motivo, tente reiniciar o processo. Certifique-se de estar na pasta `nazuna` e execute `npm start` novamente.
 
 > 💡 **Dica Crucial para Termux**: Se você encontrar o erro "Permissão negada" em qualquer etapa, é quase certo que as permissões de armazenamento não foram concedidas corretamente. Execute `termux-setup-storage` novamente e certifique-se de aceitar a permissão na caixa de diálogo do sistema.
+</details>
 
 ### ☁️ Pterodactyl: Configuração em Servidores
+
+<details>
+<summary><strong>☁️ Tutorial para servidores Pterodactyl</strong></summary>
 
 Este guia detalha como configurar o **nazuna Bot** em um servidor Pterodactyl, oferecendo duas opções: o Egg oficial do nazuna, que automatiza a maior parte do processo, e um Egg Node.js comum, para maior controle manual.
 
@@ -465,26 +523,35 @@ Esta opção oferece mais controle sobre a configuração, mas requer mais passo
      ```
 
 > 💡 **Dica para Pterodactyl**: O Egg oficial do nazuna simplifica enormemente a instalação e a manutenção, automatizando a maioria dos processos. É a escolha recomendada para a maioria dos usuários.
+</details>
+</details>
 
 ---
 
 ## ❓ Resolvendo Problemas Comuns (FAQ)
 
+<details>
+<summary><strong>🔧 Soluções para problemas frequentes</strong></summary>
+
 Encontrou algum problema durante a instalação ou uso do nazuna Bot? Aqui estão as soluções para os problemas mais frequentes. Se sua dúvida não for respondida aqui, não hesite em nos contatar no [Grupo do WhatsApp](https://chat.whatsapp.com/EvgIsHK0NJmGbErpy4G3aB?mode=ac_t).
 
 | **Problema Comum**               | **Solução Detalhada e Passo a Passo**                                                                 |
 |----------------------------------|-------------------------------------------------------------------------------------------------------|
-| **“Comando não encontrado” (git, node, npm)** | Este erro indica que o Git ou o Node.js não estão instalados corretamente ou não estão no PATH do sistema. Verifique a instalação com `node -v` e `git --version`. Se não retornarem versões, reinstale-os. No Termux, use `pkg install git nodejs`. |
+| **"Comando não encontrado" (git, node, npm)** | Este erro indica que o Git ou o Node.js não estão instalados corretamente ou não estão no PATH do sistema. Verifique a instalação com `node -v` e `git --version`. Se não retornarem versões, reinstale-os. No Termux, use `pkg install git nodejs`. |
 | **QR Code não funciona ou expira rapidamente** | **Causas Comuns**: Conexão de internet lenta, terminal muito pequeno para exibir o QR code corretamente, ou demora para escanear. **Soluções**: 1) Aumente o tamanho da janela do terminal. 2) Verifique sua conexão com a internet. 3) Gere um novo QR code reiniciando o bot com `npm start`. 4) Tente o método de conexão com código de pareamento. |
 | **Bot desconecta frequentemente** | **Causas Comuns**: Conexão de internet instável, recursos insuficientes (RAM/CPU), ou problemas com a sessão salva. **Soluções**: 1) Verifique sua conexão com a internet. 2) Monitore o uso de recursos do sistema. 3) Reinicie o bot com `npm start`. 4) Como último recurso, apague a pasta `sessions` (isso exigirá uma nova autenticação) e reinicie o bot. |
 | **Erro durante a instalação de dependências (npm install)** | **Causas Comuns**: Conexão de internet instável, pacotes corrompidos no cache do npm, ou problemas de permissão. **Soluções**: 1) Verifique sua conexão com a internet. 2) Limpe o cache do npm com `npm cache clean --force` e tente novamente. 3) Certifique-se de que você tem permissões de escrita no diretório do projeto. 4) Verifique se você está usando a versão correta do Node.js (18+). |
 | **Termux para de funcionar em segundo plano** | **Causa**: O sistema Android é agressivo ao fechar aplicativos em segundo plano para economizar bateria. **Soluções**: 1) Desative a otimização de bateria para o aplicativo Termux nas configurações do seu Android. 2) Use um aplicativo de "manter tela ligada" ou "manter acordado". 3) Reinicie o bot com `cd /sdcard/nazuna && npm start`. |
 
 > 😊 **Ainda com Problemas?** Nossa comunidade está pronta para ajudar! Junte-se ao nosso [Grupo do WhatsApp](https://chat.whatsapp.com/EvgIsHK0NJmGbErpy4G3aB?mode=ac_t) para obter suporte direto do criador e de outros usuários experientes.
+</details>
 
 ---
 
 ## 💖 Apoie o Projeto: Faça a Diferença
+
+<details>
+<summary><strong>💝 Como contribuir com o projeto</strong></summary>
 
 O desenvolvimento e a manutenção do **nazuna Bot** são um trabalho de amor, mas também exigem tempo, esforço e recursos. Seu apoio é fundamental para garantir a continuidade e a evolução do projeto, permitindo a adição de novas funcionalidades, melhorias de desempenho e suporte contínuo à comunidade.
 
@@ -495,10 +562,14 @@ Se você aprecia o nazuna Bot e deseja contribuir para seu futuro, considere faz
   *Qualquer valor é bem-vindo e nos ajuda a manter o projeto vivo e próspero!* 
 
 > ❤️ **Nossa Gratidão!** Agradecemos imensamente a todos que apoiam o nazuna Bot. Sua generosidade é o que nos motiva a continuar inovando e aprimorando esta ferramenta para toda a comunidade!
+</details>
 
 ---
 
 ## 🌐 Recomendação de Hospedagem
+
+<details>
+<summary><strong>🏢 Parceiros de hospedagem recomendados</strong></summary>
 
 Para aqueles que desejam rodar o nazuna Bot 24/7 em um ambiente estável e com bom custo-benefício, recomendamos a **Latam Data Center**.
 
@@ -506,18 +577,26 @@ Para aqueles que desejam rodar o nazuna Bot 24/7 em um ambiente estável e com b
 
 - **Site**: [latamdatacenter.com.br](https://latamdatacenter.com.br)
 - **Por que recomendamos?**: Oferecem planos de hospedagem acessíveis, com boa estabilidade e suporte em português, ideais para projetos como o nazuna Bot.
+</details>
 
 ---
 
 ## 📜 Licença de Uso e Direitos Autorais
 
+<details>
+<summary><strong>⚖️ Termos de uso e direitos</strong></summary>
+
 © 2025 **Hiudy**. Todos os direitos reservados.
 
 O **nazuna Bot** é um projeto de código aberto, mas é **protegido por copyright**. Isso significa que, embora você tenha total liberdade para editar e distribuir o bot para uso pessoal ou em sua comunidade, a **venda** do nazuna Bot ou de suas versões modificadas é estritamente proibida, pois o projeto é oferecido gratuitamente. Além disso, a remoção total dos créditos do autor é vedada. Violações destas condições podem resultar em ações legais.
+</details>
 
 ---
 
 ## 👤 Sobre o Criador: Hiudy
+
+<details>
+<summary><strong>👨‍💻 Conheça o desenvolvedor</strong></summary>
 
 Feito com ❤️ e muitas xícaras de café por [**Hiudy**](https://github.com/hiudyy), um desenvolvedor apaixonado por criar ferramentas que tornam a tecnologia mais divertida, acessível e poderosa. Ele está constantemente inovando e dedicando seu tempo ao nazuna Bot para aprimorar a experiência de toda a comunidade.
 
@@ -539,10 +618,14 @@ Hiudy é um entusiasta de tecnologia que se dedica a criar soluções práticas,
 - 📱 **WhatsApp**: [wa.me/hiudy](https://wa.me/hiudy)
 
 > 🌟 **Gostou do Projeto?** Demonstre seu apoio dando uma estrela no GitHub e compartilhando o nazuna Bot com seus amigos e comunidades!
+</details>
 
 ---
 
 ## ❔ FAQ Avançado e Dúvidas Frequentes
+
+<details>
+<summary><strong>❓ Perguntas e respostas avançadas</strong></summary>
 
 | **Pergunta Frequente**                    | **Resposta Detalhada**                                                                 |
 |------------------------------------------|-----------------------------------------------------------------------------------------|
@@ -550,5 +633,91 @@ Hiudy é um entusiasta de tecnologia que se dedica a criar soluções práticas,
 | **O bot funciona se meu celular estiver offline?** | **Sim!** Graças ao modo multi-dispositivos do WhatsApp, após a configuração inicial, o bot funciona de forma independente e não requer que seu celular esteja conectado à internet. |
 | **Como posso personalizar os comandos e as respostas do bot?** | A personalização é um dos pontos fortes do nazuna Bot! Você pode editar o arquivo `config.json` após a instalação para alterar o prefixo, as mensagens de boas-vindas e outras configurações. Para personalizações mais avançadas, você pode editar diretamente os arquivos de comando na pasta do projeto. |
 | **O que fazer se meu servidor Pterodactyl travar ou o bot parar de responder?** | Primeiro, verifique os logs do bot no console do Pterodactyl para identificar possíveis erros. Em seguida, tente reiniciar o servidor. Se o problema persistir, verifique se há recursos suficientes (RAM/CPU) alocados para o bot e considere atualizar o bot para a versão mais recente. |
+| **O bot é compatível com outros sistemas além do WhatsApp?** | Atualmente, o nazuna Bot é desenvolvido exclusivamente para WhatsApp. No entanto, nossa arquitetura modular permite que futuras integrações com outras plataformas sejam consideradas. Fique atento às atualizações para possíveis novos recursos! |
+| **Como posso contribuir para o desenvolvimento do nazuna Bot?** | Adoramos contribuições da comunidade! Você pode contribuir de várias formas: reportando bugs, sugerindo novas funcionalidades, traduzindo o bot para outros idiomas, melhorando a documentação, ou mesmo enviando pull requests com melhorias de código. Visite nosso repositório no GitHub para mais detalhes. |
+| **O bot funciona em grupos grandes?** | Sim! O nazuna Bot foi projetado para funcionar eficientemente em grupos de todos os tamanhos. No entanto, para grupos muito grandes (mais de 1000 membros), recomendamos usar um servidor dedicado para garantir o melhor desempenho. |
 
-> 💡 **Tem Mais Dúvidas?** Nossa comunidade e o criador estão sempre dispostos a ajudar! Pergunte no [Grupo do WhatsApp](https://chat.whatsapp.com/EvgIsHK0NJmGbErpy4G3aB?mode=ac_t) e teremos prazer em auxiliá-lo!
+> 💡 **Tem Mais Dúvidas?** Nossa comunidade e o criador estão sempre dispostos a ajudar! Pergunte no [Grupo do WhatsApp](https://chat.whatsapp.com/EvgIsHK0NJmGbErpy4G3aB?mode=ac_t) e teremos prazer em auxiliá-lo! 
+</details>
+
+---
+
+## 🛠️ Configuração Avançada (Desenvolvedores)
+
+<details>
+<summary><strong>⚙️ Para desenvolvedores que querem customizar</strong></summary>
+
+Para desenvolvedores que desejam fazer modificações avançadas no nazuna Bot, seguem algumas informações importantes:
+
+### 1. **Configuração do Ambiente de Desenvolvimento**
+   ```bash
+   # Clone o repositório
+   git clone https://github.com/hiudyy/nazuna.git
+   cd nazuna
+   
+   # Adicione o repositório original como remote
+   git remote add upstream https://github.com/hiudyy/nazuna.git
+   ```
+
+2. **Configure o Ambiente de Desenvolvimento**
+   ```bash
+   # Instale as dependências
+   npm run config
+   npm run config:install
+   
+   # Configure as variáveis de ambiente
+   cp .env.example .env
+   # Edite o arquivo .env com suas configurações
+   ```
+
+### Estrutura do Projeto
+
+A estrutura do projeto é organizada de forma modular para facilitar o desenvolvimento:
+
+```
+nazuna/
+├── dados/                    # Dados e configurações
+│   ├── src/                  # Código fonte principal
+│   │   ├── funcs/            # Funções do bot
+│   │   │   ├── downloads/    # Comandos de download
+│   │   │   ├── json/         # Dados JSON
+│   │   │   ├── private/      # Funções privadas
+│   │   │   └── utils/        # Utilitários
+│   │   ├── menus/            # Menus do bot
+│   │   └── utils/            # Utilitários gerais
+│   └── midias/               # Mídia (imagens, etc.)
+├── package.json              # Dependências e scripts
+└── README.md                 # Esta documentação
+```
+
+### Melhorias na Estrutura dos Tutoriais
+
+<details>
+<summary><strong>📚 Ampliando a documentação</strong></summary>
+
+Para tornar os tutoriais ainda mais completos e profissionais, recomendamos as seguintes melhorias:
+
+#### 🎯 **Tutoriais Interativos e Passo a Passo**
+- Adicionar capturas de tela em pontos críticos da instalação
+- Incluir vídeos explicativos para processos complexos
+- Criar check-lists interativas para cada plataforma
+- Implementar testes automatizados para verificar a instalação
+
+#### 🔧 **Soluções de Problemas Avançadas**
+- Adicionar logs detalhados para troubleshooting
+- Implementar modo debug para desenvolvedores
+- Criar scripts de diagnóstico automático
+- Documentar casos de uso específicos por comunidade
+
+#### 📊 **Métricas e Monitoramento**
+- Implementar dashboard para monitorar o bot
+- Adicionar logs estruturados para análise
+- Criar alertas para problemas comuns
+- Incluir métricas de performance
+
+#### 🚀 **Deploy e Produção**
+- Guias completos para CI/CD
+- Configurações para Docker
+- Integração com serviços de monitoramento
+- Backup e recuperação de dados
+</details>

@@ -4,8 +4,8 @@
  * Versão: 2.0.0
  */
 
-import axios from 'axios';
-import { parseHTML } from 'linkedom';
+const axios = require('axios');
+const { parseHTML } = require('linkedom');
 
 // Configurações
 const CONFIG = {
@@ -221,4 +221,4 @@ async function buscarPlugin(nome) {
   }
 }
 
-export default buscarPlugin;
+module.exports = buscarPlugin;

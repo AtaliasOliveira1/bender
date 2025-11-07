@@ -1,13 +1,10 @@
-import SystemMonitor from './systemMonitor.js';
-import MediaCleaner from './mediaCleaner.js';
-import AutoRestarter from './autoRestarter.js';
-import OptimizedCacheManager from './optimizedCache.js';
-import MediaCompressor from './mediaCompressor.js';
-import { fileURLToPath } from 'url';
-import path from 'path';
+const SystemMonitor = require('./systemMonitor.js');
+const MediaCleaner = require('./mediaCleaner.js');
+const AutoRestarter = require('./autoRestarter.js');
+const OptimizedCacheManager = require('./optimizedCache.js');
+const MediaCompressor = require('./mediaCompressor.js');
+const path = require('path');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 class PerformanceOptimizer {
     constructor() {
@@ -93,6 +90,9 @@ class PerformanceOptimizer {
                 } catch (error) {
                     console.error(`❌ Erro ao inicializar ${module.name}:`, error.message);
                     this.modules[module.name] = null;
+
+                    // Continue with other modules
+
                 }
             }
         }
@@ -365,4 +365,5 @@ class PerformanceOptimizer {
     }
 }
 
-export default PerformanceOptimizer;
+
+module.exports = PerformanceOptimizer;

@@ -8,6 +8,7 @@ async function menubn(prefix, botName = "MeuBot", userName = "Usuário", isLiteM
     middleBorder = "┊",
     gamesMenuTitle = "🎮 JOGOS & DIVERSÃO 🎲",
     interactionsMenuTitle = "💬 INTERAÇÕES SOCIAIS 🤝",
+    relationshipMenuTitle = "💞 RELACIONAMENTOS ❤️",
     hotInteractionsMenuTitle = '🔥 INTERAÇÕES "PICANTES" 😏',
     maleFunMenuTitle = "🎯 BRINCADEIRAS MASCULINAS 🔥",
     femaleFunMenuTitle = "💅 BRINCADEIRAS FEMININAS 👸",
@@ -84,6 +85,17 @@ ${middleBorder}${menuItemIcon}${prefix}rico
 ${middleBorder}${menuItemIcon}${prefix}pobre${isLiteMode ? '' : `\n${middleBorder}${menuItemIcon}${prefix}pirocudo${isLiteMode ? '' : `\n${middleBorder}${menuItemIcon}${prefix}nazista`}${isLiteMode ? '' : `\n${middleBorder}${menuItemIcon}${prefix}ladrao`}`}
 ${middleBorder}${menuItemIcon}${prefix}safado
 ${middleBorder}${menuItemIcon}${prefix}vesgo
+
+${menuTopBorder}${separatorIcon} *${relationshipMenuTitle}*
+${middleBorder}
+${middleBorder}${menuItemIcon}${prefix}brincadeira
+${middleBorder}${menuItemIcon}${prefix}namoro
+${middleBorder}${menuItemIcon}${prefix}casamento
+${middleBorder}${menuItemIcon}${prefix}relacionamento
+${middleBorder}${menuItemIcon}${prefix}terminar
+${middleBorder}${menuItemIcon}${prefix}trair
+${middleBorder}${menuItemIcon}${prefix}historicotraicao
+${bottomBorder}
 ${middleBorder}${menuItemIcon}${prefix}bebado${isLiteMode ? '' : `\n${middleBorder}${menuItemIcon}${prefix}machista${isLiteMode ? '' : `\n${middleBorder}${menuItemIcon}${prefix}homofobico${isLiteMode ? '' : `\n${middleBorder}${menuItemIcon}${prefix}racista`}`}`}
 ${middleBorder}${menuItemIcon}${prefix}chato
 ${middleBorder}${menuItemIcon}${prefix}sortudo
@@ -117,14 +129,54 @@ ${middleBorder}${menuItemIcon}${prefix}mito
 ${middleBorder}${menuItemIcon}${prefix}padrao
 ${middleBorder}${menuItemIcon}${prefix}comedia${isLiteMode ? '' : `\n${middleBorder}${menuItemIcon}${prefix}psicopata`}
 ${middleBorder}${menuItemIcon}${prefix}fortao
+${middleBorder}${menuItemIcon}${prefix}global
+${middleBorder}${menuItemIcon}${prefix}humilde
+${middleBorder}${menuItemIcon}${prefix}independente
+${middleBorder}${menuItemIcon}${prefix}infantil
+${middleBorder}${menuItemIcon}${prefix}inseguro
+${middleBorder}${menuItemIcon}${prefix}introvertido
+${middleBorder}${menuItemIcon}${prefix}irresponsavel
+${middleBorder}${menuItemIcon}${prefix}lider
+${middleBorder}${menuItemIcon}${prefix}liberal
+${middleBorder}${menuItemIcon}${prefix}local
+${middleBorder}${menuItemIcon}${prefix}maduro
 ${middleBorder}${menuItemIcon}${prefix}magrelo
-${middleBorder}${menuItemIcon}${prefix}bombado
-${middleBorder}${menuItemIcon}${prefix}chefe
-${middleBorder}${menuItemIcon}${prefix}presidente
-${middleBorder}${menuItemIcon}${prefix}rei
-${middleBorder}${menuItemIcon}${prefix}patrao
-${middleBorder}${menuItemIcon}${prefix}playboy
+${middleBorder}${menuItemIcon}${prefix}malandro
+${middleBorder}${menuItemIcon}${prefix}misterioso
+${middleBorder}${menuItemIcon}${prefix}mito
+${middleBorder}${menuItemIcon}${prefix}moderno
+${middleBorder}${menuItemIcon}${prefix}nerd
+${middleBorder}${menuItemIcon}${prefix}nervoso
+${middleBorder}${menuItemIcon}${prefix}offline
+${middleBorder}${menuItemIcon}${prefix}online
+${middleBorder}${menuItemIcon}${prefix}otimista
+${middleBorder}${menuItemIcon}${prefix}padrao
+${middleBorder}${menuItemIcon}${prefix}patriotico
+${middleBorder}${menuItemIcon}${prefix}pesquisador
+${middleBorder}${menuItemIcon}${prefix}pessimista
+${middleBorder}${menuItemIcon}${prefix}pratico
+${middleBorder}${menuItemIcon}${prefix}programador
+${middleBorder}${menuItemIcon}${prefix}rainha
+${middleBorder}${menuItemIcon}${prefix}realista
+${middleBorder}${menuItemIcon}${prefix}religioso
+${middleBorder}${menuItemIcon}${prefix}responsavel
+${middleBorder}${menuItemIcon}${prefix}romantico
+${middleBorder}${menuItemIcon}${prefix}rural
+${middleBorder}${menuItemIcon}${prefix}saudavel
+${middleBorder}${menuItemIcon}${prefix}seguidor
+${middleBorder}${menuItemIcon}${prefix}serio
+${middleBorder}${menuItemIcon}${prefix}social
+${middleBorder}${menuItemIcon}${prefix}solitario
+${middleBorder}${menuItemIcon}${prefix}sonhador
+${middleBorder}${menuItemIcon}${prefix}sorte
+${middleBorder}${menuItemIcon}${prefix}supersticioso
+${middleBorder}${menuItemIcon}${prefix}tecnologico
+${middleBorder}${menuItemIcon}${prefix}tradicional
+${middleBorder}${menuItemIcon}${prefix}urbano
+${middleBorder}${menuItemIcon}${prefix}viajante
+${middleBorder}${menuItemIcon}${prefix}visionario
 ${middleBorder}${menuItemIcon}${prefix}zueiro
+${middleBorder}${menuItemIcon}${prefix}billionario
 ${middleBorder}${menuItemIcon}${prefix}gamer
 ${middleBorder}${menuItemIcon}${prefix}programador
 ${middleBorder}${menuItemIcon}${prefix}visionario
@@ -179,15 +231,79 @@ ${middleBorder}${menuItemIcon}${prefix}brincalhona${isLiteMode ? '' : `\n${middl
 ${middleBorder}${menuItemIcon}${prefix}mito
 ${middleBorder}${menuItemIcon}${prefix}padrão
 ${middleBorder}${menuItemIcon}${prefix}comédia${isLiteMode ? '' : `\n${middleBorder}${menuItemIcon}${prefix}psicopata`}
+${middleBorder}${menuItemIcon}${prefix}ateia
+${middleBorder}${menuItemIcon}${prefix}aventureira
+${middleBorder}${menuItemIcon}${prefix}bagunceira
+${middleBorder}${menuItemIcon}${prefix}calma
+${middleBorder}${menuItemIcon}${prefix}caseira
+${middleBorder}${menuItemIcon}${prefix}cetica
+${middleBorder}${menuItemIcon}${prefix}confiante
+${middleBorder}${menuItemIcon}${prefix}conservadora
+${middleBorder}${menuItemIcon}${prefix}cosmopolita
+${middleBorder}${menuItemIcon}${prefix}covarde
+${middleBorder}${menuItemIcon}${prefix}criativa
+${middleBorder}${menuItemIcon}${prefix}dependente
+${middleBorder}${menuItemIcon}${prefix}desumilde
+${middleBorder}${menuItemIcon}${prefix}digital
+${middleBorder}${menuItemIcon}${prefix}dorminhoca
+${middleBorder}${menuItemIcon}${prefix}doente
+${middleBorder}${menuItemIcon}${prefix}economica
+${middleBorder}${menuItemIcon}${prefix}engracada
+${middleBorder}${menuItemIcon}${prefix}esperta
+${middleBorder}${menuItemIcon}${prefix}estudiosa
+${middleBorder}${menuItemIcon}${prefix}extrovertida
+${middleBorder}${menuItemIcon}${prefix}fofoqueira
 ${middleBorder}${menuItemIcon}${prefix}fortona
+${middleBorder}${menuItemIcon}${prefix}fraca
+${middleBorder}${menuItemIcon}${prefix}gastadora
+${middleBorder}${menuItemIcon}${prefix}global
+${middleBorder}${menuItemIcon}${prefix}humilde
+${middleBorder}${menuItemIcon}${prefix}independente
+${middleBorder}${menuItemIcon}${prefix}infantil
+${middleBorder}${menuItemIcon}${prefix}insegura
+${middleBorder}${menuItemIcon}${prefix}introvertida
+${middleBorder}${menuItemIcon}${prefix}irresponsavel
+${middleBorder}${menuItemIcon}${prefix}lider
+${middleBorder}${menuItemIcon}${prefix}liberal
+${middleBorder}${menuItemIcon}${prefix}local
+${middleBorder}${menuItemIcon}${prefix}madura
 ${middleBorder}${menuItemIcon}${prefix}magrela
-${middleBorder}${menuItemIcon}${prefix}bombada
-${middleBorder}${menuItemIcon}${prefix}chefe
-${middleBorder}${menuItemIcon}${prefix}presidenta
+${middleBorder}${menuItemIcon}${prefix}misteriosa
+${middleBorder}${menuItemIcon}${prefix}mito
+${middleBorder}${menuItemIcon}${prefix}moderna
+${middleBorder}${menuItemIcon}${prefix}nervosa
+${middleBorder}${menuItemIcon}${prefix}offline
+${middleBorder}${menuItemIcon}${prefix}online
+${middleBorder}${menuItemIcon}${prefix}otimista
+${middleBorder}${menuItemIcon}${prefix}padrão
+${middleBorder}${menuItemIcon}${prefix}patriotica
+${middleBorder}${menuItemIcon}${prefix}pesquisadora
+${middleBorder}${menuItemIcon}${prefix}pessimista
+${middleBorder}${menuItemIcon}${prefix}pratica
+${middleBorder}${menuItemIcon}${prefix}programadora
 ${middleBorder}${menuItemIcon}${prefix}rainha
-${middleBorder}${menuItemIcon}${prefix}patroa
-${middleBorder}${menuItemIcon}${prefix}playgirl
+${middleBorder}${menuItemIcon}${prefix}realista
+${middleBorder}${menuItemIcon}${prefix}religiosa
+${middleBorder}${menuItemIcon}${prefix}romantica
+${middleBorder}${menuItemIcon}${prefix}rural
+${middleBorder}${menuItemIcon}${prefix}saudavel
+${middleBorder}${menuItemIcon}${prefix}sedentaria
+${middleBorder}${menuItemIcon}${prefix}seguidora
+${middleBorder}${menuItemIcon}${prefix}seria
+${middleBorder}${menuItemIcon}${prefix}simpatica
+${middleBorder}${menuItemIcon}${prefix}social
+${middleBorder}${menuItemIcon}${prefix}solitaria
+${middleBorder}${menuItemIcon}${prefix}sonhadora
+${middleBorder}${menuItemIcon}${prefix}sorte
+${middleBorder}${menuItemIcon}${prefix}supersticiosa
+${middleBorder}${menuItemIcon}${prefix}tecnologica
+${middleBorder}${menuItemIcon}${prefix}tradicional
+${middleBorder}${menuItemIcon}${prefix}urbana
+${middleBorder}${menuItemIcon}${prefix}vencedora
+${middleBorder}${menuItemIcon}${prefix}viajante
+${middleBorder}${menuItemIcon}${prefix}visionaria
 ${middleBorder}${menuItemIcon}${prefix}zueira
+${middleBorder}${menuItemIcon}${prefix}bilionária
 ${middleBorder}${menuItemIcon}${prefix}gamer
 ${middleBorder}${menuItemIcon}${prefix}programadora
 ${middleBorder}${menuItemIcon}${prefix}visionária
@@ -254,4 +370,4 @@ ${bottomBorder}
 `;
     return menuContent;
 }
-export default menubn;
+module.exports = menubn;

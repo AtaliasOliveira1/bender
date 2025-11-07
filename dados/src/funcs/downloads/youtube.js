@@ -12,9 +12,9 @@
 3️⃣ *Chave incorreta* → Verificar se está correta no config.json
 4️⃣ *Problema temporário do servidor* → Aguardar alguns minutos*/
 
-import axios from 'axios';
-import { spawn } from 'child_process';
-import { Readable } from 'stream';
+const axios = require('axios');
+const { spawn } = require('child_process');
+const { Readable } = require('stream');
 
 const dailyNotifications = {
   count: 0,
@@ -247,7 +247,7 @@ async function mp4(url, quality = 360, apiKey) {
   }
 }
 
-export default {
+module.exports = {
   search: (text, apiKey) => search(text, apiKey),
   mp3: (url, q, apiKey) => mp3(url, q, apiKey),
   mp4: (url, q, apiKey) => mp4(url, q, apiKey),

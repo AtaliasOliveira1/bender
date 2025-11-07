@@ -3,13 +3,28 @@
  * Updated to use cog2.cognima.com.br API
  */
 
-import axios from 'axios';
+const axios = require('axios');
 
 const dailyNotifications = {
   count: 0,
   date: null,
   maxNotifications: 3
 };
+
+function canSendNotification() {
+  const today = new Date().toDateString();
+  
+  if (dailyNotifications.date !== today) {
+    dailyNotifications.count = 0;
+    dailyNotifications.date = today;
+  }
+  
+  return dailyNotifications.count < dailyNotifications.maxNotifications;
+}
+
+function incrementNotificationCount() {
+  dailyNotifications.count++;
+}
 
 function canSendNotification() {
   const today = new Date().toDateString();
@@ -130,6 +145,10 @@ Uma API Key é como uma "senha especial" que permite ao bot acessar os serviços
     // Incrementar contador após envio bem-sucedido
     incrementNotificationCount();
     
+
+    // Incrementar contador após envio bem-sucedido
+    incrementNotificationCount();
+    
   } catch (notifyError) {
     console.error('❌ Erro ao notificar dono sobre API key:', notifyError.message);
   }
@@ -225,7 +244,7 @@ async function tiktokDownload(url, apiKey) {
   }
 }
 
-export default {
+module.exports = {
   dl: (url, apiKey) => tiktokDownload(url, apiKey),
   search: (text, apiKey) => tiktokSearch(text, apiKey),
   notifyOwnerAboutApiKey

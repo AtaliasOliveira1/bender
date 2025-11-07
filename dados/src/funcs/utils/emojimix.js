@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 // --- CONFIGURAÇÃO ---
 const CONFIG = {
@@ -100,4 +100,4 @@ async function emojiMix(emoji1, emoji2) {
     }
 }
 
-export default emojiMix;
+module.exports = emojiMix;

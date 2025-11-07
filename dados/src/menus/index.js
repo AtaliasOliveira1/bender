@@ -1,15 +1,11 @@
 // Lista central de todos os módulos de menu que queremos carregar.
 // O nome da chave será o nome no objeto final. O valor é o caminho do arquivo.
-import { fileURLToPath } from 'url';
-import path from 'path';
 
-// Configuração de caminhos para o ambiente ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const path = require('path');
+
 
 const menuModules = {
     menu: "./menu.js",
-    menuButtons: "./menuButtons.js",
     menuAlterador: "./alteradores.js",
     menudown: "./menudown.js",
     menuadm: "./menuadm.js",
@@ -20,38 +16,27 @@ const menuModules = {
     menuSticker: "./menufig.js",
     menuIa: "./menuia.js",
     menuTopCmd: "./topcmd.js",
-    menuGold: "./menugold.js"
+    menuRPG: "./menurpg.js"
 };
 
 /**
- * Carrega dinamicamente todos os menus listados em menuModules.
- * Valida se cada módulo foi carregado e se possui uma exportação padrão válida.
- * @returns {Promise<Object>} Um objeto contendo todos os menus carregados.
+ * Carrega todos os menus listados em menuModules de forma síncrona.
+ * Valida se cada módulo foi carregado corretamente.
+ * @returns {Object} Um objeto contendo todos os menus carregados.
  */
-async function loadMenus() {
+function loadMenus() {
     const loadedMenus = {};
     const invalidMenus = [];
 
-    // Usamos Promise.all para carregar todos os módulos em paralelo, o que é mais rápido.
-    const promises = Object.entries(menuModules).map(async ([name, path]) => {
+    for (const [name, filePath] of Object.entries(menuModules)) {
         try {
-            // A importação dinâmica retorna um objeto com a exportação padrão na chave 'default'
-            const module = await import(path);
-            
-            // Validação: O módulo foi carregado e tem uma exportação padrão?
-            if (module && module.default) {
-                loadedMenus[name] = module.default;
-            } else {
-                invalidMenus.push(`${name} (não possui exportação padrão)`);
-            }
+            const module = require(path.resolve(__dirname, filePath));
+            loadedMenus[name] = module;
         } catch (error) {
-            console.error(`[${new Date().toISOString()}] Falha ao carregar o menu '${name}' de ${path}:`, error.message);
+            console.error(`[${new Date().toISOString()}] Falha ao carregar o menu '${name}' de ${filePath}:`, error.message);
             invalidMenus.push(name);
         }
-    });
-
-    // Espera todas as importações terminarem
-    await Promise.all(promises);
+    }
 
     // Se houver menus inválidos, loga um aviso claro
     if (invalidMenus.length > 0) {
@@ -62,9 +47,5 @@ async function loadMenus() {
     return loadedMenus;
 }
 
-// Carrega os menus e os exporta.
-// O 'export default' de um módulo ESM é resolvido apenas uma vez.
-// Usamos uma IIAFE (Immediately Invoked Asynchronous Function Expression) para carregar e exportar.
-const menus = await loadMenus();
-
-export default menus;
+// Carrega os menus e os exporta de forma síncrona.
+module.exports = loadMenus();

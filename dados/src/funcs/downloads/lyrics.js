@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { parseHTML } from 'linkedom';
+const axios = require('axios');
+const { parseHTML } = require('linkedom');
 
 async function getLyrics(topic) {
   try {
@@ -81,4 +81,4 @@ ${lyricsText.join('\n\n')}
   }
 }
 
-export default getLyrics;
+module.exports = getLyrics;

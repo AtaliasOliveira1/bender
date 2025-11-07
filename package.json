@@ -1,9 +1,9 @@
 {
     "name": "nazuna",
-    "version": "6.0.0",
-    "description": "Bot de whatsapp criado por hiudy",
+    "version": "7.0.0",
+    "description": "Bot de whatsapp criada por hiudy",
+    "type": "commonjs",
     "main": "dados/src/connect.js",
-    "type": "module",
     "scripts": {
         "start": "node dados/src/.scripts/start.js",
         "dev": "nodemon dados/src/.scripts/start.js",
@@ -19,15 +19,15 @@
     "author": "Hiudy",
     "license": "ISC",
     "dependencies": {
-        "@cacheable/node-cache": "latest",
-        "@cognima/walib": "npm:@itsukichan/baileys@latest",
+
+        "node-cache": "latest",
         "@hapi/boom": "latest",
+        "whaileys": "latest",
         "axios": "latest",
         "fluent-ffmpeg": "latest",
         "linkedom": "latest",
-        "moment": "^2.30.1",
-        "moment-timezone": "^0.6.0",
-        "node-cron": "^4.2.1",
+        "node-cron": "latest",
+
         "node-webpmux": "latest",
         "pino": "latest",
         "qrcode-terminal": "latest",

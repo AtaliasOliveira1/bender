@@ -1,17 +1,13 @@
-import { promises as fs } from "fs";
-import fsSync from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import webp from "node-webpmux";
-import axios from "axios";
-import ffmpeg from "fluent-ffmpeg";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const fs = require('fs').promises;
+const fsSync = require('fs');
+const path = require('path');
+const webp = require('node-webpmux');
+const axios = require('axios');
+const ffmpeg = require('fluent-ffmpeg');
 
 // Diretório temporário
 function ensureTmpDir() {
-  const tmpDir = path.join(__dirname, "../../../database/tmp");
+  const tmpDir = path.join(path.dirname(__filename), "../../../database/tmp");
   if (!fsSync.existsSync(tmpDir)) {
     fsSync.mkdirSync(tmpDir, { recursive: true });
   }
@@ -191,5 +187,4 @@ const sendSticker = async (bender, jid, {
   return webpBuffer;
 };
 
-export { sendSticker };
-export default { sendSticker };
+module.exports = { sendSticker };

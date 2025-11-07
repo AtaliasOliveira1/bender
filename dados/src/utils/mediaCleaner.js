@@ -1,12 +1,9 @@
-import fs from 'fs/promises';
-import path from 'path';
-import { exec } from 'child_process';
-import { fileURLToPath } from 'url';
-import { promisify } from 'util';
+const fs = require('fs/promises');
+const path = require('path');
+const { exec } = require('child_process');
+const { promisify } = require('util');
+const zlib = require('zlib');
 
-// Configuração de caminhos para o ambiente ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const execAsync = promisify(exec);
 
@@ -100,6 +97,9 @@ class MediaCleaner {
                     }
                 } catch (error) {
                     console.warn(`⚠️ Erro ao processar arquivo ${file}:`, error.message);
+
+                    // Continue processing other files
+
                 }
             }
 
@@ -158,19 +158,11 @@ class MediaCleaner {
             const fileExt = path.extname(filePath).toLowerCase();
             
             // Verifica imagens
-            if (['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(fileExt)) {
+
+            if (['.jpg', '.jpeg', '.png', '.gif', '.webp', '.mp4', '.webm', '.avi', '.mkv'].includes(fileExt)) {
                 try {
-                    await execAsync(`identify "${filePath}"`, { timeout: 5000 });
-                    return false;
-                } catch {
-                    return true;
-                }
-            }
-            
-            // Verifica vídeos
-            if (['.mp4', '.webm', '.avi', '.mkv'].includes(fileExt)) {
-                try {
-                    await execAsync(`ffprobe -v quiet -print_format json -show_format "${filePath}"`, { timeout: 10000 });
+                    await execAsync(`ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "${filePath}"`, { timeout: 10000 });
+
                     return false;
                 } catch {
                     return true;
@@ -388,41 +380,24 @@ class MediaCleaner {
     async compressImage(filePath) {
         try {
             const originalStats = await fs.stat(filePath);
-            const tempPath = filePath + '.compressed';
-            
-            // Usa ImageMagick para comprimir (se disponível)
-            try {
-                await execAsync(`convert "${filePath}" -quality 75 -resize 1920x1920> "${tempPath}"`, { timeout: 30000 });
-                
-                const compressedStats = await fs.stat(tempPath);
-                
-                // Só substitui se a compressão foi significativa (>20% de economia)
-                if (compressedStats.size < originalStats.size * 0.8) {
-                    await fs.rename(tempPath, filePath);
-                    return {
-                        success: true,
-                        spaceSaved: originalStats.size - compressedStats.size
-                    };
-                } else {
-                    await fs.unlink(tempPath);
-                    return { success: false };
-                }
-            } catch {
-                // Se ImageMagick não estiver disponível, tenta com ffmpeg
-                await execAsync(`ffmpeg -i "${filePath}" -q:v 8 -y "${tempPath}"`, { timeout: 30000 });
-                
-                const compressedStats = await fs.stat(tempPath);
-                
-                if (compressedStats.size < originalStats.size * 0.8) {
-                    await fs.rename(tempPath, filePath);
-                    return {
-                        success: true,
-                        spaceSaved: originalStats.size - compressedStats.size
-                    };
-                } else {
-                    await fs.unlink(tempPath);
-                    return { success: false };
-                }
+
+            const fileExt = path.extname(filePath) || '.jpg';
+            const tempPath = path.join(path.dirname(filePath), `${path.basename(filePath, fileExt)}.compressed${fileExt}`);
+
+            await execAsync(`ffmpeg -hide_banner -loglevel error -i "${filePath}" -vf "scale=min(1920\\,iw):min(1920\\,ih):force_original_aspect_ratio=decrease" -q:v 8 -map_metadata -1 -y "${tempPath}"`, { timeout: 30000 });
+
+            const compressedStats = await fs.stat(tempPath);
+
+            if (compressedStats.size < originalStats.size * 0.8) {
+                await fs.rename(tempPath, filePath);
+                return {
+                    success: true,
+                    spaceSaved: originalStats.size - compressedStats.size
+                };
+            } else {
+                await fs.unlink(tempPath);
+                return { success: false };
+
             }
         } catch (error) {
             console.warn(`⚠️ Erro ao comprimir imagem ${filePath}:`, error.message);
@@ -439,7 +414,9 @@ class MediaCleaner {
             const tempPath = filePath + '.compressed.mp4';
             
             // Comprime vídeo com ffmpeg
-            await execAsync(`ffmpeg -i "${filePath}" -c:v libx264 -preset fast -crf 28 -c:a aac -b:a 128k -y "${tempPath}"`, { timeout: 60000 });
+
+            await execAsync(`ffmpeg -i "${filePath}" -c:v libx264 -preset medium -crf 25 -c:a aac -b:a 128k -movflags +faststart -y "${tempPath}"`, { timeout: 60000 });
+
             
             const compressedStats = await fs.stat(tempPath);
             
@@ -496,4 +473,6 @@ class MediaCleaner {
     }
 }
 
-export default MediaCleaner;
+
+module.exports = MediaCleaner;
+
