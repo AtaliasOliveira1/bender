@@ -162,6 +162,57 @@ var zerosite = "https://zero-two-apis.com.br"
 const assBender = '𝑩𝒆𝒏𝒅𝒆𝒓𝑿 𝒗3.1'
 const dattofc = moment.tz('America/Sao_Paulo').format('DD/MM/YYYY');
 const hourofc = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
+const MIN_UNKNOWN_INTERNATIONAL_VIEWS = 1000000;
+const KNOWN_MUSIC_KEYWORDS = [
+  'official', 'oficial', 'video', 'audio', 'lyrics', 'lyric', 'letra', 'clip', 'clipe',
+  'ao vivo', 'live', 'remix', 'feat', 'ft.', 'prod', 'cover', 'karaoke', 'topic'
+];
+const BRAZILIAN_MUSIC_KEYWORDS = [
+  'funk', 'sertanejo', 'pagode', 'samba', 'forró', 'forro', 'pisadinha', 'piseiro',
+  'arrocha', 'axé', 'axe', 'mpb', 'brega', 'pancadão', 'pancadao', 'sofrência', 'sofrencia'
+];
+
+const normalizeMusicText = (text = '') => String(text)
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .toLowerCase();
+
+const parseViewCount = (views) => {
+  if (typeof views === 'number') return views;
+  const raw = normalizeMusicText(views).replace(/,/g, '.');
+  const value = parseFloat(raw.replace(/[^\d.]/g, ''));
+  if (!Number.isFinite(value)) return 0;
+  if (raw.includes('bi') || raw.includes('billion')) return value * 1000000000;
+  if (raw.includes('mi') || raw.includes('milhao') || raw.includes('million')) return value * 1000000;
+  if (raw.includes('mil') || raw.includes('k')) return value * 1000;
+  return value;
+};
+
+const hasKnownMusicSignal = (text = '') => {
+  const normalized = normalizeMusicText(text);
+  return KNOWN_MUSIC_KEYWORDS.some(keyword => normalized.includes(normalizeMusicText(keyword)));
+};
+
+const hasBrazilianMusicSignal = (text = '') => {
+  const normalized = normalizeMusicText(text);
+  return BRAZILIAN_MUSIC_KEYWORDS.some(keyword => normalized.includes(normalizeMusicText(keyword)));
+};
+
+const isUnknownInternationalResult = (result = {}, query = '') => {
+  const title = result.titulo || result.title || '';
+  const author = result.autor || result.canal || result.author?.name || result.author || '';
+  const description = result.desc || result.description || '';
+  const text = `${title} ${author} ${description} ${query}`;
+  const hasBrazilianSignal = hasBrazilianMusicSignal(text);
+  const hasKnownSignal = hasKnownMusicSignal(text);
+  const views = parseViewCount(result.views || result.visualizacoes || result.viewsCount || result.viewCount);
+  return !hasBrazilianSignal && !hasKnownSignal && views > 0 && views < MIN_UNKNOWN_INTERNATIONAL_VIEWS;
+};
+
+const pickBestMusicResult = (results = [], query = '') => {
+  if (!Array.isArray(results)) return null;
+  return results.find(result => !isUnknownInternationalResult(result, query)) || null;
+};
 
 const writeJsonFile = (filePath, data) => {
   try {
@@ -5502,13 +5553,13 @@ case 'tocar': {
         // --- 1. PESQUISA NA API BRONXYS ---
         // A pesquisa é necessária para validar se a música existe e obter a capa/info.
         let data = await fetchJson(`https://api.bronxyshost.com.br/api-bronxys/pesquisa_ytb?nome=${query}&apikey=${API_KEY_BRONXYS}`);
+        const resultado = pickBestMusicResult(data, query);
         
-        if (!data || data.length === 0 || data[0]?.tempo?.length >= 7) {
+        if (!resultado || resultado?.tempo?.length >= 7) {
             return reply("A pesquisa falhou ou o vídeo é muito longo. Não foi possível criar os botões.");
         }
         
         // --- 2. MONTAGEM DA MENSAGEM DE LISTA DE OPÇÕES ---
-        const resultado = data[0];
         const downloadQuery = query;
 
         await bender.react('🆗', {key: info.key});
@@ -5516,7 +5567,7 @@ case 'tocar': {
         if (!q.trim()) return reply(`- Exemplo: ${prefix}play nome da música\na música será baixada, só basta escolher áudio ou vídeo, se não baixar, o YouTube privou de não baixarem, ou algo do tipo..`);
         
         // Verifica se a pesquisa retornou resultados válidos e se o vídeo não é muito longo
-        if (!data || data.length === 0 || data[0]?.tempo?.length >= 7) {
+        if (!resultado || resultado?.tempo?.length >= 7) {
             // Se falhar na primeira API (pesquisa ruim ou vídeo longo), lança um erro.
             throw new Error("Pesquisa na API 1 falhou (ruim ou vídeo muito longo).");
         }
@@ -5525,12 +5576,12 @@ case 'tocar': {
         // BLOCO ISOLADO PARA TENTAR ENVIAR A IMAGEM DE CAPA
         // ----------------------------------------------------
         var N_E = " Não encontrado."; // Variável não utilizada, mas mantida por segurança se for usada em outro lugar
-        var bla2 = `*Titulo:* ${data[0]?.titulo||N_E}\n*Tempo:* ${data[0]?.tempo||N_E}\n\n🎧 *Tocando agora no ${assBender}!*`;
+        var bla2 = `*Titulo:* ${resultado?.titulo||N_E}\n*Tempo:* ${resultado?.tempo||N_E}\n\n🎧 *Tocando agora no ${assBender}!*`;
         var bla = `📥 *Baixar vídeo:* \`${prefix}playvid ${q.trim()}\`
 🎧 *Tocando agora no ${assBender}!*`;
 
         try {
-            let imageUrl = data[0]?.thumb || logoslink?.logo;
+            let imageUrl = resultado?.thumb || logoslink?.logo;
             let imageBuffer;
 
             if (imageUrl) {
@@ -5561,7 +5612,7 @@ case 'tocar': {
         await bender.sendMessage(from, {
             audio: {url: `https://api.bronxyshost.com.br/api-bronxys/play?nome_url=${q}&apikey=${API_KEY_BRONXYS}`},
             mimetype: "audio/mpeg", 
-            fileName: data[0]?.titulo || "play.mp3"
+            fileName: resultado?.titulo || "play.mp3"
         }, {quoted: info}).catch(async (e) => {
             // Se o envio do áudio da API 1 falhar, lança um erro para o catch externo
             console.log("Erro no download da API 1 (Áudio):", e);
